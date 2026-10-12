@@ -1,0 +1,287 @@
+/* ═══════════════════════════════════════════════════════════
+   Culture Flow — Reviews / Testimonials Section
+   Facebook-style recommendation cards with scroll-reveal
+   ═══════════════════════════════════════════════════════════ */
+
+.cf-reviews-section {
+  position: relative;
+  background-color: #F6EEDD;
+  padding: clamp(80px, 10vh, 140px) 0 clamp(100px, 14vh, 180px);
+  overflow: hidden;
+  z-index: 10;
+}
+
+/* ─── Watermark Title Behind Cards ─── */
+.cf-reviews-watermark {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: var(--font-heading), 'Oranienbaum', 'Georgia', serif;
+  font-size: clamp(4rem, 9vw, 9rem);
+  font-weight: 400;
+  color: rgba(0, 34, 68, 0.04);
+  line-height: 1.1;
+  text-align: center;
+  white-space: nowrap;
+  pointer-events: none;
+  user-select: none;
+  z-index: 1;
+  letter-spacing: 0.02em;
+}
+
+.cf-reviews-watermark span {
+  display: block;
+}
+
+/* ─── Main Heading ─── */
+.cf-reviews-header {
+  text-align: center;
+  margin-bottom: clamp(48px, 7vh, 90px);
+  position: relative;
+  z-index: 3;
+}
+
+.cf-reviews-heading {
+  font-family: var(--font-heading), 'Oranienbaum', 'Georgia', serif;
+  font-size: clamp(2.6rem, 5.5vw, 5.2rem);
+  font-weight: 400;
+  color: #002244;
+  line-height: 1.12;
+  letter-spacing: 0.01em;
+  margin: 0 auto;
+  max-width: 800px;
+}
+
+.cf-reviews-heading em {
+  font-style: italic;
+  font-family: var(--font-heading), 'Oranienbaum', 'Georgia', serif;
+  color: #C89C66;
+}
+
+.cf-reviews-subtitle {
+  font-family: var(--font-body), 'Inter', sans-serif;
+  font-size: clamp(0.85rem, 1vw, 1rem);
+  color: rgba(0, 34, 68, 0.55);
+  margin-top: 16px;
+  letter-spacing: 0.02em;
+}
+
+/* ─── 3-Column Masonry Grid ─── */
+.cf-reviews-masonry {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  gap: clamp(16px, 2vw, 28px);
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 clamp(20px, 4vw, 48px);
+  align-items: flex-start;
+}
+
+.cf-reviews-column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(16px, 2vw, 28px);
+}
+
+/* Offset middle column for organic masonry feel */
+.cf-reviews-column:nth-child(2) {
+  margin-top: clamp(40px, 5vh, 70px);
+}
+
+.cf-reviews-column:nth-child(3) {
+  margin-top: clamp(20px, 2.5vh, 35px);
+}
+
+/* ─── Individual Review Card (Speech Bubble) ─── */
+.cf-review-card {
+  background: #FFFFFF;
+  border: 1px solid rgba(0, 34, 68, 0.08);
+  border-radius: 16px;
+  padding: clamp(20px, 2.2vw, 28px);
+  position: relative;
+  box-shadow: 0 2px 12px rgba(5, 10, 48, 0.04), 0 1px 3px rgba(5, 10, 48, 0.02);
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.4s ease;
+  will-change: transform, opacity;
+}
+
+/* Speech bubble tail — small triangle on top-left */
+.cf-review-card-tail {
+  position: absolute;
+  top: -8px;
+  left: 28px;
+  width: 16px;
+  height: 16px;
+  background: #FFFFFF;
+  border-left: 1px solid rgba(0, 34, 68, 0.08);
+  border-top: 1px solid rgba(0, 34, 68, 0.08);
+  transform: rotate(45deg);
+  z-index: -1;
+}
+
+/* Scroll reveal: initial hidden state */
+.cf-review-card[data-visible="false"] {
+  opacity: 0;
+  transform: translateY(60px) scale(0.97);
+}
+
+.cf-review-card[data-visible="true"] {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.cf-review-card:hover {
+  box-shadow: 0 8px 32px rgba(5, 10, 48, 0.07), 0 2px 8px rgba(5, 10, 48, 0.03);
+  transform: translateY(-2px) scale(1);
+}
+
+/* ─── Card Header: Avatar + Name recommends + Date ─── */
+.cf-review-card-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+/* Three-dot menu in top right */
+.cf-review-dots {
+  position: absolute;
+  top: clamp(14px, 1.6vw, 20px);
+  right: clamp(14px, 1.6vw, 20px);
+  font-size: 1.2rem;
+  color: rgba(0, 34, 68, 0.25);
+  letter-spacing: 2px;
+  line-height: 1;
+  cursor: default;
+}
+
+.cf-review-avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #002244 0%, #1a3a5c 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.cf-review-avatar-letter {
+  font-family: var(--font-heading), 'Oranienbaum', serif;
+  font-size: 1.05rem;
+  color: #F6EEDD;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.cf-review-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  flex: 1;
+  min-width: 0;
+  padding-right: 24px; /* space for the dots menu */
+}
+
+/* Name + recommends line — uses INLINE flow, not flex */
+.cf-review-name-line {
+  font-family: var(--font-body), 'Inter', sans-serif;
+  font-size: 0.88rem;
+  line-height: 1.45;
+  color: rgba(0, 34, 68, 0.6);
+  margin: 0;
+}
+
+.cf-review-name {
+  font-weight: 600;
+  color: #002244;
+}
+
+/* Badge icon — inline-block so it sits in the text flow */
+.cf-review-rec-icon {
+  display: inline-block;
+  vertical-align: middle;
+  position: relative;
+  top: -1px;
+  margin: 0 1px;
+}
+
+.cf-review-rec-brand {
+  font-weight: 600;
+  color: #002244;
+}
+
+/* Date line */
+.cf-review-date {
+  font-family: var(--font-body), 'Inter', sans-serif;
+  font-size: 0.72rem;
+  color: rgba(0, 34, 68, 0.4);
+  letter-spacing: 0.01em;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.cf-review-globe {
+  display: inline-block;
+  vertical-align: middle;
+  color: rgba(0, 34, 68, 0.35);
+}
+
+/* ─── Review Text ─── */
+.cf-review-text {
+  font-family: var(--font-body), 'Inter', sans-serif;
+  font-size: clamp(0.84rem, 0.92vw, 0.92rem);
+  line-height: 1.72;
+  color: rgba(0, 34, 68, 0.75);
+}
+
+/* ─── Bottom Gradient Fade ─── */
+.cf-reviews-bottom-fade {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: clamp(80px, 10vh, 140px);
+  background: linear-gradient(to top, #F6EEDD 0%, rgba(246, 238, 221, 0) 100%);
+  pointer-events: none;
+  z-index: 5;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   Responsive
+   ═══════════════════════════════════════════════════════════ */
+
+@media (max-width: 960px) {
+  .cf-reviews-masonry {
+    gap: 14px;
+  }
+
+  .cf-reviews-column:nth-child(2) {
+    margin-top: 30px;
+  }
+
+  .cf-reviews-column:nth-child(3) {
+    margin-top: 15px;
+  }
+}
+
+@media (max-width: 700px) {
+  .cf-reviews-masonry {
+    flex-direction: column;
+    max-width: 500px;
+  }
+
+  .cf-reviews-column:nth-child(2),
+  .cf-reviews-column:nth-child(3) {
+    margin-top: 0;
+  }
+
+  .cf-reviews-watermark {
+    font-size: 3rem;
+  }
+}
