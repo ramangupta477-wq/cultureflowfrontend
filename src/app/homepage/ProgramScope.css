@@ -1,0 +1,236 @@
+/* ─── Program Scope Section (Swiss Editorial Sticky Pin) ─── */
+.cf-scope-section {
+  position: relative;
+  width: 100%;
+  height: 280vh; /* Smooth scroll track for 3 discrete steps */
+  background-color: var(--color-bg, #FDFCF4);
+  border-top: 1px solid rgba(11, 11, 11, 0.06);
+}
+
+.cf-scope-sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 clamp(20px, 5vw, 64px);
+  overflow: hidden;
+  background-color: var(--color-bg, #FDFCF4);
+}
+
+.cf-scope-container {
+  max-width: 1400px;
+  width: 100%;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.12fr 0.88fr;
+  align-items: center;
+  gap: clamp(40px, 5vw, 84px);
+}
+
+/* ─── Left Column: Seamless Photo Container (Skiper49) ─── */
+.cf-scope-left {
+  position: relative;
+  width: 100%;
+  max-width: 700px;
+  min-width: 0;
+  background: transparent !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  border: none !important;
+  overflow: hidden !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+/* ─── Right Column: Swiss Editorial Content ─── */
+.cf-scope-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(10px, 2vw, 24px) 0;
+  max-width: 560px;
+}
+
+/* Swiss Minimal Kicker / Tag */
+.cf-scope-kicker-wrapper {
+  min-height: 26px;
+  margin-bottom: 22px;
+}
+
+.cf-scope-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-body, -apple-system, sans-serif);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-gold, #FFCD00);
+}
+
+.cf-scope-kicker-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--color-gold, #FFCD00);
+}
+
+.cf-scope-kicker-step {
+  color: rgba(11, 11, 11, 0.45);
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  margin-left: 6px;
+}
+
+/* Heading Wrapper & React Bits <BlurText /> Styling */
+.cf-scope-heading-wrapper {
+  min-height: clamp(120px, 14vw, 160px);
+  margin-bottom: 24px;
+  display: flex;
+  align-items: flex-start;
+}
+
+.cf-scope-heading {
+  font-family: var(--font-heading, 'DM Serif Display', Georgia, serif);
+  font-size: clamp(2.3rem, 3.8vw, 3.6rem);
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--color-obraz-black, #0B0B0B);
+  width: 100%;
+}
+
+/* Final 2 accent words italic & brand gold */
+.cf-scope-heading > span.inline-flex:nth-last-child(-n+2) {
+  font-style: italic;
+  color: var(--color-gold, #FFCD00);
+}
+
+/* Description Wrapper */
+.cf-scope-desc-wrapper {
+  min-height: 110px;
+  margin-bottom: 28px;
+}
+
+.cf-scope-description {
+  font-family: var(--font-body, -apple-system, sans-serif);
+  font-size: clamp(1rem, 1.2vw, 1.12rem);
+  font-weight: 400;
+  line-height: 1.76;
+  color: rgba(11, 11, 11, 0.76);
+  max-width: 510px;
+}
+
+/* Swiss Step Stepper */
+.cf-scope-stepper {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding-top: 6px;
+}
+
+.cf-scope-step-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-body, -apple-system, sans-serif);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  color: rgba(11, 11, 11, 0.35);
+  transition: all 0.3s ease;
+}
+
+.cf-scope-step-btn:hover {
+  color: var(--color-obraz-black, #0B0B0B);
+}
+
+.cf-scope-step-btn--active {
+  color: var(--color-obraz-black, #0B0B0B);
+}
+
+.cf-scope-step-line {
+  display: inline-block;
+  width: 20px;
+  height: 2px;
+  background-color: rgba(11, 11, 11, 0.15);
+  transition: all 0.3s ease;
+}
+
+.cf-scope-step-btn--active .cf-scope-step-line {
+  width: 44px;
+  background-color: var(--color-gold, #FFCD00);
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .cf-scope-container {
+    grid-template-columns: 1fr;
+    gap: 28px;
+    text-align: center;
+  }
+
+  .cf-scope-right {
+    align-items: center;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .cf-scope-heading-wrapper {
+    justify-content: center;
+    min-height: 130px;
+  }
+
+  .cf-scope-heading {
+    justify-content: center;
+  }
+
+  .cf-scope-desc-wrapper {
+    min-height: 100px;
+  }
+
+  .cf-scope-stepper {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 640px) {
+  .cf-scope-section {
+    height: 240vh;
+  }
+
+  .cf-scope-sticky {
+    padding: 0 16px;
+  }
+
+  .cf-scope-heading {
+    font-size: 2.1rem;
+    line-height: 1.18;
+  }
+
+  .cf-scope-heading-wrapper {
+    min-height: 110px;
+    margin-bottom: 18px;
+  }
+
+  .cf-scope-description {
+    font-size: 0.95rem;
+    line-height: 1.65;
+  }
+
+  .cf-scope-desc-wrapper {
+    min-height: 115px;
+    margin-bottom: 20px;
+  }
+}
+

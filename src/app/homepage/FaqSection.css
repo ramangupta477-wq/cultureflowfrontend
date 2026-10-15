@@ -1,0 +1,188 @@
+/* ═══════════════════════════════════════════════
+   FAQ Section — Modern Minimalist Card Accordion
+   Culture Flow Brand Theme (Compact Edition)
+   ═══════════════════════════════════════════════ */
+
+.cf-faq-section {
+  position: relative;
+  width: 100%;
+  background-color: var(--color-bg, #FDFCF4);
+  padding: clamp(48px, 5.5vw, 80px) clamp(16px, 3vw, 32px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-top: 1px solid rgba(11, 11, 11, 0.06);
+}
+
+/* ─── Compact Outer Shell Container (Brand Card Surface) ─── */
+.cf-faq-container {
+  width: 100%;
+  max-width: 840px; /* Compact width instead of 1100px */
+  background-color: #EAE9E4; /* Warm stone/sand card surface in Culture Flow theme */
+  border-radius: clamp(20px, 2.6vw, 28px);
+  padding: clamp(26px, 3.4vw, 38px) clamp(20px, 3vw, 34px);
+  border: 1px solid rgba(11, 11, 11, 0.06);
+  box-shadow: 0 16px 36px -10px rgba(11, 11, 11, 0.04),
+              0 1px 3px rgba(11, 11, 11, 0.02);
+}
+
+/* ─── Header ─── */
+.cf-faq-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: clamp(18px, 2.4vw, 26px);
+  padding: 0 4px;
+}
+
+/* Title in Brand Yellow */
+.cf-faq-title {
+  font-family: var(--font-body, 'Plus Jakarta Sans', 'Inter', sans-serif);
+  font-size: clamp(2rem, 3.4vw, 2.85rem); /* Scaled down and punchy */
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.035em;
+  color: var(--color-yellow, #FFCD00); /* FAQ written in Brand Yellow */
+  text-transform: uppercase;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+}
+
+.cf-faq-count {
+  font-family: var(--font-body, 'Plus Jakarta Sans', 'Inter', sans-serif);
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  color: rgba(11, 11, 11, 0.42);
+  text-transform: uppercase;
+}
+
+/* ─── Accordion Stack ─── */
+.cf-faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* Tighter gap */
+}
+
+/* ─── Individual Card ─── */
+.cf-faq-card {
+  background-color: #FFFFFF;
+  border-radius: 14px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03),
+              0 1px 2px rgba(0, 0, 0, 0.02);
+  border: 1px solid rgba(11, 11, 11, 0.04);
+  overflow: hidden;
+  transition: box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.25s ease;
+}
+
+.cf-faq-card:hover {
+  box-shadow: 0 6px 20px -3px rgba(0, 0, 0, 0.06),
+              0 1px 4px rgba(0, 0, 0, 0.02);
+  border-color: rgba(11, 11, 11, 0.08);
+  transform: translateY(-1px);
+}
+
+.cf-faq-card.is-open {
+  box-shadow: 0 8px 24px -3px rgba(0, 0, 0, 0.07),
+              0 2px 5px rgba(0, 0, 0, 0.03);
+  border-color: rgba(11, 11, 11, 0.08);
+}
+
+/* ─── Trigger Button ─── */
+.cf-faq-trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 15px 22px; /* Sleeker, less bulky */
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  outline: none;
+  font-family: inherit;
+}
+
+.cf-faq-trigger:focus-visible {
+  outline: 2px solid var(--color-yellow, #FFCD00);
+  outline-offset: -2px;
+  border-radius: inherit;
+}
+
+.cf-faq-question {
+  font-family: var(--font-body, 'Plus Jakarta Sans', 'Inter', sans-serif);
+  font-size: clamp(0.92rem, 1.1vw, 1rem); /* Compact question text */
+  font-weight: 600;
+  line-height: 1.38;
+  color: var(--color-obraz-black, #0B0B0B);
+  letter-spacing: -0.012em;
+  transition: color 0.2s ease;
+}
+
+.cf-faq-card:hover .cf-faq-question {
+  color: #000000;
+}
+
+/* ─── Chevron ─── */
+.cf-faq-chevron {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  color: var(--color-obraz-black, #0B0B0B); /* Brand neutral black */
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              color 0.2s ease;
+}
+
+.cf-faq-chevron svg {
+  width: 15px;
+  height: 15px;
+  stroke-width: 2.3;
+}
+
+.cf-faq-chevron.is-rotated {
+  transform: rotate(180deg);
+  color: var(--color-yellow, #FFCD00); /* Accents with brand yellow when open */
+}
+
+/* ─── Answer Collapse Area ─── */
+.cf-faq-answer-wrapper {
+  overflow: hidden;
+}
+
+.cf-faq-answer-inner {
+  padding: 0 22px 18px 22px;
+}
+
+.cf-faq-answer-text {
+  font-family: var(--font-body, 'Plus Jakarta Sans', 'Inter', sans-serif);
+  font-size: clamp(0.85rem, 0.98vw, 0.91rem); /* Compact, comfortable reading */
+  font-weight: 400;
+  line-height: 1.62;
+  color: rgba(11, 11, 11, 0.64);
+  margin: 0;
+}
+
+/* ─── Responsive Media Queries ─── */
+@media (max-width: 640px) {
+  .cf-faq-section {
+    padding: 36px 14px;
+  }
+
+  .cf-faq-container {
+    padding: 22px 16px;
+    border-radius: 18px;
+  }
+
+  .cf-faq-trigger {
+    padding: 13px 16px;
+  }
+
+  .cf-faq-answer-inner {
+    padding: 0 16px 14px 16px;
+  }
+}

@@ -115,13 +115,13 @@
   bottom: 0;
   left: 0;
   width: 0%;
-  height: 1.5px;
-  background: #C89C66;
+  height: 2px;
+  background: var(--color-yellow, #FFCD00);
   transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .cf-nav-link:hover {
-  color: #002244;
+  color: var(--color-obraz-black, #0B0B0B);
 }
 
 .cf-nav-link:hover::after {
@@ -129,40 +129,40 @@
 }
 
 .cf-nav-link--active {
-  color: #002244;
+  color: var(--color-obraz-black, #0B0B0B);
   font-weight: 700;
 }
 
 .cf-nav-link--active::after {
   width: 100%;
-  background: #002244;
+  background: var(--color-yellow, #FFCD00);
 }
 
-/* Pill CTA Button (Inspired by "Let's talk" in Image 2) */
+/* Pill CTA Button */
 .cf-nav-cta-pill {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   padding: 10px 22px;
   border-radius: 50px;
-  background: #050A30;
-  color: #F6EEDD;
-  font-family: var(--font-body), "Inter", sans-serif;
+  background: var(--color-obraz-black, #0B0B0B);
+  color: var(--color-moverunion-white, #FDFCF4);
+  font-family: var(--font-body), sans-serif;
   font-size: 0.76rem;
   font-weight: 600;
   letter-spacing: 0.08em;
   text-decoration: none;
   white-space: nowrap;
-  border: 1px solid rgba(0, 34, 68, 0.15);
-  box-shadow: 0 4px 14px rgba(5, 10, 48, 0.12);
+  border: 1px solid rgba(11, 11, 11, 0.15);
+  box-shadow: 0 4px 14px rgba(11, 11, 11, 0.12);
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .cf-nav-cta-pill:hover {
-  background: #C89C66;
-  color: #050A30;
-  border-color: #C89C66;
-  box-shadow: 0 6px 20px rgba(200, 156, 102, 0.35);
+  background: var(--color-yellow, #FFCD00);
+  color: var(--color-obraz-black, #0B0B0B);
+  border-color: var(--color-yellow, #FFCD00);
+  box-shadow: 0 6px 20px rgba(255, 205, 0, 0.4);
   transform: translateY(-1px);
 }
 

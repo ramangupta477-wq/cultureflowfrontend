@@ -1,26 +1,31 @@
-@import url('https://fonts.googleapis.com/css2?family=Oranienbaum&family=Inter:wght@300;400;500;600;700&family=Carattere&family=Alex+Brush&family=Playfair+Display:ital,wght@1,400;1,600&display=swap');
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Bricolage+Grotesque:opsz,wght@12..96,600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
 
-@font-face {
-  font-family: 'Carattere';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url('https://fonts.gstatic.com/s/carattere/v8/4iCv6Kp1b9dXlgt_CkvTtw.ttf') format('truetype');
-}
-
-/* ─── Brand Palette ─── */
+/* ─── Culture Flow Official Brand Kit ─── */
 :root {
-    --color-bg: #F6EEDD;
-    --color-gold: #C89C66;
-    --color-navy: #050A30;
-    --color-text: #002244;
-    --color-gold-light: rgba(200, 156, 102, 0.15);
-    --color-navy-light: rgba(5, 10, 48, 0.08);
+    /* Brand Colors (Exact Specifications) */
+    --color-yellow: #FFCD00;           /* Yellow (RGB: 255, 205, 0 | CMYK: 0, 20, 93, 0) */
+    --color-accent: #FFCD00;
+    --color-obraz-dark: #1B1B1B;       /* Obraz Dark (Neutral Black C | RGB: 27, 27, 27) */
+    --color-obraz-black: #0B0B0B;      /* Obraz Black (Pantone 6 C | RGB: 11, 11, 11) */
+    --color-warm-white: #F1F0EE;       /* Warm White (Pantone P 179-1 C | RGB: 241, 240, 238) */
+    --color-moverunion-white: #FDFCF4; /* Moverunion White (Pantone White | RGB: 253, 252, 244) */
 
-    --font-heading: 'Oranienbaum', 'Georgia', serif;
-    --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    --font-script: var(--font-carattere), 'Carattere', 'Alex Brush', serif;
+    /* Semantic Tokens */
+    --color-bg: #FDFCF4;               /* Primary Canvas: Moverunion White */
+    --color-bg-card: #F1F0EE;          /* Card Surfaces: Warm White */
+    --color-text: #0B0B0B;             /* Primary Typography: Obraz Black */
+    --color-text-muted: #1B1B1B;       /* Secondary Text: Obraz Dark */
+    --color-gold: #FFCD00;             /* Brand Yellow Accent */
+    --color-navy: #0B0B0B;             /* Obraz Black */
+    --color-gold-light: rgba(255, 205, 0, 0.18);
+    --color-navy-light: rgba(11, 11, 11, 0.06);
 
+    /* Typography */
+    --font-heading: 'DM Serif Display', Georgia, serif;
+    --font-body: 'TT Norms', 'Plus Jakarta Sans', 'Inter', -apple-system, sans-serif;
+    --font-logo: 'Bricolage Grotesque', sans-serif;
+    --font-script: 'DM Serif Display', serif;
 
     --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
     --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);

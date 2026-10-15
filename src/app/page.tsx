@@ -1,19 +1,22 @@
 import HeroSection from "./homepage/HeroSection";
-import ValueGrid from "./homepage/valuegrid";
-import StatsSection from "./homepage/StatsSection";
-import ProgramSection from "./homepage/ProgramSection";
-import ReviewsSection from "./homepage/ReviewsSection";
+import ProgramScope from "./homepage/ProgramScope";
+import ApproachSection from "./homepage/ApproachSection";
+import AboutSection from "./homepage/AboutSection";
+import ValuesSection from "./homepage/ValuesSection";
+import FaqSection from "./homepage/FaqSection";
 import Footer from "./homepage/Footer";
 
 export default function Page() {
   return (
     <main>
       <HeroSection />
-      <ValueGrid />
-      <StatsSection />
-      <ProgramSection />
-      <ReviewsSection />
+      <ProgramScope />
+      <ApproachSection />
+      <AboutSection />
+      <ValuesSection />
+      <FaqSection />
       <Footer />
     </main>
   );
 }
+

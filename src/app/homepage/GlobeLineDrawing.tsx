@@ -116,9 +116,9 @@ export default function GlobeLineDrawing({ active, onComplete, size }: GlobeLine
     // ─── Subtle reference sphere (ghosted) ───
     const sphereGeo = new THREE.SphereGeometry(GLOBE_R * 0.98, 64, 48);
     const sphereMat = new THREE.MeshBasicMaterial({
-      color: '#1A1508',
+      color: '#0B0B0B',
       transparent: true,
-      opacity: 0.18,
+      opacity: 0.04,
       depthWrite: false,
     });
     const sphereMesh = new THREE.Mesh(sphereGeo, sphereMat);
@@ -207,8 +207,8 @@ export default function GlobeLineDrawing({ active, onComplete, size }: GlobeLine
       const borderMat = new THREE.ShaderMaterial({
         uniforms: {
           uProgress: { value: 0 },
-          uColor: { value: new THREE.Color('#1E3A8A') },
-          uGlow: { value: new THREE.Color('#1E3A8A') },
+          uColor: { value: new THREE.Color('#0B0B0B') },
+          uGlow: { value: new THREE.Color('#1B1B1B') },
         },
         vertexShader: `
           attribute float revealOrder;
@@ -228,14 +228,14 @@ export default function GlobeLineDrawing({ active, onComplete, size }: GlobeLine
 
             float edge = uProgress - vOrder;
 
-            // Golden glow at drawing frontier
+            // Subtle glow at drawing frontier
             float glowIntensity = smoothstep(0.06, 0.0, edge);
 
             // Fade-in solidification
             float solidify = smoothstep(0.0, 0.03, edge);
 
             vec3 finalColor = mix(uColor, uGlow, glowIntensity * 0.85);
-            float alpha = solidify * 0.9;
+            float alpha = solidify * 0.95;
 
             gl_FragColor = vec4(finalColor, alpha);
           }
@@ -262,8 +262,8 @@ export default function GlobeLineDrawing({ active, onComplete, size }: GlobeLine
       const gridMat = new THREE.ShaderMaterial({
         uniforms: {
           uProgress: { value: 0 },
-          uColor: { value: new THREE.Color('#1E3A8A') },
-          uGlow: { value: new THREE.Color('#1E3A8A') },
+          uColor: { value: new THREE.Color('#222222') },
+          uGlow: { value: new THREE.Color('#222222') },
         },
         vertexShader: borderMat.vertexShader,
         fragmentShader: `

@@ -1,0 +1,149 @@
+/* ─── Culture Flow Approach Section (Swiss Editorial Manifesto) ─── */
+.approach-section {
+  position: relative;
+  width: 100%;
+  background-color: var(--color-yellow, #FFCD00);
+  padding: clamp(100px, 12vw, 180px) clamp(24px, 5vw, 64px);
+  border-top: 1px solid rgba(11, 11, 11, 0.1);
+  border-bottom: 1px solid rgba(11, 11, 11, 0.1);
+  overflow: hidden;
+  text-align: center;
+}
+
+.approach-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Kicker */
+.approach-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-body, -apple-system, sans-serif);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-obraz-black, #0B0B0B);
+  margin-bottom: 32px;
+}
+
+.approach-kicker-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--color-obraz-black, #0B0B0B);
+}
+
+/* Heading */
+.approach-heading {
+  font-family: var(--font-heading, 'DM Serif Display', Georgia, serif);
+  font-size: clamp(2.4rem, 4.4vw, 4.4rem);
+  font-weight: 400;
+  line-height: 1.16;
+  letter-spacing: -0.02em;
+  color: var(--color-obraz-black, #0B0B0B);
+  max-width: 980px;
+  margin: 0 auto 32px auto;
+}
+
+.approach-accent {
+  font-style: italic;
+  color: var(--color-moverunion-white, #FDFCF4);
+  font-family: var(--font-heading, serif);
+  position: relative;
+  display: inline-block;
+  text-shadow: 0 1px 3px rgba(11, 11, 11, 0.22);
+}
+
+/* Description */
+.approach-description {
+  font-family: var(--font-body, -apple-system, sans-serif);
+  font-size: clamp(1.1rem, 1.45vw, 1.35rem);
+  font-weight: 400;
+  line-height: 1.76;
+  color: var(--color-obraz-dark, #1B1B1B);
+  opacity: 0.88;
+  max-width: 720px;
+  margin: 0 auto 48px auto;
+}
+
+/* Button */
+.approach-actions {
+  display: flex;
+  justify-content: center;
+}
+
+.approach-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 36px;
+  border-radius: 999px;
+  background-color: var(--color-obraz-black, #0B0B0B);
+  color: var(--color-moverunion-white, #FDFCF4);
+  font-family: var(--font-body, -apple-system, sans-serif);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  border: 1.5px solid var(--color-obraz-black, #0B0B0B);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 14px rgba(11, 11, 11, 0.12);
+}
+
+.approach-button-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-color: rgba(253, 252, 244, 0.15);
+  color: var(--color-moverunion-white, #FDFCF4);
+  transition: all 0.35s ease;
+}
+
+.approach-button:hover {
+  background-color: var(--color-moverunion-white, #FDFCF4);
+  color: var(--color-obraz-black, #0B0B0B);
+  border-color: var(--color-obraz-black, #0B0B0B);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(11, 11, 11, 0.22);
+}
+
+.approach-button:hover .approach-button-icon {
+  background-color: var(--color-obraz-black, #0B0B0B);
+  color: var(--color-moverunion-white, #FDFCF4);
+  transform: translateY(2px);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .approach-section {
+    padding: 72px 20px;
+  }
+
+  .approach-heading {
+    font-size: 2.1rem;
+    line-height: 1.2;
+    margin-bottom: 24px;
+  }
+
+  .approach-description {
+    font-size: 1.05rem;
+    line-height: 1.65;
+    margin-bottom: 36px;
+  }
+
+  .approach-button {
+    padding: 14px 28px;
+    font-size: 0.72rem;
+  }
+}
