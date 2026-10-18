@@ -1,5 +1,35 @@
 @import "tailwindcss";
-@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Bricolage+Grotesque:opsz,wght@12..96,600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Bricolage+Grotesque:opsz,wght@12..96,600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* ─── Libron (body font) — self-hosted from public/fonts ─── */
+@font-face {
+    font-family: 'Libron';
+    src: url('/fonts/Libron-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Libron';
+    src: url('/fonts/Libron-Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Libron';
+    src: url('/fonts/Libron-Italic.woff2') format('woff2');
+    font-weight: 400;
+    font-style: italic;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Libron';
+    src: url('/fonts/Libron-BoldItalic.woff2') format('woff2');
+    font-weight: 700;
+    font-style: italic;
+    font-display: swap;
+}
 
 /* ─── Culture Flow Official Brand Kit ─── */
 :root {
@@ -23,7 +53,7 @@
 
     /* Typography */
     --font-heading: 'DM Serif Display', Georgia, serif;
-    --font-body: 'TT Norms', 'Plus Jakarta Sans', 'Inter', -apple-system, sans-serif;
+    --font-body: 'Libron', 'Inter', -apple-system, sans-serif;
     --font-logo: 'Bricolage Grotesque', sans-serif;
     --font-script: 'DM Serif Display', serif;
 

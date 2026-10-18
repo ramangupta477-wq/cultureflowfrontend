@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Link from "next/link";
 import dynamic from "next/dynamic";
 import "./HeroSection.css";
 
@@ -57,10 +58,10 @@ export default function HeroSection() {
             Transforming Indian student mobility through structured educational
             programs, partnering with top universities worldwide.
           </p>
-          <a href="/contact" className="hero-cta">
-            GET STARTED
+          <Link href="/waitlist" className="hero-cta">
+            JOIN WAITLIST
             <span className="hero-cta__arrow">↗</span>
-          </a>
+          </Link>
         </div>
 
         {/* Right: Description + Tags */}

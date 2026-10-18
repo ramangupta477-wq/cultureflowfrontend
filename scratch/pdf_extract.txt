@@ -1,0 +1,528 @@
+
+===== PAGE 1 =====
+Culture Flow: Website v1 Structure and
+Content Brief
+Oct 14, 2026  ·  @Raman
+1. Purpose, audience and scope of v1
+The v1 site is a small, fast credibility-and-waitlist site: it proves Culture Flow is real and
+safe, and captures signups before the first program opens on Day 45. A visitor should be
+able to answer four questions within 60 seconds: who are they, what do they offer, is it
+safe, and how do I join.
+Goals
+1. Explain what Culture Flow does in under 10 seconds on the home page.
+2. Give parents verifiable trust signals: company details, safety system, policies, named
+people.
+3. Capture waitlist signups (students and parents) and institution enquiries.
+4. Give Instagram visitors a landing page that matches the brand and loads fast on mobile.
+Audiences
+In scope for v1: a mobile-first marketing site, a waitlist form, an institution enquiry form, a
+contact page, and legal pages.
+Deferred to the full platform: online enrollment and payments, user accounts and login,
+program booking, itinerary or pricing calculators, a blog CMS, and multiple languages.
+Audience What they need from the site Main pages
+Students (university
+age)
+What it is, the tracks, why it is not a
+holiday, how to join the waitlist
+Home, Programs, How It
+Works
+Parents (fee-paying) Safety, legitimacy, return on investment,
+who is accountable
+Safety and Trust, About,
+FAQ
+Partner institutions Credibility, the 40/40/20 model, how to
+partner
+Partners, How It Works
+Culture Flow: Website v1 Structure and Content Brief
+Page 1 of 16
+===== PAGE 2 =====
+Assumption: most traffic will arrive from Instagram on phones in India, so every layout is
+designed mobile-first and tested on mid-range Android devices.
+2. Sitemap
+The v1 site has eight main pages, three track pages built from one template, a thank-you
+page, and a set of legal pages in the footer.
+site map · 8 main pages, 3 track pages, legal footer
+Culture Flow: Website v1 Structure and Content Brief
+Page 2 of 16
+===== PAGE 3 =====
+The highlighted Waitlist page is the site's single goal, so every page ends with a link to it.
+Build Waitlist and Safety and Trust first, because they carry conversion and trust.
+3. Global elements
+Four elements appear on every page, so build them once as shared components.
+Primary call to action everywhere: "Join the Waitlist". Secondary: "Talk to us" (contact)
+and, on the Partners page only, "Partner with us".
+Floating WhatsApp button: a click-to-chat link to the Culture Flow business number with
+a pre-filled message. It costs nothing and gives parents a fast, human route to ask
+questions.
+Element Content Behaviour
+Announcement
+bar
+"First program opens [Day 45 date]. Join the
+waitlist for priority access."
+Dismissible, links to
+the waitlist page;
+remove after launch
+Header CF monogram and wordmark; nav: Programs,
+How It Works, Safety and Trust, About, Partners,
+FAQ; gold button "Join the Waitlist"
+Sticky on scroll;
+hamburger menu on
+mobile with the
+waitlist button
+always visible
+Trust strip 1:15 chaperone ratio, vetted local partners,
+emergency medical insurance, parental
+indemnity framework
+Four icons with one-
+line labels; shown on
+Home and repeated
+above the footer on
+Safety and Programs
+Footer Short description, nav links, contact email and
+WhatsApp number, Instagram and LinkedIn
+links, registered company name, CIN and GST
+number, legal links, copyright
+Same on all pages;
+company details are
+text, not an image, so
+they are searchable
+Culture Flow: Website v1 Structure and Content Brief
+Page 3 of 16
+===== PAGE 4 =====
+4. Page-by-page content
+Each page below lists its sections in top-to-bottom order with draft copy. Copy marked
+[FILL] must come from the Culture Flow team before build. Draft headlines are
+suggestions to be refined.
+4.1 Home
+Order Section Content and draft copy
+1 Hero Headline: "Two weeks abroad. A syllabus, not an
+itinerary." Subline: "Short international immersions
+for university students: hands-on learning, real
+industry access and guided reflection." Buttons:
+Join the Waitlist, Explore Programs. Navy
+background with the gold flight-trail motif; no
+tourist stock photos
+2 What we do Three short lines: 7 to 21 day programs; a fixed
+40/40/20 learning model; three themed tracks
+3 The 40/40/20 model A simple bar or ring graphic: 40% academic rigor
+and workshops, 40% industry and cultural
+immersion, 20% guided synthesis and reflection.
+Link to How It Works
+4 Three tracks Three cards: Tech and Innovation Bootcamps,
+Sustainability and Social Impact, Cultural and
+Heritage Immersions. Each has one line, an example
+destination region and a Learn more link
+5 A sample day A timetable graphic (for example 9:00 workshop,
+13:00 industry visit, 17:00 reflection). Mark it
+"Illustrative" until real itineraries exist
+6 Safety strip The four trust points from the global trust strip,
+with a link to Safety and Trust
+7 Who we are Two or three lines on the founder and mission, a
+photo, and a link to About
+8 Waitlist band Short form: name, email, I am a (student or parent),
+city. Copy: "Be first in line when the first program
+opens."
+Culture Flow: Website v1 Structure and Content Brief
+Page 4 of 16
+===== PAGE 5 =====
+4.2 About (Who we are)
+4.3 Programs (overview and three track pages)
+The overview page lists the three tracks. Each track gets its own page built from one
+shared template, so the tech team builds the template once.
+Order Section Content and draft copy
+9 FAQ preview Three questions from the FAQ page with a link to
+all
+Order Section Content and draft copy
+1 Our story [FILL] 150 to 200 words from the founder: why
+short, structured immersions, and what problem
+Culture Flow solves for students and parents
+2 Mission and approach One sentence mission, then three principles (for
+example: learning first, safety as a system,
+reflection turns experience into outcomes)
+3 The team Founder and key people: photo, name, role, two-line
+bio, LinkedIn link. Add program lead and any
+advisors when confirmed. Real names and faces
+matter most to parents
+4 Company details Registered company name (Culture Flow Pvt. Ltd.),
+CIN, GST number, registered address, year of
+incorporation. [FILL]
+5 Partners Logos of confirmed institutional, DMC or insurance
+partners only, with written permission. Hide the
+section if none are confirmed
+6 Call to action Join the Waitlist
+Order Overview page section Content
+1 Intro "Short, structured immersions of 7 to 21 days." One
+paragraph on the 40/40/20 model
+Culture Flow: Website v1 Structure and Content Brief
+Page 5 of 16
+===== PAGE 6 =====
+Track page template (repeat for Tech and Innovation, Sustainability and Social Impact,
+Cultural and Heritage):
+Order Overview page section Content
+2 Track cards Three large cards, each linking to its track page
+3 Every program includes Icons: 1:15 chaperone ratio, vetted local partners,
+emergency medical insurance, parental indemnity
+framework, structured timetable
+4 First program "First program announced [Day 45 date]." Show
+destination and dates once confirmed [FILL]
+5 Pricing "Pricing published at launch." Replace with a price
+range once decided [FILL]
+6 Waitlist CTA Join the Waitlist
+Order Section Content
+1 Hero Track name, one-line promise, example
+destinations, button Join the Waitlist (track pre-
+selected in the form)
+2 Who it is for Year of study, interests, no prior experience
+required [CONFIRM]
+3 What you will learn Four to six workshop or module titles
+4 Industry and cultural
+immersion
+Types of organisations and experiences, named
+only once confirmed
+5 A sample day Illustrative timetable graphic
+6 Where Example destinations: Germany and Silicon Valley
+for Tech; Scandinavia for Sustainability; Europe
+and Asia outbound plus inbound into India for
+Cultural and Heritage
+7 What you leave with Project or portfolio piece, mentor feedback,
+certificate. Mark each item [CONFIRM] until it is
+guaranteed
+8 Safety summary Trust strip and link to Safety and Trust
+Culture Flow: Website v1 Structure and Content Brief
+Page 6 of 16
+===== PAGE 7 =====
+4.4 How It Works
+This page explains the model and the student journey, and is the one partner institutions
+read most closely.
+1. The 40/40/20 model. Three short blocks. 40% academic rigor and hands-on
+workshops; 40% industry and cultural immersion; 20% guided synthesis and
+reflection. Each block gets two or three example activities [FILL].
+2. The journey. Join the waitlist, apply and get selected, attend a pre-departure briefing
+(parents invited), complete the program, then reflect and receive outcomes.
+3. A week at a glance. One illustrative timetable showing how the three blocks sit across
+days.
+4. Why short immersions. Three honest points on why 7 to 21 days works: fits inside a
+semester break, lower cost and commitment than a semester abroad, focused
+outcomes.
+5. Call to action. Join the Waitlist; for institutions, Partner with us.
+4.5 Safety and Trust
+This is the most important page for parents. It must be specific, not reassuring in general
+terms, so every claim needs a fact or a document behind it.
+Order Section Content
+9 Waitlist form Same form, track pre-selected
+Order Section Content
+1 Headline "Safety is a system, not a promise." One paragraph
+on why
+2 Four pillars 1:15 chaperone ratio (what it means in practice).
+Vetted local partners (how they are vetted:
+licences checked, references, site visits [FILL]).
+Emergency medical insurance (insurer name,
+cover summary [FILL]). Parental indemnity
+framework (plain-language explanation of what
+parents sign and why)
+Culture Flow: Website v1 Structure and Content Brief
+Page 7 of 16
+===== PAGE 8 =====
+4.6 Partners (for institutions)
+Order Section Content
+3 Before departure Parent briefing, medical and emergency contact
+forms, travel documents checklist
+4 During the program 24x7 emergency contact, daily check-ins, how and
+when parents receive updates [CONFIRM]
+5 If something goes wrong A numbered emergency protocol: who is
+contacted, in what order, within what time [FILL]
+6 Documents to download PDFs: safety policy, sample parent consent form,
+insurance summary. These sit behind no form so
+parents can read them freely
+7 Who is accountable Names and photos of the founder and program
+lead, with a link to About and the registered
+company details
+8 Ask us anything WhatsApp button and email for parent questions
+Order Section Content
+1 Headline "Bring structured global learning to your students."
+2 What we provide Curriculum, vetted local delivery, chaperones,
+insurance, and a reflection framework [CONFIRM
+each]
+3 Partnership models Co-branded cohorts, faculty-led programs, custom
+short immersions. One short paragraph each [FILL]
+4 The 40/40/20 model A summary with a link to How It Works
+5 Enquiry form Institution name, your role, email, phone, expected
+cohort size, preferred track, message
+6 Ask Your College A short form for students and parents to nominate
+their institution: college name, contact person if
+known, their email. This turns consumer demand
+into institutional leads
+Culture Flow: Website v1 Structure and Content Brief
+Page 8 of 16
+===== PAGE 9 =====
+4.7 FAQ
+Build as an accordion grouped under four headings, with FAQ structured data for search.
+Answers below are drafts; replace [FILL] with confirmed facts.
+Group Question Draft answer
+Program What is a micro-immersion? A 7 to 21 day international program with
+a fixed structure: 40% academic work
+and workshops, 40% industry and
+cultural immersion, 20% guided
+reflection
+Program Is this a holiday or a tour? No. Every day follows a timetable with
+workshops, industry visits and
+reflection. Free time exists but is not
+the point
+Program Who can join? University students. Eligibility by track
+and year [FILL]
+Program When is the first program? Announced on [Day 45 date]. Waitlist
+members hear first
+Safety How many chaperones are there? One chaperone for every 15 students
+(1:15)
+Safety What if a student falls ill or has an
+emergency?
+Every participant has emergency
+medical insurance and access to a 24x7
+contact. The protocol is on the Safety
+and Trust page
+Safety Who are your local partners? Local partners are vetted before we
+work with them. Vetting steps [FILL]
+Parents What does the parental indemnity
+framework mean?
+A clear written agreement that sets out
+responsibilities, consent and
+emergency authority. A sample is
+available to download
+Parents What is the cost? Pricing is published at launch. Price
+range [FILL]
+Parents What is the refund policy? [FILL] The policy will be published in
+full before any payment is taken
+Culture Flow: Website v1 Structure and Content Brief
+Page 9 of 16
+===== PAGE 10 =====
+4.8 Waitlist (main conversion page)
+One short form, reused as the Home band and on each track page. Keep it to the fields
+below, because every extra field lowers completion.
+After submitting: a thank-you page with the person's own referral link and share buttons
+(WhatsApp, copy link), and a confirmation email. Store every entry in a spreadsheet or
+CRM with a timestamp and the page it came from.
+Group Question Draft answer
+Waitlist What does joining the waitlist cost? Nothing. It carries no obligation to enrol
+Waitlist What do I get for joining? Priority access when the first program
+opens, plus updates. Referral perks
+[FILL]
+Field Type Required
+Full name Text Yes
+Email Email Yes
+Mobile or WhatsApp
+number
+Phone Optional
+I am a Dropdown: Student, Parent, Institution
+representative
+Yes
+City Text Yes
+College or university Text (shown for students) Optional
+Year of study Dropdown (shown for students) Optional
+Track interest Multi-select: the three tracks Optional
+How did you hear about us Dropdown: Instagram, friend, college, other Optional
+Referral code Text, filled automatically from a referral link Optional
+Consent Checkbox with link to the Privacy Policy Yes
+Culture Flow: Website v1 Structure and Content Brief
+Page 10 of 16
+===== PAGE 11 =====
+4.9 Contact
+Contact email, a WhatsApp number, a short form (name, email, topic dropdown,
+message), the registered address, and social links. State the response time, for example
+"We reply within one working day" [CONFIRM].
+5. Legal and compliance pages
+The site collects names, emails, phone numbers and student details, so these pages must
+exist at launch. Have a lawyer review the final wording; the table is a checklist, not legal
+advice.
+Page Must cover Linked from
+Privacy Policy What data is collected, why, how long it
+is kept, who it is shared with, how to
+withdraw consent or request deletion;
+aligned with India's Digital Personal Data
+Protection Act, 2023
+Footer, every form
+Terms of Use Rules for using the site, intellectual
+property, limits of liability
+Footer
+Cookie notice What analytics cookies are used and
+how to opt out. Add a consent banner if
+analytics tools set cookies
+Banner and footer
+Grievance contact Name and email of the person who
+handles privacy complaints
+Footer and Privacy
+Policy
+Refund and Cancellation
+Policy
+Publish in full before any payment is
+accepted. Draft now even if enrollment
+opens later
+Footer, FAQ
+Disclaimer Itineraries, destinations and outcomes
+are illustrative until confirmed; no
+guarantee of visas, placements or
+admissions
+Footer, program
+pages
+Company details Registered name, CIN, GST number,
+registered address, as text in the footer
+and on About
+Footer, About
+Culture Flow: Website v1 Structure and Content Brief
+Page 11 of 16
+===== PAGE 12 =====
+Rules for the tech team: every form carries an unticked consent checkbox linking to the
+Privacy Policy; no data is collected before consent; if a visitor could be under 18, add an
+age confirmation. Rules for copy: never promise a job, internship, visa or admission
+outcome, and never show a testimonial or partner logo you cannot document.
+6. Brand and design requirements
+The site should feel clean, institutional and prestigious: navy-led, generous white space,
+one gold accent for action. Use the existing brand kit exactly.
+Contrast rules (checked): navy text on gold is about 6.4 to 1 and passes accessibility AA,
+so gold buttons use navy text. White text on gold is about 2.5 to 1 and fails, so never use it.
+Gold text works on navy, but not on white.
+Typography: Oranienbaum for headings and display text. TT Norms for body and UI text.
+Oranienbaum is a free Google Font. TT Norms is a paid commercial font, so the team must
+confirm a web-font licence before using it; if there is none, use a free sans such as
+Manrope or DM Sans as the body font. Body text 16 px minimum on mobile; headings scale
+down cleanly to a 360 px wide screen.
+Logo: the interlocking CF monogram with the ascending flight trail, supplied as SVG.
+Provide a full-colour version, a white version for navy backgrounds, a favicon (32 and 512
+px) and a social-share image (1200 by 630 px). Keep clear space equal to the height of the
+"C" on all sides and never recolour or stretch it.
+Imagery rules:
+1. Prefer real photography from scouting visits, pilot sessions and partners, with written
+permission.
+2. Show structure: timetables, workshops, notebooks, industry visits, people at work.
+Token Hex Use
+Deep Navy #002244 Primary background, headings on light, navy
+sections
+Midnight #050A30 Footer, hero overlays, deepest sections
+Sand/Gold #C89C66 Buttons, accents, dividers, highlights
+Crisp White #FCFCFF Page background, text on navy
+Culture Flow: Website v1 Structure and Content Brief
+Page 12 of 16
+===== PAGE 13 =====
+3. No generic tourist stock photos, no AI-generated destination scenes, no fake
+testimonials. These push the brand toward "holiday" and "scam".
+4. Until real photos exist, use brand-colour graphics, the flight-trail motif and typographic
+layouts.
+Tone of voice: precise, confident, warm. Use program, cohort, immersion, syllabus,
+outcomes. Avoid trip, tour, holiday, package, dream destination, once in a lifetime.
+Motion: subtle only. The flight trail may draw once on the hero; respect the reduced-
+motion setting and keep it under one second.
+7. Technical requirements
+Build v1 as a fast, mostly static site with a small form backend, hosted cheaply on a CDN,
+so it loads quickly on Indian mobile networks and can be replaced or extended when the
+full platform launches. The stack is the tech team's call; the requirements below are what
+the result must meet.
+Area Requirement
+Approach Static or server-rendered pages (for example
+Astro, Next.js or similar) on a CDN host. A heavy
+CMS is not needed for v1
+Mobile first Design and test at 360 px width first; test on mid-
+range Android phones and in Instagram's in-app
+browser, since most visitors will arrive from
+Instagram
+Performance Largest content paint under 2.5 s on a 4G
+connection; page weight under 1.5 MB; images in
+WebP or AVIF, lazy loaded; fonts subset and
+preloaded
+Forms Waitlist, institution enquiry, Ask Your College and
+contact forms; server-side validation; spam
+protection (honeypot plus a CAPTCHA
+alternative); confirmation email; entries stored
+with timestamp, source page, UTM values and the
+Privacy Policy version the person accepted; CSV
+export
+Culture Flow: Website v1 Structure and Content Brief
+Page 13 of 16
+===== PAGE 14 =====
+Rough effort (estimate for the tech team to confirm): about one week for design, one to
+two weeks for build, and one week for content loading, testing and fixes.
+Area Requirement
+Referral Each waitlist entry gets a unique code; a link with ?
+ref=CODE fills the referral field and credits the
+referrer; the admin view shows referral counts per
+person
+Analytics Privacy-friendly analytics or GA4; events for
+waitlist submit, WhatsApp click, partner enquiry,
+FAQ open, outbound social clicks; capture UTM
+parameters from Instagram links
+SEO Unique title and description per page; Organization
+and FAQPage structured data; sitemap.xml and
+robots.txt; Open Graph and Twitter share images;
+clean URLs; canonical tags
+Accessibility WCAG 2.1 AA: keyboard navigation, visible focus,
+alt text, sufficient contrast, reduced-motion
+support
+Security HTTPS everywhere, security headers, no secrets in
+client code, two-factor on hosting and domain
+accounts, regular backups of form data
+Content editing The team can edit FAQ, team bios, dates and copy
+without a developer, through a simple CMS or
+content files with a clear guide
+Email and domain Custom domain with www redirect; business email
+on the domain with SPF, DKIM and DMARC set so
+confirmation emails reach inboxes
+Browsers Last two versions of Chrome, Safari, Edge, Firefox
+and Samsung Internet
+Monitoring Uptime monitor and a basic error alert
+Culture Flow: Website v1 Structure and Content Brief
+Page 14 of 16
+===== PAGE 15 =====
+8. Content and assets Culture Flow must supply
+The build cannot finish until these are in hand, so start collecting them now, in parallel
+with design. Tick each as it is delivered.
+Company and brand
+People
+Program facts
+Safety proof
+Media and partners
+Accounts and legal
+Registered company name, CIN, GST number, registered address, year of incorporation
+Logo files: SVG full-colour, SVG white, favicon source, social-share image
+TT Norms web-font licence, or approval to use a free substitute
+Founder photo and 150 to 200 word story
+Team and advisor photos, names, roles, two-line bios, LinkedIn links
+Two or three example activities for each part of the 40/40/20 model
+Description, example destinations and learning outcomes for each of the three tracks
+Eligibility rules, first program date, and price range (or the decision to publish at
+launch)
+Confirmed outcomes students leave with (project, certificate, mentor feedback)
+Safety policy PDF, sample parent consent form, insurance summary PDF
+Insurer name and cover summary
+Local partner vetting steps and emergency protocol
+Real photos or video (scouting visits, pilot session, partners) with written permission
+Partner logos with written permission, only for confirmed partners
+Domain and DNS access, business email, WhatsApp Business number, Instagram and
+LinkedIn URLs
+Analytics account and a place to store form entries
+Lawyer-reviewed Privacy Policy, Terms, Refund Policy and Disclaimer, plus the named
+grievance contact
+Culture Flow: Website v1 Structure and Content Brief
+Page 15 of 16
+===== PAGE 16 =====
+9. Launch checklist and what comes in v2
+The site is ready to go live when every item below is ticked, ideally a week before the
+Instagram campaign starts so the link in bio is stable.
+Before launch
+Deferred to v2 (the full platform)
+Online application, enrollment and payments, with the refund workflow
+User accounts and a parent dashboard
+Itinerary pages and booking for each confirmed program
+Verified student and parent reviews page, once real cohorts have finished
+A resources or blog section
+Hindi and other language versions
+CRM automation and an institution portal
+Every [FILL] and [CONFIRM] in this brief is resolved or the section is hidden
+All pages checked on small and large phones, tablets and desktop
+Tested inside Instagram's in-app browser, including the link-in-bio flow
+Every form tested end to end: entry stored, confirmation email received, referral code
+works
+Legal pages live and linked; consent checkbox required on all forms
+Analytics events firing and UTM values captured
+Share previews correct on WhatsApp and Instagram (title, description, image)
+Speed and accessibility checks passed; custom 404 page in place
+Backups, uptime monitoring and two-factor access in place
+Culture Flow: Website v1 Structure and Content Brief
+Page 16 of 16

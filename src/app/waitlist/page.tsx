@@ -1,0 +1,560 @@
+"use client";
+
+import React, { useState, useEffect } from "react";
+import Link from "next/link";
+import dynamic from "next/dynamic";
+import { playShutterSound } from "@/components/ui/admit-one-ticket";
+import {
+  creditReferrer,
+  joinWaitlist,
+  type TrackId,
+  type WaitlistEntry,
+  type WaitlistRole,
+} from "../../lib/appwrite";
+import "./waitlist.css";
+
+const AdmitOneTicket = dynamic(() => import("@/components/ui/admit-one-ticket"), {
+  ssr: false,
+  loading: () => (
+    <div
+      style={{
+        width: "100%",
+        maxWidth: 540,
+        height: 310,
+        borderRadius: 20,
+        background: "rgba(5, 10, 48, 0.6)",
+        border: "1px dashed rgba(200, 156, 102, 0.4)",
+        display: "grid",
+        placeItems: "center",
+        color: "rgba(253, 252, 244, 0.6)",
+        fontSize: "0.85rem",
+        letterSpacing: "0.1em",
+        textTransform: "uppercase",
+      }}
+    >
+      Generating Your Priority Pass...
+    </div>
+  ),
+});
+
+const WAITLIST_TICKET_TEXTURE = {
+  engine: "generative" as const,
+  colorBack: "#050A30",
+  colorFront: "#C89C66",
+  colorHighlight: "#F6EEDD",
+  shape: "warp" as const,
+  type: "4x4" as const,
+  size: 1.2,
+  colorSteps: 4,
+  originalColors: false,
+  scale: 1.45,
+  rotation: 20,
+  offsetX: 0,
+  offsetY: 0,
+  speed: 0.35,
+};
+
+const WAITLIST_TICKET_LAYOUT = {
+  padding: 57 / 741,
+  labelTop: 54 / 741,
+  labelSize: 17 / 741,
+  labelLead: 24 / 741,
+  labelTracking: 0.05,
+  nameTop: 180 / 741,
+  nameSize: 56 / 741,
+  nameLead: 58 / 741,
+  nameTracking: -0.01,
+  footerTop: 348 / 741,
+  footerSize: 18 / 741,
+  footerTracking: 0.04,
+  stubSize: 60 / 741,
+  stubTracking: 0.05,
+  stubOpacity: 0.9,
+  watermarkSize: 110 / 741,
+  watermarkOpacity: 0.75,
+  watermarkColor: "#C89C66",
+  inkColor: "#F6EEDD",
+};
+
+const TRACKS: { id: TrackId; label: string }[] = [
+  { id: "tech", label: "Tech & Innovation" },
+  { id: "sustainability", label: "Sustainability & Social Impact" },
+  { id: "cultural", label: "Cultural & Heritage" },
+];
+
+const YEAR_OPTIONS: { value: NonNullable<WaitlistEntry["yearOfStudy"]>; label: string }[] = [
+  { value: "first", label: "First year" },
+  { value: "second", label: "Second year" },
+  { value: "third", label: "Third year" },
+  { value: "fourth", label: "Fourth year" },
+  { value: "postgrad", label: "Postgraduate" },
+];
+
+const SOURCE_OPTIONS = [
+  { value: "instagram", label: "Instagram" },
+  { value: "friend", label: "A friend" },
+  { value: "college", label: "My college" },
+  { value: "other", label: "Other" },
+] as const;
+
+export default function WaitlistPage() {
+  // Step 1 fields (identity + role), step 2 fields (context + consent)
+  const [step, setStep] = useState<1 | 2>(1);
+  const [submitting, setSubmitting] = useState(false);
+  const [done, setDone] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const [form, setForm] = useState({
+    fullName: "",
+    email: "",
+    phone: "",
+    role: "student" as WaitlistRole,
+    city: "",
+    college: "",
+    yearOfStudy: "",
+    tracks: [] as TrackId[],
+    source: "",
+    consent: false,
+  });
+  const [copied, setCopied] = useState(false);
+  const [createdCode, setCreatedCode] = useState("");
+  const [ticketWidth, setTicketWidth] = useState(540);
+
+  useEffect(() => {
+    function handleResize() {
+      if (typeof window === "undefined") return;
+      const vw = window.innerWidth;
+      if (vw < 480) {
+        setTicketWidth(Math.max(280, vw - 48));
+      } else if (vw < 768) {
+        setTicketWidth(Math.min(480, vw - 64));
+      } else if (vw < 1100) {
+        setTicketWidth(540);
+      } else {
+        setTicketWidth(620);
+      }
+    }
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  useEffect(() => {
+    if (done) {
+      try {
+        playShutterSound({ volume: 0.35 });
+      } catch {}
+    }
+  }, [done]);
+
+  const set = <K extends keyof typeof form>(key: K, value: (typeof form)[K]) =>
+    setForm((f) => ({ ...f, [key]: value }));
+
+  const toggleTrack = (id: TrackId) =>
+    setForm((f) => ({
+      ...f,
+      // Appwrite schema: tracks is a string array, max 3 items
+      tracks: f.tracks.includes(id)
+        ? f.tracks.filter((t) => t !== id)
+        : f.tracks.length < 3
+          ? [...f.tracks, id]
+          : f.tracks,
+    }));
+
+  const step1Valid = Boolean(
+    form.fullName.trim() &&
+    form.email.trim() &&
+    /.+@.+\..+/.test(form.email) &&
+    form.city.trim()
+  );
+
+  const step2Valid = Boolean(form.consent);
+
+  // Referral captured from the URL (?ref=CODE) — safely captured in useEffect
+  // to prevent any SSR/hydration divergence.
+  const [refCode, setRefCode] = useState<string | undefined>(undefined);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const code = (new URLSearchParams(window.location.search).get("ref") || "")
+      .toUpperCase()
+      .replace(/[^A-Z0-9-]/g, "")
+      .slice(0, 16);
+    if (code) {
+      setRefCode(code);
+    }
+  }, []);
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    if (!step1Valid || !step2Valid || submitting) return;
+    setSubmitting(true);
+    setError(null);
+    try {
+      const res = await joinWaitlist({
+        fullName: form.fullName.trim(),
+        email: form.email.trim().toLowerCase(),
+        role: form.role,
+        city: form.city.trim(),
+        consent: true,
+        phone: form.phone.trim() || undefined,
+        college: form.college.trim() || undefined,
+        yearOfStudy:
+          form.role === "student" && form.yearOfStudy
+            ? (form.yearOfStudy as WaitlistEntry["yearOfStudy"])
+            : undefined,
+        tracks: form.tracks.length ? form.tracks : undefined,
+        source: (form.source || undefined) as WaitlistEntry["source"],
+        referredBy: refCode,
+      });
+      setCreatedCode((res as { referralCode?: string }).referralCode ?? "");
+      setDone(true);
+      // Fire-and-forget: credit the referrer after this signup is stored.
+      // Failure here shouldn't block a successful join.
+      if (refCode) {
+        creditReferrer(refCode).catch(() => {});
+      }
+    } catch (err: unknown) {
+      const msg = err instanceof Error ? err.message : String(err);
+      // Unique index on email — duplicate signup gets a friendly message
+      if (msg.includes("unique attribute constraint")) {
+        setError("You're already on the list! We'll be in touch soon.");
+      } else {
+        setError("Something went wrong. Please try again in a moment.");
+      }
+    } finally {
+      setSubmitting(false);
+    }
+  }
+
+  if (done) {
+    const trackLabel = form.tracks.length > 0
+      ? (TRACKS.find((t) => t.id === form.tracks[0])?.label.toUpperCase() + " TRACK")
+      : "GLOBAL MOBILITY PASS";
+
+    const venueInfo = `${form.city.toUpperCase()}${
+      form.college ? ` · ${form.college.toUpperCase()}` : " · GLOBAL PATHWAY"
+    }`;
+
+    const referralLink = typeof window !== "undefined" && createdCode
+      ? `${window.location.origin}/waitlist?ref=${createdCode}`
+      : "";
+
+    const copyReferralLink = async () => {
+      if (!referralLink) return;
+      try {
+        await navigator.clipboard.writeText(referralLink);
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+      } catch {
+        // Fallback for blocked clipboard permissions
+      }
+    };
+
+    return (
+      <main className="wl-page">
+        <div className="wl-success-hero">
+          <span className="wl-success-kicker">APPLICATION CONFIRMED · COHORT 2026/2027</span>
+          <h1 className="wl-success-heading">Priority Admission Pass</h1>
+          <p className="wl-success-subtext">
+            Welcome, {form.fullName.split(" ")[0]}. Your priority pass has been reserved.
+            Share your referral link with peers to advance your admission review.
+          </p>
+
+          {/* Centered 3D Ticket */}
+          <div className="wl-ticket-centerpiece">
+            <AdmitOneTicket
+              name={form.fullName.trim() || "SCHOLAR APPLICANT"}
+              presenter="CULTURE FLOW · GLOBAL MOBILITY"
+              event={trackLabel}
+              venue={venueInfo}
+              dates="COHORT 2026/2027"
+              stubText="PRIORITY PASS"
+              referralCode={createdCode}
+              width={ticketWidth}
+              texture={WAITLIST_TICKET_TEXTURE}
+              layout={WAITLIST_TICKET_LAYOUT}
+              tilt={{ maxTilt: 12, glare: 0.22, scale: 1.02 }}
+            />
+          </div>
+
+          {/* Referral Code Bar + Copy Action + Go Back Button */}
+          <div className="wl-referral-actions-bar">
+            {createdCode && (
+              <div className="wl-referral-pill-row">
+                <span className="wl-referral-label">Referral Code</span>
+                <span className="wl-referral-code-display">{createdCode}</span>
+                <button
+                  type="button"
+                  className="wl-copy-btn-primary"
+                  onClick={copyReferralLink}
+                >
+                  {copied ? "Link Copied" : "Copy Referral Link"}
+                </button>
+              </div>
+            )}
+
+            <div className="wl-success-nav-row">
+              <Link href="/" className="wl-back-home-btn">
+                Back to Home
+              </Link>
+            </div>
+          </div>
+        </div>
+      </main>
+    );
+  }
+
+  return (
+    <main className="wl-page">
+      <div className="wl-container">
+        {/* Left column — pitch, styled like the quiz panel */}
+        <aside className="wl-quiz">
+          <h2 className="wl-quiz-question">
+            Ready to spend two weeks abroad learning, not touring?
+          </h2>
+          <div className="wl-blob-list">
+            <div className="wl-blob wl-blob--1">
+              <span className="wl-blob-check" aria-hidden>
+                40
+              </span>
+              <p>
+                % academic rigor and hands-on workshops — a syllabus, not an
+                itinerary.
+              </p>
+            </div>
+            <div className="wl-blob wl-blob--2">
+              <span className="wl-blob-check" aria-hidden>
+                40
+              </span>
+              <p>% industry and cultural immersion with vetted local partners.</p>
+            </div>
+            <div className="wl-blob wl-blob--3">
+              <span className="wl-blob-check" aria-hidden>
+                20
+              </span>
+              <p>% guided synthesis and reflection that turns it into outcomes.</p>
+            </div>
+          </div>
+          <p className="wl-quiz-note">
+            7 to 21 day micro-immersions for university students.
+            <br />
+            Joining costs nothing — it carries no obligation to enrol.
+          </p>
+        </aside>
+
+        {/* Right column — the form panel */}
+        <section className="wl-form-panel">
+          <h1 className="wl-form-heading">Join the waitlist</h1>
+
+          {step === 1 ? (
+            <form
+              className="wl-form"
+              onSubmit={(e) => {
+                e.preventDefault();
+                if (step1Valid) setStep(2);
+              }}
+            >
+              {/* Role segmented control, like the Liebe/Lieber/Hallo radios */}
+              <fieldset className="wl-role">
+                <legend>I am a…</legend>
+                <div className="wl-role-options">
+                  {(
+                    [
+                      ["student", "Student"],
+                      ["parent", "Parent"],
+                      ["institution", "Institution"],
+                    ] as const
+                  ).map(([value, label]) => (
+                    <label key={value} className="wl-radio">
+                      <input
+                        type="radio"
+                        name="role"
+                        checked={form.role === value}
+                        onChange={() => set("role", value)}
+                      />
+                      <span className="wl-radio-dot" aria-hidden />
+                      {label}
+                    </label>
+                  ))}
+                </div>
+              </fieldset>
+
+              <label className="wl-field">
+                <span>Full name *</span>
+                <input
+                  type="text"
+                  required
+                  value={form.fullName}
+                  onChange={(e) => set("fullName", e.target.value)}
+                  autoComplete="name"
+                />
+              </label>
+
+              <label className="wl-field">
+                <span>Email *</span>
+                <input
+                  type="email"
+                  required
+                  value={form.email}
+                  onChange={(e) => set("email", e.target.value)}
+                  autoComplete="email"
+                />
+              </label>
+
+              <div className="wl-row">
+                <label className="wl-field">
+                  <span>City *</span>
+                  <input
+                    type="text"
+                    required
+                    value={form.city}
+                    onChange={(e) => set("city", e.target.value)}
+                    autoComplete="address-level2"
+                  />
+                </label>
+                <label className="wl-field">
+                  <span>Mobile / WhatsApp</span>
+                  <input
+                    type="tel"
+                    value={form.phone}
+                    onChange={(e) => set("phone", e.target.value)}
+                    autoComplete="tel"
+                  />
+                </label>
+              </div>
+
+              <button
+                type="submit"
+                className="wl-btn wl-btn--next"
+                disabled={!step1Valid}
+                suppressHydrationWarning
+              >
+                Next &rarr;
+              </button>
+            </form>
+          ) : (
+            <form className="wl-form" onSubmit={handleSubmit}>
+              {form.role === "student" && (
+                <div className="wl-row">
+                  <label className="wl-field">
+                    <span>College or university</span>
+                    <input
+                      type="text"
+                      value={form.college}
+                      onChange={(e) => set("college", e.target.value)}
+                      autoComplete="organization"
+                    />
+                  </label>
+                  <label className="wl-field">
+                    <span>Year of study</span>
+                    <select
+                      value={form.yearOfStudy}
+                      onChange={(e) => set("yearOfStudy", e.target.value)}
+                    >
+                      <option value="">Select…</option>
+                      {YEAR_OPTIONS.map((y) => (
+                        <option key={y.value} value={y.value}>
+                          {y.label}
+                        </option>
+                      ))}
+                    </select>
+                  </label>
+                </div>
+              )}
+
+              {form.role === "institution" && (
+                <label className="wl-field">
+                  <span>Institution / organisation</span>
+                  <input
+                    type="text"
+                    value={form.college}
+                    onChange={(e) => set("college", e.target.value)}
+                    autoComplete="organization"
+                  />
+                </label>
+              )}
+
+              <fieldset className="wl-field wl-tracks">
+                <span>Track interest (pick up to 3)</span>
+                <div className="wl-track-options">
+                  {TRACKS.map((t) => (
+                    <label key={t.id} className="wl-track-chip">
+                      <input
+                        type="checkbox"
+                        checked={form.tracks.includes(t.id)}
+                        onChange={() => toggleTrack(t.id)}
+                      />
+                      {t.label}
+                    </label>
+                  ))}
+                </div>
+              </fieldset>
+
+              <label className="wl-field">
+                <span>How did you hear about us?</span>
+                <select
+                  value={form.source}
+                  onChange={(e) => set("source", e.target.value)}
+                >
+                  <option value="">Select…</option>
+                  {SOURCE_OPTIONS.map((s) => (
+                    <option key={s.value} value={s.value}>
+                      {s.label}
+                    </option>
+                  ))}
+                </select>
+              </label>
+
+              <label className="wl-consent">
+                <input
+                  type="checkbox"
+                  checked={form.consent}
+                  onChange={(e) => set("consent", e.target.checked)}
+                  required
+                />
+                <span>
+                  I accept the{" "}
+                  <Link href="/legal/privacy">Privacy Policy</Link> *{" "}
+                  <em>(required)</em>
+                </span>
+              </label>
+
+              {error && <p className="wl-error" role="alert">{error}</p>}
+
+              <div className="wl-step-actions">
+                <button
+                  type="button"
+                  className="wl-link-plain"
+                  onClick={() => setStep(1)}
+                >
+                  ← Back
+                </button>
+                <button
+                  type="submit"
+                  className="wl-btn"
+                  disabled={!step2Valid || submitting}
+                  suppressHydrationWarning
+                >
+                  {submitting ? "Sending…" : "Join the waitlist!"}
+                </button>
+              </div>
+            </form>
+          )}
+
+          <p className="wl-required-note">* required fields</p>
+        </section>
+      </div>
+
+      {/* Floating CTA — the brief's "Let's talk" pill, always reachable.
+          Hides itself while the user is typing / has finished the form. */}
+      <Link
+        href="/programs#contact-advising"
+        className="wl-float-cta"
+        aria-label="Let's talk — contact advising"
+      >
+        Let&apos;s talk
+      </Link>
+    </main>
+  );
+}

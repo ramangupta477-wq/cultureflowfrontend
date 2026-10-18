@@ -22,6 +22,8 @@ export default function Navbar({ pageLabel }: NavbarProps) {
     if (pathname.startsWith("/programs")) return "PROGRAMS";
     if (pathname.startsWith("/destination")) return "DESTINATION";
     if (pathname.startsWith("/team")) return "TEAM";
+    // Waitlist page: no page-title indicator
+    if (pathname.startsWith("/waitlist")) return "";
     // Default fallback: strip slashes and uppercase
     return pathname.replace(/^\//, "").toUpperCase();
   };
@@ -45,9 +47,12 @@ export default function Navbar({ pageLabel }: NavbarProps) {
     <header className={`cf-navbar ${scrolled ? "cf-navbar--scrolled" : ""}`}>
       <div className="cf-navbar-container">
         
-        {/* ─── LEFT: Current Page Name Only (as requested: "only display the name nothing else") ─── */}
+        {/* ─── LEFT: Current Page Name Only. On /waitlist the title is empty,
+             but the column stays so the centered logo remains centered. ─── */}
         <div className="cf-navbar-col cf-navbar-col--left">
-          <span className="cf-navbar-page-title">{activeTitle}</span>
+          {activeTitle && (
+            <span className="cf-navbar-page-title">{activeTitle}</span>
+          )}
         </div>
 
         {/* ─── MID: Centered Brand Logo (as requested) ─── */}
@@ -88,12 +93,20 @@ export default function Navbar({ pageLabel }: NavbarProps) {
             >
               TEAM
             </Link>
+            <Link
+              href="/waitlist"
+              className={`cf-nav-link ${pathname.startsWith("/waitlist") ? "cf-nav-link--active" : ""}`}
+            >
+              WAITLIST
+            </Link>
           </nav>
 
-          {/* Pill Action Button matching inspiration */}
-          <Link href="/programs#contact-advising" className="cf-nav-cta-pill">
-            <span>Let&apos;s talk</span>
-          </Link>
+          {/* Pill Action Button — links directly to /waitlist */}
+          {pathname !== "/waitlist" && (
+            <Link href="/waitlist" className="cf-nav-cta-pill">
+              <span>Join Waitlist</span>
+            </Link>
+          )}
 
           {/* Mobile Menu Toggle Button */}
           <button
@@ -148,15 +161,23 @@ export default function Navbar({ pageLabel }: NavbarProps) {
               <span className="cf-mobile-link-num">04</span>
               <span>TEAM</span>
             </Link>
+            <Link
+              href="/waitlist"
+              onClick={() => setMobileMenuOpen(false)}
+              className={`cf-mobile-link ${pathname.startsWith("/waitlist") ? "cf-mobile-link--active" : ""}`}
+            >
+              <span className="cf-mobile-link-num">05</span>
+              <span>WAITLIST</span>
+            </Link>
           </div>
 
           <div className="cf-mobile-drawer-bottom">
             <Link
-              href="/programs#contact-advising"
+              href="/waitlist"
               onClick={() => setMobileMenuOpen(false)}
               className="cf-mobile-cta"
             >
-              Schedule Consultation ↗
+              Join Cohort Waitlist ↗
             </Link>
           </div>
         </div>
