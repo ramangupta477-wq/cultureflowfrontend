@@ -190,6 +190,7 @@ export default function ValuesSection() {
 
   return (
     <section ref={sectionRef} id="values" className="values-section" data-bg-fade="#FDFCF4">
+      <div id="safety" style={{ position: "absolute", top: "-80px" }} />
       <div className="values-sticky">
         
         {/* Editorial Header */}
