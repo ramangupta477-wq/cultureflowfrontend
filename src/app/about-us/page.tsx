@@ -362,7 +362,7 @@ export default function AboutUsPage() {
               institution exploring international articulation partnerships, our doors are open.
             </p>
             <div className="cf-about-cta-buttons">
-              <Link href="/#waitlist" className="cf-about-btn-solid">
+              <Link href="/waitlist" className="cf-about-btn-solid">
                 <span>Join Waitlist</span>
                 <span className="cf-btn-arrow">→</span>
               </Link>

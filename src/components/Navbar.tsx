@@ -92,7 +92,7 @@ export default function Navbar({ pageLabel, logoTheme = "auto" }: NavbarProps) {
           </nav>
 
           {/* Pill Action Button */}
-          <Link href="/#waitlist" className="cf-nav-cta-pill">
+          <Link href="/waitlist" className="cf-nav-cta-pill">
             <span>Join Waitlist</span>
           </Link>
 
@@ -153,7 +153,7 @@ export default function Navbar({ pageLabel, logoTheme = "auto" }: NavbarProps) {
 
           <div className="cf-mobile-drawer-bottom">
             <Link
-              href="/#waitlist"
+              href="/waitlist"
               onClick={() => setMobileMenuOpen(false)}
               className="cf-mobile-cta"
             >
