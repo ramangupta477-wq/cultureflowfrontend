@@ -97,8 +97,8 @@ export default function ProgramsPage() {
                 key={track.num}
                 className={`track-bar track-bar--${track.num}`}
               >
+                <span className="track-num">{track.num}</span>
                 <div className="track-bar-content">
-                  <span className="track-num">{track.num}</span>
                   <h3 className="track-title">{track.title}</h3>
                   <p className="track-desc">{track.desc}</p>
                 </div>

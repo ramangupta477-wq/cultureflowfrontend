@@ -3,11 +3,14 @@
 import { useEffect, useRef } from "react";
 
 const N_MIN = 4, N_MAX = 12;
-const PHASE2 = 0.3;
-const SMOOTHING = 0.2;
-const STOP_EPSILON = 0.0005;
 const C_LINE = "#0B0B0B";
 const C_AXLE = "#0B0B0B";
+const MOBILE_BP = 767;
+const MARGIN_X = 0, BOTTOM_MARGIN = 320, VERTICAL_POS = 0.50;
+const SMOOTHING = 0.2;
+const STOP_EPSILON = 0.0005;
+const SCROLL_OFFSET_DESKTOP = 0.25, SCROLL_OFFSET_MOBILE = 0;
+const PHASE2 = 0.3;
 
 const easeInOut = (t: number) => t * t * (3 - 2 * t);
 const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
@@ -67,6 +70,27 @@ function continuousVerts(nf: number, r: number) {
   return out;
 }
 
+function drawRoundedRect(
+  ctx: CanvasRenderingContext2D,
+  x: number,
+  y: number,
+  w: number,
+  h: number,
+  r: number
+) {
+  if (typeof ctx.roundRect === "function") {
+    ctx.roundRect(x, y, w, h, [r, r, 0, 0]);
+  } else {
+    ctx.moveTo(x + r, y);
+    ctx.lineTo(x + w - r, y);
+    ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+    ctx.lineTo(x + w, y + h);
+    ctx.lineTo(x, y + h);
+    ctx.lineTo(x, y + r);
+    ctx.quadraticCurveTo(x, y, x + r, y);
+  }
+}
+
 /**
  * Renders just a <canvas>. The parent provides the scroll container ref
  * so the polygon and the track bars share the same 400vh scroll context.
@@ -108,13 +132,17 @@ export default function RollingPolygon({
       ctx.lineCap = "round";
 
       W = cssW; H = cssH;
-      isMobile = W <= 767;
-      R = Math.min(W, H) * (isMobile ? 0.12 : 0.095);
+      isMobile = W <= MOBILE_BP;
+
+      const RADIUS_SCALE = isMobile ? 0.13 * 1.2 : 0.12;
+      R = Math.min(W, H) * RADIUS_SCALE;
+
       scrollable = Math.max(0, outer!.offsetHeight - window.innerHeight);
-      offsetFrac = isMobile ? 0 : 0.25;
+      offsetFrac = isMobile ? SCROLL_OFFSET_MOBILE : SCROLL_OFFSET_DESKTOP;
       xLeft = isMobile ? R : -R;
-      xRight = W - 2 * R - (isMobile ? 10 : 20);
-      tEntry = isMobile ? 0.05 : (2 * R) / (xRight - xLeft);
+      xRight = W - MARGIN_X - R;
+      tEntry = isMobile ? 0.05 : (2 * R + MARGIN_X) / (xRight - xLeft);
+
       updateTarget();
       render(progress);
     }
@@ -144,9 +172,29 @@ export default function RollingPolygon({
     }
 
     function render(p: number) {
+      const bars = outer!.querySelectorAll<HTMLElement>(".track-bar");
+      const canvasRect = canvas!.getBoundingClientRect();
+
+      // Clear full canvas first
+      ctx.clearRect(0, 0, W, H);
+
+      let minBoxX = 0;
+      let maxBoxX = W;
+
+      if (bars.length > 0) {
+        const firstRect = bars[0].getBoundingClientRect();
+        const lastRect = bars[bars.length - 1].getBoundingClientRect();
+        minBoxX = firstRect.left - canvasRect.left;
+        maxBoxX = lastRect.right - canvasRect.left;
+      }
+
+      // Span the wheel across the boxes
+      const xLeftTrack = minBoxX - R;
+      const xRightTrack = maxBoxX + R;
+      const span = xRightTrack - xLeftTrack;
+
       const t = Math.max(0, Math.min(1, p));
-      const span = xRight - xLeft;
-      const wheelX = lerp(xLeft, xRight, t);
+      const wheelX = lerp(xLeftTrack, xRightTrack, t);
 
       const tMorphRaw = Math.max(0, (t - tEntry) / (1 - tEntry));
       const tMorph = easeInOut(Math.min(1, tMorphRaw));
@@ -166,16 +214,42 @@ export default function RollingPolygon({
       const aLo = R * Math.cos(Math.PI / nLo);
       const aHi = R * Math.cos(Math.PI / nHi);
       const a = lerp(aLo, aHi, frac);
+      const bottomMargin = isMobile ? 300 : BOTTOM_MARGIN;
+      let boxCenterY = (H - bottomMargin) * VERTICAL_POS;
 
-      const bottomMargin = isMobile ? 60 : 80;
-      const roadPeakY = (H - bottomMargin) * 0.68 + a;
-      const axleY = roadPeakY - (a + (R - a) * circT);
+      if (bars.length > 0) {
+        const barRect = bars[0].getBoundingClientRect();
+        const boxTop = barRect.top - canvasRect.top;
+        const boxHeight = barRect.height;
+        // Centered directly in the vertical middle of the card boxes
+        boxCenterY = boxTop + boxHeight * 0.50;
+      }
 
-      ctx.clearRect(0, 0, W, H);
+      const axleY = boxCenterY;
+      const roadPeakY = axleY + (a + (R - a) * circT);
 
-      // catenary road
-      const firstPeakX = xLeft + Math.ceil((-xLeft - s) / s) * s;
-      const numArches = Math.ceil((W + s * 2) / s) + 2;
+      // ─── CLIP CANVAS TO ONLY THE INTERIOR OF THE BOXES ───
+      ctx.save();
+      ctx.beginPath();
+      if (bars.length > 0) {
+        bars.forEach((bar) => {
+          const r = bar.getBoundingClientRect();
+          const bx = r.left - canvasRect.left;
+          const by = r.top - canvasRect.top;
+          const bw = r.width;
+          const bh = r.height;
+          if (bw > 0 && bh > 0) {
+            drawRoundedRect(ctx, bx, by, bw, bh, 8);
+          }
+        });
+      } else {
+        ctx.rect(0, 0, W, H);
+      }
+      ctx.clip();
+
+      // catenary road (only rendered inside clipped boxes!)
+      const firstPeakX = minBoxX + Math.ceil((-minBoxX - s) / s) * s;
+      const numArches = Math.ceil((maxBoxX - minBoxX + s * 2) / s) + 2;
       const steps = Math.max(48, Math.round(s));
       const invA = 1 / a;
       const oneMinusCirc = 1 - circT;
@@ -197,7 +271,7 @@ export default function RollingPolygon({
       ctx.lineWidth = 1.5;
       ctx.stroke();
 
-      // rolling shape
+      // rolling shape (only rendered inside clipped boxes!)
       const d = t * span;
       const rotation = (d / s) * (2 * Math.PI / nf) - Math.PI / nf;
       const verts = continuousVerts(nf, R);
@@ -239,16 +313,18 @@ export default function RollingPolygon({
       ctx.fill();
       ctx.restore();
 
-      // axle guide
+      // axle guide (only rendered inside clipped boxes!)
       ctx.save();
       ctx.strokeStyle = C_AXLE;
       ctx.lineWidth = 1;
       ctx.setLineDash([5, 10]);
-      ctx.globalAlpha = 0.4;
       ctx.beginPath();
-      ctx.moveTo(0, axleY);
-      ctx.lineTo(W, axleY);
+      ctx.moveTo(minBoxX, axleY);
+      ctx.lineTo(maxBoxX, axleY);
       ctx.stroke();
+      ctx.restore();
+
+      // restore clipping context
       ctx.restore();
     }
 
