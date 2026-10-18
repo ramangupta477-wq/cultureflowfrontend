@@ -6,8 +6,8 @@ const N_MIN = 4, N_MAX = 12;
 const PHASE2 = 0.3;
 const SMOOTHING = 0.2;
 const STOP_EPSILON = 0.0005;
-const C_LINE = "white";
-const C_AXLE = "white";
+const C_LINE = "#0B0B0B";
+const C_AXLE = "#0B0B0B";
 
 const easeInOut = (t: number) => t * t * (3 - 2 * t);
 const lerp = (a: number, b: number, t: number) => a + (b - a) * t;

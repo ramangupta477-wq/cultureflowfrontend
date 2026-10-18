@@ -1,0 +1,159 @@
+/* ─── Role Picker: vertical scrolling pill selector ─── */
+
+.rp-section {
+  width: 100%;
+  background: var(--color-yellow, #FFCD00);
+  border-radius: 24px;
+  padding: clamp(40px, 6vw, 72px) clamp(24px, 4vw, 56px);
+  overflow: hidden;
+  margin: auto 0;
+}
+
+.rp-inner {
+  display: flex;
+  align-items: center;
+  gap: clamp(20px, 3vw, 40px);
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+/* ─── Left prompt ─── */
+.rp-prompt {
+  flex: none;
+  font-family: var(--font-heading, "DM Serif Display", Georgia, serif);
+  font-size: clamp(2.4rem, 5vw, 4.2rem);
+  font-weight: 400;
+  line-height: 1;
+  color: var(--color-obraz-black, #0B0B0B);
+  white-space: nowrap;
+  margin: 0;
+}
+
+/* ─── Scrolling track ─── */
+.rp-track-mask {
+  flex: 1;
+  height: clamp(260px, 30vw, 340px);
+  overflow: hidden;
+  position: relative;
+  mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    black 15%,
+    black 85%,
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    black 15%,
+    black 85%,
+    transparent 100%
+  );
+}
+
+.rp-track {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  height: 100%;
+  overflow-y: auto;
+  padding: 8px 0;
+  scrollbar-width: none;
+  cursor: grab;
+  user-select: none;
+  touch-action: pan-y;
+  -webkit-overflow-scrolling: touch;
+}
+
+.rp-track::-webkit-scrollbar {
+  display: none;
+}
+
+/* ─── Pills ─── */
+.rp-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 36px;
+  min-height: clamp(52px, 6vw, 68px);
+  font-family: var(--font-body, "Inter", sans-serif);
+  font-size: clamp(1rem, 2vw, 1.35rem);
+  font-weight: 700;
+  color: var(--color-obraz-black, #0B0B0B);
+  background: transparent;
+  border: 2.5px solid var(--color-obraz-black, #0B0B0B);
+  border-radius: 999px;
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.rp-pill:hover {
+  background: rgba(11, 11, 11, 0.08);
+}
+
+.rp-pill--active {
+  background: var(--color-obraz-black, #0B0B0B);
+  color: var(--color-yellow, #FFCD00);
+  border-color: var(--color-obraz-black, #0B0B0B);
+  transform: scale(1.05);
+}
+
+/* ─── Next button ─── */
+.rp-next {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 16px 32px;
+  font-family: var(--font-body, "Inter", sans-serif);
+  font-size: clamp(1rem, 2vw, 1.3rem);
+  font-weight: 700;
+  color: var(--color-obraz-black, #0B0B0B);
+  background: transparent;
+  border: 2.5px solid var(--color-obraz-black, #0B0B0B);
+  border-radius: 999px;
+  cursor: pointer;
+  opacity: 0.4;
+  transition: all 0.25s ease;
+  white-space: nowrap;
+}
+
+.rp-next:disabled {
+  cursor: not-allowed;
+}
+
+.rp-next--ready {
+  opacity: 1;
+  background: var(--color-obraz-black, #0B0B0B);
+  color: var(--color-yellow, #FFCD00);
+}
+
+.rp-next--ready:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(11, 11, 11, 0.25);
+}
+
+/* ─── Mobile ─── */
+@media (max-width: 640px) {
+  .rp-inner {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .rp-prompt {
+    white-space: normal;
+  }
+
+  .rp-track-mask {
+    height: 220px;
+    width: 100%;
+  }
+
+  .rp-next {
+    width: 100%;
+    justify-content: center;
+  }
+}

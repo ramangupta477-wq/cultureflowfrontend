@@ -8,7 +8,7 @@
   width: 100%;
   min-height: 100vh;
   background-color: var(--color-bg, #F6EEDD);
-  color: var(--color-text, #002244);
+  color: var(--color-text, #0B0B0B);
   font-family: var(--font-body), "Inter", sans-serif;
   overflow-x: clip;
 }
@@ -347,7 +347,7 @@
   font-family: var(--font-heading), "Oranienbaum", "Georgia", serif;
   font-size: clamp(2.2rem, 4vw, 3.4rem);
   font-weight: 400;
-  color: #002244;
+  color: #0B0B0B;
   line-height: 1.15;
   letter-spacing: -0.015em;
   margin-bottom: 16px;
@@ -393,14 +393,14 @@
 
 .programs-filter-pill:hover {
   background: rgba(0, 34, 68, 0.08);
-  color: #002244;
+  color: #0B0B0B;
   border-color: rgba(0, 34, 68, 0.2);
 }
 
 .programs-filter-pill--active {
-  background: #002244;
+  background: #0B0B0B;
   color: #F6EEDD;
-  border-color: #002244;
+  border-color: #0B0B0B;
   box-shadow: 0 4px 14px rgba(0, 34, 68, 0.15);
 }
 
@@ -433,7 +433,7 @@
   outline: none;
   font-family: var(--font-body);
   font-size: 0.82rem;
-  color: #002244;
+  color: #0B0B0B;
 }
 
 .programs-search-input::placeholder {
@@ -483,7 +483,7 @@
   width: 100%;
   aspect-ratio: 16 / 10;
   overflow: hidden;
-  background: #002244;
+  background: #0B0B0B;
 }
 
 .program-card-img {
@@ -558,7 +558,7 @@
   font-family: var(--font-heading), "Oranienbaum", "Georgia", serif;
   font-size: 1.55rem;
   font-weight: 400;
-  color: #002244;
+  color: #0B0B0B;
   letter-spacing: 0.02em;
 }
 
@@ -599,7 +599,7 @@
   font-family: var(--font-body), "Inter", sans-serif;
   font-size: 0.74rem;
   font-weight: 500;
-  color: #002244;
+  color: #0B0B0B;
 }
 
 .program-chip-label {
@@ -623,7 +623,7 @@
   font-family: var(--font-body);
   font-size: 0.78rem;
   font-weight: 600;
-  color: #002244;
+  color: #0B0B0B;
   background: none;
   border: none;
   cursor: pointer;
@@ -642,7 +642,7 @@
   justify-content: center;
   padding: 8px 18px;
   border-radius: 40px;
-  background: #002244;
+  background: #0B0B0B;
   color: #F6EEDD;
   font-size: 0.76rem;
   font-weight: 600;
@@ -653,7 +653,7 @@
 
 .program-card-apply-btn:hover {
   background: #C89C66;
-  color: #002244;
+  color: #0B0B0B;
 }
 
 /* No Results Message */
@@ -667,7 +667,7 @@
   margin-top: 16px;
   padding: 10px 24px;
   border-radius: 40px;
-  background: #002244;
+  background: #0B0B0B;
   color: #F6EEDD;
   cursor: pointer;
   font-size: 0.8rem;
@@ -697,7 +697,7 @@
   font-family: var(--font-heading), "Oranienbaum", "Georgia", serif;
   font-size: clamp(2rem, 3.5vw, 3rem);
   font-weight: 400;
-  color: #002244;
+  color: #0B0B0B;
   margin-bottom: 12px;
 }
 
@@ -738,7 +738,7 @@
   font-family: var(--font-heading), "Oranienbaum", serif;
   font-size: 1.4rem;
   font-weight: 400;
-  color: #002244;
+  color: #0B0B0B;
   margin-bottom: 10px;
 }
 
@@ -885,7 +885,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #002244;
+  color: #0B0B0B;
   transition: background 0.2s ease;
 }
 
@@ -908,7 +908,7 @@
   font-family: var(--font-heading), "Oranienbaum", serif;
   font-size: clamp(1.8rem, 3vw, 2.4rem);
   font-weight: 400;
-  color: #002244;
+  color: #0B0B0B;
   line-height: 1.15;
   margin-bottom: 6px;
 }
@@ -923,7 +923,7 @@
   display: inline-block;
   padding: 4px 12px;
   border-radius: 20px;
-  background: #002244;
+  background: #0B0B0B;
   color: #F6EEDD;
   font-size: 0.72rem;
   font-weight: 600;
@@ -953,7 +953,7 @@
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: #002244;
+  color: #0B0B0B;
   margin-bottom: 10px;
   padding-bottom: 6px;
   border-bottom: 1px solid rgba(0, 34, 68, 0.08);
@@ -990,7 +990,7 @@
 .spec-value {
   font-size: 0.82rem;
   font-weight: 600;
-  color: #002244;
+  color: #0B0B0B;
 }
 
 .program-modal-highlights {
@@ -1063,7 +1063,7 @@
 
 .programs-footer-brand {
   font-size: 0.88rem;
-  color: #002244;
+  color: #0B0B0B;
 }
 
 .programs-footer-brand em {
@@ -1313,7 +1313,7 @@
 
 .track-bar {
   border-radius: 8px 8px 0 0;
-  background: #002244;
+  background: var(--color-yellow, #FFCD00);
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -1326,14 +1326,14 @@
 
 .track-bar-content {
   padding: clamp(24px, 3vw, 36px);
-  color: #F6EEDD;
+  color: var(--color-obraz-black, #0B0B0B);
 }
 
 .track-num {
   font-family: "SF Mono", Menlo, monospace;
   font-size: 0.72rem;
   letter-spacing: 0.12em;
-  color: #C89C66;
+  color: var(--color-obraz-black, #0B0B0B);
   display: block;
   margin-bottom: 16px;
 }
@@ -1349,7 +1349,7 @@
 .track-desc {
   font-size: clamp(0.82rem, 0.95vw, 0.92rem);
   line-height: 1.55;
-  color: rgba(246, 238, 221, 0.7);
+  color: rgba(11, 11, 11, 0.65);
   margin: 0;
 }
 

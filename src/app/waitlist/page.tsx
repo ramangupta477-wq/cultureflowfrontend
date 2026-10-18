@@ -1,8 +1,10 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import dynamic from "next/dynamic";
+import { z } from "zod/v4";
+import RolePicker from "./RolePicker";
 import { playShutterSound } from "@/components/ui/admit-one-ticket";
 import {
   creditReferrer,
@@ -39,7 +41,7 @@ const AdmitOneTicket = dynamic(() => import("@/components/ui/admit-one-ticket"),
 
 const WAITLIST_TICKET_TEXTURE = {
   engine: "generative" as const,
-  colorBack: "#050A30",
+  colorBack: "#1B1B1B",
   colorFront: "#C89C66",
   colorHighlight: "#F6EEDD",
   shape: "warp" as const,
@@ -76,6 +78,18 @@ const WAITLIST_TICKET_LAYOUT = {
   inkColor: "#F6EEDD",
 };
 
+/* ─── Zod schemas ─── */
+const step1Schema = z.object({
+  fullName: z.string().trim().min(1, "Name is required"),
+  email: z.email("Enter a valid email"),
+  city: z.string().trim().min(1, "City is required"),
+  phone: z.string().optional(),
+});
+
+const step2Schema = z.object({
+  consent: z.literal(true, { message: "You must agree to continue" }),
+});
+
 const TRACKS: { id: TrackId; label: string }[] = [
   { id: "tech", label: "Tech & Innovation" },
   { id: "sustainability", label: "Sustainability & Social Impact" },
@@ -99,7 +113,7 @@ const SOURCE_OPTIONS = [
 
 export default function WaitlistPage() {
   // Step 1 fields (identity + role), step 2 fields (context + consent)
-  const [step, setStep] = useState<1 | 2>(1);
+  const [step, setStep] = useState<0 | 1 | 2>(0);
   const [submitting, setSubmitting] = useState(false);
   const [done, setDone] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -161,14 +175,9 @@ export default function WaitlistPage() {
           : f.tracks,
     }));
 
-  const step1Valid = Boolean(
-    form.fullName.trim() &&
-    form.email.trim() &&
-    /.+@.+\..+/.test(form.email) &&
-    form.city.trim()
-  );
+  const step1Valid = step1Schema.safeParse(form).success;
 
-  const step2Valid = Boolean(form.consent);
+  const step2Valid = step2Schema.safeParse(form).success;
 
   // Referral captured from the URL (?ref=CODE) — safely captured in useEffect
   // to prevent any SSR/hydration divergence.
@@ -305,8 +314,23 @@ export default function WaitlistPage() {
     );
   }
 
+  const handleRoleSelect = useCallback((role: string) => {
+    const roleMap: Record<string, WaitlistRole> = {
+      Student: "student",
+      Parent: "parent",
+      Institution: "institution",
+      Researcher: "student",
+      Educator: "institution",
+    };
+    set("role", roleMap[role] ?? "student");
+    setStep(1);
+  }, []);
+
   return (
     <main className="wl-page">
+      {step === 0 ? (
+        <RolePicker onSelect={handleRoleSelect} />
+      ) : (
       <div className="wl-container">
         {/* Left column — pitch, styled like the quiz panel */}
         <aside className="wl-quiz">
@@ -545,9 +569,9 @@ export default function WaitlistPage() {
           <p className="wl-required-note">* required fields</p>
         </section>
       </div>
+      )}
 
-      {/* Floating CTA — the brief's "Let's talk" pill, always reachable.
-          Hides itself while the user is typing / has finished the form. */}
+      {/* Floating CTA */}
       <Link
         href="/programs#contact-advising"
         className="wl-float-cta"

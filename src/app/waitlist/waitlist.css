@@ -1,20 +1,17 @@
 /* Waitlist page — organic blob styling from the Fairtrade reference,
    rebuilt in Culture Flow palette:
-   Deep Navy #002244 · Midnight #050A30 · Sand/Gold #C89C66 · Crisp White #FCFCFF */
+   Deep Navy #0B0B0B · Midnight #1B1B1B · Sand/Gold #C89C66 · Crisp White #FCFCFF */
 
 .wl-page {
-  --color-navy: #002244;
-  --color-midnight: #050A30;
+  --color-navy: #1A1714;
+  --color-midnight: #242018;
   --color-gold: #C89C66;
-  --color-cream: #FCFCFF;
+  --color-cream: #FDFCF4;
   min-height: 100vh;
-  background: var(--color-navy, #002244);
-  background-image:
-    radial-gradient(circle at 12% 15%, rgba(200, 156, 102, 0.1) 0, transparent 30%),
-    radial-gradient(circle at 88% 80%, rgba(5, 10, 48, 0.55) 0, transparent 45%);
+  background: var(--color-cream, #FCFCFF);
   padding: 96px 24px 64px;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: center;
 }
 
@@ -24,6 +21,7 @@
   gap: 48px;
   max-width: 1120px;
   width: 100%;
+  align-self: flex-start;
   align-items: flex-start;
 }
 
@@ -34,7 +32,7 @@
   font-size: clamp(1.6rem, 3vw, 2.2rem);
   font-weight: 800;
   line-height: 1.25;
-  color: var(--color-cream, #FCFCFF);
+  color: var(--color-navy, #1A1714);
   margin: 0 0 36px;
   max-width: 20ch;
 }
@@ -60,9 +58,9 @@
   align-items: center;
   gap: 18px;
   padding: 20px 26px;
-  color: var(--color-cream, #FCFCFF);
-  background: var(--color-midnight, #050A30);
-  border: 2px solid rgba(200, 156, 102, 0.25);
+  color: var(--color-navy, #1A1714);
+  background: rgba(200, 156, 102, 0.08);
+  border: 2px solid rgba(200, 156, 102, 0.3);
 }
 
 /* Wobbly organic shapes — different border-radius per blob, like the reference cards */
@@ -94,7 +92,7 @@
   font-family: var(--font-body), sans-serif;
   font-size: 1.15rem;
   font-weight: 800;
-  color: var(--color-midnight, #050A30);
+  color: var(--color-midnight, #1B1B1B);
   background: var(--color-gold, #C89C66);
   border-radius: 50%;
 }
@@ -103,7 +101,7 @@
   margin-top: 32px;
   font-size: 0.9rem;
   line-height: 1.6;
-  color: rgba(252, 252, 255, 0.75);
+  color: rgba(26, 23, 20, 0.6);
 }
 
 /* ─── Right column: white form panel ─── */
@@ -112,7 +110,7 @@
   background: var(--color-cream, #FCFCFF);
   border-radius: 28px 40px 30px 44px;
   padding: 36px 34px 28px;
-  box-shadow: 0 18px 60px rgba(5, 10, 48, 0.45);
+  box-shadow: 0 18px 60px rgba(11, 11, 11, 0.45);
 }
 
 .wl-form-heading {
@@ -121,7 +119,7 @@
   font-weight: 800;
   letter-spacing: 0.02em;
   text-transform: uppercase;
-  color: var(--color-navy, #002244);
+  color: var(--color-navy, #0B0B0B);
   margin: 0 0 22px;
 }
 
@@ -148,7 +146,7 @@
 .wl-field > span {
   font-size: 0.8rem;
   font-weight: 600;
-  color: var(--color-navy, #002244);
+  color: var(--color-navy, #0B0B0B);
 }
 
 .wl-field input,
@@ -157,7 +155,7 @@
   padding: 13px 18px;
   font-family: var(--font-body), sans-serif;
   font-size: 0.95rem;
-  color: var(--color-navy, #002244);
+  color: var(--color-navy, #0B0B0B);
   background: rgba(200, 156, 102, 0.12);
   border: 1px solid rgba(0, 34, 68, 0.18);
   border-radius: 999px;
@@ -190,7 +188,7 @@
 .wl-tracks > span {
   font-size: 0.8rem;
   font-weight: 600;
-  color: var(--color-navy, #002244);
+  color: var(--color-navy, #0B0B0B);
   padding: 0;
   margin-bottom: 6px;
 }
@@ -206,7 +204,7 @@
   align-items: center;
   gap: 7px;
   font-size: 0.92rem;
-  color: var(--color-navy, #002244);
+  color: var(--color-navy, #0B0B0B);
   cursor: pointer;
 }
 
@@ -221,7 +219,7 @@
   width: 18px;
   height: 18px;
   border-radius: 50%;
-  border: 2px solid var(--color-navy, #002244);
+  border: 2px solid var(--color-navy, #0B0B0B);
   display: inline-grid;
   place-items: center;
   transition: border-color 0.15s ease;
@@ -260,7 +258,7 @@
   padding: 12px 18px;
   font-size: 0.92rem;
   font-weight: 600;
-  color: var(--color-navy, #002244);
+  color: var(--color-navy, #0B0B0B);
   background: rgba(200, 156, 102, 0.12);
   border: 1px solid rgba(0, 34, 68, 0.14);
   border-radius: 20px 22px 18px 24px;
@@ -269,8 +267,8 @@
 }
 
 .wl-track-chip:has(input:checked) {
-  background: var(--color-navy, #002244);
-  border-color: var(--color-navy, #002244);
+  background: var(--color-navy, #0B0B0B);
+  border-color: var(--color-navy, #0B0B0B);
   color: var(--color-cream, #FCFCFF);
 }
 
@@ -285,17 +283,17 @@
   gap: 10px;
   font-size: 0.85rem;
   line-height: 1.5;
-  color: var(--color-navy, #002244);
+  color: var(--color-navy, #0B0B0B);
   cursor: pointer;
 }
 
 .wl-consent input {
   margin-top: 3px;
-  accent-color: var(--color-navy, #002244);
+  accent-color: var(--color-navy, #0B0B0B);
 }
 
 .wl-consent a {
-  color: var(--color-navy, #002244);
+  color: var(--color-navy, #0B0B0B);
   font-weight: 700;
 }
 
@@ -313,7 +311,7 @@
   font-family: var(--font-body), sans-serif;
   font-size: 1rem;
   font-weight: 800;
-  color: var(--color-navy, #002244);
+  color: var(--color-navy, #0B0B0B);
   background: var(--color-gold, #C89C66);
   border: 2px solid var(--color-gold, #C89C66);
   border-radius: 999px;
@@ -350,7 +348,7 @@
   font-family: var(--font-body), sans-serif;
   font-size: 0.9rem;
   font-weight: 700;
-  color: var(--color-navy, #002244);
+  color: var(--color-navy, #0B0B0B);
   text-decoration: underline;
   text-underline-offset: 3px;
   cursor: pointer;
@@ -383,7 +381,9 @@
   max-width: 820px;
   margin: 0 auto;
   text-align: center;
-  padding: 20px 16px 40px;
+  padding: 40px 24px;
+  background: var(--color-navy, #1A1714);
+  border-radius: 28px;
 }
 
 .wl-success-kicker {
@@ -435,7 +435,7 @@
   display: flex;
   align-items: center;
   width: 100%;
-  background: rgba(5, 10, 48, 0.75);
+  background: rgba(27, 27, 27, 0.75);
   border: 1px solid rgba(200, 156, 102, 0.45);
   border-radius: 999px;
   padding: 6px 8px 6px 22px;
@@ -469,7 +469,7 @@
 .wl-copy-btn-primary {
   padding: 10px 24px;
   background: var(--color-gold, #C89C66);
-  color: #050A30;
+  color: #1B1B1B;
   font-family: var(--font-body);
   font-size: 0.82rem;
   font-weight: 700;
@@ -528,7 +528,7 @@
   font-family: var(--font-body), sans-serif;
   font-size: 1.9rem;
   font-weight: 800;
-  color: var(--color-navy, #002244);
+  color: var(--color-navy, #0B0B0B);
   margin: 0 0 14px;
 }
 
@@ -559,11 +559,11 @@
   font-family: var(--font-body), sans-serif;
   font-size: 0.9rem;
   font-weight: 800;
-  color: var(--color-navy, #002244);
+  color: var(--color-navy, #0B0B0B);
   background: var(--color-gold, #C89C66);
   border-radius: 999px;
   text-decoration: none;
-  box-shadow: 0 10px 30px rgba(5, 10, 48, 0.5);
+  box-shadow: 0 10px 30px rgba(26, 23, 20, 0.2);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -610,7 +610,7 @@
   font-size: 0.88rem;
   font-family: var(--font-body), sans-serif;
   color: var(--color-offwhite, #EEF0FA);
-  background: rgba(5, 10, 48, 0.65);
+  background: rgba(27, 27, 27, 0.65);
   border: 1px solid rgba(200, 156, 102, 0.4);
   border-radius: 10px;
 }
@@ -620,7 +620,7 @@
   font-size: 0.88rem;
   font-weight: 700;
   font-family: var(--font-body), sans-serif;
-  color: var(--color-navy, #002244);
+  color: var(--color-navy, #0B0B0B);
   background: var(--color-gold, #C89C66);
   border: none;
   border-radius: 10px;

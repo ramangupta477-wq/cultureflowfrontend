@@ -3,6 +3,7 @@
 import React, { useRef, useLayoutEffect } from "react";
 import Footer from "../homepage/Footer";
 import RollingPolygon from "./RollingPolygon";
+import ProgramsShowcase from "./ProgramsShowcase";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import "./programs.css";
@@ -106,6 +107,9 @@ export default function ProgramsPage() {
           </div>
         </div>
       </div>
+
+      {/* ─── PROGRAMS SHOWCASE: scroll-pinned photo fly-through ─── */}
+      <ProgramsShowcase />
 
       {/* ─── FOOTER ─── */}
       <Footer />

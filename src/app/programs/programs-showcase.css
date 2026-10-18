@@ -1,0 +1,198 @@
+/* ─── Programs Showcase: scroll-pinned photo fly-through ─── */
+
+.ps-track {
+  position: relative;
+  height: 620vh;
+}
+
+.ps-stage {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
+  background:
+    radial-gradient(120% 30% at 50% -8%, rgba(200, 156, 102, 0.18), transparent 70%),
+    var(--color-bg, #FDFCF4);
+}
+
+/* ─── Floating photos ─── */
+.ps-photos {
+  position: absolute;
+  inset: 0;
+}
+
+.ps-ph {
+  position: absolute;
+  left: 0;
+  top: 0;
+  overflow: hidden;
+  will-change: transform, filter, opacity;
+  opacity: 0;
+  background: linear-gradient(135deg, #e8dcc4, #c4b494);
+  border-radius: 6px;
+}
+
+/* ─── Centre copy ─── */
+.ps-copy {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0 24px;
+  will-change: opacity, transform;
+  pointer-events: none;
+}
+
+.ps-copy h2 {
+  font-family: var(--font-heading, "DM Serif Display", Georgia, serif);
+  font-weight: 400;
+  font-size: clamp(24px, 1.9vw, 40px);
+  letter-spacing: -0.005em;
+  margin-bottom: 2.4vh;
+  color: var(--color-obraz-black, #0B0B0B);
+}
+
+.ps-copy p {
+  max-width: min(46vw, 860px);
+  min-width: min(100%, 520px);
+  font-family: var(--font-body, "Inter", sans-serif);
+  font-size: clamp(15px, 1.22vw, 24px);
+  line-height: 1.42;
+  color: var(--color-obraz-black, #0B0B0B);
+}
+
+.ps-copy p + p {
+  margin-top: 3.6vh;
+}
+
+.ps-cta {
+  margin-top: 3.2vh;
+  display: inline-flex;
+  gap: 4px;
+  pointer-events: auto;
+  text-decoration: none;
+}
+
+.ps-cta span {
+  font-family: var(--font-body, "Inter", sans-serif);
+  font-size: clamp(12px, 0.85vw, 14px);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-obraz-black, #0B0B0B);
+  background: var(--color-warm-white, #F1F0EE);
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+  padding: 0 28px;
+  border-radius: 20px 0 0 20px;
+  transition: background 0.3s;
+}
+
+.ps-cta i {
+  font-style: normal;
+  font-family: var(--font-body, "Inter", sans-serif);
+  background: var(--color-warm-white, #F1F0EE);
+  width: 42px;
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-obraz-dark, #1B1B1B);
+  border-radius: 0 20px 20px 0;
+  transition: transform 0.35s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.ps-cta:hover i {
+  transform: translateX(3px);
+}
+
+.ps-cta:hover span {
+  background: #e5ddd0;
+}
+
+/* ─── Key locations heading ─── */
+.ps-loc {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  text-align: center;
+  will-change: transform, opacity;
+  opacity: 0;
+}
+
+.ps-loc h2 {
+  font-family: var(--font-heading, "DM Serif Display", Georgia, serif);
+  font-weight: 400;
+  font-size: clamp(24px, 2.1vw, 34px);
+  margin-bottom: 1.2vh;
+  color: var(--color-obraz-black, #0B0B0B);
+}
+
+.ps-loc p {
+  font-family: var(--font-body, "Inter", sans-serif);
+  font-size: clamp(13px, 0.9vw, 15px);
+  line-height: 1.35;
+  color: var(--color-obraz-dark, #1B1B1B);
+}
+
+/* ─── Destination cards ─── */
+.ps-cities {
+  padding: 14vh 5vw 18vh;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px 28px;
+  max-width: 1500px;
+  margin: 0 auto;
+}
+
+.ps-city {
+  opacity: 0;
+  transform: translateY(40px);
+  transition:
+    opacity 0.9s cubic-bezier(0.2, 0.7, 0.2, 1),
+    transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.ps-city--in {
+  opacity: 1;
+  transform: none;
+}
+
+.ps-city-img {
+  aspect-ratio: 4 / 3;
+  border-radius: 6px;
+  overflow: hidden;
+  background: linear-gradient(135deg, #e5d7b8, #a9bcc0);
+}
+
+.ps-city h3 {
+  font-family: var(--font-heading, "DM Serif Display", Georgia, serif);
+  font-weight: 400;
+  font-size: 24px;
+  margin: 18px 0 8px;
+  color: var(--color-obraz-black, #0B0B0B);
+}
+
+.ps-city p {
+  font-family: var(--font-body, "Inter", sans-serif);
+  font-size: 15px;
+  line-height: 1.45;
+  color: var(--color-obraz-dark, #1B1B1B);
+  max-width: 44ch;
+}
+
+/* ─── Mobile ─── */
+@media (max-width: 800px) {
+  .ps-track {
+    height: 400vh;
+  }
+
+  .ps-cities {
+    grid-template-columns: 1fr;
+  }
+}
