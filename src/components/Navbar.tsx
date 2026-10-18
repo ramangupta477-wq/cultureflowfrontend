@@ -24,7 +24,6 @@ export default function Navbar({ pageLabel, logoTheme = "auto" }: NavbarProps) {
     if (pathname.includes("about")) return "ABOUT US";
     if (pathname.startsWith("/programs")) return "PROGRAMS";
     if (pathname.startsWith("/destination")) return "DESTINATION";
-    if (pathname.startsWith("/waitlist")) return "";
     // Default fallback: strip slashes and uppercase
     return pathname.replace(/^\//, "").toUpperCase();
   };
@@ -90,20 +89,12 @@ export default function Navbar({ pageLabel, logoTheme = "auto" }: NavbarProps) {
             >
               SAFETY & TRUST
             </Link>
-            <Link
-              href="/waitlist"
-              className={`cf-nav-link ${pathname.startsWith("/waitlist") ? "cf-nav-link--active" : ""}`}
-            >
-              WAITLIST
-            </Link>
           </nav>
 
           {/* Pill Action Button */}
-          {pathname !== "/waitlist" && (
-            <Link href="/waitlist" className="cf-nav-cta-pill">
-              <span>Join Waitlist</span>
-            </Link>
-          )}
+          <Link href="/#waitlist" className="cf-nav-cta-pill">
+            <span>Join Waitlist</span>
+          </Link>
 
           {/* Mobile Menu Toggle Button */}
           <button
@@ -158,19 +149,11 @@ export default function Navbar({ pageLabel, logoTheme = "auto" }: NavbarProps) {
               <span className="cf-mobile-link-num">04</span>
               <span>SAFETY & TRUST</span>
             </Link>
-            <Link
-              href="/waitlist"
-              onClick={() => setMobileMenuOpen(false)}
-              className={`cf-mobile-link ${pathname.startsWith("/waitlist") ? "cf-mobile-link--active" : ""}`}
-            >
-              <span className="cf-mobile-link-num">05</span>
-              <span>WAITLIST</span>
-            </Link>
           </div>
 
           <div className="cf-mobile-drawer-bottom">
             <Link
-              href="/waitlist"
+              href="/#waitlist"
               onClick={() => setMobileMenuOpen(false)}
               className="cf-mobile-cta"
             >

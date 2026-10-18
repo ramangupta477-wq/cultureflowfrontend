@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
-import Link from "next/link";
 import "./HeroSection.css";
 
 // ─── 3D Sphere Ball Styles (Tactile Depth, Realistic Lighting & Specular Highlights) ───
@@ -838,10 +837,6 @@ export default function HeroSection() {
             academic institutions to build pathways students don&apos;t just
             follow — they embrace.
           </p>
-          <Link href="/waitlist" className="hero-cta">
-            JOIN WAITLIST
-            <span className="hero-cta__arrow">↗</span>
-          </Link>
         </div>
 
         {/* ═══ FOOTER (FLOOR FOR BOUNCING COINS) ═══ */}
