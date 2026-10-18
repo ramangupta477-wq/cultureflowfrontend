@@ -17,7 +17,8 @@ function ArrowIcon() {
 
 export default function Footer() {
   return (
-    <footer className="cf-footer">
+    <footer id="waitlist" className="cf-footer">
+      <div id="contact" style={{ position: "absolute", top: "-80px" }} />
       {/* Full background image */}
       <div className="cf-footer-bg">
         <img

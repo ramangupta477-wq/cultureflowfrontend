@@ -8,9 +8,11 @@ import "./Navbar.css";
 interface NavbarProps {
   /** Optional override for current page label */
   pageLabel?: string;
+  /** Explicit logo color theme: 'yellow' | 'black' | 'auto' */
+  logoTheme?: "yellow" | "black" | "auto";
 }
 
-export default function Navbar({ pageLabel }: NavbarProps) {
+export default function Navbar({ pageLabel, logoTheme = "auto" }: NavbarProps) {
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -19,16 +21,19 @@ export default function Navbar({ pageLabel }: NavbarProps) {
   const getPageTitle = () => {
     if (pageLabel) return pageLabel.toUpperCase();
     if (!pathname || pathname === "/") return "HOME";
+    if (pathname.includes("about")) return "ABOUT US";
     if (pathname.startsWith("/programs")) return "PROGRAMS";
     if (pathname.startsWith("/destination")) return "DESTINATION";
-    if (pathname.startsWith("/team")) return "TEAM";
-    // Waitlist page: no page-title indicator
     if (pathname.startsWith("/waitlist")) return "";
     // Default fallback: strip slashes and uppercase
     return pathname.replace(/^\//, "").toUpperCase();
   };
 
   const activeTitle = getPageTitle();
+
+  // Determine if logo should be yellow (on About Us page or explicitly requested)
+  const isAbout = pathname?.includes("about") || pageLabel?.toLowerCase().includes("about");
+  const isYellowLogo = logoTheme === "yellow" || (logoTheme === "auto" && isAbout);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -47,26 +52,18 @@ export default function Navbar({ pageLabel }: NavbarProps) {
     <header className={`cf-navbar ${scrolled ? "cf-navbar--scrolled" : ""}`}>
       <div className="cf-navbar-container">
         
-        {/* ─── LEFT: Current Page Name Only. On /waitlist the title is empty,
-             but the column stays so the centered logo remains centered. ─── */}
+        {/* ─── LEFT: Culture Flow Logo at Top Left Corner ─── */}
         <div className="cf-navbar-col cf-navbar-col--left">
-          {activeTitle && (
-            <span className="cf-navbar-page-title">{activeTitle}</span>
-          )}
-        </div>
-
-        {/* ─── MID: Centered Brand Logo (as requested) ─── */}
-        <div className="cf-navbar-col cf-navbar-col--mid">
           <Link href="/" className="cf-navbar-logo-link" aria-label="Culture Flow Home">
             <img
               src="/homepage_assets/Culture Flow logo.svg"
               alt="Culture Flow"
-              className="cf-navbar-logo-img"
+              className={`cf-navbar-logo-img ${isYellowLogo ? "cf-navbar-logo-img--yellow" : ""}`}
             />
           </Link>
         </div>
 
-        {/* ─── RIGHT: Navigation Links (Programs, Destination, Team, Home) + Pill CTA ─── */}
+        {/* ─── RIGHT: Navigation Links + Pill CTA ─── */}
         <div className="cf-navbar-col cf-navbar-col--right">
           <nav className="cf-navbar-nav" aria-label="Main Navigation">
             <Link
@@ -76,22 +73,22 @@ export default function Navbar({ pageLabel }: NavbarProps) {
               HOME
             </Link>
             <Link
+              href="/about-us"
+              className={`cf-nav-link ${pathname.includes("about") ? "cf-nav-link--active" : ""}`}
+            >
+              ABOUT US
+            </Link>
+            <Link
               href="/programs"
               className={`cf-nav-link ${pathname.startsWith("/programs") ? "cf-nav-link--active" : ""}`}
             >
               PROGRAMS
             </Link>
             <Link
-              href="/programs#destinations"
-              className={`cf-nav-link ${pathname.includes("#destinations") ? "cf-nav-link--active" : ""}`}
+              href="/#safety"
+              className={`cf-nav-link ${pathname.includes("#safety") || pathname.includes("#values") ? "cf-nav-link--active" : ""}`}
             >
-              DESTINATION
-            </Link>
-            <Link
-              href="/#team"
-              className={`cf-nav-link ${pathname.includes("#team") ? "cf-nav-link--active" : ""}`}
-            >
-              TEAM
+              SAFETY & TRUST
             </Link>
             <Link
               href="/waitlist"
@@ -101,7 +98,7 @@ export default function Navbar({ pageLabel }: NavbarProps) {
             </Link>
           </nav>
 
-          {/* Pill Action Button — links directly to /waitlist */}
+          {/* Pill Action Button */}
           {pathname !== "/waitlist" && (
             <Link href="/waitlist" className="cf-nav-cta-pill">
               <span>Join Waitlist</span>
@@ -138,28 +135,28 @@ export default function Navbar({ pageLabel }: NavbarProps) {
               <span>HOME</span>
             </Link>
             <Link
+              href="/about-us"
+              onClick={() => setMobileMenuOpen(false)}
+              className={`cf-mobile-link ${pathname.includes("about") ? "cf-mobile-link--active" : ""}`}
+            >
+              <span className="cf-mobile-link-num">02</span>
+              <span>ABOUT US</span>
+            </Link>
+            <Link
               href="/programs"
               onClick={() => setMobileMenuOpen(false)}
               className={`cf-mobile-link ${pathname.startsWith("/programs") ? "cf-mobile-link--active" : ""}`}
             >
-              <span className="cf-mobile-link-num">02</span>
+              <span className="cf-mobile-link-num">03</span>
               <span>PROGRAMS</span>
             </Link>
             <Link
-              href="/programs#destinations"
-              onClick={() => setMobileMenuOpen(false)}
-              className="cf-mobile-link"
-            >
-              <span className="cf-mobile-link-num">03</span>
-              <span>DESTINATION</span>
-            </Link>
-            <Link
-              href="/#team"
+              href="/#safety"
               onClick={() => setMobileMenuOpen(false)}
               className="cf-mobile-link"
             >
               <span className="cf-mobile-link-num">04</span>
-              <span>TEAM</span>
+              <span>SAFETY & TRUST</span>
             </Link>
             <Link
               href="/waitlist"
@@ -177,7 +174,7 @@ export default function Navbar({ pageLabel }: NavbarProps) {
               onClick={() => setMobileMenuOpen(false)}
               className="cf-mobile-cta"
             >
-              Join Cohort Waitlist ↗
+              Join Waitlist ↗
             </Link>
           </div>
         </div>

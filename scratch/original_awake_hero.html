@@ -1,0 +1,414 @@
+Created At: 2026-10-18T18:30:34+05:30
+Completed At: 2026-10-18T18:30:34+05:30
+File Path: `file:///c:/Culture%20flow/culture_flow/awake-hero.html`
+Total Lines: 406
+Total Bytes: 15146
+Showing lines 1 to 406
+The following code has been modified to include a line number before every line, in the format: <line_number>: <original_line>. Please note that any changes targeting the original code should remove the line number, colon, and leading space.
+1: <!doctype html>
+2: <html lang="en">
+3: <head>
+4: <meta charset="utf-8">
+5: <meta name="viewport" content="width=device-width, initial-scale=1">
+6: <title>awake. — We build websites people remember</title>
+7: <link rel="preconnect" href="https://fonts.googleapis.com">
+8: <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+9: <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&display=swap" rel="stylesheet">
+10: <style>
+11:   :root{
+12:     --red:#e8003c;
+13:     --page:#ffffff;
+14:     --ink:#ffffff;
+15:     --soft:rgba(255,255,255,.72);
+16:     --pill:rgba(255,255,255,.2);
+17:     --ease:cubic-bezier(.22,1,.36,1);
+18:     --pad:clamp(18px,2.3vw,44px);
+19:   }
+20:   *{box-sizing:border-box;margin:0;padding:0}
+21:   html,body{height:100%}
+22:   body{
+23:     background:var(--page);
+24:     font-family:"Archivo","Helvetica Neue",Arial,sans-serif;
+25:     color:var(--ink);
+26:     -webkit-font-smoothing:antialiased;
+27:     overflow:hidden;
+28:   }
+29:   .frame{height:100vh;height:100dvh;padding:clamp(6px,.8vw,14px)}
+30:   .hero{
+31:     position:relative;height:100%;width:100%;
+32:     background:var(--red);
+33:     border-radius:clamp(18px,1.9vw,36px);
+34:     overflow:hidden;
+35:     padding:var(--pad);
+36:     display:flex;flex-direction:column;
+37:     isolation:isolate;
+38:   }
+39: 
+40:   /* header */
+41:   header{display:flex;justify-content:space-between;align-items:center;position:relative;z-index:3}
+42:   .logo{
+43:     font-size:clamp(26px,2.5vw,48px);font-weight:300;letter-spacing:-.02em;
+44:     font-stretch:100%;text-decoration:none;color:var(--ink);line-height:1;
+45:   }
+46:   .nav{display:flex;gap:clamp(6px,.6vw,12px)}
+47:   .btn{
+48:     border:0;cursor:pointer;font:inherit;font-size:clamp(12px,1.05vw,20px);
+49:     display:inline-flex;align-items:center;gap:.7em;
+50:     padding:.72em 1.5em;border-radius:999px;letter-spacing:-.01em;
+51:     transition:transform .5s var(--ease),background .3s,color .3s;
+52:   }
+53:   .btn.ghost{background:var(--pill);color:var(--ink)}
+54:   .btn.solid{background:#fff;color:var(--red)}
+55:   .btn:hover{transform:translateY(-2px) scale(1.04)}
+56:   .btn.ghost:hover{background:rgba(255,255,255,.34)}
+57:   .btn svg{width:1.2em;height:1.2em}
+58: 
+59:   /* headline */
+60:   main{
+61:     flex:1;position:relative;z-index:2;
+62:     display:grid;grid-template-columns:1fr 1fr;
+63:     grid-template-rows:auto auto;column-gap:3vw;align-content:center;
+64:     padding-bottom:3vh;
+65:   }
+66:   h1{
+67:     font-weight:400;font-stretch:125%;
+68:     font-size:clamp(34px,5.35vw,118px);
+69:     line-height:.98;letter-spacing:-.01em;text-transform:uppercase;
+70:   }
+71:   h1 .line{display:block;white-space:nowrap}
+72:   h1.left{grid-column:1;grid-row:1 / span 2}
+73:   h1.right{grid-column:2;grid-row:1;text-align:right}
+74:   h1.right .line{text-align:right}
+75:   .ch{display:inline-block;opacity:0;will-change:transform,opacity}
+76:   .sp{display:inline-block;width:.28em}
+77:   .lede{
+78:     grid-column:2;grid-row:2;justify-self:end;align-self:end;text-align:left;
+79:     width:min(100%,22vw);min-width:220px;
+80:     margin-top:clamp(18px,4.2vh,56px);
+81:     font-size:clamp(11px,.82vw,16px);line-height:1.6;color:var(--soft);
+82:     opacity:0;transform:translateY(14px);
+83:   }
+84: 
+85:   /* footer */
+86:   footer{
+87:     position:relative;z-index:3;
+88:     border-top:1px solid rgba(255,255,255,.28);
+89:     padding-top:clamp(12px,1.6vw,26px);
+90:     display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
+91:     font-size:clamp(9px,.72vw,14px);letter-spacing:.01em;text-transform:uppercase;color:rgba(255,255,255,.7);
+92:   }
+93:   footer b{font-weight:500;color:#fff}
+94:   footer a{color:#fff;text-decoration:none;font-weight:500}
+95:   footer a:hover{text-decoration:underline}
+96:   .rule{position:absolute;left:var(--pad);right:var(--pad);height:1px;background:transparent}
+97: 
+98:   /* coins canvas */
+99:   #coins{position:absolute;inset:0;width:100%;height:100%;z-index:4;pointer-events:none}
+100: 
+101:   /* intro states */
+102:   .fade{opacity:0;transform:translateY(-10px)}
+103:   footer{--w:0}
+104:   footer::before{
+105:     content:"";position:absolute;left:0;top:-1px;height:1px;width:100%;background:#fff;opacity:.0;
+106:   }
+107:   .go .fade{animation:fadeIn .9s var(--ease) forwards}
+108:   .go .fade.d1{animation-delay:1.5s}
+109:   .go .fade.d2{animation-delay:1.65s}
+110:   .go footer{animation:fadeUp 1s var(--ease) 1.6s both}
+111:   .go .lede{animation:fadeUp 1s var(--ease) 1.5s forwards}
+112:   @keyframes fadeIn{to{opacity:1;transform:none}}
+113:   @keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+114:   @keyframes chIn{
+115:     0%{opacity:0;transform:translateX(var(--x)) scale(.96)}
+116:     35%{opacity:1}
+117:     100%{opacity:1;transform:none}
+118:   }
+119:   .go .ch{animation:chIn 1.1s var(--ease) var(--d) forwards}
+120: 
+121:   /* tablet / mobile */
+122:   @media (max-width:820px){
+123:     main{grid-template-columns:1fr;row-gap:5vh;align-content:center}
+124:     h1{font-size:clamp(30px,9vw,64px)}
+125:     h1.left,h1.right{grid-column:1;grid-row:auto}
+126:     h1.right,h1.right .line{text-align:left}
+127:     .lede{grid-column:1;grid-row:auto;justify-self:start;width:100%;margin-top:0}
+128:   }
+129:   @media (prefers-reduced-motion:reduce){
+130:     .ch,.fade,.lede,footer{animation:none!important;opacity:1!important;transform:none!important}
+131:   }
+132: </style>
+133: </head>
+134: <body>
+135: <div class="frame">
+136:   <section class="hero" id="hero">
+137:     <header>
+138:       <a class="logo fade" href="#">awake.</a>
+139:       <nav class="nav">
+140:         <button class="btn ghost fade d1">get in touch.</button>
+141:         <button class="btn solid fade d2">menu.
+142:           <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M3 6h14M7 10h10M11 14h6"/></svg>
+143:         </button>
+144:       </nav>
+145:     </header>
+146: 
+147:     <main>
+148:       <h1 class="left" data-split>
+149:         <span class="line">We</span>
+150:         <span class="line">Websites</span>
+151:         <span class="line">Remember.</span>
+152:       </h1>
+153:       <h1 class="right" data-split>
+154:         <span class="line">Build</span>
+155:         <span class="line">People</span>
+156:       </h1>
+157:       <p class="lede">Awake is a creative digital studio in Warsaw. We design and build premium websites and web products for founders and product teams who need to stand out.</p>
+158:     </main>
+159: 
+160:     <footer id="foot">
+161:       <span>Based in: <b>Warsaw <span id="clock">15:01</span> · 12°C</b></span>
+162:       <span>Say hello: <a href="mailto:contact@awakeagency.dev">contact@awakeagency.dev</a></span>
+163:     </footer>
+164: 
+165:     <canvas id="coins"></canvas>
+166:   </section>
+167: </div>
+168: 
+169: <script>
+170: (() => {
+171:   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+172:   const hero = document.getElementById('hero');
+173: 
+174:   /* ---------- Warsaw clock ---------- */
+175:   const clock = document.getElementById('clock');
+176:   const tick = () => {
+177:     try {
+178:       clock.textContent = new Intl.DateTimeFormat('en-GB',{hour:'2-digit',minute:'2-digit',timeZone:'Europe/Warsaw',hour12:false}).format(new Date());
+179:     } catch(e){}
+180:   };
+181:   tick(); setInterval(tick, 20000);
+182: 
+183:   /* ---------- Split headline into letters, random stagger ---------- */
+184:   document.querySelectorAll('[data-split] .line').forEach(line => {
+185:     const text = line.textContent; line.textContent = '';
+186:     [...text].forEach(c => {
+187:       const s = document.createElement('span');
+188:       if (c === ' ') { s.className = 'sp'; line.appendChild(s); return; }
+189:       s.className = 'ch'; s.textContent = c;
+190:       s.style.setProperty('--d', (0.15 + Math.random()*0.95).toFixed(2) + 's');
+191:       s.style.setProperty('--x', ((Math.random() < .5 ? -1 : 1) * (30 + Math.random()*90)).toFixed(0) + 'px');
+192:       line.appendChild(s);
+193:     });
+194:   });
+195: 
+196:   const start = () => requestAnimationFrame(() => hero.classList.add('go'));
+197:   (document.fonts && document.fonts.ready ? Promise.race([document.fonts.ready, new Promise(r=>setTimeout(r,900))]) : Promise.resolve()).then(start);
+198:   document.body.classList.add('ready');
+199:   hero.addEventListener('animationstart', () => {}, {once:true});
+200:   // .go is applied to the hero, so scope the selectors by also toggling on <html>
+201:   new MutationObserver(()=>{ if(hero.classList.contains('go')) document.documentElement.classList.add('go'); })
+202:     .observe(hero,{attributes:true,attributeFilter:['class']});
+203: 
+204:   /* ---------- Coin physics ---------- */
+205:   const cv = document.getElementById('coins');
+206:   const ctx = cv.getContext('2d');
+207:   const foot = document.getElementById('foot');
+208:   let W=0,H=0,DPR=1,floorY=0,R=20;
+209: 
+210:   const PALETTE = [
+211:     ['#2a2d35','#555963','#8c909a'],  // charcoal
+212:     ['#7d8189','#9ca0a8','#c0c4ca'],  // mid grey
+213:     ['#a9aeb5','#c3c7cc','#dfe2e6'],  // light grey
+214:     ['#e9ebf0','#f6f7f9','#ffffff'],  // white
+215:     ['#ffffff','#ffffff','#f1f2f5'],  // white
+216:     ['#f9d3dd','#fde0e8','#ffeef3'],  // pale pink
+217:     ['#f5879f','#fa9db2','#fdbccb'],  // pink
+218:     ['#ee3a68','#f4587f','#f98aa4'],  // rose
+219:     ['#f9c3d0','#fcd5de','#fee7ed'],  // blush
+220:   ];
+221: 
+222:   const coins = [];
+223:   const mouse = {x:-999,y:-999,vx:0,vy:0,on:false};
+224: 
+225:   function resize(){
+226:     DPR = Math.min(devicePixelRatio||1, 2);
+227:     const r = hero.getBoundingClientRect();
+228:     W = r.width; H = r.height;
+229:     cv.width = W*DPR; cv.height = H*DPR;
+230:     ctx.setTransform(DPR,0,0,DPR,0,0);
+231:     const f = foot.getBoundingClientRect();
+232:     floorY = f.top - r.top;               // coins rest on the footer divider
+233:     R = Math.max(15, Math.min(W*0.0215, 46));
+234:     coins.forEach(c => { c.r = R*c.k; });
+235:   }
+236:   addEventListener('resize', resize);
+237: 
+238:   function spawn(i){
+239:     const k = 0.97 + Math.random()*0.06;
+240:     const pal = PALETTE[Math.floor(Math.random()*PALETTE.length)];
+241:     coins.push({
+242:       x: W*0.025 + Math.random()*W*0.03,
+243:       y: H*0.12 + Math.random()*H*0.05,
+244:       vx: W*(0.3 + Math.random()*0.26),
+245:       vy: -H*(0.05 + Math.random()*0.18),
+246:       a: Math.random()*Math.PI*2,
+247:       w: (Math.random()-.5)*8,
+248:       k, r: R*k, pal, glyph: Math.random()<.78 ? 'a.' : 'a.',
+249:       glyphAng: Math.random()*Math.PI*2,
+250:       born: performance.now()
+251:     });
+252:   }
+253: 
+254:   const COUNT = 14;
+255:   let spawned = 0, spawnTimer = null;
+256:   function startRain(n=COUNT, every=430){
+257:     clearInterval(spawnTimer);
+258:     let k = 0;
+259:     spawnTimer = setInterval(() => {
+260:       spawn(spawned++);
+261:       if (++k >= n) clearInterval(spawnTimer);
+262:     }, every);
+263:   }
+264: 
+265:   const G = () => H*2.6;                 // gravity px/s²
+266:   const REST = 0.42, FRIC = 0.28;
+267: 
+268:   function step(dt){
+269:     const g = G();
+270:     for (const c of coins){
+271:       c.vy += g*dt;
+272:       c.x += c.vx*dt; c.y += c.vy*dt; c.a += c.w*dt;
+273:       c.vx *= (1 - 0.15*dt); c.w *= (1 - 0.5*dt);
+274: 
+275:       // mouse push
+276:       if (mouse.on){
+277:         const dx = c.x-mouse.x, dy = c.y-mouse.y, d = Math.hypot(dx,dy), rr = c.r+22;
+278:         if (d < rr && d > 0.001){
+279:           const nx=dx/d, ny=dy/d, push=(rr-d)*18;
+280:           c.vx += nx*push + mouse.vx*0.06; c.vy += ny*push + mouse.vy*0.06;
+281:           c.w += (mouse.vx*ny - mouse.vy*nx)*0.004;
+282:         }
+283:       }
+284:       // floor
+285:       if (c.y + c.r > floorY){
+286:         c.y = floorY - c.r;
+287:         if (c.vy > 0) c.vy *= -REST;
+288:         if (Math.abs(c.vy) < 30) c.vy = 0;
+289:         // rolling: couple linear & angular velocity
+290:         const target = c.vx / c.r;
+291:         c.w += (target - c.w) * Math.min(1, 12*dt);
+292:         c.vx *= (1 - FRIC*dt*3);
+293:       }
+294:       // walls
+295:       if (c.x - c.r < 0){ c.x = c.r; c.vx = Math.abs(c.vx)*REST; }
+296:       if (c.x + c.r > W){ c.x = W - c.r; c.vx = -Math.abs(c.vx)*REST; }
+297:     }
+298:     // coin ↔ coin
+299:     for (let it=0; it<3; it++){
+300:       for (let i=0;i<coins.length;i++){
+301:         for (let j=i+1;j<coins.length;j++){
+302:           const a=coins[i], b=coins[j];
+303:           const dx=b.x-a.x, dy=b.y-a.y, min=a.r+b.r;
+304:           const d2=dx*dx+dy*dy;
+305:           if (d2 >= min*min || d2 === 0) continue;
+306:           const d=Math.sqrt(d2), nx=dx/d, ny=dy/d, ov=min-d;
+307:           a.x-=nx*ov*0.5; a.y-=ny*ov*0.5; b.x+=nx*ov*0.5; b.y+=ny*ov*0.5;
+308:           const rvx=b.vx-a.vx, rvy=b.vy-a.vy, vn=rvx*nx+rvy*ny;
+309:           if (vn < 0){
+310:             const j2 = -(1+REST)*vn*0.5;
+311:             a.vx-=j2*nx; a.vy-=j2*ny; b.vx+=j2*nx; b.vy+=j2*ny;
+312:             // tangential friction → spin
+313:             const tx=-ny, ty=nx, vt=rvx*tx+rvy*ty;
+314:             const fr = vt*0.12;
+315:             a.vx+=tx*fr; a.vy+=ty*fr; b.vx-=tx*fr; b.vy-=ty*fr;
+316:             a.w -= vt/a.r*0.25; b.w -= vt/b.r*0.25;
+317:           }
+318:         }
+319:       }
+320:     }
+321:   }
+322: 
+323:   function lighten(hex,t){ return hex; }
+324: 
+325:   function drawCoin(c){
+326:     const {x,y,r,pal} = c;
+327:     ctx.save();
+328:     ctx.translate(x,y);
+329: 
+330:     // soft drop shadow
+331:     ctx.save();
+332:     ctx.shadowColor='rgba(80,0,20,.28)'; ctx.shadowBlur=r*.45; ctx.shadowOffsetY=r*.12;
+333:     ctx.beginPath(); ctx.arc(0,0,r,0,Math.PI*2); ctx.fillStyle=pal[0]; ctx.fill();
+334:     ctx.restore();
+335: 
+336:     // rim
+337:     let g = ctx.createLinearGradient(-r,-r,r,r);
+338:     g.addColorStop(0,pal[2]); g.addColorStop(.5,pal[1]); g.addColorStop(1,pal[0]);
+339:     ctx.beginPath(); ctx.arc(0,0,r,0,Math.PI*2); ctx.fillStyle=g; ctx.fill();
+340: 
+341:     // face (slightly inset, lit from the top-left)
+342:     const fr = r*0.86;
+343:     g = ctx.createRadialGradient(-fr*.35,-fr*.4,fr*.1,0,0,fr*1.05);
+344:     g.addColorStop(0,pal[2]); g.addColorStop(.7,pal[1]); g.addColorStop(1,pal[0]);
+345:     ctx.beginPath(); ctx.arc(0,0,fr,0,Math.PI*2); ctx.fillStyle=g; ctx.fill();
+346:     ctx.lineWidth=Math.max(1,r*.05); ctx.strokeStyle='rgba(0,0,0,.10)'; ctx.stroke();
+347: 
+348:     // embossed "a." (rotates with the coin)
+349:     ctx.rotate(c.a + c.glyphAng);
+350:     const dark = (pal === PALETTE[0]);
+351:     ctx.font = `italic 500 ${r*1.15}px Archivo, Helvetica, Arial, sans-serif`;
+352:     ctx.textAlign='center'; ctx.textBaseline='middle';
+353:     ctx.fillStyle = dark ? 'rgba(255,255,255,.26)' : 'rgba(0,0,0,.13)';
+354:     ctx.fillText('a.', 0, r*.03);
+355:     ctx.fillStyle = dark ? 'rgba(255,255,255,.16)' : 'rgba(255,255,255,.55)';
+356:     ctx.fillText('a.', -r*.025, -r*.015);
+357:     ctx.restore();
+358:   }
+359: 
+360:   let last = performance.now();
+361:   function frame(now){
+362:     let dt = Math.min(0.032, (now-last)/1000); last = now;
+363:     const sub = 4;
+364:     for (let i=0;i<sub;i++) step(dt/sub);
+365:     mouse.vx *= .85; mouse.vy *= .85;
+366:     ctx.clearRect(0,0,W,H);
+367:     // draw darker/earlier first so the pile layers nicely
+368:     for (const c of coins) drawCoin(c);
+369:     requestAnimationFrame(frame);
+370:   }
+371: 
+372:   hero.addEventListener('pointermove', e => {
+373:     const r = hero.getBoundingClientRect();
+374:     const nx = e.clientX-r.left, ny = e.clientY-r.top;
+375:     mouse.vx = nx-mouse.x; mouse.vy = ny-mouse.y;
+376:     mouse.x = nx; mouse.y = ny; mouse.on = e.pointerType !== 'touch' || e.buttons>0;
+377:   });
+378:   hero.addEventListener('pointerleave', () => { mouse.on=false; });
+379:   // click anywhere on the hero to drop another coin
+380:   hero.addEventListener('pointerdown', e => {
+381:     if (e.target.closest('a,button')) return;
+382:     const r = hero.getBoundingClientRect();
+383:     spawn(spawned++);
+384:     const c = coins[coins.length-1];
+385:     c.x = e.clientX-r.left; c.y = e.clientY-r.top; c.vx = (Math.random()-.5)*W*.1; c.vy = 0;
+386:     if (coins.length > 40) coins.shift();
+387:   });
+388: 
+389:   function boot(){
+390:     resize();
+391:     last = performance.now();
+392:     requestAnimationFrame(frame);
+393:     if (reduce){
+394:       // settle a pile instantly without animating
+395:       for (let i=0;i<COUNT;i++) spawn(i);
+396:       for (let i=0;i<600;i++) step(1/240);
+397:     } else {
+398:       setTimeout(() => startRain(), 3000);   // after the headline has landed
+399:     }
+400:   }
+401:   (document.fonts && document.fonts.ready ? Promise.race([document.fonts.ready, new Promise(r=>setTimeout(r,900))]) : Promise.resolve()).then(boot);
+402: })();
+403: </script>
+404: </body>
+405: </html>
+406: 
+The above content shows the entire, complete file contents of the requested file.
