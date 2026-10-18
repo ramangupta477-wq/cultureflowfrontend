@@ -353,3 +353,18 @@
     top: 68px;
   }
 }
+
+/* ─── Dark background variant (waitlist etc.) ─── */
+.cf-navbar--dark .cf-navbar-page-title {
+  color: #FCFCFF;
+}
+.cf-navbar--dark .cf-nav-link {
+  color: rgba(252, 252, 255, 0.7);
+}
+.cf-navbar--dark .cf-nav-link:hover,
+.cf-navbar--dark .cf-nav-link--active {
+  color: #FCFCFF;
+}
+.cf-navbar--dark .cf-hamburger-bar {
+  background: #FCFCFF;
+}

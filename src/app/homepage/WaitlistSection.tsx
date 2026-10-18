@@ -99,10 +99,6 @@ export default function WaitlistSection() {
       <div className="cf-waitlist-container">
         {/* Left Column: Heading, Value Proposition & CTA */}
         <div className="cf-waitlist-content">
-          <div className="cf-waitlist-badge">
-            <span className="cf-waitlist-badge-dot" />
-            2026/2027 Cohort Intake Open
-          </div>
 
           <h2 className="cf-waitlist-heading">
             Claim Your <em>Priority Pass</em> to Global Academic Mobility
