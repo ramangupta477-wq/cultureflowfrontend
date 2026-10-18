@@ -10,7 +10,7 @@
   background-color: var(--color-bg, #F6EEDD);
   color: var(--color-text, #002244);
   font-family: var(--font-body), "Inter", sans-serif;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 /* ═══════════════════════════════════════════════════════════════
@@ -1142,5 +1142,250 @@
   .programs-footer-inner {
     flex-direction: column;
     align-items: flex-start;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   8. EDITORIAL TEXT GRID HERO
+   ═══════════════════════════════════════════════════════════════ */
+
+.programs-hero-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 clamp(20px, 4vw, 64px);
+}
+
+.programs-hero-kicker {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 40px;
+}
+
+.programs-kicker-dot {
+  width: 7px;
+  height: 7px;
+  background: #C89C66;
+  border-radius: 1px;
+  flex-shrink: 0;
+}
+
+.programs-kicker-label {
+  font-family: "SF Mono", Menlo, monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(0, 34, 68, 0.55);
+}
+
+.programs-hero-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 24px 48px;
+}
+
+.programs-hero-heading {
+  font-family: var(--font-heading), "Oranienbaum", "Georgia", serif;
+  font-size: clamp(2.6rem, 4.5vw, 4.2rem);
+  font-weight: 400;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  color: var(--color-text, #0B0B0B);
+  margin: 0;
+}
+
+.programs-hero-heading em {
+  font-style: italic;
+  color: #C89C66;
+}
+
+.programs-hero-image-block {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 34, 68, 0.05);
+  border-radius: 8px;
+  padding: 28px;
+  overflow: hidden;
+}
+
+.programs-hero-map {
+  width: 100%;
+  height: auto;
+  opacity: 0.3;
+  filter: grayscale(1);
+}
+
+.programs-hero-text {
+  font-size: clamp(0.95rem, 1.1vw, 1.05rem);
+  line-height: 1.65;
+  color: rgba(0, 34, 68, 0.7);
+  margin: 0;
+}
+
+.programs-hero-text em {
+  font-style: italic;
+  color: #C89C66;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   9. COMBINED: TRACKS + POLYGON (shared scroll container)
+   ═══════════════════════════════════════════════════════════════ */
+
+.tracks-scroll-container {
+  height: 400vh;
+  position: relative;
+  background: var(--color-bg, #F6EEDD);
+}
+
+.tracks-sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 80px clamp(20px, 4vw, 64px) 20px;
+  overflow: hidden;
+}
+
+/* Canvas sits ON TOP of the cards — polygon rolls across the bars */
+.polygon-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 3;
+}
+
+.tracks-header {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 32px;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+}
+
+.tracks-tagline {
+  font-size: clamp(0.92rem, 1.1vw, 1.05rem);
+  font-family: var(--font-body), "Inter", sans-serif;
+  color: var(--color-text, #0B0B0B);
+  line-height: 1.5;
+  max-width: 320px;
+  margin: 0;
+}
+
+.tracks-tagline em {
+  font-family: var(--font-heading), "Oranienbaum", "Georgia", serif;
+  font-style: italic;
+}
+
+.tracks-kicker {
+  font-family: "SF Mono", Menlo, monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.14em;
+  color: #C89C66;
+  border: 1px solid #C89C66;
+  border-radius: 999px;
+  padding: 8px 20px;
+  white-space: nowrap;
+}
+
+.tracks-bars {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(12px, 1.5vw, 20px);
+  align-items: end;
+  flex: 1;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.track-bar {
+  border-radius: 8px 8px 0 0;
+  background: #002244;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  will-change: transform;
+}
+
+.track-bar--01 { height: 100%; }
+.track-bar--02 { height: 80%; }
+.track-bar--03 { height: 68%; }
+
+.track-bar-content {
+  padding: clamp(24px, 3vw, 36px);
+  color: #F6EEDD;
+}
+
+.track-num {
+  font-family: "SF Mono", Menlo, monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  color: #C89C66;
+  display: block;
+  margin-bottom: 16px;
+}
+
+.track-title {
+  font-family: var(--font-heading), "Oranienbaum", "Georgia", serif;
+  font-size: clamp(1.4rem, 2vw, 1.8rem);
+  font-weight: 400;
+  line-height: 1.15;
+  margin: 0 0 12px;
+}
+
+.track-desc {
+  font-size: clamp(0.82rem, 0.95vw, 0.92rem);
+  line-height: 1.55;
+  color: rgba(246, 238, 221, 0.7);
+  margin: 0;
+}
+
+/* ─── Responsive: Hero Grid + Tracks ─── */
+@media (max-width: 768px) {
+  .programs-hero-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .tracks-scroll-container {
+    height: 250vh;
+  }
+
+  .tracks-sticky {
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+
+  .tracks-header {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .tracks-bars {
+    grid-template-columns: 1fr;
+    height: auto;
+    gap: 16px;
+  }
+
+  .track-bar--01,
+  .track-bar--02,
+  .track-bar--03 {
+    height: auto;
+  }
+
+  .track-bar {
+    border-radius: 8px;
   }
 }
