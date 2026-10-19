@@ -7,7 +7,7 @@ import { useEffect } from "react";
  * enter the viewport, staggered by the inline CSS var `--pr-d`.
  * CSS lives wherever `[data-pr]` rules are imported (waitlist.css / programs.css).
  */
-export function useBlurReveal() {
+export function useBlurReveal(deps: unknown[] = []) {
   useEffect(() => {
     const els = Array.from(document.querySelectorAll<HTMLElement>("[data-pr]"));
     if (!("IntersectionObserver" in window)) {
@@ -28,5 +28,5 @@ export function useBlurReveal() {
     );
     els.forEach((el) => io.observe(el));
     return () => io.disconnect();
-  }, []);
+  }, deps);
 }

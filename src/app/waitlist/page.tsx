@@ -120,7 +120,6 @@ const SOURCE_OPTIONS = [
 ] as const;
 
 export default function WaitlistPage() {
-  useBlurReveal();
   // Step 1 fields (identity + role), step 2 fields (context + consent)
   const [step, setStep] = useState<0 | 1 | 2>(0);
   const [submitting, setSubmitting] = useState(false);
@@ -142,6 +141,9 @@ export default function WaitlistPage() {
   const [copied, setCopied] = useState(false);
   const [createdCode, setCreatedCode] = useState("");
   const [ticketWidth, setTicketWidth] = useState(540);
+
+  // Re-scan blur-up targets whenever the step swaps the DOM (picker → 1 → 2)
+  useBlurReveal([step, done, copied]);
 
   useEffect(() => {
     function handleResize() {
