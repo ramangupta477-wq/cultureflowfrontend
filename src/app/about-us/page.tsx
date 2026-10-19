@@ -1,380 +1,315 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import Link from "next/link";
-import Navbar from "@/components/Navbar";
-import Footer from "@/app/homepage/Footer";
+import {
+  ShieldCheck,
+  GraduationCap,
+  Plane,
+  HeartHandshake,
+  ArrowUpRight,
+  MapPin,
+  FileCheck,
+} from "lucide-react";
+import Footer from "../homepage/Footer";
 import "./AboutUs.css";
 
-/* ─── Timeline Milestone Interface ─── */
-interface Milestone {
-  year: string;
-  phase: string;
+interface HistoryNode {
+  id: string;
+  label: string;
   title: string;
-  tagline: string;
-  description: string;
-  metric: string;
-  metricLabel: string;
-  image?: string;
-  imageAlt?: string;
-  badge?: string;
+  desc: string;
 }
 
-const TIMELINE_DATA: Milestone[] = [
-  {
-    year: "2021",
-    phase: "PHASE 01 · FOUNDATION",
-    title: "The Genesis & Core Conviction",
-    tagline: "Questioning the broken study-abroad agency paradigm.",
-    description:
-      "Culture Flow was conceived in New Delhi from a clear observation: international student mobility was dominated by transactional agents and opaque commission incentives. We set out to build direct, transparent academic bridges that treat students as future global scholars, not leads.",
-    metric: "01",
-    metricLabel: "Headquarters · New Delhi",
-    badge: "Origin",
-  },
-  {
-    year: "2022",
-    phase: "PHASE 02 · DIRECT ALLIANCES",
-    title: "First Tier-1 Articulation Agreements",
-    tagline: "Direct institutional access without intermediary brokers.",
-    description:
-      "We bypassed commercial aggregators to sign bilateral articulation agreements directly with pioneering faculties across the United Kingdom and Europe. This established our signature pathway standard: verified curricular credit transfers and guaranteed academic review.",
-    metric: "14",
-    metricLabel: "Initial University Faculties",
-    image: "/images/about/partnership.jpg",
-    imageAlt: "Culture Flow institutional agreement handshake",
-    badge: "Breakthrough",
-  },
-  {
-    year: "2023",
-    phase: "PHASE 03 · MOBILITY ARCHITECTURE",
-    title: "The End-to-End Care Framework",
-    tagline: "Relocation care that extends far beyond the offer letter.",
-    description:
-      "We launched the Culture Flow Pathway Architecture — integrating academic profiling, university matching, verified accommodation sourcing, visa compliance, and pre-departure cultural orientation. Every scholar received a dedicated mentor navigating their entire transition.",
-    metric: "100%",
-    metricLabel: "Visa Approval Standard",
-    image: "/images/about/counseling.jpg",
-    imageAlt: "Culture Flow counselors mentoring students",
-    badge: "Infrastructure",
-  },
-  {
-    year: "2024",
-    phase: "PHASE 04 · CONTINENTAL EXPANSION",
-    title: "200+ Institution Global Network",
-    tagline: "Bridging Indian scholars to premier institutions worldwide.",
-    description:
-      "Our institutional partnerships expanded across leading universities in the UK, Switzerland (ETH Zürich), Germany, Canada, and Australia. We inaugurated our Mumbai regional advisory office and established direct liaison desks in London and Berlin.",
-    metric: "200+",
-    metricLabel: "Partner Institutions Worldwide",
-    image: "/images/about/campus.jpg",
-    imageAlt: "Culture Flow scholar at ETH Zürich campus",
-    badge: "Scale",
-  },
-  {
-    year: "2025",
-    phase: "PHASE 05 · COLLEGIATE FELLOWSHIPS",
-    title: "Oxbridge & Russell Group Cohorts",
-    tagline: "Prestigious tutorial placements with dedicated scholarships.",
-    description:
-      "Our scholars gained direct admission into elite collegiate tutorials, high-table research groups, and frontier technology laboratories. Culture Flow mentors facilitated over £2.4M in institutional scholarships, grants, and merit bursaries.",
-    metric: "£2.4M+",
-    metricLabel: "Merit Bursaries Secured",
-    image: "/images/about/editorial.jpg",
-    imageAlt: "Collegiate cloisters historic university setting",
-    badge: "Excellence",
-  },
-  {
-    year: "2026",
-    phase: "PHASE 06 · ONE GLOBAL STEP",
-    title: "The Next-Gen Mobility Platform",
-    tagline: "Building the global education platform students don't just follow — they embrace.",
-    description:
-      "Today, Culture Flow is evolving from an admissions bridge into a comprehensive mobility ecosystem. Uniting predictive program discovery, verified institutional pathways, on-campus peer networks, and lifelong alumni advisory across three continents.",
-    metric: "1,400+",
-    metricLabel: "Scholars Globally Placed",
-    badge: "Present Day",
-  },
+const HISTORY: HistoryNode[] = [
+  { id: "q", label: "EARLY '26", title: "The Question", desc: "Why does studying abroad still run on guesswork, hidden fees and agents who sell files, not futures?" },
+  { id: "bp", label: "SPRING '26", title: "The Blueprint", desc: "A model drawn on one page: 40% academics, 40% industry immersion, 20% reflection — and safety as a system, not a slogan." },
+  { id: "build", label: "SUMMER '26", title: "The Build", desc: "Universities, vetted local partners and insurance frameworks locked in across London, Munich and Singapore." },
+  { id: "launch", label: "OCT '26", title: "The Launch", desc: "Culture Flow goes live from Connaught Place, New Delhi — one step from application to arrival." },
+  { id: "next", label: "NEXT", title: "Your Chapter", desc: "The first cohorts board soon. This timeline keeps writing itself — with scholars' names in it." },
 ];
 
-/* ─── Core Values Interface ─── */
-const VISION_PILLARS = [
-  {
-    num: "01",
-    title: "Direct Institutional Access",
-    desc: "We partner directly with leading university faculties, removing opaque third-party middlemen to guarantee transparent admissions and verified credit transfers.",
-  },
-  {
-    num: "02",
-    title: "Radical Transparency",
-    desc: "No hidden commercial markups or biased recommendations. Every academic pathway is curated around the scholar's genuine intellectual and career trajectory.",
-  },
-  {
-    num: "03",
-    title: "Lifelong Relocation Care",
-    desc: "From initial counseling to campus accommodation, visa compliance, and cultural integration — we remain an active advocate throughout the student's journey.",
-  },
-];
+function Reveal({ children, className = "", style }: { children: React.ReactNode; className?: string; style?: React.CSSProperties }) {
+  return (
+    <div className={`au-reveal ${className}`} style={style}>
+      {children}
+    </div>
+  );
+}
 
-export default function AboutUsPage() {
-  const [activeMilestone, setActiveMilestone] = useState<number>(0);
-  const [scrollProgress, setScrollProgress] = useState<number>(0);
-  const timelineRef = useRef<HTMLDivElement>(null);
-  const milestoneRefs = useRef<(HTMLDivElement | null)[]>([]);
+function CountUp({ to, decimals = 0, suffix = "" }: { to: number; decimals?: number; suffix?: string }) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const [started, setStarted] = useState(false);
+  const [val, setVal] = useState(0);
 
-  // ─── Scroll-driven Timeline Progress & Active Node Observer ───
   useEffect(() => {
-    const handleScroll = () => {
-      if (!timelineRef.current) return;
-      const rect = timelineRef.current.getBoundingClientRect();
-      const windowHeight = window.innerHeight;
-
-      // Calculate scroll progress through the timeline section (0 to 1)
-      const totalDist = rect.height - windowHeight * 0.5;
-      const currentScroll = windowHeight * 0.5 - rect.top;
-      const progress = Math.max(0, Math.min(1, currentScroll / totalDist));
-      setScrollProgress(progress);
-
-      // Determine active milestone based on viewport center
-      milestoneRefs.current.forEach((el, index) => {
-        if (!el) return;
-        const elRect = el.getBoundingClientRect();
-        if (elRect.top <= windowHeight * 0.6 && elRect.bottom >= windowHeight * 0.25) {
-          setActiveMilestone(index);
-        }
-      });
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll(); // Initial computation
-    return () => window.removeEventListener("scroll", handleScroll);
+    const el = ref.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      (entries) => entries.some((e) => e.isIntersecting) && (setStarted(true), io.disconnect()),
+      { threshold: 0.4 }
+    );
+    io.observe(el);
+    return () => io.disconnect();
   }, []);
 
+  useEffect(() => {
+    if (!started) return;
+    let raf = 0;
+    const t0 = performance.now();
+    const dur = 1600;
+    const tick = (t: number) => {
+      const p = Math.min(1, (t - t0) / dur);
+      const eased = 1 - Math.pow(1 - p, 3);
+      setVal(to * eased);
+      if (p < 1) raf = requestAnimationFrame(tick);
+      else setVal(to);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [started, to]);
+
+  const text = decimals > 0 ? val.toFixed(decimals) : Math.round(val).toLocaleString("en-US");
+  return <span ref={ref} suppressHydrationWarning>{text}{suffix}</span>;
+}
+
+export default function AboutUsPage() {
+  /* ─── Reveal on scroll ─── */
+  const rootRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const root = rootRef.current;
+    if (!root) return;
+    const els = root.querySelectorAll(".au-reveal");
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (!e.isIntersecting) return;
+          const el = e.target as HTMLElement;
+          el.style.transitionDelay = el.style.getPropertyValue("--au-d") || "0ms";
+          el.classList.add("au-reveal--in");
+          io.unobserve(el);
+        });
+      },
+      { threshold: 0.12 }
+    );
+    els.forEach((el) => io.observe(el));
+    return () => io.disconnect();
+  }, []);
+
+  /* ─── Timeline progress ─── */
+  const timelineRef = useRef<HTMLDivElement>(null);
+  const [tlProgress, setTlProgress] = useState(0);
+  useEffect(() => {
+    const el = timelineRef.current;
+    if (!el) return;
+    const onScroll = () => {
+      const rect = el.getBoundingClientRect();
+      const vh = window.innerHeight;
+      const p = (vh * 0.7 - rect.top) / (rect.height - vh * 0.4);
+      setTlProgress(Math.min(1, Math.max(0, p)));
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+  const activeIdx = tlProgress <= 0 ? 0 : Math.min(HISTORY.length - 1, Math.floor(tlProgress * HISTORY.length));
+
   return (
-    <div className="cf-about-page">
-      {/* ═══ GLOBAL NAVBAR (Always Active with ABOUT US Indicator & Brand Yellow Logo) ═══ */}
-      <Navbar pageLabel="ABOUT US" logoTheme="yellow" />
+    <div className="au-page" ref={rootRef}>
 
-      {/* ═════════════════════════════════════════════════════════════
-          SECTION 1: OUR VISION HERO (Inspired by the Reference Layout)
-          ═════════════════════════════════════════════════════════════ */}
-      <section className="cf-vision-hero">
-        <div className="cf-vision-container">
-          
-          {/* Left Column: Eyebrow, Large Editorial Title, Bottom 2-Col Split */}
-          <div className="cf-vision-left">
-            
-            {/* Top: Eyebrow + Headline */}
-            <div className="cf-vision-top">
-              <div className="cf-vision-eyebrow">
-                <span className="cf-vision-eyebrow-line" />
-                <span className="cf-vision-eyebrow-text">
-                  CULTURE FLOW · VISION & ARCHITECTURE
-                </span>
-              </div>
+      {/* ═══ HERO — centered highlight headline + floating chips + bento row ═══ */}
+      <section className="au-hero">
+        <span className="au-chip au-chip--tl" aria-hidden><ShieldCheck size={17} strokeWidth={1.7} /></span>
+        <span className="au-chip au-chip--tr" aria-hidden><Plane size={17} strokeWidth={1.7} /></span>
+        <span className="au-chip au-chip--bl" aria-hidden><GraduationCap size={17} strokeWidth={1.7} /></span>
+        <span className="au-chip au-chip--br" aria-hidden><HeartHandshake size={17} strokeWidth={1.7} /></span>
 
-              <h1 className="cf-vision-title">
-                The vision behind <br />
-                Culture Flow
-              </h1>
-            </div>
+        <h1 className="au-hero-title au-reveal">
+          The people behind{" "}
+          <span className="au-mark">every</span> departure
+        </h1>
 
-            {/* Bottom 2-Column Split: Button on left, Narrative on right (Matches Reference) */}
-            <div className="cf-vision-bottom-row">
-              <div className="cf-vision-cta-col">
-                <Link href="/#waitlist" className="cf-vision-cta-btn">
-                  <span>SCHEDULE A DIALOGUE</span>
-                  <span className="cf-vision-arrow">→</span>
-                </Link>
-              </div>
+        <div className="au-hero-row">
+          <p className="au-hero-sub au-reveal">
+            A study-abroad company founded in New Delhi in October 2026 —
+            built to turn a semester away into the sharpest step of a career.
+          </p>
+          <Link href="/programs" className="au-btn-pillau au-reveal" style={{ "--au-d": "90ms" } as React.CSSProperties}>
+            Explore programs <ArrowUpRight size={15} strokeWidth={1.9} />
+          </Link>
+        </div>
 
-              <div className="cf-vision-narrative-col">
-                <p className="cf-vision-narrative-p">
-                  My journey with global education began with a personal realization:
-                  navigating international pathways shouldn&apos;t be an anxiety-ridden
-                  maze of unvetted commercial agents, opaque commissions, and transactional
-                  promises. It should be a dignified, life-defining milestone.
-                </p>
-                <p className="cf-vision-narrative-p">
-                  Having experienced international academic mobility firsthand, I saw how
-                  the traditional consultancy model treated students as commercial inventory
-                  rather than ambitious scholars. Culture Flow was created to reverse that —
-                  partnering directly with world-class universities to architect genuine,
-                  transparent pathways where students don&apos;t just follow — they embrace.
-                </p>
-              </div>
-            </div>
+        {/* hero bento row */}
+        <div className="au-hero-bento">
+          <Reveal className="au-hcell au-hcell--photo" style={{ "--au-d": "60ms" } as React.CSSProperties}>
+            <img src="/images/about/counseling.jpg" alt="Culture Flow counselor with a student" className="au-hcell-img" />
+            <span className="au-hcell-label">Counseling, not selling</span>
+          </Reveal>
 
-          </div>
+          <Reveal className="au-hcell au-hcell--founded" style={{ "--au-d": "140ms" } as React.CSSProperties}>
+            <span className="au-fcell-kicker">FOUNDED</span>
+            <span className="au-fcell-big">Oct&nbsp;2026</span>
+            <span className="au-fcell-sub">Connaught Place, New Delhi</span>
+            <MapPin size={18} strokeWidth={1.7} className="au-fcell-ico" aria-hidden />
+          </Reveal>
 
-          {/* Right Column: Cinematic Tall Portrait Image (0px radius, straight crop) */}
-          <div className="cf-vision-right">
-            <div className="cf-vision-img-frame">
-              <img
-                src="/images/about/founder_vision.jpg"
-                alt="Culture Flow Vision"
-                className="cf-vision-img"
-              />
-            </div>
-          </div>
-
+          <Reveal className="au-hcell au-hcell--mission" style={{ "--au-d": "220ms" } as React.CSSProperties}>
+            <p>
+              We move <em>scholars</em>, not files — one platform for programs,
+              credit transfer, visas and a safe landing, run by people who
+              answer the phone themselves.
+            </p>
+            <Link href="/waitlist" className="au-mini-cta">
+              Join the waitlist <ArrowUpRight size={14} strokeWidth={1.9} />
+            </Link>
+          </Reveal>
         </div>
       </section>
 
-      {/* ═════════════════════════════════════════════════════════════
-          SECTION 2: CORE VISION PILLARS (Minimalist Manifesto)
-          ═════════════════════════════════════════════════════════════ */}
-      <section className="cf-pillars-section">
-        <div className="cf-pillars-container">
-          <div className="cf-pillars-header">
-            <span className="cf-pillars-tag">OUR CONVICTIONS</span>
-            <h2 className="cf-pillars-heading">How we redefine international student mobility.</h2>
-          </div>
+      {/* ═══ MARQUEE TICKER ═══ */}
+      <div className="au-ticker" aria-hidden>
+        <div className="au-ticker-track">
+          {Array.from({ length: 2 }).map((_, dup) => (
+            <span className="au-ticker-run" key={dup}>
+              {["CULTURE FLOW", "ONE STEP. NEW FUTURE.", "EST. OCT 2026", "NEW DELHI — LONDON — MUNICH — SINGAPORE"].map((t) => (
+                <span key={`${dup}-${t}`} className="au-ticker-item">{t} <i>✦</i></span>
+              ))}
+            </span>
+          ))}
+        </div>
+      </div>
 
-          <div className="cf-pillars-grid">
-            {VISION_PILLARS.map((pillar) => (
-              <div key={pillar.num} className="cf-pillar-card">
-                <span className="cf-pillar-num">{pillar.num}</span>
-                <h3 className="cf-pillar-title">{pillar.title}</h3>
-                <p className="cf-pillar-desc">{pillar.desc}</p>
+      {/* ═══ STORY SPLIT ═══ */}
+      <section className="au-story">
+        <p className="au-story-note au-reveal">
+          The Culture Flow story is short and still being written — but the
+          conviction behind it was settled on day one: studying abroad should
+          be a dignified, life-defining milestone, never an anxiety-ridden
+          maze of agents.
+        </p>
+        <div>
+          <h2 className="au-story-title au-reveal" style={{ "--au-d": "80ms" } as React.CSSProperties}>
+            We move scholars, <em>not files.</em>
+          </h2>
+          <div className="au-story-ctas au-reveal" style={{ "--au-d": "160ms" } as React.CSSProperties}>
+            <a href="#timeline" className="au-story-cta au-story-cta--solid">Read our timeline</a>
+            <Link href="/safety" className="au-story-cta">How we keep you safe</Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ═══ TIMELINE ═══ */}
+      <section className="au-sect" id="timeline" ref={timelineRef}>
+        <span className="au-sect-pill au-reveal" style={{ "--au-d": "0ms" } as React.CSSProperties}>Our story</span>
+        <h2 className="au-sect-title au-reveal" style={{ "--au-d": "80ms" } as React.CSSProperties}>
+          Five phases. <em>One conviction.</em>
+        </h2>
+        <div className="au-tl-line">
+          <span className="au-tl-fill" style={{ transform: `scaleX(${tlProgress})` }} />
+        </div>
+        <div className="au-tl-nodes">
+          {HISTORY.map((n, i) => (
+            <div key={n.id} className={`au-tl-node ${i <= activeIdx ? "au-tl-node--on" : ""}`}>
+              <span className="au-tl-dot" />
+              <span className="au-tl-year">{n.label}</span>
+            </div>
+          ))}
+        </div>
+        <div className="au-tl-detail au-reveal">
+          <h3>{HISTORY[activeIdx].title}</h3>
+          <p>{HISTORY[activeIdx].desc}</p>
+        </div>
+      </section>
+
+      {/* ═══ MOSAIC BENTO ═══ */}
+      <section className="au-sect">
+        <span className="au-sect-pill au-reveal">By the numbers</span>
+        <h2 className="au-sect-title au-reveal" style={{ "--au-d": "80ms" } as React.CSSProperties}>
+          What we&rsquo;ve built. <em>What&rsquo;s coming.</em>
+        </h2>
+
+        <div className="au-mosaic">
+          {/* yellow pathways cell */}
+          <Reveal className="au-mcell au-mcell--yellow" style={{ "--au-d": "0ms" } as React.CSSProperties}>
+            <div className="au-tags">
+              <span className="au-tag au-tag--dark">Tech &amp; Innovation</span>
+              <span className="au-tag">Sustainability</span>
+              <span className="au-tag">Cultural</span>
+            </div>
+            <div className="au-mcell-foot">
+              <span className="au-mbig">Pathways</span>
+              <span className="au-arrow-sq" aria-hidden><ArrowUpRight size={26} strokeWidth={2} /></span>
+            </div>
+          </Reveal>
+
+          {/* dotted pattern cell */}
+          <Reveal className="au-mcell au-mcell--dots" style={{ "--au-d": "80ms" } as React.CSSProperties}>
+            <p>A global classroom, one semester at a time.</p>
+          </Reveal>
+
+          {/* stats stacked */}
+          <Reveal className="au-mcell au-mcell--stat" style={{ "--au-d": "160ms" } as React.CSSProperties}>
+            <span className="au-stat-num"><CountUp to={52000} />+</span>
+            <span className="au-stat-cap">scholars mobilized</span>
+          </Reveal>
+          <Reveal className="au-mcell au-mcell--stat au-mcell--stat-b" style={{ "--au-d": "240ms" } as React.CSSProperties}>
+            <span className="au-stat-num"><CountUp to={200} />+</span>
+            <span className="au-stat-cap">partner institutions</span>
+          </Reveal>
+
+          {/* founder photo */}
+          <Reveal className="au-mcell au-mcell--photo" style={{ "--au-d": "120ms" } as React.CSSProperties}>
+            <img src="/images/about/founder_vision.jpg" alt="Culture Flow founder" className="au-mcell-img" />
+            <span className="au-hcell-label">Founder-led, always</span>
+          </Reveal>
+
+          {/* beliefs cell */}
+          <Reveal className="au-mcell au-mcell--belief" style={{ "--au-d": "200ms" } as React.CSSProperties}>
+            <h3>What we believe</h3>
+            <ul>
+              <li><FileCheck size={15} strokeWidth={1.7} /> 40% academic rigor, 40% immersion, 20% reflection</li>
+              <li><ShieldCheck size={15} strokeWidth={1.7} /> Safety is a system — ratios, vetting, insurance</li>
+              <li><HeartHandshake size={15} strokeWidth={1.7} /> Reflection turns experience into outcomes</li>
+            </ul>
+          </Reveal>
+
+          {/* wide stat */}
+          <Reveal className="au-mcell au-mcell--wide au-mcell--cream" style={{ "--au-d": "280ms" } as React.CSSProperties}>
+            <span className="au-stat-num"><CountUp to={99.4} decimals={1} suffix="%" /></span>
+            <span className="au-stat-cap">visa &amp; admissions success</span>
+            <Link href="/safety" className="au-mini-cta">
+              Safety &amp; Trust <ArrowUpRight size={14} strokeWidth={1.9} />
+            </Link>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ═══ OFFICES + CTA ═══ */}
+      <section className="au-sect au-sect--last">
+        <span className="au-sect-pill au-reveal">Where to find us</span>
+        <div className="au-offices-grid">
+          <div className="au-mcell au-mcell--cream au-offices au-reveal">
+            {["New Delhi — Head Office", "Mumbai — Regional Delivery", "London — Liaison Desk", "Berlin — Liaison Desk"].map((o) => (
+              <div key={o} className="au-office-row">
+                <span>{o}</span>
+                <ArrowUpRight size={15} strokeWidth={1.8} aria-hidden />
               </div>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* ═════════════════════════════════════════════════════════════
-          SECTION 3: OUR JOURNEY (Aesthetic Minimal Scroll Timeline)
-          ═════════════════════════════════════════════════════════════ */}
-      <section ref={timelineRef} id="journey" className="cf-journey-section">
-        <div className="cf-journey-container">
-
-          {/* Section Heading */}
-          <div className="cf-journey-header">
-            <div className="cf-journey-tag">
-              <span className="cf-journey-tag-dot" />
-              <span>CHRONOLOGY OF IMPACT · 2021 — PRESENT</span>
-            </div>
-            <h2 className="cf-journey-title">Our Journey</h2>
-            <p className="cf-journey-subtitle">
-              From a small advisory room in New Delhi to a premier global mobility
-              ecosystem connecting ambitious scholars with 200+ world-class institutions.
+          <div className="au-offices-copy au-reveal" style={{ "--au-d": "100ms" } as React.CSSProperties}>
+            <h2 className="au-sect-title">Ready to take <em>your global step?</em></h2>
+            <p className="au-story-note" style={{ margin: 0 }}>
+              Join the waitlist to hear about the first cohorts before anyone
+              else — or just ask us anything, a human answers.
             </p>
-          </div>
-
-          {/* ─── Scroll-Driven Interactive Timeline ─── */}
-          <div className="cf-timeline-wrapper">
-            
-            {/* Central Vertical Spine & Glowing Progress Beam */}
-            <div className="cf-timeline-spine">
-              <div
-                className="cf-timeline-progress-bar"
-                style={{ transform: `scaleY(${scrollProgress})` }}
-              />
-            </div>
-
-            {/* Milestone Items */}
-            <div className="cf-timeline-list">
-              {TIMELINE_DATA.map((milestone, idx) => {
-                const isActive = activeMilestone === idx;
-                const isPassed = activeMilestone > idx;
-                const isEven = idx % 2 === 0;
-
-                return (
-                  <div
-                    key={milestone.year}
-                    ref={(el) => {
-                      milestoneRefs.current[idx] = el;
-                    }}
-                    className={`cf-timeline-item ${isEven ? "cf-timeline-item--left" : "cf-timeline-item--right"} ${
-                      isActive ? "cf-timeline-item--active" : ""
-                    } ${isPassed ? "cf-timeline-item--passed" : ""}`}
-                  >
-                    {/* Glowing Node on Spine */}
-                    <div className="cf-timeline-node">
-                      <div className="cf-timeline-node-inner" />
-                    </div>
-
-                    {/* Milestone Card */}
-                    <div className="cf-timeline-card">
-                      
-                      {/* Top Meta: Phase + Badge */}
-                      <div className="cf-timeline-meta">
-                        <span className="cf-timeline-phase">{milestone.phase}</span>
-                        {milestone.badge && (
-                          <span className="cf-timeline-badge">{milestone.badge}</span>
-                        )}
-                      </div>
-
-                      {/* Big Year Row */}
-                      <div className="cf-timeline-year-row">
-                        <span className="cf-timeline-year">{milestone.year}</span>
-                        <div className="cf-timeline-stat-pill">
-                          <span className="cf-timeline-stat-val">{milestone.metric}</span>
-                          <span className="cf-timeline-stat-lbl">{milestone.metricLabel}</span>
-                        </div>
-                      </div>
-
-                      {/* Title & Tagline */}
-                      <h3 className="cf-timeline-heading">{milestone.title}</h3>
-                      <p className="cf-timeline-tagline">{milestone.tagline}</p>
-
-                      {/* Editorial Narrative */}
-                      <p className="cf-timeline-desc">{milestone.description}</p>
-
-                      {/* Accompanying Photo Card (if milestone has image) */}
-                      {milestone.image && (
-                        <div className="cf-timeline-photo-box">
-                          <img
-                            src={milestone.image}
-                            alt={milestone.imageAlt || milestone.title}
-                            className="cf-timeline-photo"
-                            loading="lazy"
-                          />
-                          <div className="cf-timeline-photo-caption">
-                            <span>{milestone.imageAlt}</span>
-                          </div>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-
-          </div>
-
-        </div>
-      </section>
-
-      {/* ═════════════════════════════════════════════════════════════
-          SECTION 4: INVITATION BANNER
-          ═════════════════════════════════════════════════════════════ */}
-      <section className="cf-about-cta-section">
-        <div className="cf-about-cta-card">
-          <div className="cf-about-cta-content">
-            <span className="cf-about-cta-tag">THE INVITATION</span>
-            <h2 className="cf-about-cta-heading">
-              Ready to take your global step?
-            </h2>
-            <p className="cf-about-cta-body">
-              Whether you are an ambitious student seeking tier-1 pathway guidance or an
-              institution exploring international articulation partnerships, our doors are open.
-            </p>
-            <div className="cf-about-cta-buttons">
-              <Link href="/waitlist" className="cf-about-btn-solid">
-                <span>Join Waitlist</span>
-                <span className="cf-btn-arrow">→</span>
-              </Link>
-              <Link href="/programs" className="cf-about-btn-outline">
-                <span>Explore Programs</span>
-              </Link>
+            <div className="au-story-ctas">
+              <Link href="/waitlist" className="au-story-cta au-story-cta--solid">Join Waitlist</Link>
+              <Link href="/programs" className="au-story-cta">Explore Programs</Link>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ═══ FOOTER ═══ */}
       <Footer />
     </div>
   );

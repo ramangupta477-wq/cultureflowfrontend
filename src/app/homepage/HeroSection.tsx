@@ -538,7 +538,7 @@ export default function HeroSection() {
       }
     };
 
-    // Draw individual 3D ball (tactile sphere with radial lighting, specular sheen, and contact shadow)
+    // Draw individual 3D ball (tactile sphere with radial lighting and specular sheen)
     const drawCoin = (c: Coin) => {
       const { x, y, r, style, glyph, scale, opacity } = c;
 
@@ -551,27 +551,6 @@ export default function HeroSection() {
       ctx.save();
       ctx.translate(x, y);
       ctx.globalAlpha = curOpacity;
-
-      // ─── Floor Contact Shadow (Physical grounding on horizontal divider line) ───
-      const distFromFloor = floorY - (y + effectiveR);
-      if (distFromFloor < effectiveR * 1.2 && distFromFloor >= -15) {
-        const shadowIntensity = Math.max(0, 1 - distFromFloor / (effectiveR * 1.2));
-        const shadowW = effectiveR * (1.15 + shadowIntensity * 0.2);
-        const shadowH = Math.max(2, effectiveR * 0.20 * shadowIntensity);
-        ctx.save();
-        ctx.beginPath();
-        ctx.ellipse(0, effectiveR + 1, shadowW, shadowH, 0, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(0, 0, 0, ${0.28 * shadowIntensity * curOpacity})`;
-        ctx.fill();
-        ctx.restore();
-      }
-
-      // ─── Outer Ball Ambient Drop Shadow ───
-      ctx.save();
-      ctx.shadowColor = "rgba(0, 0, 0, 0.22)";
-      ctx.shadowBlur = effectiveR * 0.38;
-      ctx.shadowOffsetX = 0;
-      ctx.shadowOffsetY = effectiveR * 0.18;
 
       // ─── Main 3D Sphere Body (Radial Lighting Gradient) ───
       // Light source at upper-left (-0.32 * R, -0.32 * R)
@@ -592,7 +571,6 @@ export default function HeroSection() {
       ctx.arc(0, 0, effectiveR, 0, Math.PI * 2);
       ctx.fillStyle = sphereGrad;
       ctx.fill();
-      ctx.restore(); // Clear drop shadow
 
       // ─── Specular Glossy Sheen (Top-Left Highlight Arc) ───
       ctx.save();

@@ -1,9 +1,11 @@
 "use client";
 
-import React, { useRef, useLayoutEffect } from "react";
+import React, { useRef, useEffect, useLayoutEffect } from "react";
+import Link from "next/link";
 import Footer from "../homepage/Footer";
 import RollingPolygon from "./RollingPolygon";
 import ProgramsShowcase from "./ProgramsShowcase";
+import { ArrowUpRight, Route as RouteIco } from "lucide-react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import "./programs.css";
@@ -52,37 +54,72 @@ export default function ProgramsPage() {
   return (
     <div className="programs-page-wrapper">
 
-      {/* ─── HERO SECTION: Editorial Text Grid ─── */}
+      {/* ═══ HERO — bento ═══ */}
       <section className="programs-hero-section">
         <div className="programs-hero-container">
 
-          <div className="programs-hero-grid">
-            <h1 className="programs-hero-heading">
-              Programs built for people who see further.{" "}
-              <em>One semester abroad changes everything.</em>
-            </h1>
-            <div className="programs-hero-image-block">
+          <span className="pgb-pill">Programs</span>
+          <h1 className="pgb-title">
+            Built for people who <span className="pgb-mark">see&nbsp;further.</span>
+          </h1>
+
+          <div className="pgb-row">
+            <p className="pgb-sub">
+              Research, leadership, deep-tech — three tracks designed for
+              three ambitions. <strong>One platform, full circle.</strong>
+            </p>
+            <Link href="/waitlist" className="pgb-cta">
+              Join the waitlist <ArrowUpRight size={15} strokeWidth={1.9} />
+            </Link>
+          </div>
+
+          <div className="pgb-grid">
+            {/* yellow tracks cell */}
+            <div className="pgb-cell pgb-cell--yellow">
+              <span className="pgb-kicker">THREE TRACKS</span>
+              <div className="pgb-tags">
+                <span className="pgb-tag pgb-tag--dark">Tech &amp; Innovation</span>
+                <span className="pgb-tag">Sustainability</span>
+                <span className="pgb-tag">Cultural</span>
+              </div>
+              <div className="pgb-cell-foot">
+                <span className="pgb-big">Any direction</span>
+                <a href="#tracks" className="pgb-arrow" aria-label="See tracks">
+                  <ArrowUpRight size={24} strokeWidth={2} />
+                </a>
+              </div>
+            </div>
+
+            {/* world map cell */}
+            <div className="pgb-cell pgb-cell--map">
               <img
                 src="/homepage_assets/world.svg"
-                alt="Global campus network"
-                className="programs-hero-map"
+                alt=""
+                aria-hidden
+                className="pgb-world"
               />
+              <p className="pgb-map-cap">One semester, one platform — campuses across three continents.</p>
             </div>
-            <p className="programs-hero-text">
-              Research, leadership, deep-tech — three tracks designed for
-              three ambitions. <em>One platform, full circle.</em>
-            </p>
-            <p className="programs-hero-text">
-              First, we understand where you are academically and
-              professionally. <em>Then we map the clearest path to where
-              you need to be.</em>
-            </p>
+
+            {/* path cell */}
+            <div className="pgb-cell pgb-cell--info">
+              <span className="pgb-ico" aria-hidden><RouteIco size={20} strokeWidth={1.7} /></span>
+              <p className="pgb-cell-text">
+                First, we understand where you are academically and
+                professionally. <strong>Then we map the clearest path to
+                where you need to be.</strong>
+              </p>
+              <a href="#tracks" className="pgb-mini-cta">
+                How the tracks work <ArrowUpRight size={14} strokeWidth={1.9} />
+              </a>
+            </div>
           </div>
+
         </div>
       </section>
 
       {/* ─── COMBINED: Polygon Canvas + Track Bars (shared scroll container) ─── */}
-      <div ref={tracksContainerRef} className="tracks-scroll-container">
+      <div ref={tracksContainerRef} className="tracks-scroll-container" id="tracks">
         <div className="tracks-sticky">
           <RollingPolygon containerRef={tracksContainerRef} />
           <div className="tracks-header">

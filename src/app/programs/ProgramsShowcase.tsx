@@ -16,14 +16,8 @@ const PHOTOS = [
   { x: 0.865, y: 0.75, w: 9.2,  ar: 1.45, s: 0.36, d: 0.34 },
 ];
 
-const DESTINATIONS = [
-  { name: "Oxford, UK", desc: "Centuries of academic tradition in a city built for deep thinking — spires, libraries, and seminar rooms where the next chapter begins." },
-  { name: "Munich, Germany", desc: "Europe's deep-tech corridor — engineering precision meets startup energy against the backdrop of the Alps." },
-  { name: "Singapore", desc: "Asia's innovation gateway — where policy, venture capital, and frontier research meet at the crossroads of the fastest-growing economies." },
-];
-
 /* Timeline phases (0–1) */
-const T = { copyIn: [0.10, 0.17], copyOut: [0.55, 0.63], locIn: [0.64, 0.80], joinEnd: 0.66 };
+const T = { copyIn: [0.10, 0.17], copyOut: [0.55, 0.63], joinEnd: 0.66 };
 
 const clamp = (v: number, a = 0, b = 1) => Math.min(b, Math.max(a, v));
 const ss = (a: number, b: number, v: number) => { const t = clamp((v - a) / (b - a)); return t * t * (3 - 2 * t); };
@@ -31,18 +25,14 @@ const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
 
 export default function ProgramsShowcase() {
   const trackRef = useRef<HTMLDivElement>(null);
-  const stageRef = useRef<HTMLDivElement>(null);
   const copyRef = useRef<HTMLDivElement>(null);
-  const locRef = useRef<HTMLDivElement>(null);
-  const photosRef = useRef<HTMLDivElement>(null);
   const photoEls = useRef<HTMLDivElement[]>([]);
   const state = useRef({ target: 0, cur: 0, W: 0, H: 0, raf: 0 });
 
   useEffect(() => {
     const track = trackRef.current;
     const copy = copyRef.current;
-    const loc = locRef.current;
-    if (!track || !copy || !loc) return;
+    if (!track || !copy) return;
 
     const s = state.current;
     s.W = window.innerWidth;
@@ -84,11 +74,6 @@ export default function ProgramsShowcase() {
       copy!.style.opacity = String(cop);
       copy!.style.transform = `translate3d(0,${((1 - ci) * 18 + (1 - co) * -14).toFixed(1)}px,0) scale(${(lerp(0.985, 1, ci) * lerp(1.02, 1, co)).toFixed(4)})`;
       copy!.style.filter = `blur(${((1 - ci) * 5 + (1 - co) * 6).toFixed(2)}px)`;
-
-      // Key locations heading
-      const li = ss(T.locIn[0], T.locIn[1], p);
-      loc!.style.opacity = String(ss(T.locIn[0], T.locIn[0] + 0.06, p));
-      loc!.style.transform = `translate3d(0,${lerp(s.H * 1.02, s.H * 0.76, li).toFixed(1)}px,0)`;
     }
 
     function tick() {
@@ -113,60 +98,30 @@ export default function ProgramsShowcase() {
     };
   }, []);
 
-  // IntersectionObserver for destination cards
-  const citiesRef = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    const el = citiesRef.current;
-    if (!el) return;
-    const io = new IntersectionObserver(
-      (entries) => entries.forEach((e) => { if (e.isIntersecting) e.target.classList.add("ps-city--in"); }),
-      { threshold: 0.15 }
-    );
-    el.querySelectorAll(".ps-city").forEach((c) => io.observe(c));
-    return () => io.disconnect();
-  }, []);
-
   return (
-    <>
-      <div ref={trackRef} className="ps-track">
-        <section ref={stageRef} className="ps-stage" aria-label="Programs">
-          <div ref={photosRef} className="ps-photos">
-            {PHOTOS.map((_, i) => (
-              <div key={i} className="ps-ph" ref={(el) => { if (el) photoEls.current[i] = el; }} />
-            ))}
-          </div>
+    <div ref={trackRef} className="ps-track">
+      <section className="ps-stage" aria-label="Programs">
+        <div className="ps-photos">
+          {PHOTOS.map((_, i) => (
+            <div key={i} className="ps-ph" ref={(el) => { if (el) photoEls.current[i] = el; }} />
+          ))}
+        </div>
 
-          <div ref={copyRef} className="ps-copy">
-            <h2>Programs</h2>
-            <p>
-              Three tracks across the world's leading universities — research,
-              deep-tech, and cultural leadership. We match ambition to
-              institution, handle the paperwork, and make sure you arrive ready
-              to work, not just travel.
-            </p>
-            <p>If our mission resonates with you, let&rsquo;s talk.</p>
-            <a className="ps-cta" href="/waitlist">
-              <span>Join waitlist</span>
-              <i>→</i>
-            </a>
-          </div>
-
-          <div ref={locRef} className="ps-loc">
-            <h2>Key Destinations</h2>
-            <p>Programs run in cities across the globe.<br />Where will you go?</p>
-          </div>
-        </section>
-      </div>
-
-      <section ref={citiesRef} className="ps-cities" aria-label="Key destinations">
-        {DESTINATIONS.map((d, i) => (
-          <article key={d.name} className="ps-city" style={{ transitionDelay: `${(i % 3) * 90}ms` }}>
-            <div className="ps-city-img" />
-            <h3>{d.name}</h3>
-            <p>{d.desc}</p>
-          </article>
-        ))}
+        <div ref={copyRef} className="ps-copy">
+          <h2>Programs</h2>
+          <p>
+            Three tracks across the world's leading universities — research,
+            deep-tech, and cultural leadership. We match ambition to
+            institution, handle the paperwork, and make sure you arrive ready
+            to work, not just travel.
+          </p>
+          <p>If our mission resonates with you, let&rsquo;s talk.</p>
+          <a className="ps-cta" href="/waitlist">
+            <span>Join waitlist</span>
+            <i>→</i>
+          </a>
+        </div>
       </section>
-    </>
+    </div>
   );
 }
