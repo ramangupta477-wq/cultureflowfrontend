@@ -9,6 +9,7 @@ import {
   MapPin,
   FileDown,
   ArrowUpRight,
+  Play,
 } from "lucide-react";
 import Footer from "../homepage/Footer";
 import "./safety.css";
@@ -124,70 +125,72 @@ export default function SafetyPage() {
   return (
     <div className="safety-page" ref={rootRef}>
 
-      {/* ═══ WHITE MEGA-CARD: about pill + headline + bento row + stats ═══ */}
-      <section className="sf-card sf-card--hero">
-        <div className="sf-card-head">
-          <span className="sf-pill sf-reveal">Safety &amp; Trust</span>
-          <h1 className="sf-hero-title sf-reveal" style={{ "--sf-d": "80ms" } as React.CSSProperties}>
-            From day one, every program has run on one belief —
-            <span className="sf-hero-strong"> safety is a system, </span>
-            <span className="sf-hero-dim">not a promise whispered at the airport.</span>
-          </h1>
-        </div>
+      {/* ═══ HERO: tile-matrix (Bible/History reference, CF palette) ═══ */}
+      <section className="sf-hero">
+        <div className="sf-hero-grid">
+          <div className="sf-hg sf-hg-word sf-hg-w1 sf-reveal">Safety</div>
 
-        {/* Bento row */}
-        <div className="sf-bento">
-          {/* A — system card */}
-          <div className="sf-cell sf-cell--info sf-reveal" style={{ "--sf-d": "100ms" } as React.CSSProperties}>
-            <span className="sf-cell-icon" aria-hidden><ShieldCheck size={22} strokeWidth={1.6} /></span>
-            <p className="sf-cell-text">
-              Ratios, vetting, insurance and a written protocol — every claim
-              on this page has a fact or a document behind it.
+          <div className="sf-hg sf-hg-chip sf-reveal" style={{ "--sf-d": "70ms" } as React.CSSProperties} aria-hidden>
+            <ShieldCheck size={30} strokeWidth={1.6} />
+          </div>
+
+          <div className="sf-hg sf-hg-explain sf-reveal" style={{ "--sf-d": "140ms" } as React.CSSProperties}>
+            <p>
+              We will help you send your child abroad with a
+              <strong> system, not promises.</strong>
             </p>
-            <div className="sf-micro">
-              <span className="sf-micro-item"><Clock size={14} strokeWidth={1.7} /> 1:15 chaperone</span>
-              <span className="sf-micro-item"><Phone size={14} strokeWidth={1.7} /> 24×7 hotline</span>
-              <span className="sf-micro-item"><ShieldCheck size={14} strokeWidth={1.7} /> 100% insured</span>
-            </div>
-            <div className="sf-cell-cta">
-              <a href="#ask" className="sf-btn-dark">Ask a question</a>
-              <a href="#ask" className="sf-btn-round" aria-label="Ask a question">
-                <ArrowUpRight size={16} strokeWidth={1.8} />
-              </a>
-            </div>
+            <span className="sf-hg-micro">1:15 chaperone · 24×7 line · 100% insured</span>
           </div>
 
-          {/* B — photo card */}
-          <div className="sf-cell sf-cell--photo sf-reveal" style={{ "--sf-d": "200ms" } as React.CSSProperties}>
-            <img src="/images/about/counseling.jpg" alt="Culture Flow counselor with a student" className="sf-cell-img" />
-            <span className="sf-cell-photo-label">Program care, day one</span>
+          <div className="sf-hg sf-hg-stat sf-reveal" style={{ "--sf-d": "210ms" } as React.CSSProperties}>
+            <span className="sf-hg-stat-label">Chaperone ratio</span>
+            <span className="sf-hg-stat-num">1 : 15</span>
           </div>
 
-          {/* C — collage card */}
-          <div className="sf-cell sf-cell--collage sf-reveal" style={{ "--sf-d": "300ms" } as React.CSSProperties}>
-            <div className="sf-collage" aria-hidden>
-              <img src="/images/about/campus.jpg" alt="" className="sf-pola sf-pola--1" />
-              <img src="/images/about/partnership.jpg" alt="" className="sf-pola sf-pola--2" />
-              <img src="/images/about/editorial.jpg" alt="" className="sf-pola sf-pola--3" />
+          <div className="sf-hg sf-hg-word sf-hg-w2 sf-reveal" style={{ "--sf-d": "280ms" } as React.CSSProperties}>
+            Abroad<em>.</em>
+          </div>
+
+          <div className="sf-hg sf-hg-avatars sf-reveal" style={{ "--sf-d": "350ms" } as React.CSSProperties}>
+            <div className="sf-avatars" aria-hidden>
+              <span className="sf-avatar sf-avatar--1">AH</span>
+              <span className="sf-avatar sf-avatar--2">RS</span>
+              <span className="sf-avatar sf-avatar--3">MJ</span>
             </div>
-            <p className="sf-cell-text">
-              Moments from programs that ran under full supervision — every
-              stop chaperoned, every evening accounted for.
-            </p>
+            <span className="sf-hg-count">1,400+</span>
           </div>
-        </div>
 
-        {/* Stats strip */}
-        <div className="sf-stats" ref={statsRef}>
-          <Stat display="1:15" active={statsActive} label="chaperone ratio" />
-          <Stat display="24×7" active={statsActive} label="emergency line" />
-          <Stat countTo={100} suffix="%" active={statsActive} label="medically insured" />
-          <Stat countTo={15} suffix=" min" active={statsActive} label="incident response start" />
+          <div className="sf-hg sf-hg-circ sf-reveal" style={{ "--sf-d": "420ms" } as React.CSSProperties} aria-hidden>
+            <svg viewBox="0 0 100 100" className="sf-hg-circ-svg">
+              <defs>
+                <path id="sf-circ-path" d="M 50,50 m -36,0 a 36,36 0 1,1 72,0 a 36,36 0 1,1 -72,0" />
+              </defs>
+              <text className="sf-hg-circ-text">
+                <textPath href="#sf-circ-path">
+                  SAFETY IS A SYSTEM · NOT A PROMISE ·
+                </textPath>
+              </text>
+              <circle cx="50" cy="50" r="3.5" fill="#0B0B0B" />
+            </svg>
+          </div>
+
+          <a href="#protocol" className="sf-hg sf-hg-stories sf-reveal" style={{ "--sf-d": "490ms" } as React.CSSProperties}>
+            <span className="sf-hg-dots" aria-hidden><i /><i /></span>
+            <span className="sf-hg-arrow" aria-hidden><ArrowUpRight size={18} strokeWidth={1.8} /></span>
+            <span className="sf-hg-stories-label">SEE WHAT HAPPENS<br />IF THINGS GO WRONG</span>
+          </a>
+
+          <a href="#pillars" className="sf-hg sf-hg-dark sf-reveal" style={{ "--sf-d": "560ms" } as React.CSSProperties}>
+            <span className="sf-hg-dark-label">HOW WE<br />KEEP THEM<br />SAFE</span>
+            <span className="sf-hg-play" aria-hidden>
+              <Play size={16} strokeWidth={2} fill="#0B0B0B" />
+            </span>
+          </a>
         </div>
       </section>
 
       {/* ═══ WHY PARENTS CHOOSE US — bento with map, stacked cards, tall photo ═══ */}
-      <section className="sf-why">
+      <section className="sf-why" id="pillars">
         <div className="sf-why-head">
           <span className="sf-pill sf-reveal">Why it&rsquo;s safe</span>
           <div className="sf-why-title-row">
@@ -263,7 +266,7 @@ export default function SafetyPage() {
       </section>
 
       {/* ═══ PROTOCOL — numbered cards ═══ */}
-      <section className="sf-protocol">
+      <section className="sf-protocol" id="protocol">
         <div className="sf-why-head">
           <span className="sf-pill sf-reveal">If something goes wrong</span>
           <h2 className="sf-why-title sf-reveal" style={{ "--sf-d": "80ms" } as React.CSSProperties}>
