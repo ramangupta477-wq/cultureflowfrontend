@@ -1,11 +1,12 @@
 "use client";
 
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useMemo, useCallback } from "react";
 import Link from "next/link";
 import dynamic from "next/dynamic";
 import { z } from "zod/v4";
 import RolePicker from "./RolePicker";
 import { playShutterSound } from "@/components/ui/admit-one-ticket";
+import { fieldErrors, showError, PHONE_RE } from "@/lib/formValidation";
 import {
   creditReferrer,
   joinWaitlist,
@@ -80,14 +81,20 @@ const WAITLIST_TICKET_LAYOUT = {
 
 /* ─── Zod schemas ─── */
 const step1Schema = z.object({
-  fullName: z.string().trim().min(1, "Name is required"),
-  email: z.email("Enter a valid email"),
-  city: z.string().trim().min(1, "City is required"),
-  phone: z.string().optional(),
+  fullName: z.string().trim().min(1, "Please enter your full name"),
+  email: z.email("Enter a valid email address"),
+  city: z.string().trim().min(1, "Please enter your city"),
+  phone: z
+    .string()
+    .trim()
+    .optional()
+    .refine((v) => !v || PHONE_RE.test(v), "Enter a valid mobile number (digits, optional +)"),
 });
 
 const step2Schema = z.object({
-  consent: z.literal(true, { message: "You must agree to continue" }),
+  consent: z.literal(true, {
+    message: "Please accept the Privacy Policy to continue",
+  }),
 });
 
 const TRACKS: { id: TrackId; label: string }[] = [
@@ -175,9 +182,18 @@ export default function WaitlistPage() {
           : f.tracks,
     }));
 
-  const step1Valid = step1Schema.safeParse(form).success;
+  const [touched1, setTouched1] = useState<Record<string, boolean>>({});
+  const [touched2, setTouched2] = useState<Record<string, boolean>>({});
+  const [attempted1, setAttempted1] = useState(false);
+  const [attempted2, setAttempted2] = useState(false);
 
-  const step2Valid = step2Schema.safeParse(form).success;
+  const mark1 = (k: string) => () => setTouched1((t) => ({ ...t, [k]: true }));
+  const mark2 = (k: string) => () => setTouched2((t) => ({ ...t, [k]: true }));
+
+  const step1Errors = useMemo(() => fieldErrors(step1Schema, form), [form]);
+  const step2Errors = useMemo(() => fieldErrors(step2Schema, form), [form]);
+  const step1Valid = Object.keys(step1Errors).length === 0;
+  const step2Valid = Object.keys(step2Errors).length === 0;
 
   // Referral captured from the URL (?ref=CODE) — safely captured in useEffect
   // to prevent any SSR/hydration divergence.
@@ -196,6 +212,7 @@ export default function WaitlistPage() {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
+    setAttempted2(true);
     if (!step1Valid || !step2Valid || submitting) return;
     setSubmitting(true);
     setError(null);
@@ -374,6 +391,7 @@ export default function WaitlistPage() {
               className="wl-form"
               onSubmit={(e) => {
                 e.preventDefault();
+                setAttempted1(true);
                 if (step1Valid) setStep(2);
               }}
             >
@@ -402,58 +420,85 @@ export default function WaitlistPage() {
                 </div>
               </fieldset>
 
-              <label className="wl-field">
+              <label
+                className={`wl-field${showError(step1Errors, "fullName", touched1, attempted1) ? " wl-field--invalid" : ""}`}
+              >
                 <span>Full name *</span>
                 <input
                   type="text"
                   required
                   value={form.fullName}
                   onChange={(e) => set("fullName", e.target.value)}
+                  onBlur={mark1("fullName")}
+                  aria-invalid={!!showError(step1Errors, "fullName", touched1, attempted1)}
                   autoComplete="name"
                   placeholder="e.g. Aarav Sharma"
                 />
+                {showError(step1Errors, "fullName", touched1, attempted1) && (
+                  <em className="wl-err">{step1Errors.fullName}</em>
+                )}
               </label>
 
-              <label className="wl-field">
+              <label
+                className={`wl-field${showError(step1Errors, "email", touched1, attempted1) ? " wl-field--invalid" : ""}`}
+              >
                 <span>Email *</span>
                 <input
                   type="email"
                   required
                   value={form.email}
                   onChange={(e) => set("email", e.target.value)}
+                  onBlur={mark1("email")}
+                  aria-invalid={!!showError(step1Errors, "email", touched1, attempted1)}
                   autoComplete="email"
                   placeholder="you@example.com"
                 />
+                {showError(step1Errors, "email", touched1, attempted1) && (
+                  <em className="wl-err">{step1Errors.email}</em>
+                )}
               </label>
 
               <div className="wl-row">
-                <label className="wl-field">
+                <label
+                  className={`wl-field${showError(step1Errors, "city", touched1, attempted1) ? " wl-field--invalid" : ""}`}
+                >
                   <span>City *</span>
                   <input
                     type="text"
                     required
                     value={form.city}
                     onChange={(e) => set("city", e.target.value)}
+                    onBlur={mark1("city")}
+                    aria-invalid={!!showError(step1Errors, "city", touched1, attempted1)}
                     autoComplete="address-level2"
                     placeholder="e.g. New Delhi"
                   />
+                  {showError(step1Errors, "city", touched1, attempted1) && (
+                    <em className="wl-err">{step1Errors.city}</em>
+                  )}
                 </label>
-                <label className="wl-field">
+                <label
+                  className={`wl-field${showError(step1Errors, "phone", touched1, attempted1) ? " wl-field--invalid" : ""}`}
+                >
                   <span>Mobile / WhatsApp</span>
                   <input
                     type="tel"
                     value={form.phone}
                     onChange={(e) => set("phone", e.target.value)}
+                    onBlur={mark1("phone")}
+                    aria-invalid={!!showError(step1Errors, "phone", touched1, attempted1)}
                     autoComplete="tel"
                     placeholder="+91 98765 43210"
                   />
+                  {showError(step1Errors, "phone", touched1, attempted1) && (
+                    <em className="wl-err">{step1Errors.phone}</em>
+                  )}
                 </label>
               </div>
 
               <button
                 type="submit"
                 className="wl-btn wl-btn--next"
-                disabled={!step1Valid}
                 suppressHydrationWarning
               >
                 Next &rarr;
@@ -533,11 +578,16 @@ export default function WaitlistPage() {
                 </select>
               </label>
 
-              <label className="wl-consent">
+              <label
+                className={`wl-consent${showError(step2Errors, "consent", touched2, attempted2) ? " wl-field--invalid" : ""}`}
+              >
                 <input
                   type="checkbox"
                   checked={form.consent}
-                  onChange={(e) => set("consent", e.target.checked)}
+                  onChange={(e) => {
+                    set("consent", e.target.checked);
+                    mark2("consent")();
+                  }}
                   required
                 />
                 <span>
@@ -545,6 +595,9 @@ export default function WaitlistPage() {
                   <Link href="/legal/privacy">Privacy Policy</Link> *{" "}
                   <em>(required)</em>
                 </span>
+                {showError(step2Errors, "consent", touched2, attempted2) && (
+                  <em className="wl-err">{step2Errors.consent}</em>
+                )}
               </label>
 
               {error && <p className="wl-error" role="alert">{error}</p>}
@@ -560,7 +613,7 @@ export default function WaitlistPage() {
                 <button
                   type="submit"
                   className="wl-btn"
-                  disabled={!step2Valid || submitting}
+                  disabled={submitting}
                   suppressHydrationWarning
                 >
                   {submitting ? "Sending…" : "Join the waitlist!"}

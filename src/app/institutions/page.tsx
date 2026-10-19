@@ -1,7 +1,9 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
+import { z } from "zod/v4";
 import { saveInstitutionInquiry, type InstitutionInquiry } from "@/lib/appwrite";
+import { fieldErrors, showError, PHONE_RE } from "@/lib/formValidation";
 import "../waitlist/waitlist.css";
 import "./institutions.css";
 
@@ -19,27 +21,44 @@ const EMPTY: InstitutionInquiry = {
   message: "",
 };
 
+/* ─── Zod schema (messages = live field errors) ─── */
+const institutionsSchema = z.object({
+  institutionType: z.string().trim().min(1, "Select an institution type"),
+  institutionName: z.string().trim().min(1, "Please enter the institution name"),
+  city: z.string().trim().min(1, "Please enter your city"),
+  state: z.string().trim().optional(),
+  country: z.string().trim().min(1, "Please enter your country"),
+  contactName: z.string().trim().min(1, "Please enter your name"),
+  designation: z.string().trim().min(1, "Please enter your designation"),
+  email: z.email("Enter a valid email address"),
+  mobile: z
+    .string()
+    .trim()
+    .optional()
+    .refine((v) => !v || PHONE_RE.test(v), "Enter a valid mobile number (digits, optional +)"),
+  lookingFor: z.string().trim().min(1, "Select what you're looking for"),
+  message: z.string().trim().max(2000, "Keep it under 2000 characters").optional(),
+});
+
 export default function InstitutionsPage() {
   const [form, setForm] = useState<InstitutionInquiry>(EMPTY);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [done, setDone] = useState(false);
+  const [touched, setTouched] = useState<Record<string, boolean>>({});
+  const [attempted, setAttempted] = useState(false);
 
-  const valid =
-    form.institutionType &&
-    form.institutionName.trim() &&
-    form.city.trim() &&
-    form.country.trim() &&
-    form.contactName.trim() &&
-    form.designation.trim() &&
-    /.+@.+\..+/.test(form.email) &&
-    form.lookingFor;
+  const errors = useMemo(() => fieldErrors(institutionsSchema, form), [form]);
+  const valid = Object.keys(errors).length === 0;
+  const err = (k: string) => showError(errors, k, touched, attempted);
 
   const set = (key: keyof InstitutionInquiry, value: string) =>
     setForm((f) => ({ ...f, [key]: value }));
+  const mark = (k: string) => () => setTouched((t) => ({ ...t, [k]: true }));
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setAttempted(true);
     if (!valid || submitting) return;
     setSubmitting(true);
     setError(null);
@@ -98,11 +117,13 @@ export default function InstitutionsPage() {
           <div className="inst-cell inst-cell--wide">
             <p className="inst-cell-label">The institution</p>
             <div className="inst-pair">
-              <label className="wl-field">
+              <label className={`wl-field${err("institutionType") ? " wl-field--invalid" : ""}`}>
                 <span>Institution type *</span>
                 <select
                   value={form.institutionType}
                   onChange={(e) => set("institutionType", e.target.value)}
+                  onBlur={mark("institutionType")}
+                  aria-invalid={!!err("institutionType")}
                   required
                 >
                   <option value="">Select type…</option>
@@ -110,17 +131,21 @@ export default function InstitutionsPage() {
                     <option key={t} value={t}>{t}</option>
                   ))}
                 </select>
+                {err("institutionType") && <em className="wl-err">{errors.institutionType}</em>}
               </label>
-              <label className="wl-field">
+              <label className={`wl-field${err("institutionName") ? " wl-field--invalid" : ""}`}>
                 <span>Institution name *</span>
                 <input
                   type="text"
                   required
                   value={form.institutionName}
                   onChange={(e) => set("institutionName", e.target.value)}
+                  onBlur={mark("institutionName")}
+                  aria-invalid={!!err("institutionName")}
                   autoComplete="organization"
                   placeholder="e.g. Delhi University"
                 />
+                {err("institutionName") && <em className="wl-err">{errors.institutionName}</em>}
               </label>
             </div>
           </div>
@@ -128,27 +153,33 @@ export default function InstitutionsPage() {
           <div className="inst-cell">
             <p className="inst-cell-label">You</p>
             <div className="inst-pair">
-              <label className="wl-field">
+              <label className={`wl-field${err("contactName") ? " wl-field--invalid" : ""}`}>
                 <span>Your name *</span>
                 <input
                   type="text"
                   required
                   value={form.contactName}
                   onChange={(e) => set("contactName", e.target.value)}
+                  onBlur={mark("contactName")}
+                  aria-invalid={!!err("contactName")}
                   autoComplete="name"
                   placeholder="e.g. Dr. Priya Menon"
                 />
+                {err("contactName") && <em className="wl-err">{errors.contactName}</em>}
               </label>
-              <label className="wl-field">
+              <label className={`wl-field${err("designation") ? " wl-field--invalid" : ""}`}>
                 <span>Designation *</span>
                 <input
                   type="text"
                   required
                   value={form.designation}
                   onChange={(e) => set("designation", e.target.value)}
+                  onBlur={mark("designation")}
+                  aria-invalid={!!err("designation")}
                   autoComplete="organization-title"
                   placeholder="e.g. Dean of Intl."
                 />
+                {err("designation") && <em className="wl-err">{errors.designation}</em>}
               </label>
             </div>
           </div>
@@ -156,16 +187,19 @@ export default function InstitutionsPage() {
           {/* ── Row 2 ── */}
           <div className="inst-cell">
             <p className="inst-cell-label">Where</p>
-            <label className="wl-field">
+            <label className={`wl-field${err("city") ? " wl-field--invalid" : ""}`}>
               <span>City *</span>
               <input
                 type="text"
                 required
                 value={form.city}
                 onChange={(e) => set("city", e.target.value)}
+                onBlur={mark("city")}
+                aria-invalid={!!err("city")}
                 autoComplete="address-level2"
                 placeholder="e.g. New Delhi"
               />
+              {err("city") && <em className="wl-err">{errors.city}</em>}
             </label>
             <div className="inst-pair">
               <label className="wl-field">
@@ -178,42 +212,51 @@ export default function InstitutionsPage() {
                   placeholder="Delhi"
                 />
               </label>
-              <label className="wl-field">
+              <label className={`wl-field${err("country") ? " wl-field--invalid" : ""}`}>
                 <span>Country *</span>
                 <input
                   type="text"
                   required
                   value={form.country}
                   onChange={(e) => set("country", e.target.value)}
+                  onBlur={mark("country")}
+                  aria-invalid={!!err("country")}
                   autoComplete="country-name"
                   placeholder="e.g. India"
                 />
+                {err("country") && <em className="wl-err">{errors.country}</em>}
               </label>
             </div>
           </div>
 
           <div className="inst-cell">
             <p className="inst-cell-label">Direct lines</p>
-            <label className="wl-field">
+            <label className={`wl-field${err("email") ? " wl-field--invalid" : ""}`}>
               <span>Email *</span>
               <input
                 type="email"
                 required
                 value={form.email}
                 onChange={(e) => set("email", e.target.value)}
+                onBlur={mark("email")}
+                aria-invalid={!!err("email")}
                 autoComplete="email"
                 placeholder="you@institution.edu"
               />
+              {err("email") && <em className="wl-err">{errors.email}</em>}
             </label>
-            <label className="wl-field">
+            <label className={`wl-field${err("mobile") ? " wl-field--invalid" : ""}`}>
               <span>Mobile no.</span>
               <input
                 type="tel"
                 value={form.mobile}
                 onChange={(e) => set("mobile", e.target.value)}
+                onBlur={mark("mobile")}
+                aria-invalid={!!err("mobile")}
                 autoComplete="tel"
                 placeholder="+91 98765 43210"
               />
+              {err("mobile") && <em className="wl-err">{errors.mobile}</em>}
             </label>
           </div>
 
@@ -223,6 +266,8 @@ export default function InstitutionsPage() {
               className="inst-select"
               value={form.lookingFor}
               onChange={(e) => set("lookingFor", e.target.value)}
+              onBlur={mark("lookingFor")}
+              aria-invalid={!!err("lookingFor")}
               required
             >
               <option value="">Select…</option>
@@ -237,18 +282,22 @@ export default function InstitutionsPage() {
                 <option key={o} value={o}>{o}</option>
               ))}
             </select>
+            {err("lookingFor") && <em className="wl-err">{errors.lookingFor}</em>}
           </div>
 
           {/* ── Row 3 ── */}
           <div className="inst-cell inst-cell--full">
-            <label className="wl-field">
+            <label className={`wl-field${err("message") ? " wl-field--invalid" : ""}`}>
               <span>Your query / message</span>
               <textarea
                 rows={2}
                 value={form.message}
                 onChange={(e) => set("message", e.target.value)}
+                onBlur={mark("message")}
+                aria-invalid={!!err("message")}
                 placeholder="Goals, timelines, or anything else…"
               />
+              {err("message") && <em className="wl-err">{errors.message}</em>}
             </label>
             {error && <p className="wl-error" role="alert">{error}</p>}
             <div className="inst-actions">
@@ -256,7 +305,7 @@ export default function InstitutionsPage() {
               <button
                 type="submit"
                 className="wl-btn wl-btn--next inst-submit"
-                disabled={!valid}
+                disabled={submitting}
                 suppressHydrationWarning
               >
                 {submitting ? "Sending…" : "Submit request →"}
