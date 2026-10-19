@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
+import gsap from "gsap";
 import "./HeroSection.css";
 
 // ─── 3D Sphere Ball Styles (Tactile Depth, Realistic Lighting & Specular Highlights) ───
@@ -209,6 +210,69 @@ export default function HeroSection() {
     } else {
       triggerGo();
     }
+  }, []);
+
+  // ─── Letter slide-through on hover (awake.-style attachLetterSwap) ───
+  // On entering a NEW char: slide it out along pointer direction, jump to the
+  // opposite side, spring back into its slot.
+  useEffect(() => {
+    const hero = heroRef.current;
+    if (!hero) return;
+    if (!window.matchMedia("(pointer: fine)").matches) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    // Wrap entrance chars in shells so the swap transform never fights the intro transition
+    const chs = hero.querySelectorAll<HTMLElement>(".cf-hero-ch");
+    if (chs.length && !hero.querySelector(".cf-hero-chw")) {
+      chs.forEach((ch) => {
+        const w = document.createElement("span");
+        w.className = "cf-hero-chw";
+        ch.replaceWith(w);
+        w.appendChild(ch);
+      });
+    }
+    const shells = Array.from(hero.querySelectorAll<HTMLElement>(".cf-hero-chw"));
+    if (!shells.length) return;
+    shells.forEach((w) => (w.dataset.swapChar = ""));
+
+    let lastX: number | null = null;
+    let dir = 1;
+    let active: HTMLElement | null = null;
+
+    const onMove = (e: PointerEvent) => {
+      if (e.pointerType === "touch") return;
+      if (lastX !== null && e.clientX !== lastX) {
+        dir = e.clientX > lastX ? 1 : -1;
+      }
+      lastX = e.clientX;
+      const hit = document.elementFromPoint(e.clientX, e.clientY) as HTMLElement | null;
+      const shell = hit?.closest<HTMLElement>("[data-swap-char]") ?? null;
+      if (!shell || shell === active) {
+        active = shell;
+        return;
+      }
+      active = shell;
+      gsap.killTweensOf(shell);
+      gsap
+        .timeline()
+        .to(shell, { xPercent: 100 * dir, duration: 0.18, ease: "power2.in" })
+        .set(shell, { xPercent: -100 * dir })
+        .to(shell, { xPercent: 0, duration: 0.5, ease: "back.out(1.4)" });
+    };
+    const onLeave = () => {
+      active = null;
+      lastX = null;
+    };
+
+    hero.addEventListener("pointermove", onMove);
+    hero.addEventListener("pointerleave", onLeave);
+    return () => {
+      hero.removeEventListener("pointermove", onMove);
+      hero.removeEventListener("pointerleave", onLeave);
+      gsap.killTweensOf(shells);
+      gsap.set(shells, { xPercent: 0 });
+      shells.forEach((w) => delete w.dataset.swapChar);
+    };
   }, []);
 
   // ─── Physics Simulation for Culture Flow Coins ───

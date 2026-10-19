@@ -236,6 +236,12 @@
 }
 
 /* Split Character Animation */
+.cf-hero-chw {
+  display: inline-block;
+  will-change: transform;
+  pointer-events: auto; /* re-enable hit-testing inside .cf-hero-main (pe:none) so chars can receive the swap hover */
+}
+
 .cf-hero-ch {
   display: inline-block;
   opacity: 0;
