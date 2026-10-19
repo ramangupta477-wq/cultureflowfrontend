@@ -311,11 +311,12 @@ export default function HeroSection() {
       const footRect = foot.getBoundingClientRect();
       // Floor line aligns precisely with the top edge of the footer divider
       floorY = footRect.top - heroRect.top;
-      // Mobile: floor drops to the "SUCCESS." line level so balls pile beside it
+      // Mobile: floor sits below the SUCCESS line so balls visibly bounce
+      // WE -> TURN -> AMBITION -> INTO -> SUCCESS, then pile under it
       if (W < 768) {
         const headline = hero.querySelector<HTMLElement>(".cf-hero-h1.right");
         if (headline) {
-          floorY = headline.getBoundingClientRect().bottom - heroRect.top + 4;
+          floorY = headline.getBoundingClientRect().bottom - heroRect.top + 30;
         }
       }
       // Ball base radius
