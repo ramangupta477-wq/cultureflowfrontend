@@ -422,6 +422,8 @@ export default function HeroSection() {
 
     // Slowly bring one new ball in, while one existing ball disappears
     const spawnSlowBall = () => {
+      // Mobile: re-measure bounce steps — consumed ones get rebuilt for the next cascade
+      if (W < 768 && obstacles.length === 0) updateObstacles();
       dismissOneCoin();
       spawnCoin();
     };
@@ -750,27 +752,44 @@ export default function HeroSection() {
     let rainTimer: NodeJS.Timeout | null = null;
     let cycleTimer: NodeJS.Timeout | null = null;
     let transitionTimer: NodeJS.Timeout | null = null;
+    let gateTimer: NodeJS.Timeout | null = null;
 
     if (reduceMotion) {
+      updateObstacles();
       for (let i = 0; i < 10; i++) spawnCoin();
       for (let i = 0; i < 400; i++) physicsStep(1 / 200);
     } else {
+      // Don't drop balls into an unmeasured hero — wait for text obstacles,
+      // otherwise the first batch tunnels straight through the headline (mobile)
       let spawnedCount = 0;
-      rainTimer = setInterval(() => {
-        spawnCoin();
-        spawnedCount++;
-        if (spawnedCount >= 10 && rainTimer) {
-          clearInterval(rainTimer);
-          rainTimer = null;
+      const minObstacles = W < 768 ? 3 : 4;
+      const startRain = () => {
+        rainTimer = setInterval(() => {
+          spawnCoin();
+          spawnedCount++;
+          if (spawnedCount >= 10 && rainTimer) {
+            clearInterval(rainTimer);
+            rainTimer = null;
 
-          // When all 10 come, wait 2.2s for them to settle, then slowly one new ball comes and any one disappears
-          transitionTimer = setTimeout(() => {
-            cycleTimer = setInterval(() => {
-              spawnSlowBall();
-            }, 3600);
-          }, 2200);
+            // When all 10 come, wait 2.2s for them to settle, then slowly one new ball comes and any one disappears
+            transitionTimer = setTimeout(() => {
+              cycleTimer = setInterval(() => {
+                spawnSlowBall();
+              }, 3600);
+            }, 2200);
+          }
+        }, 340);
+      };
+      const gateStart = Date.now();
+      const gate = () => {
+        updateObstacles();
+        if (obstacles.length >= minObstacles || Date.now() - gateStart > 4000) {
+          startRain();
+        } else {
+          gateTimer = setTimeout(gate, 150);
         }
-      }, 340);
+      };
+      gateTimer = setTimeout(gate, 120);
     }
 
     lastTime = performance.now();
@@ -780,6 +799,7 @@ export default function HeroSection() {
       cancelAnimationFrame(animId);
       clearTimeout(obsTimer1);
       clearTimeout(obsTimer2);
+      clearTimeout(gateTimer);
       if (rainTimer) clearInterval(rainTimer);
       if (transitionTimer) clearTimeout(transitionTimer);
       if (cycleTimer) clearInterval(cycleTimer);
