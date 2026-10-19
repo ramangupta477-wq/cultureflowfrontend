@@ -147,9 +147,21 @@
     white-space: normal;
   }
 
+  .rp-section {
+    padding: 32px 20px 28px;
+    border-radius: 18px;
+  }
+
   .rp-track-mask {
-    height: 220px;
+    height: 200px;
     width: 100%;
+  }
+
+  .rp-pill {
+    padding: 10px 26px;
+    min-height: 46px;
+    font-size: 0.95rem;
+    border-width: 2px;
   }
 
   .rp-next {

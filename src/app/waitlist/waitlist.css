@@ -704,4 +704,16 @@
     bottom: 14px;
     padding: 12px 20px;
   }
+
+  .wl-role-options {
+    flex-wrap: wrap;
+    row-gap: 8px;
+  }
+}
+
+@media (max-width: 640px) {
+  /* duplicates the navbar CTA and overlaps the role picker / form on phones */
+  .wl-float-cta {
+    display: none;
+  }
 }
