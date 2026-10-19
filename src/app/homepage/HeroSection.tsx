@@ -756,18 +756,20 @@ export default function HeroSection() {
 
     if (reduceMotion) {
       updateObstacles();
-      for (let i = 0; i < 10; i++) spawnCoin();
+      const rainMaxRM = W < 768 ? 5 : 10;
+      for (let i = 0; i < rainMaxRM; i++) spawnCoin();
       for (let i = 0; i < 400; i++) physicsStep(1 / 200);
     } else {
       // Don't drop balls into an unmeasured hero — wait for text obstacles,
       // otherwise the first batch tunnels straight through the headline (mobile)
       let spawnedCount = 0;
       const minObstacles = W < 768 ? 3 : 4;
+      const rainMax = W < 768 ? 5 : 10; // fewer balls on mobile — a 10-ball pile hides the SUCCESS text
       const startRain = () => {
         rainTimer = setInterval(() => {
           spawnCoin();
           spawnedCount++;
-          if (spawnedCount >= 10 && rainTimer) {
+          if (spawnedCount >= rainMax && rainTimer) {
             clearInterval(rainTimer);
             rainTimer = null;
 
