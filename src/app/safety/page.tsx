@@ -2,6 +2,14 @@
 
 import React, { useRef, useEffect, useState } from "react";
 import Link from "next/link";
+import {
+  ShieldCheck,
+  Clock,
+  Phone,
+  MapPin,
+  FileDown,
+  ArrowUpRight,
+} from "lucide-react";
 import Footer from "../homepage/Footer";
 import "./safety.css";
 
@@ -9,22 +17,22 @@ const PILLARS = [
   {
     num: "01",
     title: "1:15 chaperone ratio",
-    desc: "One trained chaperone for every fifteen students — on every flight, at every site, in every residence. Small enough that no one is anonymous.",
+    desc: "One trained chaperone for every fifteen students — on every flight, at every site, in every residence.",
   },
   {
     num: "02",
     title: "Vetted local partners",
-    desc: "Every local partner is vetted before we work with them: licences checked, references taken, sites visited. Vetting repeats before each cohort.",
+    desc: "Licences checked, references taken, sites visited — and the vetting repeats before every cohort.",
   },
   {
     num: "03",
     title: "Emergency medical insurance",
-    desc: "Every participant carries emergency medical insurance for the full duration of the program — arranged by us, documented before departure.",
+    desc: "Every participant is insured for the full duration of the program, arranged and documented by us.",
   },
   {
     num: "04",
     title: "Parental indemnity framework",
-    desc: "A plain-language written agreement that sets out responsibilities, consent and emergency authority. Parents read and sign it before any payment.",
+    desc: "A plain-language written agreement covering responsibilities, consent and emergency authority.",
   },
 ];
 
@@ -41,7 +49,6 @@ const DOCUMENTS = [
   { name: "Insurance Summary", note: "Cover, insurer and claims process · PDF" },
 ];
 
-/* Count-up hook: animates from 0 to `to` when `active` flips true */
 function useCountUp(to: number, active: boolean, duration = 1400) {
   const [val, setVal] = useState(0);
   useEffect(() => {
@@ -60,23 +67,11 @@ function useCountUp(to: number, active: boolean, duration = 1400) {
   return val;
 }
 
-function StatItem({
-  display,
-  countTo,
-  countSuffix = "",
-  active,
-  label,
-  pad,
-}: {
-  display?: string;
-  countTo?: number;
-  countSuffix?: string;
-  active: boolean;
-  label: string;
-  pad?: number;
+function Stat({ display, countTo, suffix = "", pad, label, active }: {
+  display?: string; countTo?: number; suffix?: string; pad?: number; label: string; active: boolean;
 }) {
   const v = useCountUp(countTo ?? 0, active);
-  const num = countTo === undefined ? display : String(v).padStart(pad ?? 0, "0") + countSuffix;
+  const num = countTo === undefined ? display : String(v).padStart(pad ?? 0, "0") + suffix;
   return (
     <div className={`sf-stat sf-reveal ${active ? "sf-reveal--in" : ""}`}>
       <span className="sf-stat-num">{num}</span>
@@ -90,7 +85,6 @@ export default function SafetyPage() {
   const statsRef = useRef<HTMLDivElement>(null);
   const [statsActive, setStatsActive] = useState(false);
 
-  /* IntersectionObserver: add .sf-reveal--in (with stagger delay) */
   useEffect(() => {
     const root = rootRef.current;
     if (!root) return;
@@ -100,19 +94,17 @@ export default function SafetyPage() {
         entries.forEach((e) => {
           if (!e.isIntersecting) return;
           const el = e.target as HTMLElement;
-          const delay = el.style.getPropertyValue("--sf-d") || "0ms";
-          el.style.transitionDelay = delay;
+          el.style.transitionDelay = el.style.getPropertyValue("--sf-d") || "0ms";
           el.classList.add("sf-reveal--in");
           io.unobserve(el);
         });
       },
-      { threshold: 0.15 }
+      { threshold: 0.12 }
     );
     els.forEach((el) => io.observe(el));
     return () => io.disconnect();
   }, []);
 
-  /* Stats trigger separately so the count-up runs once visible */
   useEffect(() => {
     const el = statsRef.current;
     if (!el) return;
@@ -132,144 +124,158 @@ export default function SafetyPage() {
   return (
     <div className="safety-page" ref={rootRef}>
 
-      {/* ═══ HERO — headline left, flight-path diagram right ═══ */}
-      <section className="sf-hero">
-        <div className="sf-hero-grid">
-          <div>
-            <p className="sf-eyebrow sf-reveal">
-              <span className="sf-eyebrow-dot" aria-hidden />
-              SAFETY &amp; TRUST
+      {/* ═══ WHITE MEGA-CARD: about pill + headline + bento row + stats ═══ */}
+      <section className="sf-card sf-card--hero">
+        <div className="sf-card-head">
+          <span className="sf-pill sf-reveal">Safety &amp; Trust</span>
+          <h1 className="sf-hero-title sf-reveal" style={{ "--sf-d": "80ms" } as React.CSSProperties}>
+            From day one, every program has run on one belief —
+            <span className="sf-hero-strong"> safety is a system, </span>
+            <span className="sf-hero-dim">not a promise whispered at the airport.</span>
+          </h1>
+        </div>
+
+        {/* Bento row */}
+        <div className="sf-bento">
+          {/* A — system card */}
+          <div className="sf-cell sf-cell--info sf-reveal" style={{ "--sf-d": "100ms" } as React.CSSProperties}>
+            <span className="sf-cell-icon" aria-hidden><ShieldCheck size={22} strokeWidth={1.6} /></span>
+            <p className="sf-cell-text">
+              Ratios, vetting, insurance and a written protocol — every claim
+              on this page has a fact or a document behind it.
             </p>
-            <h1 className="sf-hero-title sf-reveal" style={{ "--sf-d": "80ms" } as React.CSSProperties}>
-              Safety is a <em>system,</em>
-              <br />
-              not a promise.
-            </h1>
-            <p className="sf-hero-sub sf-reveal" style={{ "--sf-d": "160ms" } as React.CSSProperties}>
-              Anyone can say a program is safe. We would rather show you the
-              machinery behind that claim — ratios, vetting, insurance, a
-              written protocol and named people who answer for all of it.
-              Every statement on this page has a fact or a document behind it.
-            </p>
+            <div className="sf-micro">
+              <span className="sf-micro-item"><Clock size={14} strokeWidth={1.7} /> 1:15 chaperone</span>
+              <span className="sf-micro-item"><Phone size={14} strokeWidth={1.7} /> 24×7 hotline</span>
+              <span className="sf-micro-item"><ShieldCheck size={14} strokeWidth={1.7} /> 100% insured</span>
+            </div>
+            <div className="sf-cell-cta">
+              <a href="#ask" className="sf-btn-dark">Ask a question</a>
+              <a href="#ask" className="sf-btn-round" aria-label="Ask a question">
+                <ArrowUpRight size={16} strokeWidth={1.8} />
+              </a>
+            </div>
           </div>
 
-          {/* Line-drawn route diagram: New Delhi → London / Munich / Singapore */}
-          <div className="sf-hero-map sf-reveal" style={{ "--sf-d": "300ms" } as React.CSSProperties}>
-            <svg viewBox="0 0 460 320" className="sf-route-svg" aria-hidden>
-              {/* world-dot backdrop */}
-              <circle cx="60" cy="60" r="1.5" className="sf-dot" />
-              <circle cx="420" cy="40" r="1.5" className="sf-dot" />
-              <circle cx="400" cy="290" r="1.5" className="sf-dot" />
-              <circle cx="30" cy="260" r="1.5" className="sf-dot" />
-              <circle cx="230" cy="20" r="1.5" className="sf-dot" />
-              <circle cx="440" cy="180" r="1.5" className="sf-dot" />
+          {/* B — photo card */}
+          <div className="sf-cell sf-cell--photo sf-reveal" style={{ "--sf-d": "200ms" } as React.CSSProperties}>
+            <img src="/images/about/counseling.jpg" alt="Culture Flow counselor with a student" className="sf-cell-img" />
+            <span className="sf-cell-photo-label">Program care, day one</span>
+          </div>
 
-              {/* routes out of New Delhi */}
-              <path className="sf-route" d="M230 160 C 300 120, 360 70, 402 46" />
-              <path className="sf-route" d="M230 160 C 300 150, 350 130, 398 106" style={{ animationDelay: "0.25s" }} />
-              <path className="sf-route" d="M230 160 C 290 200, 340 240, 392 276" style={{ animationDelay: "0.5s" }} />
-
-              {/* origin + destination nodes */}
-              <circle className="sf-node sf-node--origin" cx="230" cy="160" r="7" />
-              <circle className="sf-node" cx="402" cy="46" r="5" style={{ animationDelay: "1.1s" }} />
-              <circle className="sf-node" cx="398" cy="106" r="5" style={{ animationDelay: "1.35s" }} />
-              <circle className="sf-node" cx="392" cy="276" r="5" style={{ animationDelay: "1.6s" }} />
-
-              {/* labels */}
-              <text x="212" y="188" className="sf-map-label">NEW DELHI</text>
-              <text x="356" y="38" className="sf-map-label">LONDON</text>
-              <text x="340" y="98" className="sf-map-label">MUNICH</text>
-              <text x="330" y="296" className="sf-map-label">SINGAPORE</text>
-
-              {/* centre pulse ring */}
-              <circle className="sf-pulse-ring" cx="230" cy="160" r="7" />
-            </svg>
+          {/* C — collage card */}
+          <div className="sf-cell sf-cell--collage sf-reveal" style={{ "--sf-d": "300ms" } as React.CSSProperties}>
+            <div className="sf-collage" aria-hidden>
+              <img src="/images/about/campus.jpg" alt="" className="sf-pola sf-pola--1" />
+              <img src="/images/about/partnership.jpg" alt="" className="sf-pola sf-pola--2" />
+              <img src="/images/about/editorial.jpg" alt="" className="sf-pola sf-pola--3" />
+            </div>
+            <p className="sf-cell-text">
+              Moments from programs that ran under full supervision — every
+              stop chaperoned, every evening accounted for.
+            </p>
           </div>
         </div>
 
-        {/* Stat strip */}
+        {/* Stats strip */}
         <div className="sf-stats" ref={statsRef}>
-          <StatItem display="1:15" active={statsActive} label="CHAPERONE RATIO" />
-          <StatItem display="24×7" active={statsActive} label="EMERGENCY CONTACT" />
-          <StatItem countTo={100} countSuffix="%" active={statsActive} label="MEDICALLY INSURED" />
-          <StatItem countTo={4} pad={2} active={statsActive} label="VETTING STEPS" />
+          <Stat display="1:15" active={statsActive} label="chaperone ratio" />
+          <Stat display="24×7" active={statsActive} label="emergency line" />
+          <Stat countTo={100} suffix="%" active={statsActive} label="medically insured" />
+          <Stat countTo={15} suffix=" min" active={statsActive} label="incident response start" />
         </div>
       </section>
 
-      {/* ═══ FOUR PILLARS — staggered, numbers ring-drawn ═══ */}
-      <section className="sf-pillars">
-        <h2 className="sf-section-title sf-reveal">
-          Four pillars that <em>hold it up.</em>
-        </h2>
+      {/* ═══ WHY PARENTS CHOOSE US — bento with map, stacked cards, tall photo ═══ */}
+      <section className="sf-why">
+        <div className="sf-why-head">
+          <span className="sf-pill sf-reveal">Why it&rsquo;s safe</span>
+          <div className="sf-why-title-row">
+            <h2 className="sf-why-title sf-reveal" style={{ "--sf-d": "80ms" } as React.CSSProperties}>
+              Why parents<br />choose us
+            </h2>
+            <p className="sf-why-sub sf-reveal" style={{ "--sf-d": "160ms" } as React.CSSProperties}>
+              Every departure is built on supervision you can verify and people
+              you can name.
+            </p>
+          </div>
+        </div>
+
+        <div className="sf-why-grid">
+          {/* dotted map card */}
+          <div className="sf-cell sf-cell--map sf-reveal">
+            <img src="/homepage_assets/world.svg" alt="" className="sf-world" aria-hidden />
+            <div>
+              <h3 className="sf-cell-title">Local expertise</h3>
+              <p className="sf-cell-text">
+                On-ground teams in New Delhi, London, Munich and Singapore —
+                people who know the campuses, clinics and consulates.
+              </p>
+            </div>
+          </div>
+
+          {/* stacked cards */}
+          <div className="sf-why-stack">
+            <div className="sf-cell sf-cell--stack sf-reveal" style={{ "--sf-d": "100ms" } as React.CSSProperties}>
+              <h3 className="sf-cell-title">Vetted local partners</h3>
+              <p className="sf-cell-text">
+                Licensed, referenced and site-visited before anyone signs with us.
+              </p>
+            </div>
+            <div className="sf-cell sf-cell--stack sf-reveal" style={{ "--sf-d": "180ms" } as React.CSSProperties}>
+              <h3 className="sf-cell-title">Named accountability</h3>
+              <div className="sf-avatars" aria-hidden>
+                <span className="sf-avatar sf-avatar--1">AH</span>
+                <span className="sf-avatar sf-avatar--2">RS</span>
+                <span className="sf-avatar sf-avatar--3">MJ</span>
+              </div>
+              <p className="sf-cell-text">
+                A founder and program lead who answer parent calls themselves.
+              </p>
+            </div>
+          </div>
+
+          {/* tall photo card */}
+          <div className="sf-cell sf-cell--tall sf-reveal" style={{ "--sf-d": "260ms" } as React.CSSProperties}>
+            <img src="/images/about/campus.jpg" alt="Students on campus" className="sf-cell-img" />
+            <div className="sf-tall-overlay">
+              <p>See how a program day is supervised — from pickup to lights-out.</p>
+              <span className="sf-btn-round sf-btn-round--light" aria-hidden>
+                <ArrowUpRight size={16} strokeWidth={1.8} />
+              </span>
+            </div>
+          </div>
+        </div>
+
+        {/* Four pillars — 2×2 mini bento */}
         <div className="sf-pillar-grid">
           {PILLARS.map((p, i) => (
-            <article
-              key={p.num}
-              className="sf-pillar sf-reveal"
-              style={{ "--sf-d": `${i * 120}ms` } as React.CSSProperties}
-            >
-              <span className="sf-pillar-badge" aria-hidden>
-                <svg viewBox="0 0 64 64">
-                  <circle className="sf-badge-ring" cx="32" cy="32" r="30" />
-                </svg>
+            <article key={p.num} className="sf-pillar sf-reveal" style={{ "--sf-d": `${i * 100}ms` } as React.CSSProperties}>
+              <div className="sf-pillar-top">
                 <span className="sf-pillar-num">{p.num}</span>
-              </span>
-              <h3 className="sf-pillar-title">{p.title}</h3>
-              <p className="sf-pillar-desc">{p.desc}</p>
+                <MapPin size={14} strokeWidth={1.7} className="sf-pillar-ico" aria-hidden />
+              </div>
+              <h3 className="sf-cell-title">{p.title}</h3>
+              <p className="sf-cell-text">{p.desc}</p>
             </article>
           ))}
         </div>
       </section>
 
-      {/* ═══ BEFORE / DURING — rope timeline with nodes ═══ */}
-      <section className="sf-phases">
-        <span className="sf-rope" aria-hidden>
-          <span className="sf-rope-line" />
-        </span>
-        <div className="sf-phase sf-reveal">
-          <span className="sf-phase-node" aria-hidden />
-          <p className="sf-phase-eyebrow">BEFORE DEPARTURE</p>
-          <h2 className="sf-phase-title">Nothing leaves to chance at the airport.</h2>
-          <ul className="sf-checklist">
-            <li>Parent briefing session — in person or on call, your choice</li>
-            <li>Medical and emergency contact forms completed for every student</li>
-            <li>Travel documents checklist signed off together, not assumed</li>
-          </ul>
-        </div>
-        <div className="sf-phase sf-reveal" style={{ "--sf-d": "150ms" } as React.CSSProperties}>
-          <span className="sf-phase-node" aria-hidden />
-          <p className="sf-phase-eyebrow">DURING THE PROGRAM</p>
-          <h2 className="sf-phase-title">You hear from us before you have to ask.</h2>
-          <ul className="sf-checklist">
-            <li>24×7 emergency contact, answered by a person — never a bot</li>
-            <li>Daily check-ins with every student group</li>
-            <li>Parents receive scheduled updates, so silence never means worry</li>
-          </ul>
-        </div>
-      </section>
-
-      {/* ═══ EMERGENCY PROTOCOL — rows draw in ═══ */}
+      {/* ═══ PROTOCOL — numbered cards ═══ */}
       <section className="sf-protocol">
-        <h2 className="sf-section-title sf-reveal">
-          If something goes wrong, <em>here is exactly what happens.</em>
-        </h2>
-        <div className="sf-protocol-list">
+        <div className="sf-why-head">
+          <span className="sf-pill sf-reveal">If something goes wrong</span>
+          <h2 className="sf-why-title sf-reveal" style={{ "--sf-d": "80ms" } as React.CSSProperties}>
+            Here is exactly<br />what happens
+          </h2>
+        </div>
+        <div className="sf-protocol-grid">
           {PROTOCOL.map((s, i) => (
-            <div
-              key={s.num}
-              className="sf-protocol-row sf-reveal"
-              style={{ "--sf-d": `${i * 130}ms` } as React.CSSProperties}
-            >
-              <span className="sf-protocol-badge" aria-hidden>
-                <svg viewBox="0 0 56 56">
-                  <circle className="sf-badge-ring" cx="28" cy="28" r="26" />
-                </svg>
-                <span className="sf-protocol-num">{s.num}</span>
-              </span>
-              <div>
-                <h3 className="sf-protocol-title">{s.title}</h3>
-                <p className="sf-protocol-desc">{s.desc}</p>
-              </div>
+            <div key={s.num} className="sf-protocol-card sf-reveal" style={{ "--sf-d": `${i * 110}ms` } as React.CSSProperties}>
+              <span className="sf-protocol-num">{s.num}</span>
+              <h3 className="sf-cell-title">{s.title}</h3>
+              <p className="sf-cell-text">{s.desc}</p>
             </div>
           ))}
         </div>
@@ -277,21 +283,23 @@ export default function SafetyPage() {
 
       {/* ═══ DOCUMENTS ═══ */}
       <section className="sf-docs">
-        <h2 className="sf-section-title sf-reveal">
-          Read the paperwork <em>before</em> we ask you to sign anything.
-        </h2>
-        <p className="sf-docs-note sf-reveal" style={{ "--sf-d": "90ms" } as React.CSSProperties}>
-          No form, no email gate — these documents are free to read.
-        </p>
-        <div className="sf-doc-list">
+        <div className="sf-why-head">
+          <span className="sf-pill sf-reveal">Documents</span>
+          <p className="sf-docs-note sf-reveal" style={{ "--sf-d": "80ms" } as React.CSSProperties}>
+            No form, no email gate — read the paperwork before we ask you to
+            sign anything.
+          </p>
+        </div>
+        <div className="sf-doc-grid">
           {DOCUMENTS.map((d, i) => (
             <a
               key={d.name}
               href="#"
-              className="sf-doc-row sf-reveal"
-              style={{ "--sf-d": `${i * 110}ms` } as React.CSSProperties}
+              className="sf-doc-card sf-reveal"
+              style={{ "--sf-d": `${i * 100}ms` } as React.CSSProperties}
               onClick={(e) => e.preventDefault()}
             >
+              <span className="sf-doc-ico" aria-hidden><FileDown size={20} strokeWidth={1.6} /></span>
               <span className="sf-doc-name">{d.name}</span>
               <span className="sf-doc-note">{d.note}</span>
               <span className="sf-doc-tag">AT LAUNCH</span>
@@ -302,42 +310,35 @@ export default function SafetyPage() {
 
       {/* ═══ ACCOUNTABILITY ═══ */}
       <section className="sf-account">
-        <div className="sf-account-grid">
-          <img
-            src="/images/about/founder_vision.jpg"
-            alt="Culture Flow founder"
-            className="sf-account-img sf-reveal"
-          />
-          <div>
-            <p className="sf-phase-eyebrow sf-reveal">WHO IS ACCOUNTABLE</p>
-            <h2 className="sf-section-title sf-account-title sf-reveal" style={{ "--sf-d": "90ms" } as React.CSSProperties}>
-              A named person, <em>not a support inbox.</em>
-            </h2>
-            <p className="sf-account-copy sf-reveal" style={{ "--sf-d": "180ms" } as React.CSSProperties}>
+        <div className="sf-account-card sf-reveal">
+          <img src="/images/about/founder_vision.jpg" alt="Culture Flow founder" className="sf-account-img" />
+          <div className="sf-account-body">
+            <span className="sf-pill">Who is accountable</span>
+            <h2 className="sf-why-title sf-account-title">A named person,<br />not a support inbox.</h2>
+            <p className="sf-cell-text">
               Afjal Hussein — Founder &amp; Program Lead. The same person who
               designs the pathway answers your safety questions. Program
               operations run under Culture Flow Education Pvt. Ltd.,
               Connaught Place, New Delhi 110001.
             </p>
-            <Link href="/about-us" className="sf-account-link sf-reveal" style={{ "--sf-d": "260ms" } as React.CSSProperties}>
-              Meet the team →
+            <Link href="/about-us" className="sf-account-link">
+              Meet the team <ArrowUpRight size={15} strokeWidth={1.8} />
             </Link>
           </div>
         </div>
       </section>
 
       {/* ═══ ASK US ANYTHING ═══ */}
-      <section className="sf-ask">
-        <h2 className="sf-section-title sf-reveal">Ask us anything.</h2>
+      <section className="sf-ask" id="ask">
+        <h2 className="sf-why-title sf-reveal">Ask us anything.</h2>
         <p className="sf-ask-sub sf-reveal" style={{ "--sf-d": "90ms" } as React.CSSProperties}>
-          Direct questions from parents get direct answers — usually within
-          the hour.
+          Direct questions from parents get direct answers — usually within the hour.
         </p>
         <div className="sf-ask-actions sf-reveal" style={{ "--sf-d": "180ms" } as React.CSSProperties}>
-          <a href="https://wa.me/917123445690" className="sf-ask-pill sf-ask-pill--solid">
-            WhatsApp us <span aria-hidden>→</span>
+          <a href="https://wa.me/917123445690" className="sf-btn-dark sf-btn-dark--lg">
+            WhatsApp us
           </a>
-          <a href="mailto:hello@cultureflow.co.in" className="sf-ask-pill">
+          <a href="mailto:hello@cultureflow.co.in" className="sf-ask-mail">
             hello@cultureflow.co.in
           </a>
         </div>
