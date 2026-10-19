@@ -799,7 +799,7 @@ export default function HeroSection() {
       cancelAnimationFrame(animId);
       clearTimeout(obsTimer1);
       clearTimeout(obsTimer2);
-      clearTimeout(gateTimer);
+      if (gateTimer) clearTimeout(gateTimer);
       if (rainTimer) clearInterval(rainTimer);
       if (transitionTimer) clearTimeout(transitionTimer);
       if (cycleTimer) clearInterval(cycleTimer);
