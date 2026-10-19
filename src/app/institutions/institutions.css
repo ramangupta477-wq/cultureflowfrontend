@@ -1,10 +1,12 @@
-/* ═══ Institutions onboarding page ═══ */
+/* ═══ Institutions onboarding — bento form ═══ */
 .inst-container {
-  max-width: 860px;
+  max-width: 1180px;
+  width: 100%;
+  display: block; /* waitlist.css ships wl-container as a 2-col grid — we stack header above the bento instead */
 }
 
 .inst-head {
-  margin-bottom: clamp(28px, 5vh, 48px);
+  margin-bottom: 14px;
 }
 
 .inst-kicker {
@@ -12,16 +14,16 @@
   font-weight: 600;
   letter-spacing: 0.22em;
   color: var(--color-gold, #C89C66);
-  margin: 0 0 14px;
+  margin: 0 0 10px;
 }
 
 .inst-title {
   font-family: var(--font-heading, "DM Serif Display", Georgia, serif);
   font-weight: 400;
-  font-size: clamp(2.4rem, 5vw, 4rem);
+  font-size: clamp(2rem, 3.2vw, 2.75rem);
   line-height: 1.04;
   color: var(--color-navy, #0B0B0B);
-  margin: 0 0 16px;
+  margin: 0 0 10px;
 }
 
 .inst-title em {
@@ -31,41 +33,156 @@
 
 .inst-sub {
   font-family: var(--font-body, "Inter", sans-serif);
-  font-size: clamp(0.98rem, 1.3vw, 1.12rem);
-  line-height: 1.6;
+  font-size: clamp(0.95rem, 1.2vw, 1.05rem);
+  line-height: 1.55;
   color: rgba(11, 11, 11, 0.66);
-  max-width: 560px;
+  max-width: 620px;
   margin: 0;
 }
 
-.wl-form textarea {
+/* ── Bento grid ── */
+.inst-bento {
+  display: grid;
+  grid-template-columns: 1.35fr 1fr 0.85fr;
+  gap: 12px;
+  align-items: stretch;
+}
+
+.inst-cell {
+  background: var(--color-warm-white, #F1F0EE);
+  border: 1px solid rgba(11, 11, 11, 0.07);
+  border-radius: 22px;
+  padding: 16px 18px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.inst-cell--wide {
+  grid-column: span 2;
+}
+
+.inst-cell--full {
+  grid-column: 1 / -1;
+}
+
+.inst-cell--accent {
+  background: var(--color-accent, #FFCD00);
+  border-color: rgba(11, 11, 11, 0.12);
+}
+
+.inst-cell-label {
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(11, 11, 11, 0.45);
+  margin: 0;
+}
+
+/* compact fields inside cells */
+.inst-bento .wl-field {
+  margin: 0;
   width: 100%;
-  padding: 13px 18px;
+  display: flex;
+  flex-direction: column;
+}
+
+.inst-bento .wl-field input,
+.inst-bento .wl-field select,
+.inst-bento .wl-field textarea,
+.inst-cell--full .wl-field textarea {
+  width: 100% !important;
+  box-sizing: border-box;
+  min-width: 0;
+}
+
+.inst-bento .wl-field span {
+  font-size: 0.74rem;
+  margin-bottom: 5px;
+}
+
+.inst-bento .wl-field input,
+.inst-bento .wl-field select {
+  padding: 10px 14px;
+  font-size: 0.9rem;
+  border-radius: 14px;
+  background: rgba(253, 252, 244, 0.85);
+}
+
+.inst-pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.inst-cell--accent .inst-cell-label {
+  color: rgba(11, 11, 11, 0.55);
+}
+
+.inst-select {
+  width: 100%;
+  padding: 12px 14px;
   font-family: var(--font-body), sans-serif;
   font-size: 0.95rem;
-  line-height: 1.55;
   color: var(--color-navy, #0B0B0B);
-  background: rgba(200, 156, 102, 0.12);
-  border: 1px solid rgba(0, 34, 68, 0.18);
-  border-radius: 20px;
+  background: rgba(253, 252, 244, 0.9);
+  border: 1px solid rgba(11, 11, 11, 0.14);
+  border-radius: 14px;
+  outline: none;
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+}
+
+.inst-select:focus {
+  border-color: var(--color-navy, #0B0B0B);
+}
+
+/* message + submit row */
+.inst-cell--full .wl-field textarea {
+  width: 100%;
+  padding: 11px 15px;
+  font-family: var(--font-body), sans-serif;
+  font-size: 0.92rem;
+  line-height: 1.5;
+  color: var(--color-navy, #0B0B0B);
+  background: rgba(253, 252, 244, 0.85);
+  border: 1px solid rgba(11, 11, 11, 0.1);
+  border-radius: 14px;
   outline: none;
   resize: vertical;
-  transition: border-color 0.2s ease, background-color 0.2s ease;
+  transition: border-color 0.2s ease;
 }
 
-.wl-form textarea:focus {
+.inst-cell--full .wl-field textarea:focus {
   border-color: var(--color-gold, #C89C66);
-  background: rgba(200, 156, 102, 0.18);
 }
 
-.wl-form textarea::placeholder {
+.inst-cell--full .wl-field textarea::placeholder {
   color: rgba(11, 11, 11, 0.35);
 }
 
-.inst-submit {
-  margin-top: 10px;
+.inst-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 2px;
 }
 
+.inst-note {
+  font-family: var(--font-body), sans-serif;
+  font-size: 0.8rem;
+  color: rgba(11, 11, 11, 0.45);
+}
+
+.inst-submit {
+  margin: 0;
+  padding: 12px 26px;
+  font-size: 0.95rem;
+}
+
+/* success card (unchanged usage) */
 .inst-card {
   width: min(640px, 92vw);
   margin: auto;
@@ -79,8 +196,32 @@
   margin-top: 24px;
 }
 
+/* ── Responsive ── */
+@media (max-width: 960px) {
+  .inst-bento {
+    grid-template-columns: 1fr 1fr;
+  }
+  .inst-cell--wide {
+    grid-column: 1 / -1;
+  }
+}
+
 @media (max-width: 640px) {
-  .wl-form textarea {
-    border-radius: 14px;
+  .inst-bento {
+    grid-template-columns: 1fr;
+  }
+  .inst-cell--wide,
+  .inst-cell--full {
+    grid-column: auto;
+  }
+  .inst-pair {
+    grid-template-columns: 1fr;
+  }
+  .inst-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .inst-submit {
+    width: 100%;
   }
 }
