@@ -536,7 +536,7 @@ export default function WaitlistPage() {
               )}
               {form.role === "corporate" && (
                 <label className="wl-field">
-                  <span>Company or employer</span>
+                  <span>Company / organisation name *</span>
                   <input
                     type="text"
                     value={form.college}
