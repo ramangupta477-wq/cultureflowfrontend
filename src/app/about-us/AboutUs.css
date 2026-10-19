@@ -66,12 +66,14 @@
   border: 1px solid rgba(11, 11, 11, 0.1);
   color: var(--color-obraz-black, #0B0B0B);
   box-shadow: 0 8px 22px rgba(11, 11, 11, 0.07);
+  pointer-events: none;
+  z-index: 1;
 }
 
-.au-chip--tl { left: clamp(12px, 12vw, 200px); top: clamp(60px, 10vh, 120px); transform: rotate(-8deg); }
-.au-chip--tr { right: clamp(12px, 12vw, 210px); top: clamp(48px, 9vh, 108px); transform: rotate(7deg); background: var(--color-yellow, #FFCD00); border-color: transparent; }
-.au-chip--bl { left: clamp(8px, 9vw, 160px); top: clamp(160px, 26vh, 280px); transform: rotate(6deg); }
-.au-chip--br { right: clamp(8px, 9vw, 160px); top: clamp(150px, 25vh, 265px); transform: rotate(-6deg); background: var(--color-yellow, #FFCD00); border-color: transparent; }
+.au-chip--tl { left: clamp(10px, 3vw, 64px); top: clamp(40px, 7vh, 88px); transform: rotate(-8deg); }
+.au-chip--tr { right: clamp(10px, 3vw, 64px); top: clamp(110px, 16vh, 190px); transform: rotate(7deg); background: var(--color-yellow, #FFCD00); border-color: transparent; }
+.au-chip--bl { left: clamp(14px, 4.5vw, 90px); top: clamp(240px, 34vh, 380px); transform: rotate(6deg); }
+.au-chip--br { right: clamp(14px, 4.5vw, 90px); top: clamp(230px, 32vh, 360px); transform: rotate(-6deg); background: var(--color-yellow, #FFCD00); border-color: transparent; }
 
 .au-hero-row {
   display: flex;
