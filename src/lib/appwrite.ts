@@ -9,9 +9,34 @@ const databases = new Databases(client);
 
 export const WAITLIST_DB_ID = "cultureflow";
 export const WAITLIST_COLLECTION_ID = "waitlist";
+export const INSTITUTION_COLLECTION_ID = "institution_inquiries";
 
 export type WaitlistRole = "student" | "parent" | "institution";
 export type TrackId = "tech" | "sustainability" | "cultural";
+
+export interface InstitutionInquiry {
+  institutionType: string;
+  institutionName: string;
+  city: string;
+  state: string;
+  country: string;
+  contactName: string;
+  designation: string;
+  email: string;
+  mobile: string;
+  lookingFor: string;
+  message: string;
+}
+
+/** Institutional onboarding inquiry — stored as a raw document; anonymous create. */
+export function saveInstitutionInquiry(data: InstitutionInquiry) {
+  return databases.createDocument(
+    WAITLIST_DB_ID,
+    INSTITUTION_COLLECTION_ID,
+    ID.unique(),
+    data
+  );
+}
 
 export interface WaitlistEntry {
   fullName: string;

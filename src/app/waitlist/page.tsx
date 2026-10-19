@@ -318,9 +318,6 @@ export default function WaitlistPage() {
     const roleMap: Record<string, WaitlistRole> = {
       Student: "student",
       Parent: "parent",
-      Institution: "institution",
-      Researcher: "student",
-      Educator: "institution",
     };
     set("role", roleMap[role] ?? "student");
     setStep(1);
@@ -387,7 +384,6 @@ export default function WaitlistPage() {
                     [
                       ["student", "Student"],
                       ["parent", "Parent"],
-                      ["institution", "Institution"],
                     ] as const
                   ).map(([value, label]) => (
                     <label key={value} className="wl-radio">
@@ -490,19 +486,6 @@ export default function WaitlistPage() {
                     </select>
                   </label>
                 </div>
-              )}
-
-              {form.role === "institution" && (
-                <label className="wl-field">
-                  <span>Institution / organisation</span>
-                  <input
-                    type="text"
-                    value={form.college}
-                    onChange={(e) => set("college", e.target.value)}
-                    autoComplete="organization"
-                    placeholder="e.g. Global Education Trust"
-                  />
-                </label>
               )}
 
               <fieldset className="wl-field wl-tracks">
