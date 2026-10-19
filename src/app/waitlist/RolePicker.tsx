@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState, useCallback, useRef, useEffect } from "react";
-import Link from "next/link";
 import "./role-picker.css";
 
 const ROLES = ["Student", "Parent"] as const;
@@ -103,10 +102,6 @@ export default function RolePicker({ onSelect }: RolePickerProps) {
         >
           next <span aria-hidden>→</span>
         </button>
-
-        <Link href="/institutions" className="rp-inst-link">
-          Institution or university? Onboard with us <span aria-hidden>→</span>
-        </Link>
       </div>
     </section>
   );

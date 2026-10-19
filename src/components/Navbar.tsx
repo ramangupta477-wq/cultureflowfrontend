@@ -102,6 +102,12 @@ export default function Navbar({ pageLabel, logoTheme = "auto" }: NavbarProps) {
             >
               SAFETY & TRUST
             </Link>
+            <Link
+              href="/institutions"
+              className={`cf-nav-link ${pathname.startsWith("/institutions") ? "cf-nav-link--active" : ""}`}
+            >
+              ONBOARD WITH US
+            </Link>
           </nav>
 
           {/* Pill Action Button */}
@@ -161,6 +167,14 @@ export default function Navbar({ pageLabel, logoTheme = "auto" }: NavbarProps) {
             >
               <span className="cf-mobile-link-num">04</span>
               <span>SAFETY & TRUST</span>
+            </Link>
+            <Link
+              href="/institutions"
+              onClick={() => setMobileMenuOpen(false)}
+              className={`cf-mobile-link ${pathname.startsWith("/institutions") ? "cf-mobile-link--active" : ""}`}
+            >
+              <span className="cf-mobile-link-num">05</span>
+              <span>ONBOARD WITH US</span>
             </Link>
           </div>
 
