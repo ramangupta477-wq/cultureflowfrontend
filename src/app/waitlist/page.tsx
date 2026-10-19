@@ -257,6 +257,16 @@ export default function WaitlistPage() {
     }
   }
 
+  const handleRoleSelect = useCallback((role: string) => {
+    const roleMap: Record<string, WaitlistRole> = {
+      Student: "student",
+      Parent: "parent",
+      "Corporate Employee": "corporate",
+    };
+    set("role", roleMap[role] ?? "student");
+    setStep(1);
+  }, []);
+
   if (done) {
     const trackLabel = form.tracks.length > 0
       ? (TRACKS.find((t) => t.id === form.tracks[0])?.label.toUpperCase() + " TRACK")
@@ -334,16 +344,6 @@ export default function WaitlistPage() {
       </main>
     );
   }
-
-  const handleRoleSelect = useCallback((role: string) => {
-    const roleMap: Record<string, WaitlistRole> = {
-      Student: "student",
-      Parent: "parent",
-      "Corporate Employee": "corporate",
-    };
-    set("role", roleMap[role] ?? "student");
-    setStep(1);
-  }, []);
 
   return (
     <main className="wl-page">
