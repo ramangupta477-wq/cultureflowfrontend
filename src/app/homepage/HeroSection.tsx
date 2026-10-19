@@ -471,6 +471,8 @@ export default function HeroSection() {
         }
 
         // ─── Solid Text Obstacles Collision (Balls bounce off text words) ───
+        // Mobile: each line drops away after its first bounce — cascade continues
+        const consumed: Obstacle[] = [];
         for (const obs of obstacles) {
           const cx = Math.max(obs.left, Math.min(c.x, obs.right));
           const cy = Math.max(obs.top, Math.min(c.y, obs.bottom));
@@ -493,6 +495,10 @@ export default function HeroSection() {
               const impulse = -(1 + REST * 1.15) * vn;
               c.vx += impulse * nx;
               c.vy += impulse * ny;
+              if (W < 768) {
+                consumed.push(obs);
+                c.vx += (Math.random() - 0.5) * 70; // scatter so the pile isn't one perfect row
+              }
 
               // Tangential friction against text surface
               const tx = -ny;
@@ -522,6 +528,9 @@ export default function HeroSection() {
               if (c.vx < 0) c.vx *= -REST;
             }
           }
+        }
+        if (W < 768 && consumed.length) {
+          obstacles = obstacles.filter((o) => !consumed.includes(o));
         }
 
         // Soft right-side barrier — keep balls from drifting into the right text
