@@ -687,7 +687,9 @@
 
 /* ═══ HERO — tile-matrix (Bible/History reference in CF palette) ═══ */
 .sf-hero {
-  padding: 104px clamp(14px, 2.4vw, 28px) 12px;
+  padding: 124px clamp(14px, 2.4vw, 28px) 28px;
+  min-height: 100svh;
+  display: flex;
 }
 
 .sf-hero-grid {
@@ -695,8 +697,12 @@
   grid-template-columns: repeat(12, 1fr);
   grid-template-rows: auto auto auto auto;
   gap: 12px;
-  max-width: 1180px;
+  flex: 1;
+  width: 100%;
+  max-width: 1280px;
   margin: 0 auto;
+  grid-template-rows: 1.05fr 0.85fr 0.95fr 0.65fr;
+  min-height: calc(100svh - 200px);
   background: var(--color-warm-white, #F1F0EE);
   border-radius: 26px;
   padding: clamp(16px, 2.4vw, 30px);
@@ -704,13 +710,13 @@
 
 .sf-hg {
   background: rgba(255, 255, 255, 0.62);
-  border-radius: 18px;
-  min-height: 86px;
+  border-radius: 20px;
+  min-height: 110px;
 }
 
 .sf-hg-word {
   font-family: var(--font-body, "Inter", sans-serif);
-  font-size: clamp(2.4rem, 4.6vw, 3.9rem);
+  font-size: clamp(3rem, 6vw, 5.1rem);
   font-weight: 600;
   letter-spacing: -0.03em;
   line-height: 1;
@@ -745,7 +751,7 @@
 .sf-hg-explain p {
   margin: 0;
   font-family: var(--font-body, "Inter", sans-serif);
-  font-size: clamp(0.95rem, 1.2vw, 1.08rem);
+  font-size: clamp(1.05rem, 1.4vw, 1.22rem);
   line-height: 1.5;
   color: var(--color-obraz-black, #0B0B0B);
   max-width: 30ch;
@@ -778,10 +784,11 @@
 }
 .sf-hg-stat-num {
   font-family: var(--font-body, "Inter", sans-serif);
-  font-size: clamp(2.2rem, 3.4vw, 3rem);
+  font-size: clamp(2.6rem, 3.6vw, 3.4rem);
   font-weight: 700;
   letter-spacing: -0.03em;
   color: var(--color-obraz-black, #0B0B0B);
+  white-space: nowrap;
 }
 .sf-hg-w2 { grid-column: 3 / span 5; }
 .sf-hg-avatars {
@@ -793,7 +800,7 @@
 }
 .sf-hg-count {
   font-family: var(--font-body, "Inter", sans-serif);
-  font-size: 1.5rem;
+  font-size: clamp(1.7rem, 2vw, 2.1rem);
   font-weight: 700;
   letter-spacing: -0.02em;
   color: var(--color-obraz-black, #0B0B0B);
@@ -806,8 +813,8 @@
   background: transparent;
 }
 .sf-hg-circ-svg {
-  width: 84px;
-  height: 84px;
+  width: clamp(96px, 9vw, 118px);
+  height: clamp(96px, 9vw, 118px);
   animation: sf-circ-spin 16s linear infinite;
 }
 .sf-hg-circ-text {
@@ -856,7 +863,7 @@
 }
 .sf-hg-stories-label {
   font-family: var(--font-body, "Inter", sans-serif);
-  font-size: clamp(0.95rem, 1.3vw, 1.15rem);
+  font-size: clamp(1.1rem, 1.6vw, 1.35rem);
   font-weight: 700;
   letter-spacing: 0.02em;
   line-height: 1.25;
@@ -877,15 +884,15 @@
 .sf-hg-dark:hover { transform: translateY(-3px); }
 .sf-hg-dark-label {
   font-family: var(--font-body, "Inter", sans-serif);
-  font-size: clamp(0.95rem, 1.3vw, 1.15rem);
+  font-size: clamp(1.1rem, 1.6vw, 1.35rem);
   font-weight: 700;
   letter-spacing: 0.03em;
   line-height: 1.25;
   color: var(--color-moverunion-white, #FDFCF4);
 }
 .sf-hg-play {
-  width: 40px;
-  height: 40px;
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
   background: var(--color-yellow, #FFCD00);
   color: var(--color-obraz-black, #0B0B0B);
@@ -908,8 +915,8 @@
 }
 
 @media (max-width: 680px) {
-  .sf-hero { padding-top: 96px; }
-  .sf-hero-grid { grid-template-columns: 1fr 1fr; }
+  .sf-hero { padding-top: 96px; min-height: 0; }
+  .sf-hero-grid { grid-template-columns: 1fr 1fr; grid-template-rows: none; min-height: 0; }
   .sf-hg-w1 { grid-column: 1; grid-row: 1; }
   .sf-hg-chip { grid-column: 2; grid-row: 1; }
   .sf-hg-explain { grid-column: 1 / -1; grid-row: 2; }
