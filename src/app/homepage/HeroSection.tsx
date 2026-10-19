@@ -311,14 +311,6 @@ export default function HeroSection() {
       const footRect = foot.getBoundingClientRect();
       // Floor line aligns precisely with the top edge of the footer divider
       floorY = footRect.top - heroRect.top;
-      // Mobile: floor sits below the SUCCESS line so balls visibly bounce
-      // WE -> TURN -> AMBITION -> INTO -> SUCCESS, then pile under it
-      if (W < 768) {
-        const headline = hero.querySelector<HTMLElement>(".cf-hero-h1.right");
-        if (headline) {
-          floorY = headline.getBoundingClientRect().bottom - heroRect.top + 30;
-        }
-      }
       // Ball base radius
       baseRadius = Math.max(20, Math.min(W * 0.0264, 53));
 
@@ -341,10 +333,9 @@ export default function HeroSection() {
     const updateObstacles = () => {
       if (!hero) return;
       const heroRect = hero.getBoundingClientRect();
-      // Mobile: headline lines still act as bounce steps (cascade down),
-      // but the lede paragraph must not wall off the SUCCESS-line floor
-      const selector = W < 768 ? ".cf-hero-main .line" : ".cf-hero-main .line, .cf-hero-lede";
-      const elements = hero.querySelectorAll<HTMLElement>(selector);
+      const elements = hero.querySelectorAll<HTMLElement>(
+        ".cf-hero-main .line, .cf-hero-lede"
+      );
       const list: Obstacle[] = [];
       elements.forEach((el) => {
         const r = el.getBoundingClientRect();
@@ -423,8 +414,6 @@ export default function HeroSection() {
 
     // Slowly bring one new ball in, while one existing ball disappears
     const spawnSlowBall = () => {
-      // Mobile: re-measure bounce steps — consumed ones get rebuilt for the next cascade
-      if (W < 768 && obstacles.length === 0) updateObstacles();
       dismissOneCoin();
       spawnCoin();
     };
@@ -474,8 +463,6 @@ export default function HeroSection() {
         }
 
         // ─── Solid Text Obstacles Collision (Balls bounce off text words) ───
-        // Mobile: each line drops away after its first bounce — cascade continues
-        const consumed: Obstacle[] = [];
         for (const obs of obstacles) {
           const cx = Math.max(obs.left, Math.min(c.x, obs.right));
           const cy = Math.max(obs.top, Math.min(c.y, obs.bottom));
@@ -498,10 +485,6 @@ export default function HeroSection() {
               const impulse = -(1 + REST * 1.15) * vn;
               c.vx += impulse * nx;
               c.vy += impulse * ny;
-              if (W < 768) {
-                consumed.push(obs);
-                c.vx += (Math.random() - 0.5) * 70; // scatter so the pile isn't one perfect row
-              }
 
               // Tangential friction against text surface
               const tx = -ny;
@@ -531,9 +514,6 @@ export default function HeroSection() {
               if (c.vx < 0) c.vx *= -REST;
             }
           }
-        }
-        if (W < 768 && consumed.length) {
-          obstacles = obstacles.filter((o) => !consumed.includes(o));
         }
 
         // Soft right-side barrier — keep balls from drifting into the right text
@@ -753,46 +733,27 @@ export default function HeroSection() {
     let rainTimer: NodeJS.Timeout | null = null;
     let cycleTimer: NodeJS.Timeout | null = null;
     let transitionTimer: NodeJS.Timeout | null = null;
-    let gateTimer: NodeJS.Timeout | null = null;
 
     if (reduceMotion) {
-      updateObstacles();
-      const rainMaxRM = W < 768 ? 5 : 10;
-      for (let i = 0; i < rainMaxRM; i++) spawnCoin();
+      for (let i = 0; i < 10; i++) spawnCoin();
       for (let i = 0; i < 400; i++) physicsStep(1 / 200);
     } else {
-      // Don't drop balls into an unmeasured hero — wait for text obstacles,
-      // otherwise the first batch tunnels straight through the headline (mobile)
       let spawnedCount = 0;
-      const minObstacles = W < 768 ? 3 : 4;
-      const rainMax = W < 768 ? 5 : 10; // fewer balls on mobile — a 10-ball pile hides the SUCCESS text
-      const startRain = () => {
-        rainTimer = setInterval(() => {
-          spawnCoin();
-          spawnedCount++;
-          if (spawnedCount >= rainMax && rainTimer) {
-            clearInterval(rainTimer);
-            rainTimer = null;
+      rainTimer = setInterval(() => {
+        spawnCoin();
+        spawnedCount++;
+        if (spawnedCount >= 10 && rainTimer) {
+          clearInterval(rainTimer);
+          rainTimer = null;
 
-            // When all 10 come, wait 2.2s for them to settle, then slowly one new ball comes and any one disappears
-            transitionTimer = setTimeout(() => {
-              cycleTimer = setInterval(() => {
-                spawnSlowBall();
-              }, 3600);
-            }, 2200);
-          }
-        }, 340);
-      };
-      const gateStart = Date.now();
-      const gate = () => {
-        updateObstacles();
-        if (obstacles.length >= minObstacles || Date.now() - gateStart > 4000) {
-          startRain();
-        } else {
-          gateTimer = setTimeout(gate, 150);
+          // When all 10 come, wait 2.2s for them to settle, then slowly one new ball comes and any one disappears
+          transitionTimer = setTimeout(() => {
+            cycleTimer = setInterval(() => {
+              spawnSlowBall();
+            }, 3600);
+          }, 2200);
         }
-      };
-      gateTimer = setTimeout(gate, 120);
+      }, 340);
     }
 
     lastTime = performance.now();
@@ -802,7 +763,6 @@ export default function HeroSection() {
       cancelAnimationFrame(animId);
       clearTimeout(obsTimer1);
       clearTimeout(obsTimer2);
-      if (gateTimer) clearTimeout(gateTimer);
       if (rainTimer) clearInterval(rainTimer);
       if (transitionTimer) clearTimeout(transitionTimer);
       if (cycleTimer) clearInterval(cycleTimer);
