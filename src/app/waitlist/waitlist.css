@@ -9,7 +9,8 @@
   --color-cream: #FDFCF4;
   min-height: 100vh;
   background: var(--color-cream, #FCFCFF);
-  padding: 96px 24px 64px;
+  /* 128 clears the fixed navbar pill (bottom ≈ 97px) with comfortable air */
+  padding: 128px 24px 64px;
   display: flex;
   align-items: center;
   justify-content: center;
