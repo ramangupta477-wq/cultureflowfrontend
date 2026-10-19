@@ -1,786 +1,574 @@
 /* ═══════════════════════════════════════════════════════════════
-   Culture Flow — About Us Page Styling (Swiss Editorial Design)
-   Pillars: Strict Hairline Grids, 0-2px Rectilinear Geometry,
-            Zero Glow / Halo Effects, Flat Matte Surfaces,
-            High-Legibility Typographic Hierarchy.
+   ABOUT US — Shorodo-inspired chaptered editorial
+   Palette: cream #FDFCF4 · warm white #F1F0EE · yellow #FFCD00 ·
+            black #0B0B0B · gold #C89C66   (no navy)
    ═══════════════════════════════════════════════════════════════ */
 
-:root {
-  --af-bg: #FDFCF4;
-  --af-ink: #0B0B0B;
-  --af-soft: rgba(11, 11, 11, 0.68);
-  --af-line: rgba(11, 11, 11, 0.12);
-  --af-line-light: rgba(11, 11, 11, 0.06);
-  --af-yellow: #FFCD00;
-  --af-card-bg: #FFFFFF;
-  --af-ease: cubic-bezier(0.16, 1, 0.3, 1);
-  --af-radius: 2px;
+.au-page {
+  background: var(--color-bg, #FDFCF4);
+  color: var(--color-obraz-black, #0B0B0B);
+  overflow-x: clip;
 }
 
-.cf-about-page {
-  background-color: var(--af-bg);
-  color: var(--af-ink);
+/* ─── Shared bits ─── */
+.au-eyebrow {
+  font-family: "SF Mono", Menlo, monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 22px;
+}
+
+.au-eyebrow::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  background: currentColor;
+  display: inline-block;
+}
+
+.au-eyebrow--gold { color: var(--color-gold, #C89C66); }
+.au-eyebrow--yellow { color: var(--color-yellow, #FFCD00); }
+.au-eyebrow--dark { color: var(--color-obraz-black, #0B0B0B); }
+
+/* Reveal (blur-up like the rest of the site) */
+.au-reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  filter: blur(6px);
+  transition:
+    opacity 0.9s cubic-bezier(0.2, 0.7, 0.2, 1),
+    transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1),
+    filter 0.9s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.au-reveal--in {
+  opacity: 1;
+  transform: none;
+  filter: blur(0);
+}
+
+/* Big stat numeral device (bottom-left) */
+.au-chapter-stat {
+  position: absolute;
+  left: clamp(20px, 4vw, 64px);
+  bottom: clamp(20px, 4vh, 48px);
+  display: flex;
+  flex-direction: column;
+  pointer-events: none;
+}
+
+.au-stat {
+  font-family: "SF Mono", Menlo, monospace;
+  font-size: clamp(2.6rem, 5.5vw, 4.6rem);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  color: var(--color-yellow, #FFCD00);
+  font-variant-numeric: tabular-nums;
+}
+
+.au-stat-label {
+  font-family: "SF Mono", Menlo, monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.22em;
+  color: rgba(253, 252, 244, 0.55);
+  margin-top: 10px;
+}
+
+/* ═══ SECTION 1: DARK INTRO ═══ */
+.au-intro {
+  position: relative;
   min-height: 100vh;
-  position: relative;
-  overflow-x: hidden;
-  font-family: var(--font-body, "Plus Jakarta Sans", -apple-system, sans-serif);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-obraz-black, #0B0B0B);
+  overflow: hidden;
+  padding: 0 clamp(24px, 6vw, 96px);
 }
 
-/* ═════════════════════════════════════════════════════════════
-   SECTION 1: OUR VISION HERO (Matches Reference Layout Exactly)
-   ═════════════════════════════════════════════════════════════ */
-.cf-vision-hero {
+.au-intro-vertical {
+  position: absolute;
+  top: 50%;
+  right: clamp(16px, 3vw, 48px);
+  transform: translateY(-50%);
+  writing-mode: vertical-rl;
+  font-family: "SF Mono", Menlo, monospace;
+  font-size: 0.66rem;
+  letter-spacing: 0.34em;
+  color: rgba(200, 156, 102, 0.45);
+  user-select: none;
+}
+
+.au-intro-inner {
+  max-width: 880px;
+}
+
+.au-intro-title {
+  font-family: var(--font-heading, "DM Serif Display", Georgia, serif);
+  font-weight: 400;
+  font-size: clamp(3rem, 7vw, 6.4rem);
+  line-height: 1.02;
+  letter-spacing: -0.01em;
+  color: var(--color-moverunion-white, #FDFCF4);
+  margin: 0 0 30px;
+}
+
+.au-intro-title em {
+  font-style: italic;
+  color: var(--color-yellow, #FFCD00);
+}
+
+.au-intro-sub {
+  font-family: var(--font-body, "Inter", sans-serif);
+  font-size: clamp(1rem, 1.4vw, 1.2rem);
+  line-height: 1.65;
+  color: rgba(253, 252, 244, 0.66);
+  max-width: 560px;
+  margin: 0;
+}
+
+.au-scroll-hint {
+  position: absolute;
+  left: 50%;
+  bottom: 32px;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  font-family: "SF Mono", Menlo, monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.3em;
+  color: rgba(253, 252, 244, 0.4);
+}
+
+.au-scroll-hint i {
+  width: 1px;
+  height: 44px;
+  background: linear-gradient(to bottom, var(--color-gold, #C89C66), transparent);
+  animation: au-drip 2s ease-in-out infinite;
+}
+
+@keyframes au-drip {
+  0%, 100% { transform: scaleY(0.4); transform-origin: top; opacity: 0.4; }
+  50% { transform: scaleY(1); transform-origin: top; opacity: 1; }
+}
+
+/* ═══ CHAPTER I — FULL-BLEED PHOTO ═══ */
+.au-chapter1 {
   position: relative;
+  height: 110vh;
+  overflow: hidden;
+  background: var(--color-obraz-black, #0B0B0B);
+}
+
+.au-ch1-img {
+  position: absolute;
+  inset: 0;
   width: 100%;
-  padding-top: clamp(100px, 13vh, 140px);
-  padding-bottom: clamp(60px, 8vh, 96px);
-  border-bottom: 1px solid var(--af-line);
-  background: var(--af-bg);
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.85;
 }
 
-.cf-vision-container {
-  max-width: 1600px;
-  margin: 0 auto;
-  padding: 0 clamp(24px, 4.5vw, 72px);
+.au-ch1-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to top, rgba(11, 11, 11, 0.88) 0%, rgba(11, 11, 11, 0.25) 45%, rgba(11, 11, 11, 0.55) 100%);
+}
+
+.au-ch1-content {
+  position: absolute;
+  left: clamp(24px, 5vw, 80px);
+  bottom: clamp(180px, 30vh, 300px);
+}
+
+.au-ch1-title {
+  font-family: var(--font-heading, "DM Serif Display", Georgia, serif);
+  font-weight: 400;
+  font-size: clamp(2.4rem, 5vw, 4.6rem);
+  line-height: 1.05;
+  color: var(--color-moverunion-white, #FDFCF4);
+  margin: 0;
+}
+
+.au-ch1-title em {
+  font-style: italic;
+  color: var(--color-yellow, #FFCD00);
+}
+
+/* ═══ CHAPTER II — HISTORY (horizontal timeline) ═══ */
+.au-chapter2 {
+  position: relative;
+  background: var(--color-obraz-black, #0B0B0B);
+  padding: clamp(90px, 14vh, 160px) clamp(24px, 5vw, 80px) clamp(140px, 20vh, 220px);
+}
+
+.au-ch2-title,
+.au-ch3-title {
+  font-family: var(--font-heading, "DM Serif Display", Georgia, serif);
+  font-weight: 400;
+  font-size: clamp(2.2rem, 4.2vw, 3.8rem);
+  line-height: 1.05;
+  color: var(--color-moverunion-white, #FDFCF4);
+  margin: 0 0 18px;
+}
+
+.au-ch3-title em {
+  font-style: italic;
+  color: var(--color-yellow, #FFCD00);
+}
+
+.au-ch2-sub {
+  font-family: var(--font-body, "Inter", sans-serif);
+  font-size: clamp(0.95rem, 1.2vw, 1.1rem);
+  line-height: 1.6;
+  color: rgba(253, 252, 244, 0.6);
+  max-width: 520px;
+  margin: 0;
+}
+
+.au-timeline {
+  margin-top: clamp(60px, 9vh, 110px);
+}
+
+.au-timeline-line {
+  position: relative;
+  height: 2px;
+  background: rgba(253, 252, 244, 0.12);
+  overflow: hidden;
+}
+
+.au-timeline-fill {
+  position: absolute;
+  inset: 0;
+  background: var(--color-gold, #C89C66);
+  transform-origin: left;
+  transform: scaleX(0);
+}
+
+.au-timeline-nodes {
   display: grid;
-  grid-template-columns: 1.25fr 0.95fr;
-  column-gap: clamp(40px, 5vw, 88px);
-  align-items: stretch;
+  grid-template-columns: repeat(6, 1fr);
+  margin-top: -7px;
 }
 
-/* ─── Left Column: Vertical space between top header and bottom row ─── */
-.cf-vision-left {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding-top: 6px;
-  padding-bottom: 4px;
-}
-
-/* Top Area: Eyebrow + Headline */
-.cf-vision-top {
-  display: flex;
-  flex-direction: column;
-}
-
-/* Eyebrow Label with Hairline Rule on Top (Exact Reference Style) */
-.cf-vision-eyebrow {
+.au-node {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 12px;
-  margin-bottom: clamp(24px, 3.5vh, 40px);
+  gap: 16px;
 }
 
-.cf-vision-eyebrow-line {
-  display: block;
-  width: clamp(200px, 22vw, 300px);
-  height: 1px;
-  background: var(--af-ink);
+.au-node-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--color-obraz-black, #0B0B0B);
+  border: 2px solid rgba(253, 252, 244, 0.25);
+  transition: all 0.4s ease;
 }
 
-.cf-vision-eyebrow-text {
-  font-size: clamp(0.68rem, 0.76vw, 0.76rem);
-  font-weight: 700;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--af-ink);
+.au-node--passed .au-node-dot {
+  border-color: var(--color-gold, #C89C66);
+  background: var(--color-gold, #C89C66);
 }
 
-/* Massive Editorial Headline (Pure crisp typography, no underline) */
-.cf-vision-title {
-  font-family: var(--font-headline, "Archivo"), "Plus Jakarta Sans", sans-serif;
-  font-size: clamp(44px, 5.2vw, 84px);
+.au-node--active .au-node-dot {
+  border-color: var(--color-yellow, #FFCD00);
+  background: var(--color-yellow, #FFCD00);
+  box-shadow: 0 0 18px rgba(255, 205, 0, 0.45);
+  transform: scale(1.25);
+}
+
+.au-node-year {
+  font-family: "SF Mono", Menlo, monospace;
+  font-size: 0.9rem;
+  letter-spacing: 0.1em;
+  color: rgba(253, 252, 244, 0.35);
+  transition: color 0.4s ease;
+}
+
+.au-node--passed .au-node-year { color: rgba(253, 252, 244, 0.7); }
+.au-node--active .au-node-year { color: var(--color-yellow, #FFCD00); }
+
+.au-timeline-detail {
+  margin-top: clamp(40px, 6vh, 70px);
+  max-width: 560px;
+  animation: au-detail-in 0.5s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+@keyframes au-detail-in {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: none; }
+}
+
+.au-timeline-detail h3 {
+  font-family: var(--font-heading, "DM Serif Display", Georgia, serif);
   font-weight: 400;
-  letter-spacing: -0.03em;
-  line-height: 1.04;
-  color: var(--af-ink);
-  margin: 0 0 clamp(36px, 5vh, 60px) 0;
-  text-transform: none;
+  font-size: clamp(1.5rem, 2.4vw, 2.2rem);
+  color: var(--color-moverunion-white, #FDFCF4);
+  margin: 0 0 12px;
 }
 
-/* Bottom Split Row: Button on left, Narrative on right (Matches Fitosauna Reference) */
-.cf-vision-bottom-row {
-  display: grid;
-  grid-template-columns: minmax(190px, auto) 1fr;
-  column-gap: clamp(32px, 4vw, 64px);
-  align-items: flex-end;
-  margin-top: auto;
-}
-
-/* Left Sub-Column: CTA Button */
-.cf-vision-cta-col {
-  display: flex;
-  align-items: flex-end;
-  padding-bottom: 2px;
-}
-
-.cf-vision-cta-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 14px;
-  padding: 13px 22px;
-  border: 1px solid var(--af-ink);
-  border-radius: 0;
-  background: transparent;
-  color: var(--af-ink);
-  text-decoration: none;
-  font-size: 0.74rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  white-space: nowrap;
-  transition: background 0.25s var(--af-ease), color 0.25s var(--af-ease);
-}
-
-.cf-vision-cta-btn:hover {
-  background: var(--af-ink);
-  color: #FFFFFF;
-}
-
-.cf-vision-arrow {
-  font-size: 1.05rem;
-  line-height: 1;
-  transition: transform 0.25s var(--af-ease);
-}
-
-.cf-vision-cta-btn:hover .cf-vision-arrow {
-  transform: translateX(4px);
-}
-
-/* Right Sub-Column: Narrative Story Block */
-.cf-vision-narrative-col {
-  max-width: 440px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.cf-vision-narrative-p {
-  font-size: clamp(12.5px, 0.88vw, 14.5px);
-  line-height: 1.62;
-  color: var(--af-ink);
+.au-timeline-detail p {
+  font-family: var(--font-body, "Inter", sans-serif);
+  font-size: clamp(0.92rem, 1.1vw, 1.05rem);
+  line-height: 1.65;
+  color: rgba(253, 252, 244, 0.6);
   margin: 0;
-  font-weight: 400;
 }
 
-/* ─── Right Column: Tall Portrait Image (Matches Reference: 0 border-radius, clean flush crop) ─── */
-.cf-vision-right {
-  display: flex;
-  justify-content: flex-end;
-  align-items: stretch;
-  width: 100%;
+.au-chapter-stat--passive .au-stat {
+  color: rgba(200, 156, 102, 0.5);
 }
 
-.cf-vision-img-frame {
+/* ═══ CHAPTER III — CRAFT (photo panels) ═══ */
+.au-chapter3 {
   position: relative;
-  width: 100%;
-  height: 100%;
-  min-height: 520px;
-  max-height: 680px;
-  border-radius: 0;
-  overflow: hidden;
-  box-shadow: none;
-  border: none;
-  background: #EAE6D8;
+  background: #141210;
+  padding: clamp(90px, 14vh, 160px) clamp(24px, 5vw, 80px) clamp(140px, 20vh, 220px);
 }
 
-.cf-vision-img {
+.au-ch3-panels {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(16px, 2.5vw, 32px);
+  margin-top: clamp(50px, 8vh, 90px);
+}
+
+.au-panel {
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border-radius: 4px;
+  background: linear-gradient(135deg, #2a2620, #1a1714);
+}
+
+.au-panel img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  display: block;
-  border-radius: 0;
-  transition: transform 0.6s var(--af-ease);
+  transition: transform 1.2s cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 
-.cf-vision-img-frame:hover .cf-vision-img {
-  transform: scale(1.02);
+.au-panel-wrap:hover .au-panel img {
+  transform: scale(1.05);
 }
 
-/* ═════════════════════════════════════════════════════════════
-   SECTION 2: VISION PILLARS (Minimalist Manifesto Grid)
-   ═════════════════════════════════════════════════════════════ */
-.cf-pillars-section {
-  padding: clamp(64px, 9vh, 96px) 0;
-  border-bottom: 1px solid var(--af-line);
-  background: rgba(246, 243, 233, 0.45);
-}
-
-.cf-pillars-container {
-  max-width: 1540px;
-  margin: 0 auto;
-  padding: 0 clamp(20px, 4vw, 64px);
-}
-
-.cf-pillars-header {
-  margin-bottom: clamp(36px, 5vh, 52px);
-}
-
-.cf-pillars-tag {
-  font-size: 0.72rem;
-  font-weight: 700;
+.au-panel-cap {
+  font-family: "SF Mono", Menlo, monospace;
+  font-size: 0.62rem;
   letter-spacing: 0.18em;
-  color: var(--af-soft);
-  text-transform: uppercase;
-  display: block;
-  margin-bottom: 10px;
+  color: rgba(253, 252, 244, 0.4);
+  margin: 14px 0 0;
 }
 
-.cf-pillars-heading {
-  font-family: var(--font-headline, "Archivo"), sans-serif;
-  font-size: clamp(26px, 2.8vw, 42px);
-  font-weight: 400;
-  letter-spacing: -0.02em;
-  color: var(--af-ink);
-  margin: 0;
+.au-chapter3 .au-chapter-stat .au-stat {
+  color: var(--color-yellow, #FFCD00);
 }
 
-.cf-pillars-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: clamp(20px, 2.5vw, 36px);
-}
-
-.cf-pillar-card {
-  padding: clamp(28px, 3vw, 40px);
-  background: var(--af-card-bg);
-  border: 1px solid var(--af-line);
-  border-radius: var(--af-radius);
-  box-shadow: none;
-  transition: border-color 0.25s var(--af-ease);
-}
-
-.cf-pillar-card:hover {
-  border-color: var(--af-ink);
-}
-
-.cf-pillar-num {
-  font-family: var(--font-mono, monospace), sans-serif;
-  font-size: 0.74rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  color: var(--af-ink);
-  background: var(--af-yellow);
-  padding: 3px 8px;
-  border-radius: 0;
-  display: inline-block;
-  margin-bottom: 20px;
-}
-
-.cf-pillar-title {
-  font-family: var(--font-headline, "Archivo"), sans-serif;
-  font-size: clamp(19px, 1.4vw, 24px);
-  font-weight: 500;
-  color: var(--af-ink);
-  margin: 0 0 12px 0;
-}
-
-.cf-pillar-desc {
-  font-size: clamp(13px, 0.92vw, 15px);
-  line-height: 1.64;
-  color: var(--af-soft);
-  margin: 0;
-}
-
-/* ═════════════════════════════════════════════════════════════
-   SECTION 3: OUR JOURNEY (Swiss Architectural Timeline)
-   Zero glow. Precise hairlines. Sharp corners.
-   ═════════════════════════════════════════════════════════════ */
-.cf-journey-section {
+/* ═══ CHAPTER IV — THE HAND (cream info) ═══ */
+.au-chapter4 {
   position: relative;
-  padding: clamp(80px, 12vh, 130px) 0;
-  background: var(--af-bg);
+  background: var(--color-bg, #FDFCF4);
+  padding: clamp(90px, 14vh, 160px) clamp(24px, 5vw, 80px) clamp(150px, 22vh, 240px);
 }
 
-.cf-journey-container {
-  max-width: 1440px;
+.au-ch4-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: clamp(40px, 6vw, 90px);
+  max-width: 1240px;
   margin: 0 auto;
-  padding: 0 clamp(20px, 4vw, 64px);
 }
 
-/* Timeline Header */
-.cf-journey-header {
-  text-align: center;
-  max-width: 760px;
-  margin: 0 auto clamp(60px, 9vh, 96px);
-}
-
-.cf-journey-tag {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--af-ink);
-  margin-bottom: 14px;
-}
-
-.cf-journey-tag-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 0;
-  background: var(--af-yellow);
-}
-
-.cf-journey-title {
-  font-family: var(--font-headline, "Archivo"), sans-serif;
-  font-size: clamp(38px, 4.8vw, 76px);
+.au-ch4-title {
+  font-family: var(--font-heading, "DM Serif Display", Georgia, serif);
   font-weight: 400;
-  letter-spacing: -0.025em;
-  color: var(--af-ink);
-  margin: 0 0 18px 0;
+  font-size: clamp(2.4rem, 4.5vw, 4rem);
   line-height: 1.05;
+  color: var(--color-obraz-black, #0B0B0B);
+  margin: 0 0 40px;
 }
 
-.cf-journey-subtitle {
-  font-size: clamp(15px, 1.1vw, 19px);
-  line-height: 1.6;
-  color: var(--af-soft);
+.au-ch4-title em {
+  font-style: italic;
+  color: var(--color-gold, #C89C66);
+}
+
+.au-offices {
+  list-style: none;
+  padding: 0;
   margin: 0;
 }
 
-/* ─── Timeline Architecture ─── */
-.cf-timeline-wrapper {
-  position: relative;
-  width: 100%;
-}
-
-/* Central Vertical Track Line: Crisp 1px drafting hairline */
-.cf-timeline-spine {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 50%;
-  width: 1px;
-  background: var(--af-line);
-  transform: translateX(-50%);
-  z-index: 1;
-}
-
-/* Scroll Progress Line: Pure solid matte ink line, NO GLOW */
-.cf-timeline-progress-bar {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: var(--af-ink);
-  transform-origin: top center;
-  box-shadow: none !important;
-  transition: transform 0.1s linear;
-}
-
-/* Timeline List Container */
-.cf-timeline-list {
-  display: flex;
-  flex-direction: column;
-  gap: clamp(56px, 8vh, 100px);
-  position: relative;
-  z-index: 2;
-}
-
-/* Individual Milestone Row */
-.cf-timeline-item {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  align-items: center;
-  position: relative;
-  width: 100%;
-}
-
-/* Left vs Right Alternating Grid Placement */
-.cf-timeline-item--left .cf-timeline-card {
-  grid-column: 1;
-  margin-right: clamp(40px, 6vw, 90px);
-}
-
-.cf-timeline-item--right .cf-timeline-card {
-  grid-column: 2;
-  margin-left: clamp(40px, 6vw, 90px);
-}
-
-/* Node on Central Spine: Crisp Registration Marker, ZERO GLOW */
-.cf-timeline-node {
-  position: absolute;
-  left: 50%;
-  top: 36px;
-  width: 11px;
-  height: 11px;
-  border-radius: 0;
-  background: var(--af-bg);
-  border: 1px solid var(--af-line);
-  transform: translate(-50%, -50%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 3;
-  box-shadow: none !important;
-  transition: background 0.3s var(--af-ease), border-color 0.3s var(--af-ease);
-}
-
-.cf-timeline-node-inner {
-  width: 3px;
-  height: 3px;
-  border-radius: 0;
-  background: rgba(11, 11, 11, 0.25);
-  transition: background 0.3s var(--af-ease);
-}
-
-/* Active Milestone State: Solid matte ink, ZERO GLOW */
-.cf-timeline-item--active .cf-timeline-node,
-.cf-timeline-item--passed .cf-timeline-node {
-  border-color: var(--af-ink);
-  background: var(--af-ink);
-  box-shadow: none !important;
-  transform: translate(-50%, -50%);
-}
-
-.cf-timeline-item--active .cf-timeline-node-inner,
-.cf-timeline-item--passed .cf-timeline-node-inner {
-  background: var(--af-bg);
-}
-
-/* ─── Milestone Card Design (Crisp 2px Rectilinear, Flat Paper) ─── */
-.cf-timeline-card {
-  background: var(--af-card-bg);
-  border: 1px solid var(--af-line);
-  border-radius: var(--af-radius);
-  padding: clamp(26px, 3vw, 40px);
-  box-shadow: none;
-  transition: border-color 0.3s var(--af-ease);
-  position: relative;
-}
-
-.cf-timeline-item--active .cf-timeline-card {
-  border-color: var(--af-ink);
-  box-shadow: none;
-}
-
-/* Card Header Meta */
-.cf-timeline-meta {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 12px;
-}
-
-.cf-timeline-phase {
-  font-family: var(--font-mono, monospace), sans-serif;
-  font-size: 0.68rem;
-  font-weight: 700;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--af-soft);
-}
-
-.cf-timeline-badge {
-  font-size: 0.65rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  background: var(--af-yellow);
-  color: var(--af-ink);
-  padding: 3px 8px;
-  border-radius: 0;
-  text-transform: uppercase;
-}
-
-/* Big Year Row */
-.cf-timeline-year-row {
+.au-offices li {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  gap: 16px;
-  margin-bottom: 16px;
-  border-bottom: 1px solid var(--af-line-light);
-  padding-bottom: 12px;
+  padding: 18px 0;
+  border-bottom: 1px solid rgba(11, 11, 11, 0.12);
+  gap: 20px;
 }
 
-.cf-timeline-year {
-  font-family: var(--font-headline, "Archivo"), sans-serif;
-  font-size: clamp(34px, 3.6vw, 56px);
-  font-weight: 400;
-  line-height: 1;
-  color: var(--af-ink);
-  letter-spacing: -0.02em;
+.au-office-city {
+  font-family: var(--font-heading, "DM Serif Display", Georgia, serif);
+  font-size: clamp(1.4rem, 2.2vw, 2rem);
+  color: var(--color-obraz-black, #0B0B0B);
 }
 
-.cf-timeline-stat-pill {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
+.au-office-role {
+  font-family: "SF Mono", Menlo, monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.2em;
+  color: rgba(11, 11, 11, 0.5);
   text-align: right;
 }
 
-.cf-timeline-stat-val {
-  font-size: 1.15rem;
-  font-weight: 800;
-  color: var(--af-ink);
-  line-height: 1.1;
+.au-founder-frame {
+  overflow: hidden;
+  border-radius: 4px;
+  aspect-ratio: 16 / 10;
+  background: linear-gradient(135deg, #e8dcc4, #c4b494);
+  margin-bottom: clamp(30px, 4vh, 48px);
 }
 
-.cf-timeline-stat-lbl {
-  font-size: 0.68rem;
-  color: var(--af-soft);
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
+.au-founder-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
-/* Headline & Tagline */
-.cf-timeline-heading {
-  font-family: var(--font-headline, "Archivo"), sans-serif;
-  font-size: clamp(20px, 1.6vw, 26px);
-  font-weight: 500;
-  letter-spacing: -0.015em;
-  color: var(--af-ink);
-  margin: 0 0 6px 0;
+.au-pillar {
+  display: flex;
+  gap: 22px;
+  padding: 22px 0;
+  border-top: 1px solid rgba(11, 11, 11, 0.12);
 }
 
-.cf-timeline-tagline {
-  font-size: clamp(13px, 0.94vw, 15px);
-  font-weight: 600;
-  color: var(--af-ink);
-  margin: 0 0 14px 0;
-  font-style: italic;
+.au-pillar-num {
+  font-family: "SF Mono", Menlo, monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  color: var(--color-gold, #C89C66);
+  padding-top: 6px;
 }
 
-.cf-timeline-desc {
-  font-size: clamp(13px, 0.92vw, 15px);
-  line-height: 1.68;
-  color: var(--af-soft);
+.au-pillar h3 {
+  font-family: var(--font-heading, "DM Serif Display", Georgia, serif);
+  font-weight: 400;
+  font-size: clamp(1.15rem, 1.6vw, 1.45rem);
+  color: var(--color-obraz-black, #0B0B0B);
+  margin: 0 0 8px;
+}
+
+.au-pillar p {
+  font-family: var(--font-body, "Inter", sans-serif);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: rgba(11, 11, 11, 0.6);
   margin: 0;
 }
 
-/* Milestone Photo Box: Sharp 2px Corners, Hairline Border */
-.cf-timeline-photo-box {
-  margin-top: 22px;
-  border-radius: var(--af-radius);
-  overflow: hidden;
-  border: 1px solid var(--af-line);
-  position: relative;
-  background: #EAE6D8;
-}
-
-.cf-timeline-photo {
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  object-fit: cover;
-  display: block;
-  border-radius: 0;
-  transition: transform 0.6s var(--af-ease);
-}
-
-.cf-timeline-card:hover .cf-timeline-photo {
-  transform: scale(1.02);
-}
-
-.cf-timeline-photo-caption {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 8px 14px;
-  background: rgba(11, 11, 11, 0.88);
-  color: #FFFFFF;
-  font-size: 0.7rem;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  border-top: 1px solid rgba(255, 255, 255, 0.12);
-}
-
-/* ═════════════════════════════════════════════════════════════
-   SECTION 4: INVITATION BANNER
-   Minimal Rectilinear Contrast Card, Zero Bloat
-   ═════════════════════════════════════════════════════════════ */
-.cf-about-cta-section {
-  padding: clamp(60px, 8vh, 96px) clamp(20px, 4vw, 64px);
-  background: var(--af-bg);
-}
-
-.cf-about-cta-card {
-  max-width: 1440px;
-  margin: 0 auto;
-  background: #0B0B0B;
-  color: #FFFFFF;
-  border-radius: 4px;
-  padding: clamp(48px, 7vw, 84px) clamp(24px, 5vw, 80px);
+/* CTA */
+.au-ch4-cta {
+  max-width: 1240px;
+  margin: clamp(70px, 10vh, 120px) auto 0;
   text-align: center;
-  position: relative;
-  overflow: hidden;
-  box-shadow: none;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1px solid rgba(11, 11, 11, 0.12);
+  padding-top: clamp(50px, 8vh, 80px);
 }
 
-.cf-about-cta-content {
-  max-width: 760px;
-  margin: 0 auto;
-  position: relative;
-  z-index: 2;
-}
-
-.cf-about-cta-tag {
-  font-size: 0.72rem;
-  font-weight: 800;
-  letter-spacing: 0.18em;
-  color: var(--af-yellow);
-  text-transform: uppercase;
-  display: block;
-  margin-bottom: 16px;
-}
-
-.cf-about-cta-heading {
-  font-family: var(--font-headline, "Archivo"), sans-serif;
-  font-size: clamp(32px, 4vw, 60px);
+.au-ch4-cta h3 {
+  font-family: var(--font-heading, "DM Serif Display", Georgia, serif);
   font-weight: 400;
-  letter-spacing: -0.025em;
-  color: #FFFFFF;
-  margin: 0 0 18px 0;
-  line-height: 1.1;
+  font-size: clamp(1.9rem, 3.4vw, 3rem);
+  color: var(--color-obraz-black, #0B0B0B);
+  margin: 0 0 36px;
 }
 
-.cf-about-cta-body {
-  font-size: clamp(14px, 1.05vw, 18px);
-  line-height: 1.62;
-  color: rgba(255, 255, 255, 0.76);
-  margin: 0 0 clamp(28px, 4vh, 44px) 0;
-}
-
-.cf-about-cta-buttons {
+.au-ch4-btns {
   display: flex;
   justify-content: center;
-  align-items: center;
   gap: 16px;
   flex-wrap: wrap;
 }
 
-.cf-about-btn-solid {
+.au-btn {
   display: inline-flex;
   align-items: center;
-  gap: 12px;
-  padding: 14px 30px;
-  border-radius: var(--af-radius);
-  background: var(--af-yellow);
-  color: #0B0B0B;
+  gap: 10px;
+  height: 52px;
+  padding: 0 34px;
+  border-radius: 999px;
+  font-family: var(--font-body, "Inter", sans-serif);
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
   text-decoration: none;
-  font-size: 0.78rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  transition: background 0.25s var(--af-ease), color 0.25s var(--af-ease);
+  transition: all 0.3s ease;
 }
 
-.cf-about-btn-solid:hover {
-  background: #FFFFFF;
-  color: #0B0B0B;
+.au-btn--solid {
+  background: var(--color-obraz-black, #0B0B0B);
+  color: var(--color-yellow, #FFCD00);
 }
 
-.cf-about-btn-outline {
-  display: inline-flex;
-  align-items: center;
-  padding: 14px 28px;
-  border-radius: var(--af-radius);
-  border: 1px solid rgba(255, 255, 255, 0.32);
-  color: #FFFFFF;
-  text-decoration: none;
-  font-size: 0.78rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  transition: border-color 0.25s var(--af-ease), background 0.25s var(--af-ease);
+.au-btn--solid:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(11, 11, 11, 0.25);
 }
 
-.cf-about-btn-outline:hover {
-  border-color: #FFFFFF;
-  background: rgba(255, 255, 255, 0.08);
+.au-btn--outline {
+  border: 2px solid var(--color-obraz-black, #0B0B0B);
+  color: var(--color-obraz-black, #0B0B0B);
+  height: 52px;
 }
 
-/* ═════════════════════════════════════════════════════════════
-   RESPONSIVE DESIGN (Tablets & Mobile)
-   ═════════════════════════════════════════════════════════════ */
-@media (max-width: 980px) {
-  .cf-vision-container {
-    grid-template-columns: 1fr;
-    row-gap: 40px;
-  }
-
-  .cf-vision-right {
-    order: -1;
-  }
-
-  .cf-vision-img-frame {
-    max-width: 100%;
-    min-height: 380px;
-    max-height: 500px;
-  }
-
-  .cf-vision-bottom-row {
-    grid-template-columns: 1fr;
-    row-gap: 24px;
-    align-items: flex-start;
-  }
-
-  .cf-vision-cta-col {
-    order: 2;
-  }
-
-  .cf-vision-narrative-col {
-    order: 1;
-    max-width: 100%;
-  }
-
-  .cf-pillars-grid {
-    grid-template-columns: 1fr;
-  }
-
-  /* Single Column Timeline on Mobile/Tablet */
-  .cf-timeline-spine {
-    left: 20px;
-    transform: none;
-  }
-
-  .cf-timeline-node {
-    left: 20px;
-    transform: translate(-50%, -50%);
-  }
-
-  .cf-timeline-item {
-    grid-template-columns: 1fr;
-  }
-
-  .cf-timeline-item--left .cf-timeline-card,
-  .cf-timeline-item--right .cf-timeline-card {
-    grid-column: 1;
-    margin-left: 50px;
-    margin-right: 0;
-  }
+.au-btn--outline:hover {
+  background: rgba(11, 11, 11, 0.06);
 }
 
-@media (max-width: 600px) {
-  .cf-vision-title {
-    font-size: 36px;
+/* Stat on cream chapter flips to dark-on-cream */
+.au-chapter-stat--dark-on-cream .au-stat {
+  color: var(--color-obraz-black, #0B0B0B);
+}
+
+.au-chapter-stat--dark-on-cream .au-stat-label {
+  color: rgba(11, 11, 11, 0.45);
+}
+
+/* ═══ RESPONSIVE ═══ */
+@media (max-width: 900px) {
+  .au-intro-vertical { display: none; }
+
+  .au-timeline-nodes {
+    grid-template-columns: repeat(3, 1fr);
+    row-gap: 36px;
+    margin-top: 0;
   }
 
-  .cf-timeline-year-row {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 8px;
+  .au-timeline-line { display: none; }
+
+  .au-ch3-panels { grid-template-columns: 1fr; }
+
+  .au-ch4-grid { grid-template-columns: 1fr; }
+
+  .au-chapter-stat {
+    position: static;
+    margin-top: 50px;
+    padding: 0 clamp(24px, 5vw, 80px);
   }
 
-  .cf-timeline-stat-pill {
-    align-items: flex-start;
-    text-align: left;
+  .au-chapter2,
+  .au-chapter3 {
+    padding-bottom: clamp(60px, 8vh, 90px);
   }
 
-  .cf-about-cta-buttons {
-    flex-direction: column;
-    width: 100%;
-  }
-
-  .cf-about-btn-solid,
-  .cf-about-btn-outline {
-    width: 100%;
-    justify-content: center;
-  }
+  .au-chapter4 { padding-bottom: clamp(60px, 8vh, 90px); }
 }

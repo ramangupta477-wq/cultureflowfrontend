@@ -6,375 +6,366 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/app/homepage/Footer";
 import "./AboutUs.css";
 
-/* ─── Timeline Milestone Interface ─── */
-interface Milestone {
-  year: string;
-  phase: string;
-  title: string;
-  tagline: string;
-  description: string;
-  metric: string;
-  metricLabel: string;
-  image?: string;
-  imageAlt?: string;
-  badge?: string;
-}
-
-const TIMELINE_DATA: Milestone[] = [
+/* ─── History timeline (feeds the horizontal gold line) ─── */
+const HISTORY = [
   {
     year: "2021",
-    phase: "PHASE 01 · FOUNDATION",
-    title: "The Genesis & Core Conviction",
-    tagline: "Questioning the broken study-abroad agency paradigm.",
-    description:
-      "Culture Flow was conceived in New Delhi from a clear observation: international student mobility was dominated by transactional agents and opaque commission incentives. We set out to build direct, transparent academic bridges that treat students as future global scholars, not leads.",
-    metric: "01",
-    metricLabel: "Headquarters · New Delhi",
-    badge: "Origin",
+    title: "The Genesis",
+    desc: "Founded in New Delhi to replace transactional agents with direct, transparent academic bridges.",
   },
   {
     year: "2022",
-    phase: "PHASE 02 · DIRECT ALLIANCES",
-    title: "First Tier-1 Articulation Agreements",
-    tagline: "Direct institutional access without intermediary brokers.",
-    description:
-      "We bypassed commercial aggregators to sign bilateral articulation agreements directly with pioneering faculties across the United Kingdom and Europe. This established our signature pathway standard: verified curricular credit transfers and guaranteed academic review.",
-    metric: "14",
-    metricLabel: "Initial University Faculties",
-    image: "/images/about/partnership.jpg",
-    imageAlt: "Culture Flow institutional agreement handshake",
-    badge: "Breakthrough",
+    title: "Direct Alliances",
+    desc: "First bilateral articulation agreements signed directly with UK and European faculties.",
   },
   {
     year: "2023",
-    phase: "PHASE 03 · MOBILITY ARCHITECTURE",
-    title: "The End-to-End Care Framework",
-    tagline: "Relocation care that extends far beyond the offer letter.",
-    description:
-      "We launched the Culture Flow Pathway Architecture — integrating academic profiling, university matching, verified accommodation sourcing, visa compliance, and pre-departure cultural orientation. Every scholar received a dedicated mentor navigating their entire transition.",
-    metric: "100%",
-    metricLabel: "Visa Approval Standard",
-    image: "/images/about/counseling.jpg",
-    imageAlt: "Culture Flow counselors mentoring students",
-    badge: "Infrastructure",
+    title: "Mobility Architecture",
+    desc: "End-to-end pathway framework launched — profiling, matching, housing, visa, orientation.",
   },
   {
     year: "2024",
-    phase: "PHASE 04 · CONTINENTAL EXPANSION",
-    title: "200+ Institution Global Network",
-    tagline: "Bridging Indian scholars to premier institutions worldwide.",
-    description:
-      "Our institutional partnerships expanded across leading universities in the UK, Switzerland (ETH Zürich), Germany, Canada, and Australia. We inaugurated our Mumbai regional advisory office and established direct liaison desks in London and Berlin.",
-    metric: "200+",
-    metricLabel: "Partner Institutions Worldwide",
-    image: "/images/about/campus.jpg",
-    imageAlt: "Culture Flow scholar at ETH Zürich campus",
-    badge: "Scale",
+    title: "Continental Expansion",
+    desc: "200+ partner institutions across the UK, Switzerland, Germany, Canada and Australia.",
   },
   {
     year: "2025",
-    phase: "PHASE 05 · COLLEGIATE FELLOWSHIPS",
-    title: "Oxbridge & Russell Group Cohorts",
-    tagline: "Prestigious tutorial placements with dedicated scholarships.",
-    description:
-      "Our scholars gained direct admission into elite collegiate tutorials, high-table research groups, and frontier technology laboratories. Culture Flow mentors facilitated over £2.4M in institutional scholarships, grants, and merit bursaries.",
-    metric: "£2.4M+",
-    metricLabel: "Merit Bursaries Secured",
-    image: "/images/about/editorial.jpg",
-    imageAlt: "Collegiate cloisters historic university setting",
-    badge: "Excellence",
+    title: "Collegiate Fellowships",
+    desc: "£2.4M+ in scholarships secured; Oxbridge and Russell Group cohorts placement.",
   },
   {
     year: "2026",
-    phase: "PHASE 06 · ONE GLOBAL STEP",
-    title: "The Next-Gen Mobility Platform",
-    tagline: "Building the global education platform students don't just follow — they embrace.",
-    description:
-      "Today, Culture Flow is evolving from an admissions bridge into a comprehensive mobility ecosystem. Uniting predictive program discovery, verified institutional pathways, on-campus peer networks, and lifelong alumni advisory across three continents.",
-    metric: "1,400+",
-    metricLabel: "Scholars Globally Placed",
-    badge: "Present Day",
+    title: "One Global Step",
+    desc: "From admissions bridge to a full mobility ecosystem across three continents.",
   },
 ];
 
-/* ─── Core Values Interface ─── */
-const VISION_PILLARS = [
+/* ─── Value pillars (cream chapter) ─── */
+const PILLARS = [
   {
     num: "01",
     title: "Direct Institutional Access",
-    desc: "We partner directly with leading university faculties, removing opaque third-party middlemen to guarantee transparent admissions and verified credit transfers.",
+    desc: "We partner directly with leading university faculties — no opaque middlemen, verified credit transfers only.",
   },
   {
     num: "02",
     title: "Radical Transparency",
-    desc: "No hidden commercial markups or biased recommendations. Every academic pathway is curated around the scholar's genuine intellectual and career trajectory.",
+    desc: "No hidden markups or biased recommendations. Every pathway is curated around the scholar's real trajectory.",
   },
   {
     num: "03",
     title: "Lifelong Relocation Care",
-    desc: "From initial counseling to campus accommodation, visa compliance, and cultural integration — we remain an active advocate throughout the student's journey.",
+    desc: "From counseling to campus arrival and beyond — we stay an active advocate through the whole journey.",
   },
 ];
 
-export default function AboutUsPage() {
-  const [activeMilestone, setActiveMilestone] = useState<number>(0);
-  const [scrollProgress, setScrollProgress] = useState<number>(0);
-  const timelineRef = useRef<HTMLDivElement>(null);
-  const milestoneRefs = useRef<(HTMLDivElement | null)[]>([]);
+/* ─── Big stat numeral device (bottom-left, per chapter) ─── */
+function StatNumeral({ value, decimals = 0, suffix = "" }: { value: number; decimals?: number; suffix?: string }) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const [display, setDisplay] = useState("0");
 
-  // ─── Scroll-driven Timeline Progress & Active Node Observer ───
   useEffect(() => {
-    const handleScroll = () => {
-      if (!timelineRef.current) return;
-      const rect = timelineRef.current.getBoundingClientRect();
-      const windowHeight = window.innerHeight;
-
-      // Calculate scroll progress through the timeline section (0 to 1)
-      const totalDist = rect.height - windowHeight * 0.5;
-      const currentScroll = windowHeight * 0.5 - rect.top;
-      const progress = Math.max(0, Math.min(1, currentScroll / totalDist));
-      setScrollProgress(progress);
-
-      // Determine active milestone based on viewport center
-      milestoneRefs.current.forEach((el, index) => {
-        if (!el) return;
-        const elRect = el.getBoundingClientRect();
-        if (elRect.top <= windowHeight * 0.6 && elRect.bottom >= windowHeight * 0.25) {
-          setActiveMilestone(index);
-        }
-      });
+    const el = ref.current;
+    if (!el) return;
+    let raf = 0;
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) return;
+        const start = performance.now();
+        const dur = 1600;
+        const step = (now: number) => {
+          const t = Math.min(1, (now - start) / dur);
+          const eased = 1 - Math.pow(1 - t, 3);
+          const v = value * eased;
+          setDisplay(decimals > 0 ? v.toFixed(decimals) : Math.round(v).toLocaleString("en-US"));
+          if (t < 1) raf = requestAnimationFrame(step);
+        };
+        raf = requestAnimationFrame(step);
+        io.disconnect();
+      },
+      { threshold: 0.4 }
+    );
+    io.observe(el);
+    return () => {
+      io.disconnect();
+      cancelAnimationFrame(raf);
     };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll(); // Initial computation
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [value, decimals]);
 
   return (
-    <div className="cf-about-page">
-      {/* ═══ GLOBAL NAVBAR (Always Active with ABOUT US Indicator & Brand Yellow Logo) ═══ */}
+    <span ref={ref} className="au-stat" suppressHydrationWarning>
+      {display}
+      {suffix}
+    </span>
+  );
+}
+
+/* ─── Reveal-on-scroll wrapper ─── */
+function Reveal({ children, className = "" }: { children: React.ReactNode; className?: string }) {
+  const ref = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      ([e]) => {
+        if (e.isIntersecting) {
+          el.classList.add("au-reveal--in");
+          io.disconnect();
+        }
+      },
+      { threshold: 0.2 }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+  return (
+    <div ref={ref} className={`au-reveal ${className}`}>
+      {children}
+    </div>
+  );
+}
+
+export default function AboutUsPage() {
+  const [active, setActive] = useState(0);
+  const [progress, setProgress] = useState(0);
+  const timelineRef = useRef<HTMLDivElement>(null);
+
+  /* Horizontal timeline: scroll progress picks the active milestone */
+  useEffect(() => {
+    const onScroll = () => {
+      const el = timelineRef.current;
+      if (!el) return;
+      const r = el.getBoundingClientRect();
+      const vh = window.innerHeight;
+      const total = r.height - vh * 0.4;
+      const p = Math.max(0, Math.min(1, (vh * 0.7 - r.top) / total));
+      setProgress(p);
+      setActive(Math.min(HISTORY.length - 1, Math.floor(p * HISTORY.length)));
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  const milestone = HISTORY[active];
+
+  return (
+    <div className="au-page">
       <Navbar pageLabel="ABOUT US" logoTheme="yellow" />
 
-      {/* ═════════════════════════════════════════════════════════════
-          SECTION 1: OUR VISION HERO (Inspired by the Reference Layout)
-          ═════════════════════════════════════════════════════════════ */}
-      <section className="cf-vision-hero">
-        <div className="cf-vision-container">
-          
-          {/* Left Column: Eyebrow, Large Editorial Title, Bottom 2-Col Split */}
-          <div className="cf-vision-left">
-            
-            {/* Top: Eyebrow + Headline */}
-            <div className="cf-vision-top">
-              <div className="cf-vision-eyebrow">
-                <span className="cf-vision-eyebrow-line" />
-                <span className="cf-vision-eyebrow-text">
-                  CULTURE FLOW · VISION & ARCHITECTURE
-                </span>
-              </div>
-
-              <h1 className="cf-vision-title">
-                The vision behind <br />
-                Culture Flow
-              </h1>
-            </div>
-
-            {/* Bottom 2-Column Split: Button on left, Narrative on right (Matches Reference) */}
-            <div className="cf-vision-bottom-row">
-              <div className="cf-vision-cta-col">
-                <Link href="/#waitlist" className="cf-vision-cta-btn">
-                  <span>SCHEDULE A DIALOGUE</span>
-                  <span className="cf-vision-arrow">→</span>
-                </Link>
-              </div>
-
-              <div className="cf-vision-narrative-col">
-                <p className="cf-vision-narrative-p">
-                  My journey with global education began with a personal realization:
-                  navigating international pathways shouldn&apos;t be an anxiety-ridden
-                  maze of unvetted commercial agents, opaque commissions, and transactional
-                  promises. It should be a dignified, life-defining milestone.
-                </p>
-                <p className="cf-vision-narrative-p">
-                  Having experienced international academic mobility firsthand, I saw how
-                  the traditional consultancy model treated students as commercial inventory
-                  rather than ambitious scholars. Culture Flow was created to reverse that —
-                  partnering directly with world-class universities to architect genuine,
-                  transparent pathways where students don&apos;t just follow — they embrace.
-                </p>
-              </div>
-            </div>
-
-          </div>
-
-          {/* Right Column: Cinematic Tall Portrait Image (0px radius, straight crop) */}
-          <div className="cf-vision-right">
-            <div className="cf-vision-img-frame">
-              <img
-                src="/images/about/founder_vision.jpg"
-                alt="Culture Flow Vision"
-                className="cf-vision-img"
-              />
-            </div>
-          </div>
-
+      {/* ═══ DARK INTRO — vertical brand statement ═══ */}
+      <section className="au-intro">
+        <span className="au-intro-vertical" aria-hidden>
+          CULTURE FLOW — GLOBAL PATHWAYS · EST. 2021
+        </span>
+        <div className="au-intro-inner">
+          <Reveal>
+            <p className="au-eyebrow au-eyebrow--gold">SINCE 2021 · NEW DELHI</p>
+          </Reveal>
+          <Reveal>
+            <h1 className="au-intro-title">
+              We move scholars,
+              <br />
+              <em>not files.</em>
+            </h1>
+          </Reveal>
+          <Reveal>
+            <p className="au-intro-sub">
+              Culture Flow was built on a simple refusal — that studying abroad should
+              never be an anxiety-ridden maze of agents and commissions. It should be a
+              dignified, life-defining milestone.
+            </p>
+          </Reveal>
+        </div>
+        <div className="au-scroll-hint" aria-hidden>
+          <span>SCROLL</span>
+          <i />
         </div>
       </section>
 
-      {/* ═════════════════════════════════════════════════════════════
-          SECTION 2: CORE VISION PILLARS (Minimalist Manifesto)
-          ═════════════════════════════════════════════════════════════ */}
-      <section className="cf-pillars-section">
-        <div className="cf-pillars-container">
-          <div className="cf-pillars-header">
-            <span className="cf-pillars-tag">OUR CONVICTIONS</span>
-            <h2 className="cf-pillars-heading">How we redefine international student mobility.</h2>
-          </div>
+      {/* ═══ CHAPTER I — THE WORK (full-bleed documentary photo) ═══ */}
+      <section className="au-chapter1">
+        <img src="/images/about/counseling.jpg" alt="Culture Flow counselors mentoring scholars" className="au-ch1-img" />
+        <div className="au-ch1-overlay" />
+        <div className="au-ch1-content">
+          <Reveal>
+            <p className="au-eyebrow au-eyebrow--yellow">CHAPTER I — THE WORK</p>
+          </Reveal>
+          <Reveal>
+            <h2 className="au-ch1-title">
+              The warmth in
+              <br />
+              <em>every departure.</em>
+            </h2>
+          </Reveal>
+        </div>
+        <div className="au-chapter-stat">
+          <StatNumeral value={52000} />
+          <span className="au-stat-label">SCHOLARS MOBILIZED</span>
+        </div>
+      </section>
 
-          <div className="cf-pillars-grid">
-            {VISION_PILLARS.map((pillar) => (
-              <div key={pillar.num} className="cf-pillar-card">
-                <span className="cf-pillar-num">{pillar.num}</span>
-                <h3 className="cf-pillar-title">{pillar.title}</h3>
-                <p className="cf-pillar-desc">{pillar.desc}</p>
+      {/* ═══ CHAPTER II — HISTORY (horizontal gold timeline) ═══ */}
+      <section className="au-chapter2">
+        <div className="au-ch2-head">
+          <Reveal>
+            <p className="au-eyebrow au-eyebrow--gold">CHAPTER II — HISTORY</p>
+          </Reveal>
+          <Reveal>
+            <h2 className="au-ch2-title">Five years, one conviction.</h2>
+          </Reveal>
+          <Reveal>
+            <p className="au-ch2-sub">
+              From a small advisory room in New Delhi to a mobility ecosystem spanning
+              three continents.
+            </p>
+          </Reveal>
+        </div>
+
+        <div ref={timelineRef} className="au-timeline">
+          <div className="au-timeline-line">
+            <div className="au-timeline-fill" style={{ transform: `scaleX(${progress})` }} />
+          </div>
+          <div className="au-timeline-nodes">
+            {HISTORY.map((m, i) => (
+              <div
+                key={m.year}
+                className={`au-node ${i <= active ? "au-node--passed" : ""} ${i === active ? "au-node--active" : ""}`}
+              >
+                <span className="au-node-dot" />
+                <span className="au-node-year">{m.year}</span>
               </div>
             ))}
           </div>
+          <div className="au-timeline-detail" key={milestone.year}>
+            <h3>{milestone.title}</h3>
+            <p>{milestone.desc}</p>
+          </div>
+        </div>
+
+        <div className="au-chapter-stat au-chapter-stat--passive">
+          <span className="au-stat">200+</span>
+          <span className="au-stat-label">PARTNER INSTITUTIONS</span>
         </div>
       </section>
 
-      {/* ═════════════════════════════════════════════════════════════
-          SECTION 3: OUR JOURNEY (Aesthetic Minimal Scroll Timeline)
-          ═════════════════════════════════════════════════════════════ */}
-      <section ref={timelineRef} id="journey" className="cf-journey-section">
-        <div className="cf-journey-container">
-
-          {/* Section Heading */}
-          <div className="cf-journey-header">
-            <div className="cf-journey-tag">
-              <span className="cf-journey-tag-dot" />
-              <span>CHRONOLOGY OF IMPACT · 2021 — PRESENT</span>
+      {/* ═══ CHAPTER III — CRAFT (photo panels + stat) ═══ */}
+      <section className="au-chapter3">
+        <div className="au-ch3-head">
+          <Reveal>
+            <p className="au-eyebrow au-eyebrow--gold">CHAPTER III — CRAFT</p>
+          </Reveal>
+          <Reveal>
+            <h2 className="au-ch3-title">
+              Precision in <em>every transfer.</em>
+            </h2>
+          </Reveal>
+        </div>
+        <div className="au-ch3-panels">
+          <Reveal className="au-panel-wrap">
+            <div className="au-panel">
+              <img src="/images/about/campus.jpg" alt="Culture Flow scholar on campus" loading="lazy" />
             </div>
-            <h2 className="cf-journey-title">Our Journey</h2>
-            <p className="cf-journey-subtitle">
-              From a small advisory room in New Delhi to a premier global mobility
-              ecosystem connecting ambitious scholars with 200+ world-class institutions.
-            </p>
+            <p className="au-panel-cap">Campus integration — ETH Zürich</p>
+          </Reveal>
+          <Reveal className="au-panel-wrap">
+            <div className="au-panel">
+              <img src="/images/about/partnership.jpg" alt="Institutional agreement handshake" loading="lazy" />
+            </div>
+            <p className="au-panel-cap">Direct faculty agreements</p>
+          </Reveal>
+          <Reveal className="au-panel-wrap">
+            <div className="au-panel">
+              <img src="/images/about/editorial.jpg" alt="Collegiate cloisters" loading="lazy" />
+            </div>
+            <p className="au-panel-cap">Collegiate fellowships</p>
+          </Reveal>
+        </div>
+        <div className="au-chapter-stat">
+          <StatNumeral value={99.4} decimals={1} suffix="%" />
+          <span className="au-stat-label">VISA &amp; ADMISSIONS SUCCESS</span>
+        </div>
+      </section>
+
+      {/* ═══ CHAPTER IV — THE HAND (cream info chapter) ═══ */}
+      <section className="au-chapter4">
+        <div className="au-ch4-grid">
+          <div className="au-ch4-left">
+            <Reveal>
+              <p className="au-eyebrow au-eyebrow--dark">CHAPTER IV — PEOPLE</p>
+            </Reveal>
+            <Reveal>
+              <h2 className="au-ch4-title">
+                Where to
+                <br />
+                <em>find us.</em>
+              </h2>
+            </Reveal>
+            <Reveal>
+              <ul className="au-offices">
+                <li>
+                  <span className="au-office-city">New Delhi</span>
+                  <span className="au-office-role">Headquarters</span>
+                </li>
+                <li>
+                  <span className="au-office-city">Mumbai</span>
+                  <span className="au-office-role">Regional Advisory</span>
+                </li>
+                <li>
+                  <span className="au-office-city">London</span>
+                  <span className="au-office-role">Liaison Desk</span>
+                </li>
+                <li>
+                  <span className="au-office-city">Berlin</span>
+                  <span className="au-office-role">Liaison Desk</span>
+                </li>
+              </ul>
+            </Reveal>
           </div>
 
-          {/* ─── Scroll-Driven Interactive Timeline ─── */}
-          <div className="cf-timeline-wrapper">
-            
-            {/* Central Vertical Spine & Glowing Progress Beam */}
-            <div className="cf-timeline-spine">
-              <div
-                className="cf-timeline-progress-bar"
-                style={{ transform: `scaleY(${scrollProgress})` }}
-              />
-            </div>
-
-            {/* Milestone Items */}
-            <div className="cf-timeline-list">
-              {TIMELINE_DATA.map((milestone, idx) => {
-                const isActive = activeMilestone === idx;
-                const isPassed = activeMilestone > idx;
-                const isEven = idx % 2 === 0;
-
-                return (
-                  <div
-                    key={milestone.year}
-                    ref={(el) => {
-                      milestoneRefs.current[idx] = el;
-                    }}
-                    className={`cf-timeline-item ${isEven ? "cf-timeline-item--left" : "cf-timeline-item--right"} ${
-                      isActive ? "cf-timeline-item--active" : ""
-                    } ${isPassed ? "cf-timeline-item--passed" : ""}`}
-                  >
-                    {/* Glowing Node on Spine */}
-                    <div className="cf-timeline-node">
-                      <div className="cf-timeline-node-inner" />
-                    </div>
-
-                    {/* Milestone Card */}
-                    <div className="cf-timeline-card">
-                      
-                      {/* Top Meta: Phase + Badge */}
-                      <div className="cf-timeline-meta">
-                        <span className="cf-timeline-phase">{milestone.phase}</span>
-                        {milestone.badge && (
-                          <span className="cf-timeline-badge">{milestone.badge}</span>
-                        )}
-                      </div>
-
-                      {/* Big Year Row */}
-                      <div className="cf-timeline-year-row">
-                        <span className="cf-timeline-year">{milestone.year}</span>
-                        <div className="cf-timeline-stat-pill">
-                          <span className="cf-timeline-stat-val">{milestone.metric}</span>
-                          <span className="cf-timeline-stat-lbl">{milestone.metricLabel}</span>
-                        </div>
-                      </div>
-
-                      {/* Title & Tagline */}
-                      <h3 className="cf-timeline-heading">{milestone.title}</h3>
-                      <p className="cf-timeline-tagline">{milestone.tagline}</p>
-
-                      {/* Editorial Narrative */}
-                      <p className="cf-timeline-desc">{milestone.description}</p>
-
-                      {/* Accompanying Photo Card (if milestone has image) */}
-                      {milestone.image && (
-                        <div className="cf-timeline-photo-box">
-                          <img
-                            src={milestone.image}
-                            alt={milestone.imageAlt || milestone.title}
-                            className="cf-timeline-photo"
-                            loading="lazy"
-                          />
-                          <div className="cf-timeline-photo-caption">
-                            <span>{milestone.imageAlt}</span>
-                          </div>
-                        </div>
-                      )}
+          <div className="au-ch4-right">
+            <Reveal>
+              <div className="au-founder-frame">
+                <img src="/images/about/founder_vision.jpg" alt="Culture Flow founder" loading="lazy" />
+              </div>
+            </Reveal>
+            <Reveal>
+              <div className="au-pillar-list">
+                {PILLARS.map((p) => (
+                  <div key={p.num} className="au-pillar">
+                    <span className="au-pillar-num">{p.num}</span>
+                    <div>
+                      <h3>{p.title}</h3>
+                      <p>{p.desc}</p>
                     </div>
                   </div>
-                );
-              })}
-            </div>
-
+                ))}
+              </div>
+            </Reveal>
           </div>
-
         </div>
-      </section>
 
-      {/* ═════════════════════════════════════════════════════════════
-          SECTION 4: INVITATION BANNER
-          ═════════════════════════════════════════════════════════════ */}
-      <section className="cf-about-cta-section">
-        <div className="cf-about-cta-card">
-          <div className="cf-about-cta-content">
-            <span className="cf-about-cta-tag">THE INVITATION</span>
-            <h2 className="cf-about-cta-heading">
-              Ready to take your global step?
-            </h2>
-            <p className="cf-about-cta-body">
-              Whether you are an ambitious student seeking tier-1 pathway guidance or an
-              institution exploring international articulation partnerships, our doors are open.
-            </p>
-            <div className="cf-about-cta-buttons">
-              <Link href="/waitlist" className="cf-about-btn-solid">
+        <Reveal>
+          <div className="au-ch4-cta">
+            <h3>Ready to take your global step?</h3>
+            <div className="au-ch4-btns">
+              <Link href="/waitlist" className="au-btn au-btn--solid">
                 <span>Join Waitlist</span>
-                <span className="cf-btn-arrow">→</span>
+                <span>→</span>
               </Link>
-              <Link href="/programs" className="cf-about-btn-outline">
+              <Link href="/programs" className="au-btn au-btn--outline">
                 <span>Explore Programs</span>
               </Link>
             </div>
           </div>
+        </Reveal>
+
+        <div className="au-chapter-stat au-chapter-stat--dark-on-cream">
+          <span className="au-stat">1,400+</span>
+          <span className="au-stat-label">SCHOLARS GLOBALLY PLACED</span>
         </div>
       </section>
 
-      {/* ═══ FOOTER ═══ */}
       <Footer />
     </div>
   );
