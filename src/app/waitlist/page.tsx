@@ -377,6 +377,31 @@ export default function WaitlistPage() {
                 if (step1Valid) setStep(2);
               }}
             >
+              {/* Role segmented control, like the Liebe/Lieber/Hallo radios */}
+              <fieldset className="wl-role">
+                <legend>I am a…</legend>
+                <div className="wl-role-options">
+                  {(
+                    [
+                      ["student", "Student"],
+                      ["parent", "Parent"],
+                      ["corporate", "Corporate Employee"],
+                    ] as const
+                  ).map(([value, label]) => (
+                    <label key={value} className="wl-radio">
+                      <input
+                        type="radio"
+                        name="role"
+                        checked={form.role === value}
+                        onChange={() => set("role", value)}
+                      />
+                      <span className="wl-radio-dot" aria-hidden />
+                      {label}
+                    </label>
+                  ))}
+                </div>
+              </fieldset>
+
               <label className="wl-field">
                 <span>Full name *</span>
                 <input
