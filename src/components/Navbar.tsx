@@ -32,7 +32,9 @@ export default function Navbar({ pageLabel, logoTheme = "auto" }: NavbarProps) {
 
   const activeTitle = getPageTitle();
 
-  const isYellowLogo = logoTheme === "yellow";
+  // Determine if logo should be yellow (on About Us page or explicitly requested)
+  const isAbout = pathname?.includes("about") || pageLabel?.toLowerCase().includes("about");
+  const isYellowLogo = logoTheme === "yellow" || (logoTheme === "auto" && isAbout);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -58,19 +60,11 @@ export default function Navbar({ pageLabel, logoTheme = "auto" }: NavbarProps) {
     setMobileMenuOpen(false);
   }, [pathname]);
 
-  const links = [
-    { href: "/", label: "Home", active: pathname === "/" },
-    { href: "/about-us", label: "About us", active: pathname.includes("about") },
-    { href: "/programs", label: "Programs", active: pathname.startsWith("/programs") },
-    { href: "/safety", label: "Safety & Trust", active: pathname.startsWith("/safety") },
-    { href: "/institutions", label: "Onboard with us", active: pathname.startsWith("/institutions") },
-  ];
-
   return (
     <header className={`cf-navbar ${scrolled ? "cf-navbar--scrolled" : ""} ${hidden ? "cf-navbar--hidden" : ""}`}>
       <div className="cf-navbar-container">
-
-        {/* ─── LEFT: Logo ─── */}
+        
+        {/* ─── LEFT: Culture Flow Logo at Top Left Corner ─── */}
         <div className="cf-navbar-col cf-navbar-col--left">
           <Link href="/" className="cf-navbar-logo-link" aria-label="Culture Flow Home">
             <img
@@ -81,21 +75,42 @@ export default function Navbar({ pageLabel, logoTheme = "auto" }: NavbarProps) {
           </Link>
         </div>
 
-        {/* ─── RIGHT: Links + CTA + burger ─── */}
+        {/* ─── RIGHT: Navigation Links + Pill CTA ─── */}
         <div className="cf-navbar-col cf-navbar-col--right">
           <nav className="cf-navbar-nav" aria-label="Main Navigation">
-            {links.map((l) => (
-              <Link
-                key={l.href}
-                href={l.href}
-                className={`cf-nav-link ${l.active ? "cf-nav-link--active" : ""}`}
-              >
-                {l.label}
-              </Link>
-            ))}
+            <Link
+              href="/"
+              className={`cf-nav-link ${pathname === "/" ? "cf-nav-link--active" : ""}`}
+            >
+              HOME
+            </Link>
+            <Link
+              href="/about-us"
+              className={`cf-nav-link ${pathname.includes("about") ? "cf-nav-link--active" : ""}`}
+            >
+              ABOUT US
+            </Link>
+            <Link
+              href="/programs"
+              className={`cf-nav-link ${pathname.startsWith("/programs") ? "cf-nav-link--active" : ""}`}
+            >
+              PROGRAMS
+            </Link>
+            <Link
+              href="/safety"
+              className={`cf-nav-link ${pathname.startsWith("/safety") ? "cf-nav-link--active" : ""}`}
+            >
+              SAFETY & TRUST
+            </Link>
+            <Link
+              href="/institutions"
+              className={`cf-nav-link ${pathname.startsWith("/institutions") ? "cf-nav-link--active" : ""}`}
+            >
+              ONBOARD WITH US
+            </Link>
           </nav>
 
-          {/* Rounded-rect CTA (HMH-style) */}
+          {/* Pill Action Button */}
           <Link href="/waitlist" className="cf-nav-cta-pill">
             <span>Join Waitlist</span>
           </Link>
@@ -107,7 +122,6 @@ export default function Navbar({ pageLabel, logoTheme = "auto" }: NavbarProps) {
             aria-label="Toggle Navigation Menu"
             aria-expanded={mobileMenuOpen}
           >
-            <span className="cf-hamburger-bar" />
             <span className="cf-hamburger-bar" />
             <span className="cf-hamburger-bar" />
           </button>
@@ -122,17 +136,46 @@ export default function Navbar({ pageLabel, logoTheme = "auto" }: NavbarProps) {
           </div>
 
           <div className="cf-mobile-nav-links">
-            {links.map((l, i) => (
-              <Link
-                key={l.href}
-                href={l.href}
-                onClick={() => setMobileMenuOpen(false)}
-                className={`cf-mobile-link ${l.active ? "cf-mobile-link--active" : ""}`}
-              >
-                <span className="cf-mobile-link-num">0{i + 1}</span>
-                <span>{l.label}</span>
-              </Link>
-            ))}
+            <Link
+              href="/"
+              onClick={() => setMobileMenuOpen(false)}
+              className={`cf-mobile-link ${pathname === "/" ? "cf-mobile-link--active" : ""}`}
+            >
+              <span className="cf-mobile-link-num">01</span>
+              <span>HOME</span>
+            </Link>
+            <Link
+              href="/about-us"
+              onClick={() => setMobileMenuOpen(false)}
+              className={`cf-mobile-link ${pathname.includes("about") ? "cf-mobile-link--active" : ""}`}
+            >
+              <span className="cf-mobile-link-num">02</span>
+              <span>ABOUT US</span>
+            </Link>
+            <Link
+              href="/programs"
+              onClick={() => setMobileMenuOpen(false)}
+              className={`cf-mobile-link ${pathname.startsWith("/programs") ? "cf-mobile-link--active" : ""}`}
+            >
+              <span className="cf-mobile-link-num">03</span>
+              <span>PROGRAMS</span>
+            </Link>
+            <Link
+              href="/safety"
+              onClick={() => setMobileMenuOpen(false)}
+              className="cf-mobile-link"
+            >
+              <span className="cf-mobile-link-num">04</span>
+              <span>SAFETY & TRUST</span>
+            </Link>
+            <Link
+              href="/institutions"
+              onClick={() => setMobileMenuOpen(false)}
+              className={`cf-mobile-link ${pathname.startsWith("/institutions") ? "cf-mobile-link--active" : ""}`}
+            >
+              <span className="cf-mobile-link-num">05</span>
+              <span>ONBOARD WITH US</span>
+            </Link>
           </div>
 
           <div className="cf-mobile-drawer-bottom">

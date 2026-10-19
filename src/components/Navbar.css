@@ -1,7 +1,6 @@
 /* ═══════════════════════════════════════════════════════════════
-   Culture Flow — HMH-style white trust bar navbar
-   (media-harbour.com pattern: white bar, natural-case links,
-    rounded-rect CTA right, hairline border, hide-on-scroll)
+   Culture Flow — Minimal Editorial Navbar
+   Inspired by Triptych grid layout with warm light luxury aesthetic
    ═══════════════════════════════════════════════════════════════ */
 
 .cf-navbar {
@@ -11,9 +10,13 @@
   right: 0;
   z-index: 90;
   width: 100%;
-  background: #FFFFFF;
-  border-bottom: 1px solid rgba(11, 11, 11, 0.06);
-  transition: box-shadow 0.35s ease,
+  background: transparent;
+  padding-top: calc(clamp(6px, 0.8vw, 14px) + clamp(28px, 3.6vh, 48px));
+  padding-bottom: clamp(14px, 1.8vh, 22px);
+  transition: background-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              padding 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.4s ease,
+              box-shadow 0.4s ease,
               transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -23,7 +26,13 @@
 }
 
 .cf-navbar--scrolled {
-  box-shadow: 0 4px 20px rgba(11, 11, 11, 0.06);
+  padding-top: 14px;
+  padding-bottom: 14px;
+  background: rgba(253, 252, 244, 0.94);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(11, 11, 11, 0.08);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04);
 }
 
 .cf-navbar-container {
@@ -33,13 +42,13 @@
   width: 100%;
   max-width: none;
   margin: 0;
-  min-height: 68px;
-  padding-left: clamp(20px, 4vw, 56px);
-  padding-right: clamp(20px, 4vw, 56px);
+  min-height: auto;
+  padding-left: calc(clamp(6px, 0.8vw, 14px) + clamp(20px, 2.5vw, 48px));
+  padding-right: calc(clamp(6px, 0.8vw, 14px) + clamp(20px, 2.5vw, 48px));
   box-sizing: border-box;
 }
 
-/* ─── Left: Brand Logo ─── */
+/* ─── Left: Brand Logo at Top Left Corner ─── */
 .cf-navbar-col--left {
   display: flex;
   align-items: center;
@@ -49,145 +58,193 @@
   display: flex;
   align-items: center;
   text-decoration: none;
-  transition: opacity 0.25s ease;
+  transition: opacity 0.25s ease, transform 0.25s ease;
 }
 
 .cf-navbar-logo-link:hover {
-  opacity: 0.85;
+  opacity: 0.88;
+  transform: translateY(-1px);
 }
 
 .cf-navbar-logo-img {
-  height: clamp(30px, 2.6vw, 38px);
+  height: clamp(34px, 3.2vw, 46px);
   width: auto;
   object-fit: contain;
   display: block;
   filter: brightness(0);
-  transition: filter 0.25s ease;
+  transition: opacity 0.25s ease, transform 0.25s ease, filter 0.25s ease;
 }
 
 .cf-navbar-logo-img--yellow {
   filter: none !important;
 }
 
-/* ─── Right: Links + CTA + burger ─── */
+/* ─── Right: Navigation Links & CTA ─── */
 .cf-navbar-col--right {
   display: flex;
   align-items: center;
-  gap: clamp(14px, 1.6vw, 26px);
+  gap: clamp(16px, 2.2vw, 36px);
 }
 
 .cf-navbar-nav {
   display: flex;
   align-items: center;
-  gap: clamp(16px, 1.8vw, 28px);
+  gap: clamp(18px, 2.4vw, 34px);
 }
 
-/* HMH-style links: natural case, medium weight, quiet gray→black */
+/* Base Link Styling (Dark Obsidian over yellow hero) */
 .cf-nav-link {
-  font-family: var(--font-body), "Inter", sans-serif;
-  font-size: 0.92rem;
-  font-weight: 500;
-  letter-spacing: 0.01em;
-  color: rgba(11, 11, 11, 0.72);
+  position: relative;
+  font-family: var(--font-body), "Plus Jakarta Sans", sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: rgba(11, 11, 11, 0.85);
   text-decoration: none;
   padding: 6px 0;
-  transition: color 0.2s ease;
+  transition: color 0.25s ease;
   white-space: nowrap;
+}
+
+.cf-nav-link::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background: #0B0B0B;
+  transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .cf-nav-link:hover {
   color: #0B0B0B;
 }
 
-.cf-nav-link--active {
-  color: #0B0B0B;
-  font-weight: 600;
+.cf-nav-link:hover::after {
+  width: 100%;
 }
 
-/* ─── Rounded-rect CTA (HMH-style filled button) ─── */
+.cf-nav-link--active {
+  color: #0B0B0B;
+  font-weight: 700;
+}
+
+.cf-nav-link--active::after {
+  width: 100%;
+  background: #0B0B0B;
+}
+
+/* Scrolled Nav Links (Over light cream background) */
+.cf-navbar--scrolled .cf-nav-link {
+  color: rgba(11, 11, 11, 0.72);
+}
+
+.cf-navbar--scrolled .cf-nav-link:hover {
+  color: var(--color-obraz-black, #0B0B0B);
+}
+
+.cf-navbar--scrolled .cf-nav-link--active {
+  color: var(--color-obraz-black, #0B0B0B);
+}
+
+/* Pill CTA Button (Obsidian Pill over Yellow Hero) */
 .cf-nav-cta-pill {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 10px 20px;
-  border-radius: 10px;
-  background: var(--color-yellow, #FFCD00);
-  color: #0B0B0B;
-  font-family: var(--font-body), "Inter", sans-serif;
-  font-size: 0.88rem;
-  font-weight: 600;
-  letter-spacing: 0.01em;
+  padding: 10px 24px;
+  border-radius: 50px;
+  background: #0B0B0B;
+  color: #FFFFFF;
+  font-family: var(--font-body), "Plus Jakarta Sans", sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
   text-decoration: none;
   white-space: nowrap;
-  transition: filter 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  border: 1px solid #0B0B0B;
+  box-shadow: 0 4px 16px rgba(11, 11, 11, 0.22);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .cf-nav-cta-pill:hover {
-  filter: brightness(0.96);
+  background: #232328;
+  color: #FFFFFF;
+  border-color: #232328;
+  box-shadow: 0 6px 20px rgba(11, 11, 11, 0.32);
   transform: translateY(-1px);
-  box-shadow: 0 4px 14px rgba(255, 205, 0, 0.45);
 }
 
-/* ─── Hamburger (mobile) ─── */
+/* Scrolled Pill CTA (Obsidian Black over cream) */
+.cf-navbar--scrolled .cf-nav-cta-pill {
+  background: var(--color-obraz-black, #0B0B0B);
+  color: var(--color-moverunion-white, #FDFCF4);
+  border-color: rgba(11, 11, 11, 0.15);
+  box-shadow: 0 4px 14px rgba(11, 11, 11, 0.12);
+}
+
+.cf-navbar--scrolled .cf-nav-cta-pill:hover {
+  background: var(--color-yellow, #FFCD00);
+  color: var(--color-obraz-black, #0B0B0B);
+  border-color: var(--color-yellow, #FFCD00);
+  box-shadow: 0 6px 20px rgba(255, 205, 0, 0.4);
+}
+
+/* Mobile Hamburger */
 .cf-nav-hamburger {
   display: none;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 4.5px;
+  gap: 5px;
   width: 40px;
   height: 40px;
   padding: 8px;
   cursor: pointer;
-  background: rgba(11, 11, 11, 0.03);
-  border: 1px solid rgba(11, 11, 11, 0.08);
-  border-radius: 10px;
+  background: rgba(0, 34, 68, 0.04);
+  border: 1px solid rgba(0, 34, 68, 0.08);
+  border-radius: 8px;
   transition: background-color 0.25s ease;
 }
 
 .cf-nav-hamburger:hover {
-  background: rgba(11, 11, 11, 0.07);
+  background: rgba(0, 34, 68, 0.08);
 }
 
 .cf-hamburger-bar {
   display: block;
-  width: 18px;
-  height: 1.75px;
+  width: 20px;
+  height: 1.5px;
   background: #0B0B0B;
   border-radius: 1px;
   transition: transform 0.3s ease, opacity 0.3s ease, background-color 0.3s ease;
 }
 
-.cf-hamburger-bar:nth-child(2) {
-  width: 13px;
-  align-self: flex-end;
-  margin-right: 3px;
+.cf-navbar--scrolled .cf-hamburger-bar {
+  background: #0B0B0B;
 }
 
 .cf-nav-hamburger--open .cf-hamburger-bar:first-child {
-  transform: translateY(6.25px) rotate(45deg);
-}
-
-.cf-nav-hamburger--open .cf-hamburger-bar:nth-child(2) {
-  opacity: 0;
+  transform: translateY(3.25px) rotate(45deg);
 }
 
 .cf-nav-hamburger--open .cf-hamburger-bar:last-child {
-  transform: translateY(-2.75px) rotate(-45deg);
+  transform: translateY(-3.25px) rotate(-45deg);
 }
 
 /* ─── Mobile Drawer ─── */
 .cf-mobile-drawer {
   display: none;
   position: fixed;
-  top: 68px;
+  top: 72px;
   left: 0;
   right: 0;
   width: 100%;
-  background: rgba(255, 255, 255, 0.98);
+  background: rgba(246, 238, 221, 0.98);
   backdrop-filter: blur(24px);
-  border-bottom: 1px solid rgba(11, 11, 11, 0.08);
-  box-shadow: 0 20px 40px rgba(11, 11, 11, 0.08);
+  border-bottom: 1px solid rgba(0, 34, 68, 0.12);
+  box-shadow: 0 20px 40px rgba(0, 34, 68, 0.08);
   opacity: 0;
   pointer-events: none;
   transform: translateY(-8px);
@@ -213,9 +270,9 @@
   gap: 8px;
   font-size: 0.72rem;
   letter-spacing: 0.12em;
-  color: rgba(11, 11, 11, 0.55);
+  color: rgba(0, 34, 68, 0.6);
   padding-bottom: 12px;
-  border-bottom: 1px solid rgba(11, 11, 11, 0.06);
+  border-bottom: 1px solid rgba(0, 34, 68, 0.06);
 }
 
 .cf-mobile-nav-links {
@@ -229,22 +286,23 @@
   align-items: center;
   gap: 14px;
   font-family: var(--font-body), "Inter", sans-serif;
-  font-size: 1.02rem;
+  font-size: 1.05rem;
   font-weight: 600;
-  color: rgba(11, 11, 11, 0.85);
+  letter-spacing: 0.08em;
+  color: #002244;
   text-decoration: none;
   padding: 10px 0;
-  border-bottom: 1px solid rgba(11, 11, 11, 0.04);
+  border-bottom: 1px solid rgba(0, 34, 68, 0.04);
 }
 
 .cf-mobile-link-num {
   font-size: 0.72rem;
-  color: var(--color-gold, #C89C66);
+  color: #C89C66;
   font-family: var(--font-body);
 }
 
 .cf-mobile-link--active {
-  color: #0B0B0B;
+  color: #C89C66;
 }
 
 .cf-mobile-drawer-bottom {
@@ -257,16 +315,17 @@
   justify-content: center;
   width: 100%;
   padding: 14px 24px;
-  border-radius: 12px;
-  background: var(--color-yellow, #FFCD00);
-  color: #0B0B0B;
-  font-size: 0.9rem;
+  border-radius: 50px;
+  background: #050A30;
+  color: #F6EEDD;
+  font-size: 0.85rem;
   font-weight: 600;
+  letter-spacing: 0.08em;
   text-decoration: none;
 }
 
-/* ─── Responsive ─── */
-@media (max-width: 1024px) {
+/* ─── Responsive Media Queries ─── */
+@media (max-width: 900px) {
   .cf-navbar-nav,
   .cf-nav-cta-pill {
     display: none;
@@ -284,19 +343,24 @@
 @media (max-width: 600px) {
   .cf-navbar-container {
     padding: 0 16px;
-    min-height: 60px;
+    min-height: 68px;
+  }
+
+  .cf-navbar-page-title {
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
   }
 
   .cf-navbar-logo-img {
-    height: 28px;
+    height: 32px;
   }
 
   .cf-mobile-drawer {
-    top: 60px;
+    top: 68px;
   }
 }
 
-/* ─── Dark background variant (unused, kept for compat) ─── */
+/* ─── Dark background variant (waitlist etc.) ─── */
 .cf-navbar--dark .cf-navbar-page-title {
   color: #FCFCFF;
 }
