@@ -90,11 +90,6 @@ const step2Schema = z.object({
   consent: z.literal(true, { message: "You must agree to continue" }),
 });
 
-const COUNTRY_CODES = [
-  "+91", "+1", "+44", "+61", "+65", "+971", "+49", "+977",
-  "+880", "+94", "+966", "+974", "+60", "+92", "+234",
-];
-
 const TRACKS: { id: TrackId; label: string }[] = [
   { id: "tech", label: "Tech & Innovation" },
   { id: "sustainability", label: "Sustainability & Social Impact" },
@@ -127,7 +122,6 @@ export default function WaitlistPage() {
     fullName: "",
     email: "",
     phone: "",
-    phoneCode: "+91",
     role: "student" as WaitlistRole,
     city: "",
     college: "",
@@ -212,7 +206,7 @@ export default function WaitlistPage() {
         role: form.role,
         city: form.city.trim(),
         consent: true,
-        phone: form.phone.trim() ? `${form.phoneCode} ${form.phone.trim()}` : undefined,
+        phone: form.phone.trim() || undefined,
         college: form.college.trim() || undefined,
         yearOfStudy:
           form.role === "student" && form.yearOfStudy
@@ -448,27 +442,13 @@ export default function WaitlistPage() {
                 </label>
                 <label className="wl-field">
                   <span>Mobile / WhatsApp</span>
-                  <div className="wl-phone-row">
-                    <select
-                      className="wl-phone-code"
-                      value={form.phoneCode}
-                      onChange={(e) => set("phoneCode", e.target.value)}
-                      aria-label="Country code"
-                    >
-                      {COUNTRY_CODES.map((code) => (
-                        <option key={code} value={code}>
-                          {code}
-                        </option>
-                      ))}
-                    </select>
-                    <input
-                      type="tel"
-                      value={form.phone}
-                      onChange={(e) => set("phone", e.target.value)}
-                      autoComplete="tel"
-                      placeholder="98765 43210"
-                    />
-                  </div>
+                  <input
+                    type="tel"
+                    value={form.phone}
+                    onChange={(e) => set("phone", e.target.value)}
+                    autoComplete="tel"
+                    placeholder="+91 98765 43210"
+                  />
                 </label>
               </div>
 

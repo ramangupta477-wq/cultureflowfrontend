@@ -178,26 +178,6 @@
 }
 
 /* Country code + phone number */
-.wl-phone-row {
-  display: flex;
-  gap: 8px;
-  align-items: stretch;
-}
-
-.wl-phone-row .wl-phone-code {
-  width: 88px;
-  flex-shrink: 0;
-  padding-left: 14px;
-  padding-right: 30px;
-  background-position: right 10px center;
-  cursor: pointer;
-}
-
-.wl-phone-row input {
-  flex: 1;
-  min-width: 0;
-}
-
 .wl-field input::placeholder {
   color: rgba(11, 11, 11, 0.35);
 }
