@@ -5,7 +5,8 @@
 .safety-page {
   background: var(--color-bg, #FDFCF4);
   color: var(--color-obraz-black, #0B0B0B);
-  padding: 96px clamp(12px, 2vw, 32px) 0;
+  /* top spacing comes from .sf-hero itself (144px incl. navbar) */
+  padding: 0 clamp(12px, 2vw, 32px) 0;
 }
 
 /* ─── Reveal-on-scroll ─── */
@@ -687,8 +688,8 @@
 
 /* ═══ HERO — tile-matrix (Bible/History reference in CF palette) ═══ */
 .sf-hero {
-  padding: 124px clamp(14px, 2.4vw, 28px) 28px;
-  min-height: 100svh;
+  padding: 112px clamp(14px, 2.4vw, 28px) 20px;
+  height: 100svh;
   display: flex;
 }
 
@@ -701,8 +702,8 @@
   width: 100%;
   max-width: 1280px;
   margin: 0 auto;
-  grid-template-rows: 1.05fr 0.85fr 0.95fr 0.65fr;
-  min-height: calc(100svh - 200px);
+  grid-template-rows: minmax(0, 1.05fr) minmax(0, 0.85fr) minmax(0, 0.95fr) minmax(0, 0.65fr);
+  min-height: 0;
   background: var(--color-warm-white, #F1F0EE);
   border-radius: 26px;
   padding: clamp(16px, 2.4vw, 30px);
@@ -711,7 +712,9 @@
 .sf-hg {
   background: rgba(255, 255, 255, 0.62);
   border-radius: 20px;
-  min-height: 110px;
+  min-height: 0;
+  min-width: 0;
+  overflow: hidden;
 }
 
 .sf-hg-word {
@@ -915,7 +918,7 @@
 }
 
 @media (max-width: 680px) {
-  .sf-hero { padding-top: 96px; min-height: 0; }
+  .sf-hero { padding-top: 96px; height: auto; min-height: 0; }
   .sf-hero-grid { grid-template-columns: 1fr 1fr; grid-template-rows: none; min-height: 0; }
   .sf-hg-w1 { grid-column: 1; grid-row: 1; }
   .sf-hg-chip { grid-column: 2; grid-row: 1; }
