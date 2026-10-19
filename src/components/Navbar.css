@@ -123,9 +123,9 @@
   box-shadow: 0 6px 18px rgba(255, 205, 0, 0.5);
 }
 
-/* ── Hamburger: staggered 3 lines, always visible (HMH desktop) ── */
+/* ── Hamburger: staggered 3 lines — mobile only ── */
 .cf-nav-hamburger {
-  display: flex;
+  display: none;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
@@ -180,21 +180,18 @@
   box-shadow: 0 2px 8px rgba(255, 205, 0, 0.4);
 }
 
-/* ── Dropdown menu panel (aligned under the pill) ── */
+/* ── Fullscreen menu overlay (mobile) ── */
 .cf-mobile-drawer {
   position: fixed;
-  top: 97px;
-  left: 21px;
-  right: 21px;
-  background: rgba(255, 255, 255, 0.97);
-  -webkit-backdrop-filter: blur(20px);
-  backdrop-filter: blur(20px);
-  border-radius: 24px;
-  box-shadow: rgba(11, 11, 11, 0.1) 0px 14px 40px 0px;
+  inset: 0;
+  height: 100dvh;
+  background: #FFFFFF;
   opacity: 0;
   pointer-events: none;
   transform: translateY(-8px);
   transition: opacity 0.3s ease, transform 0.3s ease;
+  overflow-y: auto;
+  z-index: -1; /* stays behind the pill so the X toggle remains clickable */
 }
 
 .cf-mobile-drawer--open {
@@ -204,48 +201,58 @@
 }
 
 .cf-mobile-drawer-inner {
-  padding: 24px clamp(20px, 4vw, 40px) 32px;
+  padding: 140px clamp(24px, 6vw, 48px) 48px;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 8px;
+  min-height: 100dvh;
+  box-sizing: border-box;
 }
 
 .cf-mobile-current-page {
   display: flex;
   align-items: center;
   gap: 8px;
-  font-size: 0.72rem;
-  letter-spacing: 0.12em;
-  color: rgba(11, 11, 11, 0.55);
-  padding-bottom: 12px;
-  border-bottom: 1px solid rgba(11, 11, 11, 0.06);
+  font-family: "Archivo", "Inter", var(--font-body), sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  color: rgba(11, 11, 11, 0.45);
+  padding-bottom: 18px;
+  margin-bottom: 12px;
+  border-bottom: 1px solid rgba(11, 11, 11, 0.07);
 }
 
 .cf-mobile-nav-links {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 4px;
 }
 
 .cf-mobile-link {
   display: flex;
-  align-items: center;
-  gap: 14px;
-  font-family: "Inter", var(--font-body), sans-serif;
-  font-size: 1.02rem;
-  font-weight: 500;
-  color: rgba(11, 11, 11, 0.85);
+  align-items: baseline;
+  gap: 16px;
+  font-family: "Archivo", "Inter", var(--font-body), sans-serif;
+  font-size: clamp(1.9rem, 7.5vw, 2.6rem);
+  font-weight: 600;
+  color: #0B0B0B;
   text-decoration: none;
-  padding: 10px 0;
-  border-bottom: 1px solid rgba(11, 11, 11, 0.04);
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(11, 11, 11, 0.05);
 }
 
 .cf-mobile-link-num {
-  font-size: 0.72rem;
+  font-size: 0.8rem;
+  font-weight: 500;
   color: var(--color-gold, #C89C66);
 }
 
 .cf-mobile-link--active {
+  color: #0B0B0B;
+}
+
+.cf-mobile-link--active .cf-mobile-link-num {
   color: #0B0B0B;
 }
 
@@ -267,10 +274,13 @@
   text-decoration: none;
 }
 
-/* ── Narrow screens: drop links, keep logo + CTA + burger ── */
+/* ── Narrow screens: drop links, burger takes over ── */
 @media (max-width: 1024px) {
   .cf-navbar-nav {
     display: none;
+  }
+  .cf-nav-hamburger {
+    display: flex;
   }
   .cf-navbar-bar-inner {
     height: 64px;
@@ -302,13 +312,11 @@
     padding: 10px 16px;
     font-size: 13.5px;
   }
-  .cf-mobile-drawer {
-    left: 12px;
-    right: 12px;
-    top: 80px;
-  }
   .cf-navbar-dot {
     display: none;
+  }
+  .cf-mobile-drawer-inner {
+    padding-top: 120px;
   }
 }
 
