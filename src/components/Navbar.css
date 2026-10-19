@@ -1,250 +1,196 @@
 /* ═══════════════════════════════════════════════════════════════
-   Culture Flow — Minimal Editorial Navbar
-   Inspired by Triptych grid layout with warm light luxury aesthetic
+   Culture Flow — media-harbour.com floating pill navbar (exact spec)
+   .hmh-top-panel: fixed inset 21px · radius 28px · white .92 + blur(14px)
+   · shadow rgba(208,nba.08) 0 8px 30px · 76px tall · links Inter 435 16px
+   · CTA pill radius 100px · staggered burger
    ═══════════════════════════════════════════════════════════════ */
 
 .cf-navbar {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
+  top: 21px;
+  left: 21px;
+  right: 21px;
   z-index: 90;
-  width: 100%;
-  background: transparent;
-  padding-top: calc(clamp(6px, 0.8vw, 14px) + clamp(28px, 3.6vh, 48px));
-  padding-bottom: clamp(14px, 1.8vh, 22px);
-  transition: background-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-              padding 0.35s cubic-bezier(0.16, 1, 0.3, 1),
-              border-color 0.4s ease,
-              box-shadow 0.4s ease,
-              transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Hide on scroll down, reveal on scroll up */
 .cf-navbar--hidden {
-  transform: translateY(-100%);
+  transform: translateY(-130%);
 }
 
-.cf-navbar--scrolled {
-  padding-top: 14px;
-  padding-bottom: 14px;
-  background: rgba(253, 252, 244, 0.94);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border-bottom: 1px solid rgba(11, 11, 11, 0.08);
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04);
+/* ── The pill ── */
+.cf-navbar-bar {
+  background: rgba(255, 255, 255, 0.92);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  border-radius: 28px;
+  box-shadow: rgba(11, 11, 11, 0.08) 0px 8px 30px 0px;
 }
 
-.cf-navbar-container {
+.cf-navbar-bar-inner {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  width: 100%;
-  max-width: none;
-  margin: 0;
-  min-height: auto;
-  padding-left: calc(clamp(6px, 0.8vw, 14px) + clamp(20px, 2.5vw, 48px));
-  padding-right: calc(clamp(6px, 0.8vw, 14px) + clamp(20px, 2.5vw, 48px));
+  height: 76px;
+  padding: 0 34px 0 36px;
   box-sizing: border-box;
 }
 
-/* ─── Left: Brand Logo at Top Left Corner ─── */
-.cf-navbar-col--left {
-  display: flex;
-  align-items: center;
+.cf-navbar--scrolled .cf-navbar-bar {
+  box-shadow: rgba(11, 11, 11, 0.12) 0px 10px 34px 0px;
 }
 
+/* ── Logo ── */
 .cf-navbar-logo-link {
   display: flex;
   align-items: center;
   text-decoration: none;
-  transition: opacity 0.25s ease, transform 0.25s ease;
+  transition: opacity 0.25s ease;
+  flex-shrink: 0;
 }
 
 .cf-navbar-logo-link:hover {
-  opacity: 0.88;
-  transform: translateY(-1px);
+  opacity: 0.8;
 }
 
 .cf-navbar-logo-img {
-  height: clamp(34px, 3.2vw, 46px);
+  height: 34px;
   width: auto;
   object-fit: contain;
   display: block;
   filter: brightness(0);
-  transition: opacity 0.25s ease, transform 0.25s ease, filter 0.25s ease;
 }
 
 .cf-navbar-logo-img--yellow {
   filter: none !important;
 }
 
-/* ─── Right: Navigation Links & CTA ─── */
-.cf-navbar-col--right {
-  display: flex;
-  align-items: center;
-  gap: clamp(16px, 2.2vw, 36px);
+/* ── Spacer pushes menu right (like .hmh-top-panel-spacer) ── */
+.cf-navbar-spacer {
+  flex: 1;
 }
 
+/* ── Links: Inter ~16px · weight 435 · #14151A · 16px side padding ── */
 .cf-navbar-nav {
   display: flex;
   align-items: center;
-  gap: clamp(18px, 2.4vw, 34px);
+  gap: 8px;
+  margin-right: clamp(12px, 1.6vw, 26px);
 }
 
-/* Base Link Styling (Dark Obsidian over yellow hero) */
 .cf-nav-link {
-  position: relative;
-  font-family: var(--font-body), "Plus Jakarta Sans", sans-serif;
-  font-size: 0.78rem;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  color: rgba(11, 11, 11, 0.85);
+  font-family: "Archivo", "Inter", var(--font-body), sans-serif;
+  font-size: 1rem;
+  font-weight: 435;
+  letter-spacing: 0;
+  color: #14151A;
   text-decoration: none;
-  padding: 6px 0;
-  transition: color 0.25s ease;
+  padding: 8px 16px;
   white-space: nowrap;
-}
-
-.cf-nav-link::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 0%;
-  height: 2px;
-  background: #0B0B0B;
-  transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: color 0.2s ease, opacity 0.2s ease;
 }
 
 .cf-nav-link:hover {
-  color: #0B0B0B;
-}
-
-.cf-nav-link:hover::after {
-  width: 100%;
+  color: #000000;
+  opacity: 0.72;
 }
 
 .cf-nav-link--active {
-  color: #0B0B0B;
-  font-weight: 700;
+  color: #000000;
+  font-weight: 600;
 }
 
-.cf-nav-link--active::after {
-  width: 100%;
-  background: #0B0B0B;
-}
-
-/* Scrolled Nav Links (Over light cream background) */
-.cf-navbar--scrolled .cf-nav-link {
-  color: rgba(11, 11, 11, 0.72);
-}
-
-.cf-navbar--scrolled .cf-nav-link:hover {
-  color: var(--color-obraz-black, #0B0B0B);
-}
-
-.cf-navbar--scrolled .cf-nav-link--active {
-  color: var(--color-obraz-black, #0B0B0B);
-}
-
-/* Pill CTA Button (Obsidian Pill over Yellow Hero) */
+/* ── CTA: full pill, radius 100px, 15px/600 ── */
 .cf-nav-cta-pill {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 10px 24px;
-  border-radius: 50px;
-  background: #0B0B0B;
-  color: #FFFFFF;
-  font-family: var(--font-body), "Plus Jakarta Sans", sans-serif;
-  font-size: 0.78rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
+  padding: 12px 24px;
+  border-radius: 100px;
+  background: var(--color-yellow, #FFCD00);
+  color: #0B0B0B;
+  font-family: "Archivo", "Inter", var(--font-body), sans-serif;
+  font-size: 15px;
+  font-weight: 600;
   text-decoration: none;
   white-space: nowrap;
-  border: 1px solid #0B0B0B;
-  box-shadow: 0 4px 16px rgba(11, 11, 11, 0.22);
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: filter 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  flex-shrink: 0;
 }
 
 .cf-nav-cta-pill:hover {
-  background: #232328;
-  color: #FFFFFF;
-  border-color: #232328;
-  box-shadow: 0 6px 20px rgba(11, 11, 11, 0.32);
+  filter: brightness(0.96);
   transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(255, 205, 0, 0.5);
 }
 
-/* Scrolled Pill CTA (Obsidian Black over cream) */
-.cf-navbar--scrolled .cf-nav-cta-pill {
-  background: var(--color-obraz-black, #0B0B0B);
-  color: var(--color-moverunion-white, #FDFCF4);
-  border-color: rgba(11, 11, 11, 0.15);
-  box-shadow: 0 4px 14px rgba(11, 11, 11, 0.12);
-}
-
-.cf-navbar--scrolled .cf-nav-cta-pill:hover {
-  background: var(--color-yellow, #FFCD00);
-  color: var(--color-obraz-black, #0B0B0B);
-  border-color: var(--color-yellow, #FFCD00);
-  box-shadow: 0 6px 20px rgba(255, 205, 0, 0.4);
-}
-
-/* Mobile Hamburger */
+/* ── Hamburger: staggered 3 lines, always visible (HMH desktop) ── */
 .cf-nav-hamburger {
-  display: none;
+  display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   gap: 5px;
-  width: 40px;
-  height: 40px;
-  padding: 8px;
+  width: 44px;
+  height: 44px;
+  padding: 11px;
+  margin-left: 10px;
   cursor: pointer;
-  background: rgba(0, 34, 68, 0.04);
-  border: 1px solid rgba(0, 34, 68, 0.08);
-  border-radius: 8px;
+  background: transparent;
+  border: none;
+  border-radius: 10px;
   transition: background-color 0.25s ease;
 }
 
 .cf-nav-hamburger:hover {
-  background: rgba(0, 34, 68, 0.08);
+  background: rgba(11, 11, 11, 0.05);
 }
 
 .cf-hamburger-bar {
   display: block;
-  width: 20px;
-  height: 1.5px;
-  background: #0B0B0B;
+  height: 2px;
+  background: #14151A;
   border-radius: 1px;
-  transition: transform 0.3s ease, opacity 0.3s ease, background-color 0.3s ease;
+  transition: transform 0.3s ease, opacity 0.3s ease, width 0.3s ease;
 }
 
-.cf-navbar--scrolled .cf-hamburger-bar {
-  background: #0B0B0B;
+.cf-hamburger-bar:nth-child(1) { width: 22px; }
+.cf-hamburger-bar:nth-child(2) { width: 16px; align-self: flex-end; }
+.cf-hamburger-bar:nth-child(3) { width: 22px; }
+
+.cf-nav-hamburger--open .cf-hamburger-bar:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+.cf-nav-hamburger--open .cf-hamburger-bar:nth-child(2) {
+  opacity: 0;
+}
+.cf-nav-hamburger--open .cf-hamburger-bar:nth-child(3) {
+  width: 22px;
+  transform: translateY(-7px) rotate(-45deg);
 }
 
-.cf-nav-hamburger--open .cf-hamburger-bar:first-child {
-  transform: translateY(3.25px) rotate(45deg);
+/* ── Scroll dot under the pill, left side ── */
+.cf-navbar-dot {
+  position: absolute;
+  left: 84px;
+  top: calc(100% + 12px);
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: var(--color-yellow, #FFCD00);
+  box-shadow: 0 2px 8px rgba(255, 205, 0, 0.4);
 }
 
-.cf-nav-hamburger--open .cf-hamburger-bar:last-child {
-  transform: translateY(-3.25px) rotate(-45deg);
-}
-
-/* ─── Mobile Drawer ─── */
+/* ── Dropdown menu panel (aligned under the pill) ── */
 .cf-mobile-drawer {
-  display: none;
   position: fixed;
-  top: 72px;
-  left: 0;
-  right: 0;
-  width: 100%;
-  background: rgba(246, 238, 221, 0.98);
-  backdrop-filter: blur(24px);
-  border-bottom: 1px solid rgba(0, 34, 68, 0.12);
-  box-shadow: 0 20px 40px rgba(0, 34, 68, 0.08);
+  top: 97px;
+  left: 21px;
+  right: 21px;
+  background: rgba(255, 255, 255, 0.97);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  border-radius: 24px;
+  box-shadow: rgba(11, 11, 11, 0.1) 0px 14px 40px 0px;
   opacity: 0;
   pointer-events: none;
   transform: translateY(-8px);
@@ -258,7 +204,7 @@
 }
 
 .cf-mobile-drawer-inner {
-  padding: 24px clamp(20px, 4vw, 36px) 32px;
+  padding: 24px clamp(20px, 4vw, 40px) 32px;
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -270,9 +216,9 @@
   gap: 8px;
   font-size: 0.72rem;
   letter-spacing: 0.12em;
-  color: rgba(0, 34, 68, 0.6);
+  color: rgba(11, 11, 11, 0.55);
   padding-bottom: 12px;
-  border-bottom: 1px solid rgba(0, 34, 68, 0.06);
+  border-bottom: 1px solid rgba(11, 11, 11, 0.06);
 }
 
 .cf-mobile-nav-links {
@@ -285,24 +231,22 @@
   display: flex;
   align-items: center;
   gap: 14px;
-  font-family: var(--font-body), "Inter", sans-serif;
-  font-size: 1.05rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  color: #002244;
+  font-family: "Inter", var(--font-body), sans-serif;
+  font-size: 1.02rem;
+  font-weight: 500;
+  color: rgba(11, 11, 11, 0.85);
   text-decoration: none;
   padding: 10px 0;
-  border-bottom: 1px solid rgba(0, 34, 68, 0.04);
+  border-bottom: 1px solid rgba(11, 11, 11, 0.04);
 }
 
 .cf-mobile-link-num {
   font-size: 0.72rem;
-  color: #C89C66;
-  font-family: var(--font-body);
+  color: var(--color-gold, #C89C66);
 }
 
 .cf-mobile-link--active {
-  color: #C89C66;
+  color: #0B0B0B;
 }
 
 .cf-mobile-drawer-bottom {
@@ -315,55 +259,60 @@
   justify-content: center;
   width: 100%;
   padding: 14px 24px;
-  border-radius: 50px;
-  background: #050A30;
-  color: #F6EEDD;
-  font-size: 0.85rem;
+  border-radius: 100px;
+  background: var(--color-yellow, #FFCD00);
+  color: #0B0B0B;
+  font-size: 0.9rem;
   font-weight: 600;
-  letter-spacing: 0.08em;
   text-decoration: none;
 }
 
-/* ─── Responsive Media Queries ─── */
-@media (max-width: 900px) {
-  .cf-navbar-nav,
-  .cf-nav-cta-pill {
+/* ── Narrow screens: drop links, keep logo + CTA + burger ── */
+@media (max-width: 1024px) {
+  .cf-navbar-nav {
     display: none;
   }
-
-  .cf-nav-hamburger {
-    display: flex;
+  .cf-navbar-bar-inner {
+    height: 64px;
+    padding: 0 18px 0 22px;
   }
-
-  .cf-mobile-drawer {
-    display: block;
+  .cf-navbar-dot {
+    left: 40px;
+    top: calc(100% + 10px);
   }
 }
 
-@media (max-width: 600px) {
-  .cf-navbar-container {
-    padding: 0 16px;
-    min-height: 68px;
+@media (max-width: 640px) {
+  .cf-navbar {
+    top: 12px;
+    left: 12px;
+    right: 12px;
   }
-
-  .cf-navbar-page-title {
-    font-size: 0.72rem;
-    letter-spacing: 0.12em;
+  .cf-navbar-bar {
+    border-radius: 20px;
   }
-
+  .cf-navbar-bar-inner {
+    height: 56px;
+    padding: 0 8px 0 16px;
+  }
   .cf-navbar-logo-img {
-    height: 32px;
+    height: 28px;
   }
-
+  .cf-nav-cta-pill {
+    padding: 10px 16px;
+    font-size: 13.5px;
+  }
   .cf-mobile-drawer {
-    top: 68px;
+    left: 12px;
+    right: 12px;
+    top: 80px;
+  }
+  .cf-navbar-dot {
+    display: none;
   }
 }
 
-/* ─── Dark background variant (waitlist etc.) ─── */
-.cf-navbar--dark .cf-navbar-page-title {
-  color: #FCFCFF;
-}
+/* ── Dark background variant (compat) ─── */
 .cf-navbar--dark .cf-nav-link {
   color: rgba(252, 252, 255, 0.7);
 }
