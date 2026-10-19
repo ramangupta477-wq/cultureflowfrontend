@@ -11,7 +11,7 @@ export const WAITLIST_DB_ID = "cultureflow";
 export const WAITLIST_COLLECTION_ID = "waitlist";
 export const INSTITUTION_COLLECTION_ID = "institution_inquiries";
 
-export type WaitlistRole = "student" | "parent" | "institution";
+export type WaitlistRole = "student" | "parent" | "corporate";
 export type TrackId = "tech" | "sustainability" | "cultural";
 
 export interface InstitutionInquiry {

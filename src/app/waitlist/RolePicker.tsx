@@ -3,7 +3,7 @@
 import React, { useState, useCallback, useRef, useEffect } from "react";
 import "./role-picker.css";
 
-const ROLES = ["Student", "Parent"] as const;
+const ROLES = ["Student", "Parent", "Corporate Employee"] as const;
 // Repeat enough to fill the track above and below center
 const ITEMS = [...ROLES, ...ROLES, ...ROLES];
 

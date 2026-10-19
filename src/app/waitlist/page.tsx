@@ -318,6 +318,7 @@ export default function WaitlistPage() {
     const roleMap: Record<string, WaitlistRole> = {
       Student: "student",
       Parent: "parent",
+      "Corporate Employee": "corporate",
     };
     set("role", roleMap[role] ?? "student");
     setStep(1);
