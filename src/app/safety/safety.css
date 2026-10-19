@@ -36,12 +36,12 @@
   height: 34px;
   padding: 0 18px;
   border-radius: 99px;
-  background: #ffffff;
-  border: 1px solid rgba(11, 11, 11, 0.1);
+  background: var(--color-obraz-black, #0B0B0B);
+  border: 1px solid var(--color-obraz-black, #0B0B0B);
   font-family: var(--font-body, "Inter", sans-serif);
   font-size: 0.78rem;
   font-weight: 600;
-  color: var(--color-obraz-black, #0B0B0B);
+  color: var(--color-moverunion-white, #FDFCF4);
   white-space: nowrap;
 }
 
@@ -102,7 +102,7 @@
 
 /* ═══ WHITE MEGA-CARD ═══ */
 .sf-card {
-  background: #ffffff;
+  background: var(--color-yellow, #FFCD00);
   border-radius: clamp(18px, 2vw, 28px);
   max-width: 1360px;
   margin: 0 auto;
@@ -337,7 +337,7 @@
 }
 
 .sf-cell--map {
-  background: var(--color-warm-white, #F1F0EE);
+  background: var(--color-yellow, #FFCD00);
   padding: clamp(22px, 2.4vw, 34px);
   min-height: 340px;
   display: flex;
@@ -349,8 +349,8 @@
 .sf-world {
   width: 100%;
   max-width: 300px;
-  opacity: 0.4;
-  filter: grayscale(1);
+  opacity: 0.45;
+  filter: grayscale(1) contrast(1.05);
   align-self: center;
 }
 
@@ -361,7 +361,7 @@
 }
 
 .sf-cell--stack {
-  background: var(--color-warm-white, #F1F0EE);
+  background: var(--color-yellow, #FFCD00);
   padding: clamp(20px, 2.2vw, 30px);
 }
 
@@ -421,7 +421,7 @@
 }
 
 .sf-pillar {
-  background: var(--color-warm-white, #F1F0EE);
+  background: var(--color-yellow, #FFCD00);
   border-radius: clamp(14px, 1.4vw, 20px);
   padding: clamp(20px, 2.2vw, 30px);
 }
@@ -463,9 +463,8 @@
 }
 
 .sf-protocol-card {
-  background: #ffffff;
+  background: var(--color-yellow, #FFCD00);
   border-radius: clamp(14px, 1.4vw, 20px);
-  border: 1px solid rgba(11, 11, 11, 0.08);
   padding: clamp(20px, 2.2vw, 30px);
 }
 
@@ -505,8 +504,7 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
-  background: #ffffff;
-  border: 1px solid rgba(11, 11, 11, 0.08);
+  background: var(--color-yellow, #FFCD00);
   border-radius: clamp(14px, 1.4vw, 20px);
   padding: clamp(22px, 2.4vw, 32px);
   text-decoration: none;
@@ -566,8 +564,7 @@
   grid-template-columns: 0.75fr 1.25fr;
   gap: clamp(28px, 4vw, 64px);
   align-items: center;
-  background: #ffffff;
-  border: 1px solid rgba(11, 11, 11, 0.08);
+  background: var(--color-yellow, #FFCD00);
   border-radius: clamp(18px, 2vw, 28px);
   padding: clamp(24px, 3vw, 48px);
 }
