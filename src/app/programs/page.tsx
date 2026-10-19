@@ -22,6 +22,28 @@ export default function ProgramsPage() {
   const tracksContainerRef = useRef<HTMLDivElement>(null);
   const barsRef = useRef<HTMLDivElement>(null);
 
+  // ─── Blur-up entrance reveals (data-pr) ───
+  useEffect(() => {
+    const els = Array.from(document.querySelectorAll<HTMLElement>("[data-pr]"));
+    if (!("IntersectionObserver" in window)) {
+      els.forEach((el) => el.classList.add("pr-in"));
+      return;
+    }
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((en) => {
+          if (en.isIntersecting) {
+            en.target.classList.add("pr-in");
+            io.unobserve(en.target);
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
+    els.forEach((el) => io.observe(el));
+    return () => io.disconnect();
+  }, []);
+
   // Cards rise y:400→0, no opacity — scrubbed to the shared scroll container
   useLayoutEffect(() => {
     const container = tracksContainerRef.current;
@@ -58,12 +80,12 @@ export default function ProgramsPage() {
       <section className="programs-hero-section">
         <div className="programs-hero-container">
 
-          <span className="pgb-pill">Programs</span>
-          <h1 className="pgb-title">
+          <span className="pgb-pill" data-pr>Programs</span>
+          <h1 className="pgb-title" data-pr style={{ "--pr-d": "0.07s" } as React.CSSProperties}>
             Built for people who <span className="pgb-mark">see&nbsp;further.</span>
           </h1>
 
-          <div className="pgb-row">
+          <div className="pgb-row" data-pr style={{ "--pr-d": "0.15s" } as React.CSSProperties}>
             <p className="pgb-sub">
               Research, leadership, deep-tech — three tracks designed for
               three ambitions. <strong>One platform, full circle.</strong>
@@ -75,7 +97,7 @@ export default function ProgramsPage() {
 
           <div className="pgb-grid">
             {/* yellow tracks cell */}
-            <div className="pgb-cell pgb-cell--yellow">
+            <div className="pgb-cell pgb-cell--yellow" data-pr style={{ "--pr-d": "0.28s" } as React.CSSProperties}>
               <span className="pgb-kicker">THREE TRACKS</span>
               <div className="pgb-tags">
                 <span className="pgb-tag pgb-tag--dark">Tech &amp; Innovation</span>
@@ -91,7 +113,7 @@ export default function ProgramsPage() {
             </div>
 
             {/* world map cell */}
-            <div className="pgb-cell pgb-cell--map">
+            <div className="pgb-cell pgb-cell--map" data-pr style={{ "--pr-d": "0.36s" } as React.CSSProperties}>
               <img
                 src="/homepage_assets/world.svg"
                 alt=""
@@ -102,7 +124,7 @@ export default function ProgramsPage() {
             </div>
 
             {/* path cell */}
-            <div className="pgb-cell pgb-cell--info">
+            <div className="pgb-cell pgb-cell--info" data-pr style={{ "--pr-d": "0.44s" } as React.CSSProperties}>
               <span className="pgb-ico" aria-hidden><RouteIco size={20} strokeWidth={1.7} /></span>
               <p className="pgb-cell-text">
                 First, we understand where you are academically and
@@ -123,10 +145,10 @@ export default function ProgramsPage() {
         <div className="tracks-sticky">
           <RollingPolygon containerRef={tracksContainerRef} />
           <div className="tracks-header">
-            <p className="tracks-tagline">
+            <p className="tracks-tagline" data-pr>
               The road can get <em>bumpy.</em> We keep you <em>rolling</em> regardless.
             </p>
-            <span className="tracks-kicker">Our Tracks</span>
+            <span className="tracks-kicker" data-pr style={{ "--pr-d": "0.1s" } as React.CSSProperties}>Our Tracks</span>
           </div>
           <div className="tracks-bars" ref={barsRef}>
             {TRACKS.map((track) => (
