@@ -1,0 +1,426 @@
+/* ═══ Safety & Trust — Concrete-inspired, cream only ═══
+   Palette: cream #FDFCF4 · warm white #F1F0EE · yellow #FFCD00 ·
+            black #0B0B0B · gold #C89C66  (no navy, no black sections) */
+
+.safety-page {
+  background: var(--color-bg, #FDFCF4);
+  color: var(--color-obraz-black, #0B0B0B);
+  padding-top: 96px;
+}
+
+/* ─── Shared type ─── */
+.sf-section-title {
+  font-family: var(--font-heading, "DM Serif Display", Georgia, serif);
+  font-weight: 400;
+  font-size: clamp(2rem, 3.6vw, 3.2rem);
+  line-height: 1.08;
+  margin: 0 0 18px;
+}
+
+.sf-section-title em {
+  font-style: italic;
+  color: var(--color-yellow, #FFCD00);
+}
+
+.sf-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-body, "Libron", Georgia, serif);
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  color: var(--color-gold, #C89C66);
+  margin: 0 0 24px;
+}
+
+.sf-eyebrow-dot {
+  width: 8px;
+  height: 8px;
+  background: var(--color-yellow, #FFCD00);
+}
+
+/* ─── Hero ─── */
+.sf-hero {
+  position: relative;
+  padding: clamp(60px, 10vh, 130px) clamp(24px, 6vw, 96px) clamp(50px, 8vh, 90px);
+  max-width: 1240px;
+  margin: 0 auto;
+}
+
+.sf-hero-title {
+  font-family: var(--font-heading, "DM Serif Display", Georgia, serif);
+  font-weight: 400;
+  font-size: clamp(3rem, 6.6vw, 6rem);
+  line-height: 1.02;
+  letter-spacing: -0.01em;
+  margin: 0 0 30px;
+}
+
+.sf-hero-title em {
+  font-style: italic;
+  color: var(--color-yellow, #FFCD00);
+}
+
+.sf-hero-sub {
+  font-family: var(--font-body, "Inter", sans-serif);
+  font-size: clamp(1rem, 1.3vw, 1.15rem);
+  line-height: 1.65;
+  color: rgba(11, 11, 11, 0.66);
+  max-width: 580px;
+  margin: 0;
+}
+
+/* ─── Stat strip (Concrete-style) ─── */
+.sf-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(16px, 2.5vw, 40px);
+  border-top: 1px solid rgba(11, 11, 11, 0.12);
+  padding-top: clamp(28px, 4vh, 44px);
+  margin-top: clamp(40px, 7vh, 80px);
+}
+
+.sf-stat-num {
+  display: block;
+  font-family: var(--font-body, "Libron", Georgia, serif);
+  font-size: clamp(2rem, 4vw, 3.4rem);
+  line-height: 1;
+  color: var(--color-obraz-black, #0B0B0B);
+}
+
+.sf-stat-label {
+  display: block;
+  font-family: var(--font-body, "Libron", Georgia, serif);
+  font-size: 0.62rem;
+  letter-spacing: 0.22em;
+  color: rgba(11, 11, 11, 0.5);
+  margin-top: 10px;
+}
+
+/* ─── Pillars ─── */
+.sf-pillars {
+  padding: clamp(70px, 12vh, 140px) clamp(24px, 6vw, 96px);
+  max-width: 1240px;
+  margin: 0 auto;
+}
+
+.sf-pillar-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(16px, 2vw, 28px);
+  margin-top: clamp(40px, 7vh, 70px);
+}
+
+.sf-pillar {
+  background: var(--color-warm-white, #F1F0EE);
+  border-radius: 8px;
+  padding: clamp(28px, 3.5vw, 48px);
+}
+
+.sf-pillar-num {
+  display: block;
+  font-family: var(--font-body, "Libron", Georgia, serif);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  color: var(--color-gold, #C89C66);
+  margin-bottom: 20px;
+}
+
+.sf-pillar-title {
+  font-family: var(--font-heading, "DM Serif Display", Georgia, serif);
+  font-weight: 400;
+  font-size: clamp(1.35rem, 1.8vw, 1.7rem);
+  line-height: 1.15;
+  margin: 0 0 12px;
+}
+
+.sf-pillar-desc {
+  font-family: var(--font-body, "Inter", sans-serif);
+  font-size: clamp(0.92rem, 1vw, 1rem);
+  line-height: 1.6;
+  color: rgba(11, 11, 11, 0.62);
+  margin: 0;
+}
+
+/* ─── Before / During phases ─── */
+.sf-phases {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(40px, 6vw, 90px);
+  padding: clamp(30px, 6vh, 70px) clamp(24px, 6vw, 96px) clamp(70px, 12vh, 140px);
+  max-width: 1240px;
+  margin: 0 auto;
+  border-top: 1px solid rgba(11, 11, 11, 0.08);
+}
+
+.sf-phase-eyebrow {
+  font-family: var(--font-body, "Libron", Georgia, serif);
+  font-size: 0.66rem;
+  letter-spacing: 0.22em;
+  color: var(--color-gold, #C89C66);
+  margin: 0 0 16px;
+}
+
+.sf-phase-title {
+  font-family: var(--font-heading, "DM Serif Display", Georgia, serif);
+  font-weight: 400;
+  font-size: clamp(1.5rem, 2.4vw, 2.1rem);
+  line-height: 1.12;
+  margin: 0 0 24px;
+}
+
+.sf-checklist {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sf-checklist li {
+  position: relative;
+  font-family: var(--font-body, "Inter", sans-serif);
+  font-size: clamp(0.95rem, 1.05vw, 1.05rem);
+  line-height: 1.55;
+  color: rgba(11, 11, 11, 0.7);
+  padding-left: 26px;
+  margin-bottom: 16px;
+}
+
+.sf-checklist li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.48em;
+  width: 10px;
+  height: 10px;
+  background: var(--color-yellow, #FFCD00);
+}
+
+/* ─── Emergency protocol ─── */
+.sf-protocol {
+  padding: clamp(70px, 12vh, 140px) clamp(24px, 6vw, 96px);
+  background: var(--color-warm-white, #F1F0EE);
+}
+
+.sf-protocol-list {
+  max-width: 920px;
+  margin: clamp(40px, 7vh, 70px) auto 0;
+}
+
+.sf-protocol-row {
+  display: grid;
+  grid-template-columns: 90px 1fr;
+  gap: 24px;
+  padding: clamp(24px, 3vh, 36px) 0;
+  border-top: 1px solid rgba(11, 11, 11, 0.12);
+}
+
+.sf-protocol-row:last-child {
+  border-bottom: 1px solid rgba(11, 11, 11, 0.12);
+}
+
+.sf-protocol-num {
+  font-family: var(--font-body, "Libron", Georgia, serif);
+  font-size: clamp(1.6rem, 2.6vw, 2.4rem);
+  line-height: 1;
+  color: var(--color-gold, #C89C66);
+}
+
+.sf-protocol-title {
+  font-family: var(--font-heading, "DM Serif Display", Georgia, serif);
+  font-weight: 400;
+  font-size: clamp(1.2rem, 1.7vw, 1.55rem);
+  margin: 0 0 8px;
+}
+
+.sf-protocol-desc {
+  font-family: var(--font-body, "Inter", sans-serif);
+  font-size: clamp(0.92rem, 1vw, 1rem);
+  line-height: 1.6;
+  color: rgba(11, 11, 11, 0.62);
+  margin: 0;
+}
+
+/* ─── Documents ─── */
+.sf-docs {
+  padding: clamp(70px, 12vh, 140px) clamp(24px, 6vw, 96px);
+  max-width: 1240px;
+  margin: 0 auto;
+}
+
+.sf-docs-note {
+  font-family: var(--font-body, "Inter", sans-serif);
+  font-size: 0.95rem;
+  color: rgba(11, 11, 11, 0.55);
+  margin: 0 0 36px;
+}
+
+.sf-doc-list {
+  max-width: 920px;
+}
+
+.sf-doc-row {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  align-items: center;
+  gap: 20px;
+  padding: 22px 0;
+  border-top: 1px solid rgba(11, 11, 11, 0.12);
+  text-decoration: none;
+  transition: padding-left 0.3s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.sf-doc-row:last-child {
+  border-bottom: 1px solid rgba(11, 11, 11, 0.12);
+}
+
+.sf-doc-row:hover {
+  padding-left: 12px;
+}
+
+.sf-doc-name {
+  font-family: var(--font-heading, "DM Serif Display", Georgia, serif);
+  font-size: clamp(1.15rem, 1.6vw, 1.5rem);
+  color: var(--color-obraz-black, #0B0B0B);
+}
+
+.sf-doc-note {
+  font-family: var(--font-body, "Inter", sans-serif);
+  font-size: 0.8rem;
+  color: rgba(11, 11, 11, 0.5);
+}
+
+.sf-doc-tag {
+  font-family: var(--font-body, "Libron", Georgia, serif);
+  font-size: 0.6rem;
+  letter-spacing: 0.18em;
+  color: rgba(11, 11, 11, 0.45);
+  border: 1px solid rgba(11, 11, 11, 0.25);
+  border-radius: 99px;
+  padding: 6px 14px;
+}
+
+/* ─── Accountability ─── */
+.sf-account {
+  padding: clamp(70px, 12vh, 140px) clamp(24px, 6vw, 96px);
+  border-top: 1px solid rgba(11, 11, 11, 0.08);
+}
+
+.sf-account-grid {
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  gap: clamp(40px, 6vw, 90px);
+  align-items: center;
+  max-width: 1240px;
+  margin: 0 auto;
+}
+
+.sf-account-img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.sf-account-title {
+  margin: 0 0 20px;
+}
+
+.sf-account-copy {
+  font-family: var(--font-body, "Inter", sans-serif);
+  font-size: clamp(0.98rem, 1.1vw, 1.1rem);
+  line-height: 1.65;
+  color: rgba(11, 11, 11, 0.66);
+  margin: 0 0 28px;
+}
+
+.sf-account-link {
+  font-family: var(--font-body, "Inter", sans-serif);
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--color-obraz-black, #0B0B0B);
+  text-decoration: none;
+  border-bottom: 2px solid var(--color-yellow, #FFCD00);
+  padding-bottom: 2px;
+}
+
+/* ─── Ask us anything ─── */
+.sf-ask {
+  text-align: center;
+  padding: clamp(80px, 14vh, 160px) clamp(24px, 6vw, 96px) clamp(90px, 15vh, 180px);
+  border-top: 1px solid rgba(11, 11, 11, 0.08);
+}
+
+.sf-ask-sub {
+  font-family: var(--font-body, "Inter", sans-serif);
+  font-size: clamp(1rem, 1.2vw, 1.1rem);
+  color: rgba(11, 11, 11, 0.6);
+  margin: 0 0 40px;
+}
+
+.sf-ask-actions {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.sf-ask-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 52px;
+  padding: 0 36px;
+  border-radius: 99px;
+  border: 2px solid var(--color-obraz-black, #0B0B0B);
+  font-family: var(--font-body, "Inter", sans-serif);
+  font-weight: 600;
+  font-size: 0.98rem;
+  color: var(--color-obraz-black, #0B0B0B);
+  text-decoration: none;
+  transition: all 0.25s ease;
+}
+
+.sf-ask-pill:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(11, 11, 11, 0.12);
+}
+
+.sf-ask-pill--solid {
+  background: var(--color-yellow, #FFCD00);
+  border-color: var(--color-yellow, #FFCD00);
+}
+
+.sf-ask-pill--solid:hover {
+  box-shadow: 0 8px 24px rgba(255, 205, 0, 0.4);
+}
+
+/* ─── Mobile ─── */
+@media (max-width: 900px) {
+  .sf-pillar-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .sf-phases {
+    grid-template-columns: 1fr;
+  }
+
+  .sf-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .sf-account-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .sf-account-img {
+    max-width: 420px;
+  }
+
+  .sf-doc-row {
+    grid-template-columns: 1fr auto;
+  }
+
+  .sf-doc-note {
+    display: none;
+  }
+}

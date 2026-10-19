@@ -97,8 +97,8 @@ export default function Navbar({ pageLabel, logoTheme = "auto" }: NavbarProps) {
               PROGRAMS
             </Link>
             <Link
-              href="/#safety"
-              className={`cf-nav-link ${pathname.includes("#safety") || pathname.includes("#values") ? "cf-nav-link--active" : ""}`}
+              href="/safety"
+              className={`cf-nav-link ${pathname.startsWith("/safety") ? "cf-nav-link--active" : ""}`}
             >
               SAFETY & TRUST
             </Link>
@@ -155,7 +155,7 @@ export default function Navbar({ pageLabel, logoTheme = "auto" }: NavbarProps) {
               <span>PROGRAMS</span>
             </Link>
             <Link
-              href="/#safety"
+              href="/safety"
               onClick={() => setMobileMenuOpen(false)}
               className="cf-mobile-link"
             >
