@@ -257,7 +257,7 @@ export default function HeroSection() {
         .timeline()
         .to(shell, { xPercent: 100 * dir, duration: 0.18, ease: "power2.in" })
         .set(shell, { xPercent: -100 * dir })
-        .to(shell, { xPercent: 0, duration: 0.5, ease: "back.out(1.4)" });
+        .to(shell, { xPercent: 0, duration: 0.5, ease: "elastic.out(1, 0.55)" });
     };
     const onLeave = () => {
       active = null;
