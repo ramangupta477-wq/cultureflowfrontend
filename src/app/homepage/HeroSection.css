@@ -400,6 +400,15 @@
     min-height: calc(100vh - 16px);
   }
 
+  /* Balls render BEHIND the headline text on mobile — SUCCESS must stay readable */
+  #cf-coins-canvas {
+    z-index: 1;
+  }
+  .cf-hero-main {
+    position: relative;
+    z-index: 2;
+  }
+
   .cf-hero-main {
     grid-template-columns: 1fr;
     row-gap: 4vh;
