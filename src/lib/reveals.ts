@@ -11,14 +11,15 @@ export function useBlurReveal() {
   useEffect(() => {
     const els = Array.from(document.querySelectorAll<HTMLElement>("[data-pr]"));
     if (!("IntersectionObserver" in window)) {
-      els.forEach((el) => el.classList.add("pr-in"));
+      els.forEach((el) => el.setAttribute("data-pr-done", ""));
       return;
     }
     const io = new IntersectionObserver(
       (entries) => {
         entries.forEach((en) => {
           if (en.isIntersecting) {
-            en.target.classList.add("pr-in");
+            // attribute, not class — React class re-renders must not wipe it
+            en.target.setAttribute("data-pr-done", "");
             io.unobserve(en.target);
           }
         });

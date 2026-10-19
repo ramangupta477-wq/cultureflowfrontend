@@ -388,9 +388,6 @@
 
 /* ─── Blur-up page entrance reveals (data-pr) ─── */
 [data-pr] {
-  opacity: 0;
-  filter: blur(10px);
-  transform: translateY(16px);
   transition:
     opacity 0.7s ease,
     filter 0.7s ease,
@@ -399,17 +396,19 @@
   will-change: opacity, filter, transform;
 }
 
-[data-pr].pr-in {
-  opacity: 1;
-  filter: blur(0);
-  transform: none;
+/* hidden until revealed — data-pr-done is set by IO, not React, so it
+   survives re-renders (e.g. the next button re-rendering after selection) */
+[data-pr]:not([data-pr-done]) {
+  opacity: 0;
+  filter: blur(10px);
+  transform: translateY(16px);
 }
 
 @media (prefers-reduced-motion: reduce) {
   [data-pr] {
-    opacity: 1;
     filter: none;
     transform: none;
+    opacity: 1;
     transition: none;
   }
 }

@@ -1648,9 +1648,6 @@
 
 /* ─── Blur-up page entrance reveals (data-pr) ─── */
 [data-pr] {
-  opacity: 0;
-  filter: blur(10px);
-  transform: translateY(16px);
   transition:
     opacity 0.7s ease,
     filter 0.7s ease,
@@ -1659,10 +1656,10 @@
   will-change: opacity, filter, transform;
 }
 
-[data-pr].pr-in {
-  opacity: 1;
-  filter: blur(0);
-  transform: none;
+[data-pr]:not([data-pr-done]) {
+  opacity: 0;
+  filter: blur(10px);
+  transform: translateY(16px);
 }
 
 @media (prefers-reduced-motion: reduce) {

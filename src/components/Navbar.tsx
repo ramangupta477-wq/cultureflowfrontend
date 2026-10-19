@@ -104,9 +104,6 @@ export default function Navbar({ pageLabel, logoTheme = "auto" }: NavbarProps) {
         </div>
       </div>
 
-      {/* Scroll dot under the pill (HMH detail) */}
-      <span className="cf-navbar-dot" aria-hidden />
-
       {/* ── Dropdown menu panel ── */}
       <div className={`cf-mobile-drawer ${mobileMenuOpen ? "cf-mobile-drawer--open" : ""}`}>
         <div className="cf-mobile-drawer-inner">
