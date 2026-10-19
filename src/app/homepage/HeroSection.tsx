@@ -234,8 +234,6 @@ export default function HeroSection() {
     let baseRadius = 22;
 
     const coins: Coin[] = [];
-    const mouse = { x: -999, y: -999, vx: 0, vy: 0, on: false };
-
     const resize = () => {
       DPR = Math.min(window.devicePixelRatio || 1, 2);
       const heroRect = hero.getBoundingClientRect();
@@ -389,38 +387,6 @@ export default function HeroSection() {
         c.vy *= 1 - dragCoeff * dt * 0.5;
         // Angular damping
         c.w *= 1 - 1.8 * dt;
-
-        // Mouse interaction — realistic push with momentum transfer
-        if (mouse.on) {
-          const dx = c.x - mouse.x;
-          const dy = c.y - mouse.y;
-          const dist = Math.hypot(dx, dy);
-          const contactRadius = c.r + 40;
-
-          if (dist < contactRadius && dist > 0.001) {
-            const nx = dx / dist;
-            const ny = dy / dist;
-            const overlap = contactRadius - dist;
-            const overlapRatio = overlap / contactRadius;
-
-            // Soft spring push (quadratic falloff)
-            const springForce = overlapRatio * overlapRatio * 12;
-            c.vx += nx * springForce;
-            c.vy += ny * springForce;
-
-            // Momentum transfer from cursor velocity
-            const mouseSpeed = Math.hypot(mouse.vx, mouse.vy);
-            if (mouseSpeed > 1) {
-              const transfer = Math.min(mouseSpeed * 0.35, 25);
-              c.vx += (mouse.vx / mouseSpeed) * transfer * overlapRatio;
-              c.vy += (mouse.vy / mouseSpeed) * transfer * overlapRatio;
-            }
-
-            // Separate overlapping position
-            c.x += nx * overlap * 0.4;
-            c.y += ny * overlap * 0.4;
-          }
-        }
 
         // Floor collision at footer divider
         if (c.y + c.r > floorY) {
@@ -712,9 +678,6 @@ export default function HeroSection() {
         physicsStep(dt / sub);
       }
 
-      mouse.vx *= 0.85;
-      mouse.vy *= 0.85;
-
       ctx.clearRect(0, 0, W, H);
       for (const coin of coins) {
         drawCoin(coin);
@@ -723,42 +686,6 @@ export default function HeroSection() {
       animId = requestAnimationFrame(loop);
     };
 
-    // Pointer event listeners
-    const handlePointerMove = (e: PointerEvent) => {
-      const rect = hero.getBoundingClientRect();
-      const nx = e.clientX - rect.left;
-      const ny = e.clientY - rect.top;
-      mouse.vx = nx - mouse.x;
-      mouse.vy = ny - mouse.y;
-      mouse.x = nx;
-      mouse.y = ny;
-      mouse.on = e.pointerType !== "touch" || e.buttons > 0;
-    };
-
-    const handlePointerLeave = () => {
-      mouse.on = false;
-    };
-
-    // Click anywhere on the hero card to drop another coin
-    const handlePointerDown = (e: PointerEvent) => {
-      const target = e.target as HTMLElement;
-      if (target.closest("a, button")) return;
-
-      // When at 10 or more balls, dismiss one ball smoothly so count stays balanced
-      const activeCount = coins.filter((c) => !c.isExiting).length;
-      if (activeCount >= 10) {
-        dismissOneCoin();
-      }
-
-      const rect = hero.getBoundingClientRect();
-      const clickX = e.clientX - rect.left;
-      const clickY = e.clientY - rect.top;
-      spawnCoin(clickX, clickY, (Math.random() - 0.5) * W * 0.12);
-    };
-
-    hero.addEventListener("pointermove", handlePointerMove);
-    hero.addEventListener("pointerleave", handlePointerLeave);
-    hero.addEventListener("pointerdown", handlePointerDown);
 
     // Initial sequence: all 10 come first from the left, then slowly one by one with replacement
     let rainTimer: NodeJS.Timeout | null = null;
@@ -798,9 +725,6 @@ export default function HeroSection() {
       if (transitionTimer) clearTimeout(transitionTimer);
       if (cycleTimer) clearInterval(cycleTimer);
       window.removeEventListener("resize", resize);
-      hero.removeEventListener("pointermove", handlePointerMove);
-      hero.removeEventListener("pointerleave", handlePointerLeave);
-      hero.removeEventListener("pointerdown", handlePointerDown);
     };
   }, []);
 
@@ -817,16 +741,16 @@ export default function HeroSection() {
         <div className="cf-hero-main">
           {/* Left Column (3 lines) */}
           <h1 className="cf-hero-h1 left" data-split>
-            <span className="line">One</span>
-            <span className="line">Global</span>
-            <span className="line">Movement.</span>
+            <span className="line">We</span>
+            <span className="line">Turn</span>
+            <span className="line">Ambition</span>
           </h1>
 
           {/* Right Column (2 lines) */}
           <h1 className="cf-hero-h1 right" data-split>
-            <span className="line">New</span>
+            <span className="line">Into</span>
             <span className="line">
-              <span className="cf-hero-accent-text">Future.</span>
+              <span className="cf-hero-accent-text">Success.</span>
             </span>
           </h1>
 
