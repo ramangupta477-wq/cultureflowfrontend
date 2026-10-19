@@ -4,6 +4,7 @@ import React, { useMemo, useState } from "react";
 import { z } from "zod/v4";
 import { saveInstitutionInquiry, type InstitutionInquiry } from "@/lib/appwrite";
 import { fieldErrors, showError, PHONE_RE } from "@/lib/formValidation";
+import { useBlurReveal } from "@/lib/reveals";
 import "../waitlist/waitlist.css";
 import "./institutions.css";
 
@@ -41,6 +42,7 @@ const institutionsSchema = z.object({
 });
 
 export default function InstitutionsPage() {
+  useBlurReveal();
   const [form, setForm] = useState<InstitutionInquiry>(EMPTY);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -102,11 +104,11 @@ export default function InstitutionsPage() {
     <main className="wl-page">
       <div className="wl-container inst-container">
         <header className="inst-head">
-          <p className="inst-kicker">INSTITUTION ONBOARDING</p>
-          <h1 className="inst-title">
+          <p className="inst-kicker" data-pr>INSTITUTION ONBOARDING</p>
+          <h1 className="inst-title" data-pr style={{ "--pr-d": "0.08s" } as React.CSSProperties}>
             Partner with <em>Culture Flow.</em>
           </h1>
-          <p className="inst-sub">
+          <p className="inst-sub" data-pr style={{ "--pr-d": "0.16s" } as React.CSSProperties}>
             Bring global mobility to your campus — tell us who you are and
             we&rsquo;ll design the onboarding together.
           </p>
@@ -114,7 +116,7 @@ export default function InstitutionsPage() {
 
         <form className="wl-form inst-bento" onSubmit={handleSubmit}>
           {/* ── Row 1 ── */}
-          <div className="inst-cell inst-cell--wide">
+          <div className="inst-cell inst-cell--wide" data-pr style={{ "--pr-d": "0.26s" } as React.CSSProperties}>
             <p className="inst-cell-label">The institution</p>
             <div className="inst-pair">
               <label className={`wl-field${err("institutionType") ? " wl-field--invalid" : ""}`}>
@@ -150,7 +152,7 @@ export default function InstitutionsPage() {
             </div>
           </div>
 
-          <div className="inst-cell">
+          <div className="inst-cell" data-pr style={{ "--pr-d": "0.34s" } as React.CSSProperties}>
             <p className="inst-cell-label">You</p>
             <div className="inst-pair">
               <label className={`wl-field${err("contactName") ? " wl-field--invalid" : ""}`}>
@@ -185,7 +187,7 @@ export default function InstitutionsPage() {
           </div>
 
           {/* ── Row 2 ── */}
-          <div className="inst-cell">
+          <div className="inst-cell" data-pr style={{ "--pr-d": "0.42s" } as React.CSSProperties}>
             <p className="inst-cell-label">Where</p>
             <label className={`wl-field${err("city") ? " wl-field--invalid" : ""}`}>
               <span>City *</span>
@@ -229,7 +231,7 @@ export default function InstitutionsPage() {
             </div>
           </div>
 
-          <div className="inst-cell">
+          <div className="inst-cell" data-pr style={{ "--pr-d": "0.5s" } as React.CSSProperties}>
             <p className="inst-cell-label">Direct lines</p>
             <label className={`wl-field${err("email") ? " wl-field--invalid" : ""}`}>
               <span>Email *</span>
@@ -260,7 +262,7 @@ export default function InstitutionsPage() {
             </label>
           </div>
 
-          <div className="inst-cell inst-cell--accent">
+          <div className="inst-cell inst-cell--accent" data-pr style={{ "--pr-d": "0.58s" } as React.CSSProperties}>
             <p className="inst-cell-label">What are you looking for? *</p>
             <select
               className="inst-select"
@@ -286,7 +288,7 @@ export default function InstitutionsPage() {
           </div>
 
           {/* ── Row 3 ── */}
-          <div className="inst-cell inst-cell--full">
+          <div className="inst-cell inst-cell--full" data-pr style={{ "--pr-d": "0.66s" } as React.CSSProperties}>
             <label className={`wl-field${err("message") ? " wl-field--invalid" : ""}`}>
               <span>Your query / message</span>
               <textarea

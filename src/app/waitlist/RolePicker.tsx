@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useCallback, useRef, useEffect } from "react";
+import { useBlurReveal } from "@/lib/reveals";
 import "./role-picker.css";
 
 const ROLES = ["Student", "Parent", "Corporate Employee"] as const;
@@ -12,6 +13,7 @@ interface RolePickerProps {
 }
 
 export default function RolePicker({ onSelect }: RolePickerProps) {
+  useBlurReveal();
   const [selected, setSelected] = useState<string | null>(null);
   const trackRef = useRef<HTMLDivElement>(null);
   const pointerDown = useRef(false);
@@ -65,9 +67,9 @@ export default function RolePicker({ onSelect }: RolePickerProps) {
   return (
     <section className="rp-section" aria-label="Choose your role">
       <div className="rp-inner">
-        <h2 className="rp-prompt">I am a</h2>
+        <h2 className="rp-prompt" data-pr>I am a</h2>
 
-        <div className="rp-track-mask">
+        <div className="rp-track-mask" data-pr style={{ "--pr-d": "0.1s" } as React.CSSProperties}>
           <div
             ref={trackRef}
             className="rp-track"
@@ -98,6 +100,8 @@ export default function RolePicker({ onSelect }: RolePickerProps) {
           className={`rp-next ${selected ? "rp-next--ready" : ""}`}
           disabled={selected === null}
           onClick={handleNext}
+          data-pr
+          style={{ "--pr-d": "0.2s" } as React.CSSProperties}
           suppressHydrationWarning
         >
           next <span aria-hidden>→</span>

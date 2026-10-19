@@ -7,6 +7,7 @@ import { z } from "zod/v4";
 import RolePicker from "./RolePicker";
 import { playShutterSound } from "@/components/ui/admit-one-ticket";
 import { fieldErrors, showError, PHONE_RE } from "@/lib/formValidation";
+import { useBlurReveal } from "@/lib/reveals";
 import {
   creditReferrer,
   joinWaitlist,
@@ -119,6 +120,7 @@ const SOURCE_OPTIONS = [
 ] as const;
 
 export default function WaitlistPage() {
+  useBlurReveal();
   // Step 1 fields (identity + role), step 2 fields (context + consent)
   const [step, setStep] = useState<0 | 1 | 2>(0);
   const [submitting, setSubmitting] = useState(false);
@@ -349,11 +351,11 @@ export default function WaitlistPage() {
       <div className="wl-container">
         {/* Left column — pitch, styled like the quiz panel */}
         <aside className="wl-quiz">
-          <h2 className="wl-quiz-question">
+          <h2 className="wl-quiz-question" data-pr>
             Ready to spend two weeks abroad learning, not touring?
           </h2>
           <div className="wl-blob-list">
-            <div className="wl-blob wl-blob--1">
+            <div className="wl-blob wl-blob--1" data-pr style={{ "--pr-d": "0.1s" } as React.CSSProperties}>
               <span className="wl-blob-check" aria-hidden>
                 40
               </span>
@@ -362,20 +364,20 @@ export default function WaitlistPage() {
                 itinerary.
               </p>
             </div>
-            <div className="wl-blob wl-blob--2">
+            <div className="wl-blob wl-blob--2" data-pr style={{ "--pr-d": "0.18s" } as React.CSSProperties}>
               <span className="wl-blob-check" aria-hidden>
                 40
               </span>
               <p>% industry and cultural immersion with vetted local partners.</p>
             </div>
-            <div className="wl-blob wl-blob--3">
+            <div className="wl-blob wl-blob--3" data-pr style={{ "--pr-d": "0.26s" } as React.CSSProperties}>
               <span className="wl-blob-check" aria-hidden>
                 20
               </span>
               <p>% guided synthesis and reflection that turns it into outcomes.</p>
             </div>
           </div>
-          <p className="wl-quiz-note">
+          <p className="wl-quiz-note" data-pr style={{ "--pr-d": "0.34s" } as React.CSSProperties}>
             7 to 21 day micro-immersions for university students.
             <br />
             Joining costs nothing — it carries no obligation to enrol.
@@ -384,7 +386,7 @@ export default function WaitlistPage() {
 
         {/* Right column — the form panel */}
         <section className="wl-form-panel">
-          <h1 className="wl-form-heading">Join the waitlist</h1>
+          <h1 className="wl-form-heading" data-pr>Join the waitlist</h1>
 
           {step === 1 ? (
             <form
@@ -396,7 +398,7 @@ export default function WaitlistPage() {
               }}
             >
               {/* Role segmented control, like the Liebe/Lieber/Hallo radios */}
-              <fieldset className="wl-role">
+              <fieldset className="wl-role" data-pr style={{ "--pr-d": "0.2s" } as React.CSSProperties}>
                 <legend>I am a…</legend>
                 <div className="wl-role-options">
                   {(
@@ -547,7 +549,7 @@ export default function WaitlistPage() {
                 </label>
               )}
 
-              <fieldset className="wl-field wl-tracks">
+              <fieldset className="wl-field wl-tracks" data-pr>
                 <span>Track interest (pick up to 3)</span>
                 <div className="wl-track-options">
                   {TRACKS.map((t) => (
@@ -580,6 +582,8 @@ export default function WaitlistPage() {
 
               <label
                 className={`wl-consent${showError(step2Errors, "consent", touched2, attempted2) ? " wl-field--invalid" : ""}`}
+                data-pr
+                style={{ "--pr-d": "0.12s" } as React.CSSProperties}
               >
                 <input
                   type="checkbox"
