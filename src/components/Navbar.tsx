@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import "./Navbar.css";
@@ -16,6 +16,8 @@ export default function Navbar({ pageLabel, logoTheme = "auto" }: NavbarProps) {
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [hidden, setHidden] = useState(false);
+  const lastYRef = useRef(0);
 
   // Compute active page title for the left indicator
   const getPageTitle = () => {
@@ -36,11 +38,22 @@ export default function Navbar({ pageLabel, logoTheme = "auto" }: NavbarProps) {
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
+      const y = window.scrollY;
+      setScrolled(y > 20);
+      // Hide on scroll down past 100px, show on scroll up
+      const dy = y - lastYRef.current;
+      lastYRef.current = y;
+      if (mobileMenuOpen) {
+        setHidden(false);
+      } else if (y < 100 || dy < -2) {
+        setHidden(false);
+      } else if (dy > 2) {
+        setHidden(true);
+      }
     };
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [mobileMenuOpen]);
 
   // Close mobile menu when route changes
   useEffect(() => {
@@ -48,7 +61,7 @@ export default function Navbar({ pageLabel, logoTheme = "auto" }: NavbarProps) {
   }, [pathname]);
 
   return (
-    <header className={`cf-navbar ${scrolled ? "cf-navbar--scrolled" : ""}`}>
+    <header className={`cf-navbar ${scrolled ? "cf-navbar--scrolled" : ""} ${hidden ? "cf-navbar--hidden" : ""}`}>
       <div className="cf-navbar-container">
         
         {/* ─── LEFT: Culture Flow Logo at Top Left Corner ─── */}

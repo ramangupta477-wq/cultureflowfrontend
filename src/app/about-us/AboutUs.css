@@ -12,7 +12,7 @@
 
 /* ─── Shared bits ─── */
 .au-eyebrow {
-  font-family: "SF Mono", Menlo, monospace;
+  font-family: var(--font-body, "Libron", Georgia, serif);
   font-size: 0.72rem;
   letter-spacing: 0.18em;
   display: flex;
@@ -61,31 +61,35 @@
 }
 
 .au-stat {
-  font-family: "SF Mono", Menlo, monospace;
+  font-family: var(--font-body, "Libron", Georgia, serif);
   font-size: clamp(2.6rem, 5.5vw, 4.6rem);
   font-weight: 400;
   letter-spacing: -0.02em;
   line-height: 1;
-  color: var(--color-yellow, #FFCD00);
+  color: var(--color-obraz-black, #0B0B0B);
   font-variant-numeric: tabular-nums;
 }
 
 .au-stat-label {
-  font-family: "SF Mono", Menlo, monospace;
+  font-family: var(--font-body, "Libron", Georgia, serif);
   font-size: 0.62rem;
   letter-spacing: 0.22em;
-  color: rgba(253, 252, 244, 0.55);
+  color: rgba(11, 11, 11, 0.5);
   margin-top: 10px;
 }
 
-/* ═══ SECTION 1: DARK INTRO ═══ */
+/* Stat on the photo chapter stays light-on-photo */
+.au-chapter1 .au-stat { color: var(--color-yellow, #FFCD00); }
+.au-chapter1 .au-stat-label { color: rgba(253, 252, 244, 0.6); }
+
+/* ═══ SECTION 1: INTRO (cream, like the landing page) ═══ */
 .au-intro {
   position: relative;
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--color-obraz-black, #0B0B0B);
+  background: var(--color-bg, #FDFCF4);
   overflow: hidden;
   padding: 0 clamp(24px, 6vw, 96px);
 }
@@ -96,10 +100,10 @@
   right: clamp(16px, 3vw, 48px);
   transform: translateY(-50%);
   writing-mode: vertical-rl;
-  font-family: "SF Mono", Menlo, monospace;
+  font-family: var(--font-body, "Libron", Georgia, serif);
   font-size: 0.66rem;
   letter-spacing: 0.34em;
-  color: rgba(200, 156, 102, 0.45);
+  color: rgba(200, 156, 102, 0.6);
   user-select: none;
 }
 
@@ -113,7 +117,7 @@
   font-size: clamp(3rem, 7vw, 6.4rem);
   line-height: 1.02;
   letter-spacing: -0.01em;
-  color: var(--color-moverunion-white, #FDFCF4);
+  color: var(--color-obraz-black, #0B0B0B);
   margin: 0 0 30px;
 }
 
@@ -126,36 +130,9 @@
   font-family: var(--font-body, "Inter", sans-serif);
   font-size: clamp(1rem, 1.4vw, 1.2rem);
   line-height: 1.65;
-  color: rgba(253, 252, 244, 0.66);
+  color: rgba(11, 11, 11, 0.66);
   max-width: 560px;
   margin: 0;
-}
-
-.au-scroll-hint {
-  position: absolute;
-  left: 50%;
-  bottom: 32px;
-  transform: translateX(-50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-  font-family: "SF Mono", Menlo, monospace;
-  font-size: 0.6rem;
-  letter-spacing: 0.3em;
-  color: rgba(253, 252, 244, 0.4);
-}
-
-.au-scroll-hint i {
-  width: 1px;
-  height: 44px;
-  background: linear-gradient(to bottom, var(--color-gold, #C89C66), transparent);
-  animation: au-drip 2s ease-in-out infinite;
-}
-
-@keyframes au-drip {
-  0%, 100% { transform: scaleY(0.4); transform-origin: top; opacity: 0.4; }
-  50% { transform: scaleY(1); transform-origin: top; opacity: 1; }
 }
 
 /* ═══ CHAPTER I — FULL-BLEED PHOTO ═══ */
@@ -163,7 +140,7 @@
   position: relative;
   height: 110vh;
   overflow: hidden;
-  background: var(--color-obraz-black, #0B0B0B);
+  background: var(--color-bg, #FDFCF4);
 }
 
 .au-ch1-img {
@@ -205,7 +182,7 @@
 /* ═══ CHAPTER II — HISTORY (horizontal timeline) ═══ */
 .au-chapter2 {
   position: relative;
-  background: var(--color-obraz-black, #0B0B0B);
+  background: var(--color-bg, #FDFCF4);
   padding: clamp(90px, 14vh, 160px) clamp(24px, 5vw, 80px) clamp(140px, 20vh, 220px);
 }
 
@@ -215,7 +192,7 @@
   font-weight: 400;
   font-size: clamp(2.2rem, 4.2vw, 3.8rem);
   line-height: 1.05;
-  color: var(--color-moverunion-white, #FDFCF4);
+  color: var(--color-obraz-black, #0B0B0B);
   margin: 0 0 18px;
 }
 
@@ -228,7 +205,7 @@
   font-family: var(--font-body, "Inter", sans-serif);
   font-size: clamp(0.95rem, 1.2vw, 1.1rem);
   line-height: 1.6;
-  color: rgba(253, 252, 244, 0.6);
+  color: rgba(11, 11, 11, 0.6);
   max-width: 520px;
   margin: 0;
 }
@@ -240,7 +217,7 @@
 .au-timeline-line {
   position: relative;
   height: 2px;
-  background: rgba(253, 252, 244, 0.12);
+  background: rgba(11, 11, 11, 0.12);
   overflow: hidden;
 }
 
@@ -254,7 +231,7 @@
 
 .au-timeline-nodes {
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   margin-top: -7px;
 }
 
@@ -269,8 +246,8 @@
   width: 14px;
   height: 14px;
   border-radius: 50%;
-  background: var(--color-obraz-black, #0B0B0B);
-  border: 2px solid rgba(253, 252, 244, 0.25);
+  background: var(--color-bg, #FDFCF4);
+  border: 2px solid rgba(11, 11, 11, 0.3);
   transition: all 0.4s ease;
 }
 
@@ -287,15 +264,15 @@
 }
 
 .au-node-year {
-  font-family: "SF Mono", Menlo, monospace;
+  font-family: var(--font-body, "Libron", Georgia, serif);
   font-size: 0.9rem;
   letter-spacing: 0.1em;
-  color: rgba(253, 252, 244, 0.35);
+  color: rgba(11, 11, 11, 0.4);
   transition: color 0.4s ease;
 }
 
-.au-node--passed .au-node-year { color: rgba(253, 252, 244, 0.7); }
-.au-node--active .au-node-year { color: var(--color-yellow, #FFCD00); }
+.au-node--passed .au-node-year { color: rgba(11, 11, 11, 0.75); }
+.au-node--active .au-node-year { color: var(--color-gold, #C89C66); }
 
 .au-timeline-detail {
   margin-top: clamp(40px, 6vh, 70px);
@@ -312,7 +289,7 @@
   font-family: var(--font-heading, "DM Serif Display", Georgia, serif);
   font-weight: 400;
   font-size: clamp(1.5rem, 2.4vw, 2.2rem);
-  color: var(--color-moverunion-white, #FDFCF4);
+  color: var(--color-obraz-black, #0B0B0B);
   margin: 0 0 12px;
 }
 
@@ -320,7 +297,7 @@
   font-family: var(--font-body, "Inter", sans-serif);
   font-size: clamp(0.92rem, 1.1vw, 1.05rem);
   line-height: 1.65;
-  color: rgba(253, 252, 244, 0.6);
+  color: rgba(11, 11, 11, 0.6);
   margin: 0;
 }
 
@@ -331,7 +308,7 @@
 /* ═══ CHAPTER III — CRAFT (photo panels) ═══ */
 .au-chapter3 {
   position: relative;
-  background: #141210;
+  background: var(--color-bg, #FDFCF4);
   padding: clamp(90px, 14vh, 160px) clamp(24px, 5vw, 80px) clamp(140px, 20vh, 220px);
 }
 
@@ -346,7 +323,7 @@
   aspect-ratio: 4 / 5;
   overflow: hidden;
   border-radius: 4px;
-  background: linear-gradient(135deg, #2a2620, #1a1714);
+  background: linear-gradient(135deg, #e8dcc4, #c4b494);
 }
 
 .au-panel img {
@@ -361,15 +338,15 @@
 }
 
 .au-panel-cap {
-  font-family: "SF Mono", Menlo, monospace;
+  font-family: var(--font-body, "Libron", Georgia, serif);
   font-size: 0.62rem;
   letter-spacing: 0.18em;
-  color: rgba(253, 252, 244, 0.4);
+  color: rgba(11, 11, 11, 0.45);
   margin: 14px 0 0;
 }
 
 .au-chapter3 .au-chapter-stat .au-stat {
-  color: var(--color-yellow, #FFCD00);
+  color: var(--color-obraz-black, #0B0B0B);
 }
 
 /* ═══ CHAPTER IV — THE HAND (cream info) ═══ */
@@ -423,7 +400,7 @@
 }
 
 .au-office-role {
-  font-family: "SF Mono", Menlo, monospace;
+  font-family: var(--font-body, "Libron", Georgia, serif);
   font-size: 0.62rem;
   letter-spacing: 0.2em;
   color: rgba(11, 11, 11, 0.5);
@@ -452,7 +429,7 @@
 }
 
 .au-pillar-num {
-  font-family: "SF Mono", Menlo, monospace;
+  font-family: var(--font-body, "Libron", Georgia, serif);
   font-size: 0.72rem;
   letter-spacing: 0.14em;
   color: var(--color-gold, #C89C66);

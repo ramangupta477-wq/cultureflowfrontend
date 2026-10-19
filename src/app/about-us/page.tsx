@@ -6,37 +6,32 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/app/homepage/Footer";
 import "./AboutUs.css";
 
-/* ─── History timeline (feeds the horizontal gold line) ─── */
+/* ─── Founding story (feeds the horizontal gold line) ─── */
 const HISTORY = [
   {
-    year: "2021",
-    title: "The Genesis",
-    desc: "Founded in New Delhi to replace transactional agents with direct, transparent academic bridges.",
+    year: "EARLY '26",
+    title: "The Question",
+    desc: "Why should studying abroad be an anxiety-ridden maze of agents and hidden fees? Culture Flow starts with that one question.",
   },
   {
-    year: "2022",
-    title: "Direct Alliances",
-    desc: "First bilateral articulation agreements signed directly with UK and European faculties.",
+    year: "SPRING '26",
+    title: "The Blueprint",
+    desc: "The mobility framework takes shape — profiling, matching, housing, visa, orientation. One pipeline, end to end.",
   },
   {
-    year: "2023",
-    title: "Mobility Architecture",
-    desc: "End-to-end pathway framework launched — profiling, matching, housing, visa, orientation.",
+    year: "SUMMER '26",
+    title: "The Build",
+    desc: "Every pathway curated with universities and advisors. Nothing hidden, nothing transactional.",
   },
   {
-    year: "2024",
-    title: "Continental Expansion",
-    desc: "200+ partner institutions across the UK, Switzerland, Germany, Canada and Australia.",
+    year: "OCT '26",
+    title: "The Launch",
+    desc: "Culture Flow goes live from New Delhi — admissions bridge, credit transfer, relocation care.",
   },
   {
-    year: "2025",
-    title: "Collegiate Fellowships",
-    desc: "£2.4M+ in scholarships secured; Oxbridge and Russell Group cohorts placement.",
-  },
-  {
-    year: "2026",
-    title: "One Global Step",
-    desc: "From admissions bridge to a full mobility ecosystem across three continents.",
+    year: "NEXT",
+    title: "Your Chapter",
+    desc: "First cohorts are forming now. The story continues with every scholar who takes one global step.",
   },
 ];
 
@@ -156,11 +151,11 @@ export default function AboutUsPage() {
       {/* ═══ DARK INTRO — vertical brand statement ═══ */}
       <section className="au-intro">
         <span className="au-intro-vertical" aria-hidden>
-          CULTURE FLOW — GLOBAL PATHWAYS · EST. 2021
+          CULTURE FLOW — GLOBAL PATHWAYS · EST. OCT 2026
         </span>
         <div className="au-intro-inner">
           <Reveal>
-            <p className="au-eyebrow au-eyebrow--gold">SINCE 2021 · NEW DELHI</p>
+            <p className="au-eyebrow au-eyebrow--gold">FOUNDED OCT 2026 · NEW DELHI</p>
           </Reveal>
           <Reveal>
             <h1 className="au-intro-title">
@@ -176,10 +171,6 @@ export default function AboutUsPage() {
               dignified, life-defining milestone.
             </p>
           </Reveal>
-        </div>
-        <div className="au-scroll-hint" aria-hidden>
-          <span>SCROLL</span>
-          <i />
         </div>
       </section>
 
@@ -212,12 +203,12 @@ export default function AboutUsPage() {
             <p className="au-eyebrow au-eyebrow--gold">CHAPTER II — HISTORY</p>
           </Reveal>
           <Reveal>
-            <h2 className="au-ch2-title">Five years, one conviction.</h2>
+            <h2 className="au-ch2-title">Born this October. One conviction.</h2>
           </Reveal>
           <Reveal>
             <p className="au-ch2-sub">
-              From a small advisory room in New Delhi to a mobility ecosystem spanning
-              three continents.
+              Young enough to move fast, built to last. One conviction carried
+              from day one into launch.
             </p>
           </Reveal>
         </div>

@@ -16,7 +16,13 @@
   transition: background-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
               padding 0.35s cubic-bezier(0.16, 1, 0.3, 1),
               border-color 0.4s ease,
-              box-shadow 0.4s ease;
+              box-shadow 0.4s ease,
+              transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Hide on scroll down, reveal on scroll up */
+.cf-navbar--hidden {
+  transform: translateY(-100%);
 }
 
 .cf-navbar--scrolled {
