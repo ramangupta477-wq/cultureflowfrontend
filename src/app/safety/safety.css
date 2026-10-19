@@ -8,6 +8,28 @@
   padding-top: 96px;
 }
 
+/* ─── Reveal-on-scroll (blur-up, staggered via --sf-d) ─── */
+.sf-reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  filter: blur(6px);
+  transition:
+    opacity 0.9s cubic-bezier(0.2, 0.7, 0.2, 1),
+    transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1),
+    filter 0.9s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.sf-reveal--in {
+  opacity: 1;
+  transform: none;
+  filter: blur(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sf-reveal { transition: none; opacity: 1; transform: none; filter: none; }
+  .sf-route, .sf-node, .sf-badge-ring, .sf-pulse-ring, .sf-rope-line { animation: none !important; stroke-dashoffset: 0 !important; }
+}
+
 /* ─── Shared type ─── */
 .sf-section-title {
   font-family: var(--font-heading, "DM Serif Display", Georgia, serif);
@@ -45,6 +67,83 @@
   padding: clamp(60px, 10vh, 130px) clamp(24px, 6vw, 96px) clamp(50px, 8vh, 90px);
   max-width: 1240px;
   margin: 0 auto;
+}
+
+.sf-hero-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: clamp(40px, 5vw, 80px);
+  align-items: center;
+}
+
+/* Route diagram — dashed lines draw, nodes pop, ring pulses */
+.sf-route-svg {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.sf-route {
+  fill: none;
+  stroke: var(--color-gold, #C89C66);
+  stroke-width: 1.5;
+  stroke-dasharray: 5 6;
+  stroke-linecap: round;
+  stroke-dasharray: 220;
+  stroke-dashoffset: 220;
+  animation: sf-draw 1.4s cubic-bezier(0.4, 0, 0.2, 1) 0.5s forwards;
+}
+
+@keyframes sf-draw {
+  to { stroke-dashoffset: 0; }
+}
+
+.sf-node {
+  fill: var(--color-bg, #FDFCF4);
+  stroke: var(--color-gold, #C89C66);
+  stroke-width: 2;
+  opacity: 0;
+  transform-origin: center;
+  transform-box: fill-box;
+  animation: sf-pop 0.5s cubic-bezier(0.2, 0.7, 0.2, 1) 1.2s forwards;
+}
+
+.sf-node--origin {
+  fill: var(--color-yellow, #FFCD00);
+  stroke: var(--color-obraz-black, #0B0B0B);
+  animation-delay: 0.2s;
+}
+
+@keyframes sf-pop {
+  0% { opacity: 0; transform: scale(0); }
+  70% { transform: scale(1.4); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+.sf-dot {
+  fill: rgba(11, 11, 11, 0.18);
+}
+
+.sf-map-label {
+  font-family: var(--font-body, "Inter", sans-serif);
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  fill: rgba(11, 11, 11, 0.55);
+}
+
+.sf-pulse-ring {
+  fill: none;
+  stroke: var(--color-yellow, #FFCD00);
+  stroke-width: 1.5;
+  opacity: 0;
+  transform-origin: center;
+  transform-box: fill-box;
+  animation: sf-pulse 2.6s ease-out 2s infinite;
+}
+
+@keyframes sf-pulse {
+  0% { opacity: 0.8; transform: scale(1); }
+  100% { opacity: 0; transform: scale(3.2); }
 }
 
 .sf-hero-title {
@@ -117,13 +216,59 @@
   padding: clamp(28px, 3.5vw, 48px);
 }
 
-.sf-pillar-num {
-  display: block;
-  font-family: var(--font-body, "Libron", Georgia, serif);
-  font-size: 0.72rem;
-  letter-spacing: 0.12em;
-  color: var(--color-gold, #C89C66);
+/* offset rhythm on desktop: right column sits lower */
+@media (min-width: 901px) {
+  .sf-pillar:nth-child(even).sf-reveal { transform: translateY(56px); }
+  .sf-pillar:nth-child(even).sf-reveal--in { transform: translateY(34px); }
+}
+
+/* ring-drawn number badges */
+.sf-pillar-badge,
+.sf-protocol-badge {
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+  width: 62px;
+  height: 62px;
   margin-bottom: 20px;
+}
+
+.sf-protocol-badge {
+  width: 54px;
+  height: 54px;
+  margin-bottom: 0;
+  align-self: center;
+}
+
+.sf-badge-ring {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke: var(--color-gold, #C89C66);
+  stroke-width: 1.5;
+  stroke-dasharray: 190;
+  stroke-dashoffset: 190;
+  transform: rotate(-90deg);
+}
+
+.sf-reveal--in .sf-badge-ring {
+  animation: sf-draw 1.2s cubic-bezier(0.4, 0, 0.2, 1) 0.15s forwards;
+}
+
+.sf-pillar-num,
+.sf-protocol-num {
+  position: relative;
+  font-family: var(--font-body, "Libron", Georgia, serif);
+  font-size: 1rem;
+  letter-spacing: 0.08em;
+  color: var(--color-obraz-black, #0B0B0B);
+}
+
+.sf-protocol-num {
+  font-size: 1.05rem;
+  color: var(--color-gold, #C89C66);
 }
 
 .sf-pillar-title {
@@ -144,6 +289,7 @@
 
 /* ─── Before / During phases ─── */
 .sf-phases {
+  position: relative;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: clamp(40px, 6vw, 90px);
@@ -151,6 +297,49 @@
   max-width: 1240px;
   margin: 0 auto;
   border-top: 1px solid rgba(11, 11, 11, 0.08);
+}
+
+/* connecting rope between the two phase nodes — draws once visible */
+.sf-rope {
+  position: absolute;
+  top: clamp(54px, 8vh, 96px);
+  left: 12%;
+  right: 12%;
+  height: 2px;
+  pointer-events: none;
+}
+
+.sf-rope-line {
+  display: block;
+  height: 100%;
+  background: repeating-linear-gradient(
+    to right,
+    var(--color-gold, #C89C66) 0 6px,
+    transparent 6px 12px
+  );
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 1.4s cubic-bezier(0.4, 0, 0.2, 1) 0.2s;
+}
+
+.sf-phases:has(.sf-reveal--in) .sf-rope-line {
+  transform: scaleX(1);
+}
+
+.sf-phase {
+  position: relative;
+}
+
+.sf-phase-node {
+  position: absolute;
+  top: 4px;
+  left: -14px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--color-yellow, #FFCD00);
+  border: 2px solid var(--color-obraz-black, #0B0B0B);
+  z-index: 1;
 }
 
 .sf-phase-eyebrow {
@@ -208,7 +397,7 @@
 
 .sf-protocol-row {
   display: grid;
-  grid-template-columns: 90px 1fr;
+  grid-template-columns: 64px 1fr;
   gap: 24px;
   padding: clamp(24px, 3vh, 36px) 0;
   border-top: 1px solid rgba(11, 11, 11, 0.12);
@@ -220,8 +409,8 @@
 
 .sf-protocol-num {
   font-family: var(--font-body, "Libron", Georgia, serif);
-  font-size: clamp(1.6rem, 2.6vw, 2.4rem);
-  line-height: 1;
+  font-size: 1.05rem;
+  letter-spacing: 0.08em;
   color: var(--color-gold, #C89C66);
 }
 
