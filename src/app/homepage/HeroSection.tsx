@@ -311,6 +311,13 @@ export default function HeroSection() {
       const footRect = foot.getBoundingClientRect();
       // Floor line aligns precisely with the top edge of the footer divider
       floorY = footRect.top - heroRect.top;
+      // Mobile: floor drops to the "SUCCESS." line level so balls pile beside it
+      if (W < 768) {
+        const headline = hero.querySelector<HTMLElement>(".cf-hero-h1.right");
+        if (headline) {
+          floorY = headline.getBoundingClientRect().bottom - heroRect.top + 4;
+        }
+      }
       // Ball base radius
       baseRadius = Math.max(20, Math.min(W * 0.0264, 53));
 
@@ -333,9 +340,10 @@ export default function HeroSection() {
     const updateObstacles = () => {
       if (!hero) return;
       const heroRect = hero.getBoundingClientRect();
-      const elements = hero.querySelectorAll<HTMLElement>(
-        ".cf-hero-main .line, .cf-hero-lede"
-      );
+      // Mobile: headline lines still act as bounce steps (cascade down),
+      // but the lede paragraph must not wall off the SUCCESS-line floor
+      const selector = W < 768 ? ".cf-hero-main .line" : ".cf-hero-main .line, .cf-hero-lede";
+      const elements = hero.querySelectorAll<HTMLElement>(selector);
       const list: Obstacle[] = [];
       elements.forEach((el) => {
         const r = el.getBoundingClientRect();
