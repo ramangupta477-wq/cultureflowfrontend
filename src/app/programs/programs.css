@@ -1377,16 +1377,27 @@
     gap: 12px;
   }
 
+  /* Keep the 3-column bar chart on mobile — stacked full-width bars exceed
+     the 100vh sticky stage, so the polygon canvas only covered bar 1 */
   .tracks-bars {
-    grid-template-columns: 1fr;
-    height: auto;
-    gap: 16px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
   }
 
-  .track-bar--01,
-  .track-bar--02,
-  .track-bar--03 {
-    height: auto;
+  .track-bar {
+    padding: 12px 10px;
+  }
+
+  .track-desc {
+    display: none;
+  }
+
+  .track-title {
+    font-size: 0.95rem;
+  }
+
+  .track-num {
+    font-size: 0.7rem;
   }
 
   .track-bar {
