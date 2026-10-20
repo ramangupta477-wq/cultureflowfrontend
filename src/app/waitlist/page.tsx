@@ -164,6 +164,18 @@ export default function WaitlistPage() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  // measure the actual centerpiece box — viewport math can't see card padding
+  useEffect(() => {
+    if (!done) return;
+    const box = document.querySelector(".wl-ticket-centerpiece");
+    if (!box) return;
+    const fit = () => setTicketWidth(Math.max(260, Math.floor(box.clientWidth) - 6));
+    fit();
+    const ro = new ResizeObserver(fit);
+    ro.observe(box);
+    return () => ro.disconnect();
+  }, [done]);
+
   useEffect(() => {
     if (done) {
       try {
