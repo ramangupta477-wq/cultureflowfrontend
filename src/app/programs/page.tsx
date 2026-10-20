@@ -81,7 +81,6 @@ export default function ProgramsPage() {
       <section className="programs-hero-section">
         <div className="programs-hero-container">
 
-          <span className="pgb-pill" data-pr>Programs</span>
           <h1 className="pgb-title" data-pr style={{ "--pr-d": "0.07s" } as React.CSSProperties}>
             <span className="pgb-title-l1">Three tracks. One framework.</span>{" "}
             <span className="pgb-title-l2">
