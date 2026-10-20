@@ -13,39 +13,38 @@ interface FaqItem {
 const FAQ_ITEMS: FaqItem[] = [
   {
     id: "faq-1",
-    question: "How do I choose the right university and study destination?",
+    question: "What is a Culture Flow immersion?",
     answer:
-      "Our advisors evaluate your academic background, career ambitions, and budget to curate a personalized shortlist of universities and countries that offer the best return on investment and student experience.",
+      "A structured short-term academic programme at our global partner institutions — built on the 40/40/20 curriculum model. 40% rigorous academics, 40% cultural and industry immersion, 20% structured reflection. Not a tour. Not a semester exchange. A focused academic experience designed to forge global leaders.",
   },
   {
     id: "faq-2",
-    question: "What are the visa requirements and how does Culture Flow assist?",
+    question: "Who can apply?",
     answer:
-      "We guide you through the entire visa application process — from financial documentation and statement preparation to mock interviews, ensuring a stress-free and compliant submission.",
+      "Ambitious school and university scholars across India. Whether through an institutional partnership or as an individual applicant, if you have the drive to learn beyond the classroom, there's a track for you.",
   },
   {
     id: "faq-3",
-    question: "Can I apply for international scholarships and financial aid?",
+    question: "What does the programme include?",
     answer:
-      "Yes, absolutely. Over 75% of our students qualify for merit-based or destination-specific scholarships. We help you identify opportunities and craft compelling scholarship essays.",
+      "Everything. Flights, visa processing, accommodation, meals, local transport, insurance, academic programme fees, and 24/7 on-ground support. Scholars and families don't manage logistics — we do.",
   },
   {
     id: "faq-4",
-    question: "What support do you provide after I arrive in my destination country?",
+    question: "How does Culture Flow ensure scholar safety?",
     answer:
-      "Our support doesn't end when your flight lands. We assist with airport pickups, finding student housing, opening local bank accounts, and connecting you with active alumni networks.",
+      "Safety is non-negotiable. Every programme includes comprehensive medical and travel insurance, vetted partner institutions, structured chaperone support, a mandatory code of conduct, and 24/7 on-ground concierge. Parents receive full documentation including consent and indemnity frameworks before departure.",
   },
   {
     id: "faq-5",
-    question: "How early should I begin my university application process?",
+    question: "What do scholars receive after the programme?",
     answer:
-      "We recommend starting 8 to 12 months prior to your intended intake. This provides ample time for standardized testing, document verification, university deadlines, and visa processing.",
+      "A certificate of completion, structured post-programme reflection, and the global perspective, academic depth, and career clarity that come from a genuine international immersion — not just a stamp on a passport.",
   },
 ];
 
 export default function FaqSection() {
-  // Card 3 (index 2) open by default to mirror the inspiration screenshot
-  const [openIndex, setOpenIndex] = useState<number | null>(2);
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   const toggleItem = (index: number) => {
     setOpenIndex((prev) => (prev === index ? null : index));
@@ -134,6 +133,11 @@ export default function FaqSection() {
             );
           })}
         </div>
+
+        <p className="cf-faq-contact">
+          Have a different question? Write to us at{" "}
+          <a href="mailto:info@cultureflow.in">info@cultureflow.in</a> — we&apos;re happy to help.
+        </p>
       </div>
     </section>
   );

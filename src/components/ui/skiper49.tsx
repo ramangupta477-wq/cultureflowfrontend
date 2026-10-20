@@ -23,20 +23,21 @@ export interface Skiper49Props {
   activeStep?: number;
   onStepChange?: (index: number) => void;
   className?: string;
+  images?: { src: string; alt: string }[];
 }
 
 const defaultImages = [
   {
-    src: "https://cdn.21st.dev/assets/localized/4a5d625e1432b674a463e803e9fe672f362ad7b1b267b16c8bb0793a5c81747d.jpg",
-    alt: "Scholastic Immersion - Oxford and Cambridge pathways",
+    src: "https://res.cloudinary.com/pxd8he17/image/upload/v1792488717/1.png",
+    alt: "Tech & Innovation — Frontier AI and robotics ecosystems",
   },
   {
-    src: "https://cdn.21st.dev/assets/localized/75561b1340c3d6965831289a69c3b61286af703f407eda10f5c21201f54586a7.jpg",
-    alt: "Borderless Research - Ivy League & frontier labs",
+    src: "https://res.cloudinary.com/pxd8he17/image/upload/v1792488786/2.png",
+    alt: "Sustainability & Impact — Systems shaping global sustainability",
   },
   {
-    src: "https://cdn.21st.dev/assets/localized/89112484e2896a033a8e70574c9187cd06bb596347e408d57f7a6f7cbf8513f7.jpg",
-    alt: "End-to-End Mobility - Housing, logistics and visas",
+    src: "https://res.cloudinary.com/pxd8he17/image/upload/v1792488784/3.png",
+    alt: "Heritage & Culture — Civilisations, traditions, and institutional heritage",
   },
 ];
 
@@ -44,12 +45,13 @@ const Skiper49: React.FC<Skiper49Props> = ({
   activeStep = 0,
   onStepChange,
   className,
+  images = defaultImages,
 }) => {
   return (
     <div className={cn("flex w-full items-center justify-center overflow-hidden", className)}>
       <Carousel_003
         className="w-full"
-        images={defaultImages}
+        images={images}
         showPagination
         loop={false}
         activeStep={activeStep}
@@ -96,16 +98,16 @@ const Carousel_003 = ({
   .Carousal_003 {
     width: 100% !important;
     max-width: 100% !important;
-    height: 480px !important;
-    padding-bottom: 50px !important;
+    height: 540px !important;
+    padding-bottom: 45px !important;
     overflow: hidden !important;
   }
   
   .Carousal_003 .swiper-slide {
     background-position: center;
     background-size: cover;
-    width: 320px !important;
-    height: 380px !important;
+    width: 360px !important;
+    height: 440px !important;
     border-radius: 0px !important;
     overflow: hidden;
   }
@@ -139,12 +141,12 @@ const Carousel_003 = ({
 
   @media (max-width: 768px) {
     .Carousal_003 {
-      height: 400px !important;
+      height: 420px !important;
       padding-bottom: 40px !important;
     }
     .Carousal_003 .swiper-slide {
-      width: 260px !important;
-      height: 310px !important;
+      width: 280px !important;
+      height: 340px !important;
     }
   }
 `;

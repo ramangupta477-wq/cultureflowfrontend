@@ -1,8 +1,16 @@
 "use client";
 
 import React from "react";
-import Image from "next/image";
 import "./AboutSection.css";
+
+const NAV_ITEMS = [
+  { num: "01", label: "The 40/40/20 Curriculum Model" },
+  { num: "02", label: "3 Academic Immersion Tracks" },
+  { num: "03", label: "Global Partner Institution Network" },
+  { num: "04", label: "Institutional-Grade Safety" },
+  { num: "05", label: "End-to-End Programme Execution" },
+  { num: "06", label: "Est. 2026, New Delhi" },
+];
 
 export default function AboutSection() {
   return (
@@ -12,18 +20,14 @@ export default function AboutSection() {
         {/* ─── Left Sidebar ─── */}
         <aside className="about-sidebar-left">
           <nav className="about-sidebar-nav">
-            <a href="#programs">Programs <span className="arrow">↗</span></a>
-            <a href="#destinations">Destinations</a>
-            <a href="#approach">Approach</a>
-            <a href="#contact">Contact</a>
+            {NAV_ITEMS.map(({ num, label }) => (
+              <div key={num} className="about-nav-item">
+                <span className="about-nav-num">{num}</span>
+                <span className="about-nav-label">{label}</span>
+              </div>
+            ))}
           </nav>
 
-          <div className="about-sidebar-bottom">
-            <span className="about-sidebar-handle">@CultureFlow</span>
-            <span className="about-sidebar-subscribe">
-              <span className="dot" /> Connect
-            </span>
-          </div>
         </aside>
 
         {/* ─── Center Main Content ─── */}
@@ -32,49 +36,34 @@ export default function AboutSection() {
           {/* Masthead */}
           <h2 className="about-masthead" style={{ color: 'var(--color-yellow, #FFCD00)' }}>About Us</h2>
 
-          {/* Pinned row */}
+          {/* Pinned row — single label only */}
           <div className="about-pinned-row">
             <span className="about-pinned-label">
-              <span className="dot" /> About Us
+              <span className="dot" /> Est. 2026
             </span>
-            <span className="about-pinned-date">Est. 2024</span>
           </div>
 
           {/* Story content */}
-          <div className="about-story">
-            {/* Left: Image */}
-            <div className="about-story-image">
-              <Image
-                src="/images/about/editorial.jpg"
-                alt="University courtyard at golden hour"
-                width={600}
-                height={450}
-                priority
-              />
-            </div>
-
-            {/* Right: Text */}
+          <div className="about-story about-story--text-only">
             <div className="about-story-text">
               <h3 className="about-story-title">
-                Bridging <em>Cultures,</em> Building Futures
+                The Story Behind the <em>Mission</em>
               </h3>
-              <div className="about-story-meta">
-                <span>By Culture Flow</span>
-                <span>5 Min Read</span>
-              </div>
               <p className="about-story-excerpt">
-                Culture Flow connects ambitious students with the world&apos;s leading
-                universities, offering expert guidance through every stage of the
-                international education journey — from the first conversation to
-                arrival on campus and beyond.
+                We started with one belief: ambition alone shouldn&apos;t determine who
+                gets global exposure — access should; not someday, not after years of
+                saving, but now. That&apos;s why Culture Flow exists. To give scholars the
+                structured international experience, genuine academic depth, and global
+                perspective that transforms not just careers — but how they see the
+                world and their place in it.
               </p>
             </div>
           </div>
 
-          {/* Bottom row */}
-          <div className="about-bottom-row">
+          {/* Bottom row — pulled up */}
+          <div className="about-bottom-row about-bottom-row--tight">
             <span className="about-issue-number">NO. 01</span>
-            <a href="#approach" className="about-see-more">
+            <a href="#values" className="about-see-more">
               <span className="arrow-down">↓</span> See More
             </a>
           </div>
@@ -84,41 +73,28 @@ export default function AboutSection() {
         {/* ─── Right Sidebar ─── */}
         <aside className="about-sidebar-right">
 
-          <div className="about-featured-header">
-            <span className="about-featured-title">Featured Highlights</span>
-            <a href="#values" className="about-featured-see-all">
-              <span className="dot" /> See All
-            </a>
-          </div>
-
           {/* Article 1 */}
           <article className="about-article">
-            <div className="about-article-top">
-              <span className="about-article-number">1</span>
-              <span className="about-article-date">Global Network</span>
-            </div>
-            <h4 className="about-article-title">
-              200+ University Partnerships Worldwide
-            </h4>
+            <span className="about-article-number">NO. 02</span>
+            <h4 className="about-article-title">Mission &amp; Vision</h4>
+            <p className="about-article-subtitle">What We&apos;re Building.</p>
             <p className="about-article-excerpt">
-              We work with a carefully curated network of universities across
-              the UK, Australia, Canada, and Europe — ensuring the right fit
-              for every student.
+              &ldquo;To give every ambitious scholar access to the global academic experience
+              that shapes how they think, lead, and see the world — until that&apos;s no
+              longer the exception, but the expectation.&rdquo;
             </p>
           </article>
 
           {/* Article 2 */}
           <article className="about-article">
-            <div className="about-article-top">
-              <span className="about-article-number">2</span>
-              <span className="about-article-date">Our Mission</span>
-            </div>
-            <h4 className="about-article-title">
-              Student-First Guidance, Every Step
-            </h4>
+            <span className="about-article-number">NO. 03</span>
+            <h4 className="about-article-title">Why Culture Flow</h4>
+            <p className="about-article-subtitle">What Sets Us Apart.</p>
             <p className="about-article-excerpt">
-              From visa applications to accommodation support, we handle the
-              complexity so students can focus on what matters — their future.
+              &ldquo;Every detail is intentional. Culture Flow is built from the ground up —
+              structured short-term academic immersions with institutional rigour at the
+              core, a purpose-built curriculum driving every programme, and safety
+              infrastructure that leaves nothing to assumption.&rdquo;
             </p>
           </article>
 

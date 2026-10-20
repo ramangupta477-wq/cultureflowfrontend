@@ -97,58 +97,60 @@ export default function WaitlistSection() {
       <div className="cf-waitlist-bg-glow" aria-hidden="true" />
 
       <div className="cf-waitlist-container">
-        {/* Left Column: Heading, Value Proposition & CTA */}
-        <div className="cf-waitlist-content">
+        {/* Full-width single-line headline */}
+        <h2 className="cf-waitlist-heading">
+          Claim Your <em>Priority Pass</em> to the Founding Cohort.
+        </h2>
 
-          <h2 className="cf-waitlist-heading">
-            Claim Your <em>Priority Pass</em> to Global Academic Mobility
-          </h2>
+        {/* 2-Column Grid Below Headline */}
+        <div className="cf-waitlist-grid">
+          {/* Left Column: Heading, Value Proposition & CTA */}
+          <div className="cf-waitlist-content">
+            <p className="cf-waitlist-desc">
+              Culture Flow&apos;s inaugural immersion cohort is being built — and early access means first priority. Join the waitlist to secure your place before applications officially open.
+            </p>
 
-          <p className="cf-waitlist-desc">
-            Direct institutional partnerships with Oxford, Harvard, TUM Munich, and NUS Singapore.
-            Join the waitlist to unlock fast-track admissions, merit grant considerations, and an exclusive referral pass.
-          </p>
-
-          <div className="cf-waitlist-perks">
-            <div className="cf-waitlist-perk">
-              <span className="cf-waitlist-perk-icon">✓</span>
-              <span>Guaranteed priority screening for international university cohorts</span>
+            <div className="cf-waitlist-perks">
+              <div className="cf-waitlist-perk">
+                <span className="cf-waitlist-perk-icon">✓</span>
+                <span>Priority enrollment for the inaugural 2027 cohort</span>
+              </div>
+              <div className="cf-waitlist-perk">
+                <span className="cf-waitlist-perk-icon">✓</span>
+                <span>First choice across all three immersion tracks</span>
+              </div>
+              <div className="cf-waitlist-perk">
+                <span className="cf-waitlist-perk-icon">✓</span>
+                <span>Direct programme updates as destinations and dates are confirmed</span>
+              </div>
             </div>
-            <div className="cf-waitlist-perk">
-              <span className="cf-waitlist-perk-icon">✓</span>
-              <span>Personalized track matching (Tech & Innovation, Sustainability, Cultural)</span>
-            </div>
-            <div className="cf-waitlist-perk">
-              <span className="cf-waitlist-perk-icon">✓</span>
-              <span>Unique referral code to fast-track your cohort placement</span>
+
+            <div className="cf-waitlist-actions">
+              <Link href="/waitlist" className="cf-waitlist-btn">
+                <span>Join the Waitlist</span>
+                <span className="cf-waitlist-btn-arrow">→</span>
+              </Link>
+              <span className="cf-waitlist-note">Takes 60 seconds · No upfront fees</span>
             </div>
           </div>
 
-          <div className="cf-waitlist-actions">
-            <Link href="/waitlist" className="cf-waitlist-btn">
-              <span>Join the Waitlist</span>
-              <span className="cf-waitlist-btn-arrow">→</span>
-            </Link>
-            <span className="cf-waitlist-note">Takes 60 seconds · No upfront fees</span>
-          </div>
-        </div>
-
-        {/* Right Column: Live Interactive 3D Dithered Pass */}
-        <div className="cf-waitlist-ticket-wrap">
-          <div className="cf-ticket-scale-box">
-            <AdmitOneTicket
-              name="YOUR NAME HERE"
-              presenter="CULTURE FLOW · GLOBAL MOBILITY"
-              event="PRIORITY ADMIT PASS 2026/2027"
-              venue="OXFORD · HARVARD · TUM · NUS"
-              dates="GLOBAL COHORT"
-              stubText="ADMIT ONE"
-              watermark="CF-2026"
-              width={ticketWidth}
-              texture={CULTURE_FLOW_TICKET_TEXTURE}
-              layout={CULTURE_FLOW_TICKET_LAYOUT}
-              tilt={{ maxTilt: 14, glare: 0.22, scale: 1.03 }}
-            />
+          {/* Right Column: Live Interactive 3D Dithered Pass shifted down */}
+          <div className="cf-waitlist-ticket-wrap">
+            <div className="cf-ticket-scale-box">
+              <AdmitOneTicket
+                name="YOUR NAME HERE"
+                presenter="CULTURE FLOW · GLOBAL MOBILITY"
+                event="PRIORITY ADMIT PASS 2026/2027"
+                venue="OXFORD · HARVARD · TUM · NUS"
+                dates="GLOBAL COHORT"
+                stubText="ADMIT ONE"
+                watermark="CF-2026"
+                width={ticketWidth}
+                texture={CULTURE_FLOW_TICKET_TEXTURE}
+                layout={CULTURE_FLOW_TICKET_LAYOUT}
+                tilt={{ maxTilt: 14, glare: 0.22, scale: 1.03 }}
+              />
+            </div>
           </div>
         </div>
       </div>

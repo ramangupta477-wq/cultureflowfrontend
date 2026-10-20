@@ -801,27 +801,31 @@ export default function HeroSection() {
         {/* ═══ MAIN HEADLINE GRID ═══ */}
         <div className="cf-hero-main">
           {/* Left Column (3 lines) */}
-          <h1 className="cf-hero-h1 left" data-split>
-            <span className="line">We</span>
-            <span className="line">Turn</span>
-            <span className="line">Ambition</span>
-          </h1>
+          <div className="cf-hero-col cf-hero-col--left">
+            <h1 className="cf-hero-h1 left" data-split>
+              <span className="line">We</span>
+              <span className="line">Forge</span>
+              <span className="line">Leaders.</span>
+            </h1>
+          </div>
 
-          {/* Right Column (2 lines) */}
-          <h1 className="cf-hero-h1 right" data-split>
-            <span className="line">Into</span>
-            <span className="line">
-              <span className="cf-hero-accent-text">Success.</span>
-            </span>
-          </h1>
+          {/* Right Column (2 lines + lede) */}
+          <div className="cf-hero-col cf-hero-col--right">
+            <h1 className="cf-hero-h1 right" data-split>
+              <span className="line">Go</span>
+              <span className="line">
+                <span className="cf-hero-accent-text">Global.</span>
+              </span>
+            </h1>
 
-          {/* Lede Paragraph */}
-          <p className="cf-hero-lede">
-            Culture Flow is India&apos;s premier global education mobility and
-            university pathway platform. We partner directly with world-class
-            academic institutions to build pathways students don&apos;t just
-            follow — they embrace.
-          </p>
+            {/* Lede Paragraph */}
+            <p className="cf-hero-lede">
+              The world doesn&apos;t just need graduates — it needs leaders shaped
+              by it. We forge scholars with global depth, frontier knowledge, and
+              the cross-cultural confidence to lead where classrooms end and real
+              industries begin.
+            </p>
+          </div>
         </div>
 
         {/* ═══ FOOTER (FLOOR FOR BOUNCING COINS) ═══ */}
@@ -834,7 +838,7 @@ export default function HeroSection() {
           </span>
           <span>
             Say hello:{" "}
-            <a href="mailto:admissions@cultureflow.in">admissions@cultureflow.in</a>
+            <a href="mailto:info@cultureflow.in">info@cultureflow.in</a>
           </span>
         </footer>
 

@@ -176,7 +176,6 @@
   z-index: 5;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: auto auto;
   column-gap: clamp(24px, 4.5vw, 72px);
   align-content: end; /* Shift content down to the line above Say Hello */
   padding-bottom: clamp(6px, 1vh, 16px);
@@ -191,12 +190,29 @@
   pointer-events: auto;
 }
 
+/* Two-column wrapper for exact top and bottom alignment */
+.cf-hero-col {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.cf-hero-col--left {
+  justify-content: flex-start;
+}
+
+.cf-hero-col--right {
+  justify-content: space-between;
+  align-items: flex-end;
+  text-align: right;
+}
+
 .cf-hero-h1 {
   font-family: "Archivo", "Plus Jakarta Sans", -apple-system, sans-serif;
   font-weight: 400;
   font-stretch: 125%;
-  /* 20% larger monumental typography: clamp(54px, 8.35vw, 185px) */
-  font-size: clamp(54px, 8.35vw, 185px);
+  /* Monumental typography matched across both columns */
+  font-size: clamp(48px, 7.3vw, 162px);
   line-height: 0.92;
   letter-spacing: -0.025em;
   text-transform: uppercase;
@@ -211,19 +227,11 @@
 }
 
 .cf-hero-h1.left {
-  grid-column: 1;
-  grid-row: 1 / span 2;
-  align-self: end;
-  font-size: clamp(46px, 7.1vw, 157px);
+  text-align: left;
 }
 
-
 .cf-hero-h1.right {
-  grid-column: 2;
-  grid-row: 1;
   text-align: right;
-  align-self: end;
-  font-size: clamp(48.6px, 7.52vw, 167px);
 }
 
 .cf-hero-h1.right .line {
@@ -263,18 +271,15 @@
 
 /* Lede Paragraph — 20% larger */
 .cf-hero-lede {
-  grid-column: 2;
-  grid-row: 2;
-  justify-self: end;
-  align-self: end;
   text-align: left;
-  width: min(100%, 30vw);
+  width: min(100%, 32vw);
   min-width: 270px;
-  margin-top: clamp(10px, 1.8vh, 26px);
+  max-width: 500px;
+  margin-top: clamp(14px, 2.2vh, 32px);
   margin-bottom: 0;
   font-family: var(--font-body, "Plus Jakarta Sans", "Inter", sans-serif);
-  font-size: clamp(14.4px, 1.24vw, 22.5px);
-  line-height: 1.5;
+  font-size: clamp(13.5px, 1.15vw, 19.5px);
+  line-height: 1.48;
   color: var(--hero-soft);
   opacity: 0;
   transform: translateY(14px);
@@ -420,27 +425,25 @@
     min-height: 0;
   }
 
-  .cf-hero-h1 {
-    font-size: clamp(40px, 12.5vw, 76px);
+  .cf-hero-col--right {
+    align-items: flex-start;
+    text-align: left;
   }
 
-  .cf-hero-h1.left,
-  .cf-hero-h1.right {
-    grid-column: 1;
-    grid-row: auto;
+  .cf-hero-h1 {
+    font-size: clamp(40px, 12.5vw, 76px);
   }
 
   .cf-hero-h1.right,
   .cf-hero-h1.right .line {
     text-align: left;
+    margin-left: 0;
   }
 
   .cf-hero-lede {
-    grid-column: 1;
-    grid-row: auto;
-    justify-self: start;
     width: 100%;
-    margin-top: 0;
+    max-width: 100%;
+    margin-top: 14px;
   }
 
   .cf-hero-footer {

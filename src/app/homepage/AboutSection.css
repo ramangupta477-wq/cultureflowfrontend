@@ -34,30 +34,38 @@
 .about-sidebar-nav {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 0;
 }
 
-.about-sidebar-nav a {
+.about-nav-item {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  padding: 9px 0;
+  border-bottom: 1px solid rgba(11, 11, 11, 0.08);
+}
+
+.about-nav-item:first-child {
+  border-top: 1px solid rgba(11, 11, 11, 0.08);
+}
+
+.about-nav-num {
   font-family: var(--font-body, -apple-system, sans-serif);
-  font-size: 0.88rem;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: rgba(11, 11, 11, 0.35);
+  flex-shrink: 0;
+  line-height: 1;
+  padding-top: 2px;
+}
+
+.about-nav-label {
+  font-family: var(--font-body, -apple-system, sans-serif);
+  font-size: 0.78rem;
   font-weight: 500;
   color: var(--color-obraz-black, #0B0B0B);
-  text-decoration: none;
-  padding: 6px 0;
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  transition: color 0.25s ease;
-}
-
-.about-sidebar-nav a:hover {
-  color: var(--color-yellow, #FFCD00);
-}
-
-.about-sidebar-nav a .arrow {
-  font-size: 0.72rem;
-  opacity: 0.5;
-  transform: translateY(-1px);
+  line-height: 1.35;
 }
 
 .about-sidebar-bottom {
@@ -157,6 +165,10 @@
   flex: 1;
 }
 
+.about-story--text-only {
+  grid-template-columns: 1fr;
+}
+
 .about-story-image {
   width: 100%;
   aspect-ratio: 4 / 3;
@@ -230,6 +242,10 @@
   margin-top: auto;
   padding-top: 28px;
   border-top: 1px solid rgba(11, 11, 11, 0.1);
+}
+
+.about-bottom-row--tight {
+  margin-top: 24px;
 }
 
 .about-issue-number {
@@ -330,28 +346,31 @@
 }
 
 .about-article-number {
-  font-family: var(--font-heading, 'DM Serif Display', Georgia, serif);
-  font-size: clamp(2rem, 3vw, 2.8rem);
-  font-weight: 400;
-  line-height: 1;
-  color: var(--color-obraz-black, #0B0B0B);
-  font-style: italic;
-}
-
-.about-article-date {
+  display: block;
   font-family: var(--font-body, -apple-system, sans-serif);
-  font-size: 0.7rem;
-  font-weight: 400;
-  color: rgba(11, 11, 11, 0.4);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(11, 11, 11, 0.35);
+  margin-bottom: 8px;
 }
 
 .about-article-title {
-  font-family: var(--font-body, -apple-system, sans-serif);
-  font-size: 1.02rem;
-  font-weight: 700;
-  line-height: 1.35;
+  font-family: var(--font-heading, 'DM Serif Display', Georgia, serif);
+  font-size: clamp(1.3rem, 1.8vw, 1.55rem);
+  font-weight: 400;
+  line-height: 1.2;
   letter-spacing: -0.01em;
   color: var(--color-obraz-black, #0B0B0B);
+  margin-bottom: 4px;
+}
+
+.about-article-subtitle {
+  font-family: var(--font-body, -apple-system, sans-serif);
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: rgba(11, 11, 11, 0.5);
   margin-bottom: 10px;
 }
 
