@@ -252,12 +252,15 @@ export default function HeroSection() {
         return;
       }
       active = shell;
-      gsap.killTweensOf(shell);
+      // awake clips each letter inside its own slot — tween the INNER char so
+      // it slides out of its clipped box and re-enters, never leaving its slot
+      const glyph = shell.querySelector<HTMLElement>(".cf-hero-ch") ?? shell;
+      gsap.killTweensOf(glyph);
       gsap
         .timeline()
-        .to(shell, { xPercent: 100 * dir, duration: 0.18, ease: "power2.in" })
-        .set(shell, { xPercent: -100 * dir })
-        .to(shell, { xPercent: 0, duration: 0.5, ease: "elastic.out(1, 0.55)" });
+        .to(glyph, { xPercent: 100 * dir, duration: 0.18, ease: "power2.in" })
+        .set(glyph, { xPercent: -100 * dir })
+        .to(glyph, { xPercent: 0, duration: 0.5, ease: "elastic.out(1, 0.55)" });
     };
     const onLeave = () => {
       active = null;
@@ -269,8 +272,9 @@ export default function HeroSection() {
     return () => {
       hero.removeEventListener("pointermove", onMove);
       hero.removeEventListener("pointerleave", onLeave);
-      gsap.killTweensOf(shells);
-      gsap.set(shells, { xPercent: 0 });
+      const glyphs = hero.querySelectorAll<HTMLElement>(".cf-hero-ch");
+      gsap.killTweensOf(glyphs);
+      gsap.set(glyphs, { xPercent: 0 });
       shells.forEach((w) => delete w.dataset.swapChar);
     };
   }, []);

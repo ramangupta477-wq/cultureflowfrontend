@@ -236,10 +236,16 @@
 }
 
 /* Split Character Animation */
+/* .cf-hero-chw = awake-style clipped letter slot: the char slides out of
+   this box (clipped) and re-enters from the other edge — never travels
+   into a neighbour's position. Padding +5% / negative margin keeps the
+   glyph fully visible inside the clip while idle. */
 .cf-hero-chw {
   display: inline-block;
-  will-change: transform;
-  pointer-events: auto; /* re-enable hit-testing inside .cf-hero-main (pe:none) so chars can receive the swap hover */
+  overflow: hidden;
+  padding: 0.05em 0.07em;
+  margin: -0.05em -0.07em;
+  pointer-events: auto; /* re-enable hit-testing inside .cf-hero-main (pe:none) */
 }
 
 .cf-hero-ch {
