@@ -96,20 +96,10 @@
 }
 
 .cf-nav-link--active {
+  background: var(--color-yellow, #FFCD00);
+  border-radius: 100px;
   color: #000000;
   font-weight: 600;
-}
-
-/* visible active marker — yellow bar under the current page's link */
-.cf-nav-link--active::after {
-  content: "";
-  position: absolute;
-  left: 16px;
-  right: 16px;
-  bottom: 1px;
-  height: 3px;
-  border-radius: 2px;
-  background: var(--color-yellow, #FFCD00);
 }
 
 /* ── CTA: full pill, radius 100px, 15px/600 ── */
