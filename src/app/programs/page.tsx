@@ -83,8 +83,10 @@ export default function ProgramsPage() {
 
           <span className="pgb-pill" data-pr>Programs</span>
           <h1 className="pgb-title" data-pr style={{ "--pr-d": "0.07s" } as React.CSSProperties}>
-            Three tracks. One framework. Built for scholars who lead what comes{" "}
-            <span className="pgb-mark">next.</span>
+            <span className="pgb-title-l1">Three tracks. One framework.</span>{" "}
+            <span className="pgb-title-l2">
+              Built for scholars who lead what comes <span className="pgb-mark">next.</span>
+            </span>
           </h1>
 
           <div className="pgb-row" data-pr style={{ "--pr-d": "0.15s" } as React.CSSProperties}>
