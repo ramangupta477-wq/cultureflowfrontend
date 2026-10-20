@@ -49,19 +49,6 @@ export default function Footer() {
                 <ArrowIcon />
               </a>
             </div>
-
-            <div className="cf-footer-address-block">
-              <span className="cf-footer-label">MUMBAI OFFICE</span>
-              <p className="cf-footer-address-text">
-                14 Linking Road,<br />
-                Bandra West,<br />
-                Mumbai, 400050
-              </p>
-              <a href="https://www.google.com/maps/search/?api=1&query=14+Linking+Road+Bandra+West+Mumbai+400050" target="_blank" rel="noreferrer" className="cf-footer-arrow-link">
-                Mumbai Office
-                <ArrowIcon />
-              </a>
-            </div>
           </div>
 
           {/* Contact + Connect row */}
@@ -144,7 +131,7 @@ export default function Footer() {
       {/* ═══ BOTTOM BAR ═══ */}
       <div className="cf-footer-bottom">
         <div className="cf-footer-bottom-left">
-          <Link href="/privacy-policy">PRIVACY</Link> / <a href="#">COOKIES POLICY</a>
+          <Link href="/privacy-policy">PRIVACY</Link> / <Link href="/terms">TERMS</Link> / <Link href="/refund-policy">REFUND POLICY</Link> / <Link href="/disclaimer">DISCLAIMER</Link>
         </div>
 
         <nav className="cf-footer-bottom-nav">
@@ -164,9 +151,6 @@ export default function Footer() {
       <div className="cf-footer-legal">
         <span className="cf-footer-legal-text">
           Culture Flow Private Limited | CIN: U85500DL2026PTC471392 | Registered Office: H No. B-71/B, G/F, Block-B, New Ashok Nagar, East Delhi, 110096, India
-        </span>
-        <span className="cf-footer-credit">
-          Crafted with precision by <strong>Shrish</strong>
         </span>
         <span className="cf-footer-copyright">
           © 2026 Culture Flow Private Limited
