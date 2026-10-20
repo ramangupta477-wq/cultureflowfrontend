@@ -317,7 +317,7 @@
   font-size: clamp(2.1rem, 4vw, 3.4rem);
   line-height: 1.08;
   letter-spacing: -0.02em;
-  margin: 0;
+  margin: 0 0 14px;
 }
 
 .sf-why-sub {
@@ -326,7 +326,7 @@
   line-height: 1.55;
   color: rgba(11, 11, 11, 0.55);
   max-width: 300px;
-  margin: 0;
+  margin: 10px 0 0;
   text-align: left;
 }
 
@@ -482,12 +482,16 @@
 /* ═══ DOCUMENTS — card rows ═══ */
 .sf-docs {
   max-width: 1360px;
-  margin: 12px auto 0;
+  margin: clamp(28px, 5vh, 52px) auto 0;
   padding: 0 clamp(16px, 4vw, 64px);
 }
 
 .sf-docs .sf-why-head {
-  margin-bottom: 18px;
+  margin-bottom: 20px;
+}
+
+.sf-docs-note {
+  margin-top: 14px;
 }
 
 .sf-docs-note {
