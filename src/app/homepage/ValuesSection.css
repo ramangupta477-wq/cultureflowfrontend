@@ -1,0 +1,246 @@
+/* ─── Culture Flow Values Section (Interactive Vector Line Animation) ─── */
+.values-section {
+  position: relative;
+  width: 100%;
+  height: 380vh; /* Smooth scroll track for 6 core values */
+  background-color: var(--color-bg, #FDFCF4);
+  border-top: 1px solid rgba(11, 11, 11, 0.07);
+}
+
+.values-sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 clamp(24px, 6vw, 96px);
+  overflow: hidden;
+  background-color: var(--color-bg, #FDFCF4);
+}
+
+/* Header container */
+.values-header {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto 36px auto;
+}
+
+/* Kicker */
+.values-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-body, -apple-system, sans-serif);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-gold, #FFCD00);
+  margin-bottom: 14px;
+  transition: opacity 0.5s cubic-bezier(0.33, 1, 0.68, 1), transform 0.5s cubic-bezier(0.33, 1, 0.68, 1), filter 0.5s cubic-bezier(0.33, 1, 0.68, 1);
+}
+
+.values-kicker.is-hidden {
+  opacity: 0;
+  filter: blur(6px);
+  transform: translateY(-8px);
+}
+
+.values-kicker-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--color-gold, #FFCD00);
+}
+
+.values-kicker-count {
+  color: rgba(11, 11, 11, 0.4);
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  margin-left: 6px;
+}
+
+.values-heading {
+  font-family: var(--font-heading, 'DM Serif Display', Georgia, serif);
+  font-size: clamp(2.4rem, 4vw, 3.8rem);
+  font-weight: 400;
+  line-height: 1.14;
+  letter-spacing: -0.02em;
+  color: var(--color-obraz-black, #0B0B0B);
+  width: 100%;
+}
+
+/* Stage: grid with list on left, text on right, and SVG overlay across */
+.values-stage {
+  position: relative;
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  align-items: center;
+  min-height: 420px;
+  gap: clamp(40px, 8vw, 120px);
+}
+
+/* ─── Left: Values List ─── */
+.values-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(10px, 2vh, 22px);
+  padding: 0;
+  margin: 0;
+  position: relative;
+  z-index: 3;
+}
+
+.values-list li {
+  display: flex;
+  align-items: center;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.values-list li button {
+  background: none;
+  border: none;
+  padding: 4px 0;
+  cursor: pointer;
+  text-align: left;
+  font-family: var(--font-heading, 'DM Serif Display', Georgia, serif);
+  font-size: clamp(2rem, 3.2vw, 3.2rem);
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  color: rgba(11, 11, 11, 0.22);
+  transition: color 0.35s ease, transform 0.35s ease;
+  position: relative;
+}
+
+.values-list li button:hover {
+  color: rgba(11, 11, 11, 0.6);
+}
+
+.values-list li.on button {
+  color: var(--color-obraz-black, #0B0B0B);
+  transform: translateX(12px);
+}
+
+/* ─── Right: Value Copy Paragraphs ─── */
+.values-text {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  min-height: 180px;
+  display: flex;
+  align-items: center;
+  z-index: 3;
+}
+
+.values-text p {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%) translateY(16px);
+  margin: 0;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1), transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  font-family: var(--font-body, -apple-system, sans-serif);
+  font-size: clamp(1.1rem, 1.4vw, 1.35rem);
+  font-weight: 400;
+  line-height: 1.76;
+  color: rgba(11, 11, 11, 0.78);
+}
+
+.values-text p.on {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(-50%) translateY(0);
+}
+
+/* ─── Connecting SVG Lines ─── */
+.values-marks {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 2;
+  overflow: visible;
+}
+
+.values-marks path {
+  fill: none;
+  stroke: var(--color-gold, #FFCD00);
+  stroke-width: 2.6px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: opacity 0.2s ease;
+  filter: drop-shadow(0 2px 6px rgba(255, 205, 0, 0.3));
+}
+
+/* Responsive adjustments */
+@media (max-width: 900px) {
+  .values-section {
+    height: 190vh;
+    min-height: 0;
+  }
+
+  .values-sticky {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    padding: 92px 20px 28px;
+  }
+
+  .values-header {
+    margin-bottom: 16px;
+  }
+
+  .values-heading {
+    font-size: 2.2rem;
+  }
+
+  .values-stage {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr auto; /* title / list / copy — fills the pin, no void */
+    height: 100%;
+    min-height: 0;
+    gap: 24px;
+  }
+
+  .values-list {
+    align-self: center;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .values-list li button {
+    font-size: 1.6rem;
+    padding: 0;
+    text-align: left;
+  }
+
+  .values-list li.on button {
+    transform: none;
+    color: var(--color-gold, #FFCD00);
+  }
+
+  .values-text {
+    min-height: 120px;
+    max-width: 100%;
+  }
+
+  .values-text p {
+    font-size: 1.05rem;
+    line-height: 1.6;
+  }
+
+  /* Simplify or hide SVG marks on mobile where layout wraps */
+  .values-marks {
+    display: none;
+  }
+}

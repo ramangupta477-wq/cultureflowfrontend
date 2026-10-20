@@ -1,0 +1,94 @@
+PRIVACY POLICY
+Culture Flow Private Limited
+CIN: U85500DL2026PTC471392
+Website: www.cultureflow.in
+Effective Date: 19 October 2026 | Last Updated: 19 October 2026
+1. Introduction
+Culture Flow Private Limited (hereinafter referred to as "Culture Flow," "we," "us," or "our"), a company incorporated under the Companies Act, 2013 bearing CIN U85500DL2026PTC471392, with its registered office at H No. B-71/B, G/F, Block-B, New Ashok Nagar, East Delhi - 110096, Delhi, India, operates the website www.cultureflow.in and delivers structured short-term academic immersion programmes internationally.
+This Privacy Policy explains how we collect, use, store, share, and protect personal data when you interact with our website, join our waitlist, submit enquiries, enroll in our programmes, or engage with us in any capacity. This policy is drafted in compliance with the Digital Personal Data Protection Act, 2023 (DPDPA) and applicable Indian data protection regulations.
+By accessing our website or providing your personal data to us, you consent to the practices described in this Privacy Policy. If you do not agree with any part of this policy, please discontinue use of our website and services.
+2. Information We Collect
+2.1 Information You Provide Directly
+Waitlist Registration: Name, email address, and any preferences you indicate when joining our waitlist for upcoming cohorts.
+Contact Form & Enquiries: Name, email address, phone number, institution or school name, and the content of your message when you submit an enquiry through our website or email.
+Programme Enrollment: Full legal name, date of birth, gender, nationality, passport details, academic records, institutional affiliation, parent or guardian contact details, emergency contact information, medical history and dietary requirements (where relevant to programme safety), and payment information.
+Parent or Guardian Information: Name, contact details, relationship to the scholar, and signed consent and indemnity documentation as required for programme participation.
+Institutional Partner Data: Name, designation, official email, institution name, and estimated cohort size when institutions enquire about or enter into partnerships with Culture Flow.
+2.2 Information Collected Automatically
+Website Usage Data: IP address, browser type and version, operating system, referring URL, pages visited, time spent on pages, and clickstream data collected through cookies and similar technologies.
+Device Information: Device type, screen resolution, language preferences, and unique device identifiers.
+3. How We Use Your Information
+We use the personal data we collect for the following purposes:
+Programme Delivery: To process applications, manage enrolments, arrange visas, flights, accommodation, insurance, and all logistical aspects of our academic immersion programmes.
+Communication: To respond to your enquiries, send programme updates, share waitlist notifications, and provide pre-departure and post-programme communications.
+Safety & Compliance: To ensure scholar safety during programmes, including emergency medical authorisation, chaperone coordination, and compliance with local regulations at international destinations.
+Legal Obligations: To comply with applicable laws, regulations, tax requirements, and legal proceedings, including obligations under the Companies Act, 2013, FEMA, RBI regulations, and the DPDPA, 2023.
+Website Improvement: To analyse website usage patterns, improve user experience, and optimise our digital presence.
+Institutional Partnerships: To facilitate and manage partnerships with schools, universities, and educational institutions.
+4. Legal Basis for Processing
+Under the Digital Personal Data Protection Act, 2023, we process your personal data on the following bases:
+Consent: Where you have provided explicit consent, such as when joining our waitlist, submitting an enquiry, or enrolling in a programme. You may withdraw consent at any time by contacting us at info@cultureflow.in.
+Contractual Necessity: Where processing is necessary for the performance of a contract, such as programme enrollment and delivery.
+Legal Obligation: Where processing is required to comply with applicable Indian laws and regulations.
+Legitimate Use: Where processing is necessary for purposes that are reasonably expected by the Data Principal in the context of their relationship with Culture Flow.
+5. Information Sharing & Disclosure
+We do not sell, rent, or trade your personal data. We may share your information with the following categories of recipients, strictly on a need-to-know basis and under appropriate contractual safeguards:
+International Partner Institutions: Universities and academic institutions at programme destinations, to the extent necessary for programme enrollment, academic coordination, and campus access.
+Destination Management Companies (DMCs): Vetted local operational partners at international destinations who assist with ground logistics, accommodation, and on-ground support during programmes.
+Insurance Providers: Comprehensive medical and travel insurance providers, as required for programme coverage.
+Visa & Travel Processors: Embassies, consulates, airline operators, and visa processing agencies as required for travel documentation.
+Government & Regulatory Authorities: Where required by law, including but not limited to the Ministry of Corporate Affairs, tax authorities, RBI, and law enforcement agencies.
+Payment Processors: Authorised banking and payment gateway partners for secure processing of programme fees.
+Professional Advisors: Legal counsel, auditors, and chartered accountants as required for compliance, audit, and advisory purposes.
+6. International Data Transfers
+Given the international nature of our programmes, your personal data may be transferred to and processed in countries outside India, including but not limited to countries where our partner institutions and DMCs are located. Such transfers are necessary for the performance of our programme delivery obligations.
+We ensure that all international data transfers are conducted in compliance with the DPDPA, 2023 and any rules notified thereunder regarding cross-border data transfers. We implement appropriate contractual safeguards with international recipients to ensure your data receives a level of protection consistent with Indian data protection standards.
+7. Data Security
+We implement appropriate technical and organisational security measures to protect your personal data against unauthorised access, alteration, disclosure, or destruction. These measures include:
+Technical Measures: Encryption of data in transit (SSL/TLS), secure server infrastructure, access controls, and regular security assessments.
+Organisational Measures: Access restricted to authorised personnel on a need-to-know basis, confidentiality obligations for all team members and contractors, and documented data handling procedures.
+While we take all reasonable steps to protect your data, no method of transmission over the internet or electronic storage is completely secure. We cannot guarantee absolute security but are committed to maintaining industry-standard protections.
+8. Data Retention
+We retain your personal data only for as long as necessary to fulfil the purposes for which it was collected, or as required by applicable law:
+Waitlist & Enquiry Data: Retained for the duration of the relevant cohort cycle plus 12 months, unless you request earlier deletion.
+Programme Enrollment Data: Retained for a period of 8 years from the completion of the programme, in compliance with applicable tax, corporate, and regulatory retention requirements.
+Website Usage Data: Retained for up to 24 months from the date of collection.
+Financial & Payment Records: Retained as required under the Companies Act, 2013, Income Tax Act, 1961, and GST regulations.
+Upon expiry of the retention period, personal data is securely deleted or anonymised.
+9. Your Rights
+Under the Digital Personal Data Protection Act, 2023, you have the following rights as a Data Principal:
+Right to Access: You may request confirmation of whether we process your personal data and obtain a summary of such data.
+Right to Correction & Erasure: You may request correction of inaccurate data or erasure of data that is no longer necessary for the purpose for which it was collected, subject to legal retention requirements.
+Right to Withdraw Consent: Where processing is based on consent, you may withdraw consent at any time. Withdrawal does not affect the lawfulness of processing conducted prior to withdrawal.
+Right to Grievance Redressal: You may raise concerns about our data processing practices by contacting our Grievance Officer (details below). We will acknowledge your grievance and respond within the timeframes prescribed under applicable law.
+Right to Nominate: You may nominate another individual to exercise your rights in the event of your death or incapacity, as provided under the DPDPA, 2023.
+To exercise any of these rights, please contact us at info@cultureflow.in.
+10. Children's & Minors' Privacy
+Culture Flow's programmes may include scholars who are under the age of 18. We are committed to protecting the privacy of minors and comply fully with the DPDPA, 2023 provisions regarding children's data.
+We collect personal data of minors only with verifiable consent from a parent or legal guardian. Parent or guardian consent is obtained through our formal enrollment and indemnity documentation process prior to any programme participation. We do not knowingly collect data from minors without such consent.
+Parents and guardians may exercise the rights described in Section 9 on behalf of their minor children by contacting us at info@cultureflow.in.
+11. Cookies & Tracking Technologies
+Our website uses cookies and similar tracking technologies to enhance your browsing experience and analyse website traffic. The types of cookies we use include:
+Essential Cookies: Required for the basic functionality of our website, including page navigation and secure access.
+Analytics Cookies: Used to understand how visitors interact with our website, including pages visited, time on site, and traffic sources. We may use third-party analytics services such as Google Analytics for this purpose.
+Preference Cookies: Used to remember your preferences and settings for a more personalised experience.
+You may manage your cookie preferences through your browser settings. Disabling certain cookies may affect the functionality of our website.
+12. Third-Party Links
+Our website may contain links to third-party websites, including partner institution websites, social media platforms, and external resources. We are not responsible for the privacy practices or content of these third-party sites. We encourage you to review the privacy policies of any external website before providing your personal data.
+13. Changes to This Policy
+We may update this Privacy Policy from time to time to reflect changes in our practices, legal requirements, or programme operations. Any material changes will be communicated through a prominent notice on our website. The "Last Updated" date at the top of this policy indicates when it was most recently revised.
+We encourage you to review this policy periodically. Your continued use of our website or services after any changes constitutes acceptance of the updated policy.
+14. Grievance Officer
+In accordance with the Digital Personal Data Protection Act, 2023, the details of the Grievance Officer appointed to address your concerns regarding data processing are as follows:
+Name: Raman Gupta
+Email: info@cultureflow.in
+Address: H No. B-71/B, G/F, Block-B, New Ashok Nagar, East Delhi - 110096, Delhi, India
+The Grievance Officer will acknowledge your complaint within 48 hours and endeavour to resolve it within 30 days of receipt.
+15. Contact Us
+For any questions, concerns, or requests regarding this Privacy Policy or our data practices, please contact us at:
+Company: Culture Flow Private Limited
+Email: info@cultureflow.in
+Website: www.cultureflow.in
+Registered Office: H No. B-71/B, G/F, Block-B, New Ashok Nagar, East Delhi - 110096, Delhi, India
+
+- End of Privacy Policy -

@@ -1,0 +1,144 @@
+@import "tailwindcss";
+/* nice */
+/* ─── Libron (body font) — self-hosted from public/fonts ─── */
+@font-face {
+    font-family: 'Libron';
+    src: url('/fonts/Libron-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Libron';
+    src: url('/fonts/Libron-Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Libron';
+    src: url('/fonts/Libron-Italic.woff2') format('woff2');
+    font-weight: 400;
+    font-style: italic;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Libron';
+    src: url('/fonts/Libron-BoldItalic.woff2') format('woff2');
+    font-weight: 700;
+    font-style: italic;
+    font-display: swap;
+}
+
+/* ─── Culture Flow Official Brand Kit ─── */
+:root {
+    /* Brand Colors (Exact Specifications) */
+    --color-yellow: #FFCD00;           /* Yellow (RGB: 255, 205, 0 | CMYK: 0, 20, 93, 0) */
+    --color-accent: #FFCD00;
+    --color-obraz-dark: #1B1B1B;       /* Obraz Dark (Neutral Black C | RGB: 27, 27, 27) */
+    --color-obraz-black: #0B0B0B;      /* Obraz Black (Pantone 6 C | RGB: 11, 11, 11) */
+    --color-warm-white: #F1F0EE;       /* Warm White (Pantone P 179-1 C | RGB: 241, 240, 238) */
+    --color-moverunion-white: #FDFCF4; /* Moverunion White (Pantone White | RGB: 253, 252, 244) */
+
+    /* Semantic Tokens */
+    --color-bg: #FDFCF4;               /* Primary Canvas: Moverunion White */
+    --color-bg-card: #F1F0EE;          /* Card Surfaces: Warm White */
+    --color-text: #0B0B0B;             /* Primary Typography: Obraz Black */
+    --color-text-muted: #1B1B1B;       /* Secondary Text: Obraz Dark */
+    --color-gold: #FFCD00;             /* Brand Yellow Accent */
+    --color-navy: #0B0B0B;             /* Obraz Black */
+    --color-gold-light: rgba(255, 205, 0, 0.18);
+    --color-navy-light: rgba(11, 11, 11, 0.06);
+
+    /* Typography */
+    --font-heading: 'DM Serif Display', Georgia, serif;
+    --font-heading-sans: 'DM Sans', 'Inter', sans-serif;
+    --font-body: 'Libron', 'Inter', -apple-system, sans-serif;
+    --font-logo: 'Bricolage Grotesque', sans-serif;
+    --font-script: 'DM Serif Display', serif;
+
+    --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+/* ─── Reset ─── */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
+html.lenis,
+html.lenis body {
+    height: auto;
+}
+
+.lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+}
+
+body {
+    font-family: var(--font-body);
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    overflow-x: clip;
+    min-height: 100vh;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: var(--font-heading);
+    font-weight: 400;
+    letter-spacing: 0.01em;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+button {
+    font-family: var(--font-body);
+    cursor: pointer;
+    border: none;
+    background: none;
+    outline: none;
+}
+
+img,
+svg {
+    display: block;
+    max-width: 100%;
+}
+
+/* ─── Selection ─── */
+::selection {
+    background: var(--color-gold);
+    color: var(--color-bg);
+}
+
+/* ─── Scrollbar ─── */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--color-bg);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--color-gold);
+    border-radius: 3px;
+}

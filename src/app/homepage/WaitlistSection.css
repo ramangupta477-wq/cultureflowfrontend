@@ -1,0 +1,195 @@
+/* ─── Culture Flow Editorial Waitlist Card & Section (Brand Yellow Theme) ─── */
+.cf-waitlist-section {
+  position: relative;
+  width: 100%;
+  background-color: var(--color-yellow, #FFCD00);
+  color: var(--color-obraz-black, #0B0B0B);
+  --waitlist-heading-spacing: clamp(56px, 6vw, 86px);
+  padding-top: var(--waitlist-heading-spacing);
+  padding-bottom: clamp(80px, 9vw, 130px);
+  padding-left: clamp(24px, 5vw, 64px);
+  padding-right: clamp(24px, 5vw, 64px);
+  overflow: hidden;
+  border-top: 1px solid rgba(11, 11, 11, 0.1);
+  border-bottom: 1px solid rgba(11, 11, 11, 0.1);
+}
+
+.cf-waitlist-bg-glow {
+  display: none;
+}
+
+.cf-waitlist-container {
+  position: relative;
+  z-index: 1;
+  max-width: 1420px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+/* ─── Full-Width Single-Line Headline (Monumental & Centered) ─── */
+.cf-waitlist-heading {
+  font-family: var(--font-heading, 'DM Serif Display', Georgia, serif);
+  font-size: clamp(2.6rem, 4.25vw, 4.9rem);
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+  color: var(--color-obraz-black, #0B0B0B);
+  margin-top: 0;
+  margin-bottom: var(--waitlist-heading-spacing);
+  text-align: center;
+  width: 100%;
+}
+
+@media (min-width: 1100px) {
+  .cf-waitlist-heading {
+    white-space: nowrap;
+  }
+}
+
+.cf-waitlist-heading em {
+  font-style: italic;
+  color: var(--color-moverunion-white, #FDFCF4);
+  text-shadow: 0 1px 3px rgba(11, 11, 11, 0.22);
+}
+
+/* ─── 2-Column Grid Below Headline ─── */
+.cf-waitlist-grid {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 48px;
+  align-items: flex-start;
+}
+
+@media (min-width: 1024px) {
+  .cf-waitlist-grid {
+    grid-template-columns: 1.08fr 0.92fr;
+    gap: clamp(40px, 5.5vw, 80px);
+    align-items: flex-start;
+  }
+}
+
+/* ─── Left Column: Content & Pitch ─── */
+.cf-waitlist-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  width: 100%;
+}
+
+.cf-waitlist-desc {
+  font-family: var(--font-body);
+  font-size: clamp(1.05rem, 1.25vw, 1.18rem);
+  line-height: 1.68;
+  color: rgba(11, 11, 11, 0.86);
+  margin-bottom: 34px;
+  max-width: 580px;
+}
+
+/* Perks List */
+.cf-waitlist-perks {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 38px;
+  width: 100%;
+}
+
+.cf-waitlist-perk {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-family: var(--font-body);
+  font-size: clamp(0.95rem, 1.05vw, 1.04rem);
+  font-weight: 500;
+  color: var(--color-obraz-black, #0B0B0B);
+}
+
+.cf-waitlist-perk-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--color-obraz-black, #0B0B0B);
+  color: var(--color-yellow, #FFCD00);
+  font-size: 0.82rem;
+  font-weight: 800;
+  flex-shrink: 0;
+}
+
+/* Actions Row */
+.cf-waitlist-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 18px;
+}
+
+.cf-waitlist-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 36px;
+  background: var(--color-obraz-black, #0B0B0B);
+  color: var(--color-moverunion-white, #FDFCF4);
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 999px;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 8px 24px rgba(11, 11, 11, 0.2);
+}
+
+.cf-waitlist-btn:hover {
+  transform: translateY(-2px);
+  background: #1B1B1B;
+  box-shadow: 0 12px 32px rgba(11, 11, 11, 0.3);
+}
+
+.cf-waitlist-btn-arrow {
+  display: inline-flex;
+  font-size: 1.1rem;
+  color: var(--color-yellow, #FFCD00);
+  transition: transform 0.3s ease;
+}
+
+.cf-waitlist-btn:hover .cf-waitlist-btn-arrow {
+  transform: translateX(3px);
+}
+
+.cf-waitlist-note {
+  font-family: var(--font-body);
+  font-size: 0.84rem;
+  color: rgba(11, 11, 11, 0.65);
+  letter-spacing: 0.02em;
+}
+
+/* ─── Right Column: Interactive Ticket Showcase ─── */
+.cf-waitlist-ticket-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+  padding-top: clamp(6px, 1vh, 16px);
+}
+
+/* Responsive Ticket Box with clean elevation */
+.cf-ticket-scale-box {
+  width: 100%;
+  max-width: 580px;
+  display: flex;
+  justify-content: center;
+  overflow: visible;
+  filter: drop-shadow(0 24px 44px rgba(11, 11, 11, 0.25));
+}

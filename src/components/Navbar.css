@@ -1,0 +1,374 @@
+/* ═══════════════════════════════════════════════════════════════
+   Culture Flow — media-harbour.com floating pill navbar (exact spec)
+   .hmh-top-panel: fixed inset 21px · radius 28px · white .92 + blur(14px)
+   · shadow rgba(208,nba.08) 0 8px 30px · 76px tall · links Inter 435 16px
+   · CTA pill radius 100px · staggered burger
+   ═══════════════════════════════════════════════════════════════ */
+
+.cf-navbar {
+  position: fixed;
+  top: 21px;
+  left: 21px;
+  right: 21px;
+  z-index: 90;
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cf-navbar--hidden {
+  transform: translateY(-130%);
+}
+
+/* ── The pill ── */
+.cf-navbar-bar {
+  background: rgba(255, 255, 255, 0.92);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  border-radius: 28px;
+  box-shadow: rgba(11, 11, 11, 0.08) 0px 8px 30px 0px;
+}
+
+.cf-navbar-bar-inner {
+  display: flex;
+  align-items: center;
+  height: 76px;
+  padding: 0 34px 0 36px;
+  box-sizing: border-box;
+}
+
+.cf-navbar--scrolled .cf-navbar-bar {
+  box-shadow: rgba(11, 11, 11, 0.12) 0px 10px 34px 0px;
+}
+
+/* ── Logo ── */
+.cf-navbar-logo-link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  transition: opacity 0.25s ease;
+  flex-shrink: 0;
+}
+
+.cf-navbar-logo-link:hover {
+  opacity: 0.8;
+}
+
+.cf-navbar-logo-img {
+  height: 34px;
+  width: auto;
+  object-fit: contain;
+  display: block;
+  filter: brightness(0);
+}
+
+.cf-navbar-logo-img--yellow {
+  filter: none !important;
+}
+
+/* ── Spacer pushes menu right (like .hmh-top-panel-spacer) ── */
+.cf-navbar-spacer {
+  flex: 1;
+}
+
+/* ── Links: Inter ~16px · weight 435 · #14151A · 16px side padding ── */
+.cf-navbar-nav {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-right: clamp(12px, 1.6vw, 26px);
+}
+
+.cf-nav-link {
+  position: relative;
+  font-family: "Archivo", "Inter", var(--font-body), sans-serif;
+  font-size: 1rem;
+  font-weight: 435;
+  letter-spacing: 0;
+  color: #14151A;
+  text-decoration: none;
+  padding: 8px 16px;
+  white-space: nowrap;
+  transition: color 0.2s ease, opacity 0.2s ease;
+}
+
+.cf-nav-link:hover {
+  color: #000000;
+  opacity: 0.72;
+}
+
+.cf-nav-link--active,
+.cf-nav-link--onboard {
+  background: transparent;
+  border-radius: 100px;
+  color: #000000;
+  font-weight: 600;
+}
+
+/* gooey sliding pill — the yellow background lives HERE, morphing between links */
+.cf-nav-gooey-pill {
+  position: absolute;
+  top: 50%;
+  height: 36px;
+  transform: translateY(-50%);
+  border-radius: 100px;
+  background: var(--color-yellow, #FFCD00);
+  transition: left 0.55s cubic-bezier(0.34, 1.4, 0.64, 1), width 0.55s cubic-bezier(0.34, 1.4, 0.64, 1);
+  will-change: left, width;
+  z-index: 0;
+}
+
+@keyframes cf-pill-squash {
+  0% { transform: translateY(-50%) scale(1, 1); }
+  40% { transform: translateY(-50%) scale(1.08, 0.86); }
+  70% { transform: translateY(-50%) scale(0.96, 1.06); }
+  100% { transform: translateY(-50%) scale(1, 1); }
+}
+
+.cf-nav-gooey-pill--squash {
+  animation: cf-pill-squash 0.62s cubic-bezier(0.34, 1.4, 0.64, 1);
+}
+
+.cf-navbar-bar-inner {
+  position: relative;
+}
+
+.cf-nav-link {
+  z-index: 1;
+}
+
+/* ── CTA: full pill, radius 100px, 15px/600 ── */
+.cf-nav-cta-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 24px;
+  border-radius: 100px;
+  background: var(--color-yellow, #FFCD00);
+  color: #0B0B0B;
+  font-family: "Archivo", "Inter", var(--font-body), sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: filter 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  flex-shrink: 0;
+}
+
+.cf-nav-cta-pill:hover {
+  filter: brightness(0.96);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(255, 205, 0, 0.5);
+}
+
+/* ── Hamburger: staggered 3 lines — mobile only ── */
+.cf-nav-hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 5px;
+  width: 44px;
+  height: 44px;
+  padding: 11px;
+  margin-left: 10px;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  border-radius: 10px;
+  transition: background-color 0.25s ease;
+}
+
+.cf-nav-hamburger:hover {
+  background: rgba(11, 11, 11, 0.05);
+}
+
+.cf-hamburger-bar {
+  display: block;
+  height: 2px;
+  background: #14151A;
+  border-radius: 1px;
+  transition: transform 0.3s ease, opacity 0.3s ease, width 0.3s ease;
+}
+
+.cf-hamburger-bar:nth-child(1) { width: 22px; }
+.cf-hamburger-bar:nth-child(2) { width: 16px; align-self: flex-end; }
+.cf-hamburger-bar:nth-child(3) { width: 22px; }
+
+.cf-nav-hamburger--open .cf-hamburger-bar:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+.cf-nav-hamburger--open .cf-hamburger-bar:nth-child(2) {
+  opacity: 0;
+}
+.cf-nav-hamburger--open .cf-hamburger-bar:nth-child(3) {
+  width: 22px;
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* ── Scroll dot under the pill, left side ── */
+.cf-navbar-dot {
+  position: absolute;
+  left: 84px;
+  top: calc(100% + 12px);
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: var(--color-yellow, #FFCD00);
+  box-shadow: 0 2px 8px rgba(255, 205, 0, 0.4);
+}
+
+/* ── Fullscreen menu overlay (mobile) ── */
+.cf-mobile-drawer {
+  position: fixed;
+  inset: 0;
+  height: 100dvh;
+  background: #FFFFFF;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-8px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  overflow-y: auto;
+  z-index: -1; /* stays behind the pill so the X toggle remains clickable */
+}
+
+.cf-mobile-drawer--open {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.cf-mobile-drawer-inner {
+  padding: 140px clamp(24px, 6vw, 48px) 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-height: 100dvh;
+  box-sizing: border-box;
+}
+
+.cf-mobile-current-page {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: "Archivo", "Inter", var(--font-body), sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  color: rgba(11, 11, 11, 0.45);
+  padding-bottom: 18px;
+  margin-bottom: 12px;
+  border-bottom: 1px solid rgba(11, 11, 11, 0.07);
+}
+
+.cf-mobile-nav-links {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.cf-mobile-link {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  font-family: "Archivo", "Inter", var(--font-body), sans-serif;
+  font-size: clamp(1.9rem, 7.5vw, 2.6rem);
+  font-weight: 600;
+  color: #0B0B0B;
+  text-decoration: none;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(11, 11, 11, 0.05);
+}
+
+.cf-mobile-link-num {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--color-gold, #C89C66);
+}
+
+.cf-mobile-link--active {
+  color: #0B0B0B;
+}
+
+.cf-mobile-link--active .cf-mobile-link-num {
+  color: #0B0B0B;
+}
+
+.cf-mobile-drawer-bottom {
+  padding-top: 8px;
+}
+
+.cf-mobile-cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 14px 24px;
+  border-radius: 100px;
+  background: var(--color-yellow, #FFCD00);
+  color: #0B0B0B;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+/* ── Narrow screens: drop links, burger takes over ── */
+@media (max-width: 1024px) {
+  .cf-navbar-nav {
+    display: none;
+  }
+  .cf-nav-hamburger {
+    display: flex;
+  }
+  .cf-navbar-bar-inner {
+    height: 64px;
+    padding: 0 18px 0 22px;
+  }
+  .cf-navbar-dot {
+    left: 40px;
+    top: calc(100% + 10px);
+  }
+}
+
+@media (max-width: 640px) {
+  .cf-navbar {
+    top: 20px;
+    left: 12px;
+    right: 12px;
+  }
+  /* phones: never hide the pill — iOS momentum + address-bar resizes fire
+     phantom scroll deltas that can strand it hidden */
+  .cf-navbar--hidden {
+    transform: none;
+  }
+  .cf-navbar-bar {
+    border-radius: 20px;
+  }
+  .cf-navbar-bar-inner {
+    height: 56px;
+    padding: 0 8px 0 16px;
+  }
+  .cf-navbar-logo-img {
+    height: 28px;
+  }
+  .cf-nav-cta-pill {
+    padding: 10px 16px;
+    font-size: 13.5px;
+  }
+  .cf-navbar-dot {
+    display: none;
+  }
+  .cf-mobile-drawer-inner {
+    padding-top: 120px;
+  }
+}
+
+/* ── Dark background variant (compat) ─── */
+.cf-navbar--dark .cf-nav-link {
+  color: rgba(252, 252, 255, 0.7);
+}
+.cf-navbar--dark .cf-nav-link:hover,
+.cf-navbar--dark .cf-nav-link--active {
+  color: #FCFCFF;
+}
+.cf-navbar--dark .cf-hamburger-bar {
+  background: #FCFCFF;
+}

@@ -1,0 +1,705 @@
+/* ═══════════════════════════════════════════════════════════
+   Culture Flow — Curated Programs Interactive Section
+   ═══════════════════════════════════════════════════════════ */
+
+.cf-programs-section {
+  position: relative;
+  height: 550vh;
+  background-color: #F6EEDD;
+  z-index: 10;
+}
+
+.cf-programs-sticky-viewport {
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background-color: #F6EEDD;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ─── Background World Map SVG Watermark ─── */
+.cf-programs-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  will-change: opacity;
+  transition: opacity 0.1s linear;
+  -webkit-mask-image: radial-gradient(ellipse 86% 80% at 50% 50%, rgba(0, 0, 0, 1) 42%, rgba(0, 0, 0, 0) 97%);
+  mask-image: radial-gradient(ellipse 86% 80% at 50% 50%, rgba(0, 0, 0, 1) 42%, rgba(0, 0, 0, 0) 97%);
+}
+
+.cf-programs-world-map {
+  width: 152vw;
+  max-width: 2850px;
+  min-width: 1750px;
+  height: auto;
+  opacity: 0.75;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* ─── Soft Border Fades for the Section ─── */
+.cf-programs-border-fade {
+  position: absolute;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.cf-programs-border-fade--top {
+  top: 0;
+  left: 0;
+  right: 0;
+  height: clamp(80px, 12vh, 160px);
+  background: linear-gradient(to bottom, #F6EEDD 0%, rgba(246, 238, 221, 0) 100%);
+}
+
+.cf-programs-border-fade--bottom {
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: clamp(90px, 14vh, 180px);
+  background: linear-gradient(to top, #F6EEDD 0%, rgba(246, 238, 221, 0) 100%);
+}
+
+.cf-programs-border-fade--left {
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: clamp(60px, 8vw, 150px);
+  background: linear-gradient(to right, #F6EEDD 0%, rgba(246, 238, 221, 0) 100%);
+}
+
+.cf-programs-border-fade--right {
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: clamp(60px, 8vw, 150px);
+  background: linear-gradient(to left, #F6EEDD 0%, rgba(246, 238, 221, 0) 100%);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   Phase A: Initial Centered Intro Card
+   Title slides UP, description slides DOWN, map fades out
+   ═══════════════════════════════════════════════════════════ */
+
+.cf-intro-card-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.cf-intro-card {
+  background: #FFFFFF;
+  border: 1px solid rgba(0, 34, 68, 0.1);
+  border-radius: 0;
+  box-shadow: 0 28px 70px rgba(5, 10, 48, 0.08), 0 4px 18px rgba(5, 10, 48, 0.04);
+  width: clamp(340px, 38vw, 540px);
+  padding: clamp(36px, 4vw, 54px) clamp(24px, 3.2vw, 42px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  overflow: hidden;
+  position: relative;
+  transform-origin: center center;
+  will-change: transform, opacity;
+  transition: transform 0.08s linear, opacity 0.08s linear;
+}
+
+.cf-intro-title {
+  font-family: var(--font-heading), "Oranienbaum", "Georgia", serif;
+  font-size: clamp(3rem, 5.2vw, 5rem);
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  color: #002244;
+  line-height: 1;
+  margin-bottom: 16px;
+  text-transform: uppercase;
+  will-change: transform, opacity;
+  transition: transform 0.08s linear, opacity 0.08s linear;
+}
+
+.cf-intro-divider {
+  width: 60px;
+  height: 1px;
+  background: #C89C66;
+  margin-bottom: 20px;
+  will-change: transform, opacity;
+  transition: transform 0.08s linear, opacity 0.08s linear;
+  transform-origin: center;
+}
+
+/* Placeholder keeps layout space for the image inside the card */
+.cf-intro-image-placeholder {
+  width: clamp(200px, 20vw, 260px);
+  height: clamp(220px, 24vh, 290px);
+  margin-bottom: 24px;
+  will-change: opacity;
+  transition: opacity 0.08s linear;
+}
+
+/* ─── The single expanding image element (lives OUTSIDE the card, over everything) ─── */
+.cf-expanding-image {
+  position: absolute;
+  z-index: 6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: clamp(340px, 36vw, 500px);
+  aspect-ratio: 4 / 3.4;
+  border-radius: 0;
+  overflow: hidden;
+  box-shadow: 0 20px 50px rgba(5, 10, 48, 0.14), 0 6px 20px rgba(5, 10, 48, 0.06);
+  border: 1px solid rgba(0, 34, 68, 0.08);
+  background: #ECE2CF;
+  will-change: transform, opacity;
+  transition: transform 0.08s linear, opacity 0.08s linear;
+  transform-origin: center center;
+  pointer-events: none;
+}
+
+.cf-expanding-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.cf-intro-desc {
+  font-family: var(--font-body), "Inter", sans-serif;
+  font-size: clamp(0.78rem, 0.88vw, 0.86rem);
+  line-height: 1.65;
+  color: rgba(0, 34, 68, 0.74);
+  max-width: 410px;
+  margin: 0 auto;
+  will-change: transform, opacity;
+  transition: transform 0.08s linear, opacity 0.08s linear;
+}
+
+.cf-intro-hint {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 22px;
+  font-family: var(--font-body), "Inter", sans-serif;
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #C89C66;
+  will-change: transform, opacity;
+  transition: transform 0.08s linear, opacity 0.08s linear;
+}
+
+.cf-intro-arrow {
+  display: inline-block;
+  font-size: 1rem;
+  animation: introBounce 1.5s ease-in-out infinite;
+}
+
+@keyframes introBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(5px); }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   Phase B/C/D: Expanded Programs Stage
+   ═══════════════════════════════════════════════════════════ */
+
+.cf-expanded-stage {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  will-change: opacity;
+  transition: opacity 0.1s linear;
+}
+
+/* Topbar Branding */
+.cf-programs-topbar {
+  position: absolute;
+  top: clamp(18px, 3.2vh, 38px);
+  left: clamp(24px, 4vw, 64px);
+  right: clamp(24px, 4vw, 64px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 10;
+  pointer-events: none;
+  will-change: opacity, transform;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+.cf-topbar-brand {
+  font-family: var(--font-body), "Inter", sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: #C89C66;
+  text-transform: uppercase;
+}
+
+.cf-topbar-counter {
+  font-family: var(--font-body), "Inter", sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #002244;
+  letter-spacing: 0.1em;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ─── Horizontal Slide Track ─── */
+.cf-horizontal-track {
+  display: flex;
+  width: 400vw;
+  height: 100%;
+  will-change: transform;
+  transition: transform 0.08s linear;
+}
+
+.cf-program-slide {
+  width: 100vw;
+  height: 100%;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 clamp(20px, 4.5vw, 64px);
+}
+
+/* ─── 3-Column Editorial Layout ─── */
+.cf-program-layout {
+  display: grid;
+  grid-template-columns: 1.25fr 1.35fr 1.15fr;
+  gap: clamp(24px, 3.6vw, 58px);
+  align-items: center;
+  width: 100%;
+  max-width: 1480px;
+  margin: 0 auto;
+  padding-bottom: clamp(20px, 4vh, 48px);
+}
+
+/* ─── Left Column ─── */
+.cf-program-left {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  position: relative;
+  will-change: opacity, transform;
+  transition: opacity 0.12s ease, transform 0.12s ease;
+}
+
+.cf-script-tag {
+  font-family: var(--font-carattere), 'Carattere', 'Alex Brush', serif;
+  font-size: clamp(3.6rem, 5.8vw, 6.2rem);
+  font-weight: 400;
+  color: #C89C66;
+  line-height: 0.95;
+  display: block;
+  margin-bottom: -10px;
+  margin-left: 2px;
+  transform: rotate(-1.5deg);
+  pointer-events: none;
+  z-index: 2;
+  position: relative;
+  opacity: 0.98;
+  letter-spacing: 0.01em;
+}
+
+.cf-serif-title {
+  font-family: var(--font-heading), "Oranienbaum", "Georgia", serif;
+  font-size: clamp(3.2rem, 5vw, 5.4rem);
+  font-weight: 400;
+  color: #002244;
+  letter-spacing: 0.03em;
+  line-height: 0.96;
+  position: relative;
+  z-index: 1;
+}
+
+.cf-serif-subtitle {
+  font-family: var(--font-heading), "Oranienbaum", "Georgia", serif;
+  font-size: clamp(1.2rem, 1.9vw, 2rem);
+  color: #002244;
+  opacity: 0.68;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-top: 8px;
+  display: block;
+}
+
+.cf-program-loc {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 24px;
+  font-family: var(--font-body), "Inter", sans-serif;
+  font-size: 0.92rem;
+  color: rgba(0, 34, 68, 0.7);
+}
+
+.cf-loc-icon {
+  width: 17px;
+  height: 17px;
+  color: #C89C66;
+}
+
+/* ─── Center Column ─── */
+.cf-program-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cf-image-frame {
+  width: 100%;
+  aspect-ratio: 4 / 3.4;
+  max-height: clamp(380px, 54vh, 560px);
+  border-radius: 0;
+  overflow: hidden;
+  box-shadow: 0 28px 65px rgba(5, 10, 48, 0.14), 0 8px 24px rgba(5, 10, 48, 0.05);
+  border: 1px solid rgba(0, 34, 68, 0.08);
+  position: relative;
+  background: #ECE2CF;
+  will-change: transform, opacity;
+  transition: transform 0.1s linear, opacity 0.1s linear;
+  transform-origin: center center;
+}
+
+.cf-program-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  display: block;
+}
+
+.cf-image-frame:hover .cf-program-img {
+  transform: scale(1.04);
+}
+
+/* ─── Right Column ─── */
+.cf-program-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  will-change: opacity, transform;
+  transition: opacity 0.12s ease, transform 0.12s ease;
+}
+
+.cf-program-description {
+  font-family: var(--font-body), "Inter", sans-serif;
+  font-size: clamp(0.86rem, 0.98vw, 0.98rem);
+  line-height: 1.68;
+  color: rgba(0, 34, 68, 0.85);
+  margin-bottom: 12px;
+}
+
+.cf-program-subdesc {
+  font-family: var(--font-body), "Inter", sans-serif;
+  font-size: clamp(0.88rem, 1vw, 1.02rem);
+  line-height: 1.7;
+  color: rgba(0, 34, 68, 0.82);
+  margin-bottom: 22px;
+}
+
+.cf-specs-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px 16px;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.55);
+  border: 1px solid rgba(0, 34, 68, 0.06);
+  border-radius: 12px;
+  padding: 14px 16px;
+  margin-bottom: 18px;
+}
+
+.cf-spec-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.cf-spec-label {
+  font-family: var(--font-body), "Inter", sans-serif;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #C89C66;
+}
+
+.cf-spec-val {
+  font-family: var(--font-body), "Inter", sans-serif;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #002244;
+}
+
+.cf-features-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 22px;
+  width: 100%;
+}
+
+.cf-feature-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-body), "Inter", sans-serif;
+  font-size: 0.8rem;
+  color: rgba(0, 34, 68, 0.8);
+}
+
+.cf-feature-bullet {
+  color: #C89C66;
+  font-size: 0.75rem;
+}
+
+.cf-cta-wrapper {
+  margin-top: 4px;
+}
+
+.cf-program-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 24px;
+  background: #002244;
+  color: #F6EEDD;
+  border-radius: 50px;
+  font-family: var(--font-body), "Inter", sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all 0.35s ease;
+  box-shadow: 0 6px 18px rgba(0, 34, 68, 0.12);
+}
+
+.cf-cta-arrow {
+  color: #C89C66;
+  font-size: 0.95rem;
+  transition: transform 0.3s ease;
+}
+
+.cf-program-cta:hover {
+  background: #C89C66;
+  color: #FFFFFF;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(200, 156, 102, 0.35);
+}
+
+.cf-program-cta:hover .cf-cta-arrow {
+  color: #FFFFFF;
+  transform: translate(2px, -2px);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   Bottom Floating Pill Navigation Bar
+   ═══════════════════════════════════════════════════════════ */
+
+.cf-bottom-nav {
+  position: absolute;
+  bottom: clamp(20px, 3.2vh, 40px);
+  left: 0;
+  right: 0;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  will-change: opacity, transform;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+.cf-nav-pills {
+  display: flex;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  padding: 6px 8px;
+  border-radius: 50px;
+  border: 1px solid rgba(0, 34, 68, 0.08);
+  box-shadow: 0 12px 36px rgba(5, 10, 48, 0.06);
+}
+
+.cf-nav-pill {
+  padding: 8px 16px;
+  border-radius: 50px;
+  border: none;
+  background: transparent;
+  font-family: var(--font-body), "Inter", sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(0, 34, 68, 0.6);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.cf-nav-pill:hover {
+  color: #002244;
+  background: rgba(0, 34, 68, 0.04);
+}
+
+.cf-nav-pill--active {
+  background: #002244 !important;
+  color: #F6EEDD !important;
+  box-shadow: 0 4px 14px rgba(0, 34, 68, 0.22);
+}
+
+.cf-nav-pill--active .cf-pill-index {
+  color: #C89C66;
+}
+
+.cf-pill-index {
+  font-size: 0.68rem;
+  color: rgba(0, 34, 68, 0.45);
+}
+
+.cf-pill-name {
+  /* stays visible */
+}
+
+.cf-scroll-hint {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-body), "Inter", sans-serif;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: rgba(0, 34, 68, 0.5);
+  text-transform: uppercase;
+}
+
+.cf-scroll-hint-arrow {
+  font-size: 0.85rem;
+  color: #C89C66;
+  animation: hintDrift 1.5s ease-in-out infinite;
+}
+
+@keyframes hintDrift {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(4px); }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   Responsive Rules
+   ═══════════════════════════════════════════════════════════ */
+
+@media (max-width: 1200px) {
+  .cf-program-layout {
+    grid-template-columns: 1fr 1.25fr 1fr;
+    gap: 28px;
+  }
+}
+
+@media (max-width: 860px) {
+  .cf-programs-section {
+    height: 600vh;
+  }
+
+  .cf-program-layout {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 16px;
+    max-height: 82vh;
+    overflow-y: auto;
+    padding: 60px 16px 80px;
+  }
+
+  .cf-program-left {
+    align-items: center;
+  }
+
+  .cf-script-tag {
+    font-size: 3rem;
+    margin-bottom: -16px;
+  }
+
+  .cf-serif-title {
+    font-size: 2.4rem;
+  }
+
+  .cf-image-frame {
+    width: 280px;
+    max-height: 220px;
+  }
+
+  .cf-program-right {
+    align-items: center;
+    text-align: center;
+  }
+
+  .cf-specs-grid {
+    max-width: 380px;
+  }
+
+  .cf-features-list {
+    align-items: center;
+  }
+
+  .cf-nav-pill .cf-pill-name {
+    display: none;
+  }
+
+  .cf-nav-pill {
+    padding: 8px 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .cf-intro-card {
+    padding: 28px 20px;
+  }
+
+  .cf-intro-title {
+    font-size: 2.6rem;
+  }
+
+  .cf-intro-image-wrapper {
+    width: 180px;
+    height: 200px;
+  }
+
+  .cf-scroll-hint {
+    display: none;
+  }
+}

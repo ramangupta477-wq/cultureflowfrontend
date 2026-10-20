@@ -1,0 +1,217 @@
+/* ═══════════════════════════════════════════════════════════════
+   Culture Flow — Glassmorphic Inspo Card
+   Exact replication of the inspired dashboard widget
+   True Glassmorphism: Translucent Frost + Luminous Gold + 8px Clean Edges
+   ═══════════════════════════════════════════════════════════════ */
+
+.inspo-glass-card {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  /* True frosted glass with translucency */
+  background: linear-gradient(
+    155deg,
+    rgba(46, 38, 30, 0.68) 0%,
+    rgba(28, 22, 17, 0.78) 100%
+  );
+  backdrop-filter: blur(32px) saturate(140%);
+  -webkit-backdrop-filter: blur(32px) saturate(140%);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  /* 8px clean architectural corner */
+  border-radius: 8px;
+  padding: clamp(22px, 2.8vw, 32px);
+  box-shadow:
+    0 24px 60px rgba(0, 0, 0, 0.16),
+    inset 0 1px 1px rgba(255, 255, 255, 0.28),
+    inset 0 0 20px rgba(0, 0, 0, 0.1);
+  color: #FFFFFF;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.4s ease,
+              border-color 0.4s ease;
+  user-select: none;
+}
+
+.inspo-glass-card--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.inspo-glass-card:hover {
+  border-color: rgba(200, 156, 102, 0.45);
+  box-shadow:
+    0 32px 72px rgba(0, 0, 0, 0.24),
+    inset 0 1px 1px rgba(255, 255, 255, 0.35),
+    inset 0 0 24px rgba(200, 156, 102, 0.1);
+}
+
+/* ─── Common Label Row ─── */
+.inspo-card-label-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+/* Signature Gold Square Indicator */
+.inspo-gold-square {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  background-color: #C89C66;
+  border-radius: 1px;
+  flex-shrink: 0;
+  box-shadow: 0 0 8px rgba(200, 156, 102, 0.85);
+}
+
+.inspo-card-label {
+  font-family: "SF Mono", "Roboto Mono", Menlo, Consolas, Monaco, monospace;
+  font-size: clamp(0.55rem, 0.72vw, 0.64rem);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.78);
+  line-height: 1.3;
+}
+
+/* ─── Top Section ─── */
+.inspo-card-section--top {
+  display: flex;
+  flex-direction: column;
+}
+
+.inspo-card-hero-num {
+  font-family: var(--font-body), "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: clamp(3rem, 4.4vw, 4.2rem);
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: #FFFFFF;
+  font-variant-numeric: tabular-nums;
+  margin-top: 2px;
+}
+
+/* ─── Hairline Divider ─── */
+.inspo-card-divider {
+  width: 100%;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.14);
+  margin: clamp(16px, 2vw, 24px) 0;
+}
+
+/* ─── Middle Section: Real SVG World Map ─── */
+.inspo-card-section--mid {
+  display: flex;
+  flex-direction: column;
+}
+
+.inspo-map-container {
+  position: relative;
+  width: 100%;
+  margin-top: 6px;
+}
+
+.inspo-map-svg-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 2000 / 857;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+}
+
+.inspo-world-svg-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  /* Transform SVG paths into crisp solid white */
+  filter: brightness(0) invert(1);
+  opacity: 0.94;
+}
+
+.inspo-dots-overlay {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+/* Plotted Location Dots in Theme Gold */
+.inspo-dot {
+  fill: #C89C66;
+  filter: none;
+}
+
+.inspo-dot--pulse {
+  animation: none;
+}
+
+/* ─── Bottom Section: 2 Columns ─── */
+.inspo-card-section--bottom {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: flex-start;
+  gap: clamp(14px, 1.8vw, 20px);
+}
+
+.inspo-card-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.inspo-card-col--left .inspo-card-label,
+.inspo-card-col--right .inspo-card-label {
+  font-size: clamp(0.5rem, 0.65vw, 0.58rem);
+  line-height: 1.25;
+}
+
+.inspo-card-col-divider {
+  width: 1px;
+  height: 100%;
+  min-height: 56px;
+  background: rgba(255, 255, 255, 0.14);
+  align-self: stretch;
+}
+
+.inspo-card-col-num {
+  font-family: var(--font-body), "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: clamp(1.6rem, 2.4vw, 2.3rem);
+  font-weight: 300;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: #FFFFFF;
+  font-variant-numeric: tabular-nums;
+  margin-top: 6px;
+}
+
+/* ─── Responsive Media Queries ─── */
+@media (max-width: 600px) {
+  .inspo-glass-card {
+    padding: 18px 16px;
+    border-radius: 6px;
+  }
+
+  .inspo-card-hero-num {
+    font-size: 2.6rem;
+  }
+
+  .inspo-card-col-num {
+    font-size: 1.4rem;
+  }
+
+  .inspo-card-section--bottom {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .inspo-card-col-divider {
+    display: none;
+  }
+}

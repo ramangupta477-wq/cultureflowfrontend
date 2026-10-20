@@ -1,0 +1,286 @@
+/* Culture Flow ValueGrid Styles - Brand Kit 1.0 */
+
+.vg-scroll-container {
+  position: relative;
+  height: 300vh;
+  background-color: #F6EEDD;
+  z-index: 10;
+}
+
+.vg-sticky-viewport {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #F6EEDD;
+}
+
+/* SVG Connection Layer */
+.vg-svg-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Phase 1: Scattered Content Wrapper */
+.vg-scatter-wrapper {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* Center Headline Phase 1 */
+.vg-center-headline {
+  text-align: center;
+  max-width: 680px;
+  padding: 0 24px;
+  pointer-events: auto;
+  will-change: transform, opacity;
+  transition: transform 0.1s linear, opacity 0.1s linear;
+}
+
+.vg-center-title {
+  font-family: var(--font-heading), "Oranienbaum", serif;
+  font-size: clamp(2.4rem, 4.5vw, 4.2rem);
+  font-weight: 700;
+  color: #002244;
+  line-height: 1.15;
+  margin-bottom: 16px;
+  letter-spacing: -0.01em;
+}
+
+.vg-center-subtitle {
+  font-family: var(--font-body), "TT Norms", sans-serif;
+  font-size: clamp(1rem, 1.3vw, 1.25rem);
+  color: #002244;
+  opacity: 0.7;
+  line-height: 1.6;
+}
+
+/* Floating Card / Capsule Elements */
+.vg-floating-node {
+  position: absolute;
+  pointer-events: auto;
+  will-change: transform, opacity;
+  transition: transform 0.1s linear, opacity 0.1s linear;
+}
+
+/* Barcode Card Design */
+.vg-card-node {
+  background: #FFFFFF;
+  border: 1px solid rgba(0, 34, 68, 0.08);
+  border-radius: 12px;
+  padding: 16px 20px;
+  box-shadow: 0 12px 32px rgba(5, 10, 48, 0.05);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 140px;
+}
+
+.vg-card-label {
+  font-family: var(--font-body), "TT Norms", monospace, sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #002244;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.vg-barcode-svg {
+  width: 90px;
+  height: 40px;
+  display: block;
+}
+
+/* Capsule Badge Design */
+.vg-capsule-node {
+  background: #FFFFFF;
+  border: 1px solid rgba(200, 156, 162, 0.25);
+  border-radius: 30px;
+  padding: 8px 18px;
+  box-shadow: 0 6px 20px rgba(5, 10, 48, 0.04);
+}
+
+.vg-capsule-text {
+  font-family: var(--font-body), "TT Norms", monospace, sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #050A30;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+/* Phase 2: Central Collapsed Dot */
+.vg-center-dot {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #C89C66;
+  box-shadow: 0 0 24px rgba(200, 156, 162, 0.8);
+  z-index: 3;
+  will-change: transform, opacity, width, height, border-radius;
+  pointer-events: none;
+}
+
+/* Phase 3: Grid Section Container */
+.vg-grid-wrapper {
+  position: absolute;
+  width: 90%;
+  max-width: 1320px;
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  will-change: opacity, transform;
+}
+
+/* Top Horizontal Dotted Line */
+.vg-grid-top-border {
+  width: 100%;
+  height: 1px;
+  border-top: 3px dashed #C89C66;
+  /* Increased thickness */
+  opacity: 1;
+  /* Increased from 0.6 to 1 for better visibility against cream bg */
+  margin-bottom: 40px;
+}
+
+.vg-grid-header {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.vg-grid-header-sub {
+  font-family: var(--font-body), "TT Norms", sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #C89C66;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.vg-grid-header-title {
+  font-family: var(--font-heading), "Oranienbaum", serif;
+  font-size: clamp(1.8rem, 3vw, 2.8rem);
+  color: #002244;
+  font-weight: 700;
+}
+
+/* 4-Card Horizontal Grid */
+.vg-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  width: 100%;
+}
+
+.vg-value-card {
+  background: #FFFFFF;
+  border: 1px solid rgba(0, 34, 68, 0.08);
+  border-radius: 16px;
+  padding: 36px 28px;
+  box-shadow: 0 16px 40px rgba(5, 10, 48, 0.04);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  display: flex;
+  justify-content: space-between;
+  height: 100%;
+  position: relative;
+  /* overflow: hidden; removed so glow isn't clipped */
+}
+
+/* The animated gradient border */
+.vg-value-card::before {
+  content: "";
+  position: absolute;
+  inset: -3px;
+  border-radius: inherit;
+  background: linear-gradient(-45deg, #C89C66 0%, #C89C66 100%);
+  z-index: -10;
+  pointer-events: none;
+  transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* The glowing shadow layer */
+.vg-value-card::after {
+  content: "";
+  z-index: -11;
+  position: absolute;
+  inset: -3px;
+  border-radius: inherit;
+  background: linear-gradient(-45deg, #C89C66 0%, #C89C66 100%);
+  transform: translate3d(0, 0, 0) scale(0.95);
+  filter: blur(20px);
+  transition: filter 0.6s ease;
+}
+
+.vg-value-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 24px 48px rgba(5, 10, 48, 0.08);
+}
+
+.vg-value-card:hover::after {
+  filter: blur(30px);
+}
+
+.vg-value-card:hover::before {
+  /* Adjusted scale to make it shorter vertically and wider horizontally */
+  transform: rotate(-90deg) scaleX(1.15) scaleY(0.85);
+}
+
+.vg-card-num {
+  font-family: var(--font-heading), "Oranienbaum", serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #C89C66;
+  margin-bottom: 24px;
+  letter-spacing: 0.1em;
+}
+
+.vg-card-title {
+  font-family: var(--font-heading), "Oranienbaum", serif;
+  font-size: 1.45rem;
+  font-weight: 700;
+  color: #002244;
+  margin-bottom: 14px;
+  line-height: 1.25;
+}
+
+.vg-card-desc {
+  font-family: var(--font-body), "TT Norms", sans-serif;
+  font-size: 0.95rem;
+  color: #002244;
+  opacity: 0.75;
+  line-height: 1.65;
+}
+
+/* Responsive Rules */
+@media (max-width: 1024px) {
+  .vg-cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .vg-cards-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .vg-scroll-container {
+    height: 350vh;
+  }
+}

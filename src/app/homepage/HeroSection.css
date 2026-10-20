@@ -1,0 +1,465 @@
+/* ═══════════════════════════════════════════════════════════════
+   Culture Flow — Awake-Style Editorial Kinetic Hero Section
+   Adapted from awake-hero with Culture Flow brand theme
+   ═══════════════════════════════════════════════════════════════ */
+
+:root {
+  --hero-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --hero-pad: clamp(20px, 2.5vw, 48px);
+}
+
+/* ─── Outer Viewport Frame ─── */
+.cf-hero-frame {
+  height: 100vh;
+  height: 100dvh;
+  width: 100%;
+  padding: clamp(6px, 0.8vw, 14px);
+  background: var(--color-bg, #FDFCF4);
+  box-sizing: border-box;
+  overflow: hidden;
+  position: relative;
+}
+
+/* ─── Inner Rounded Hero Card ─── */
+.cf-hero-card {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  border-radius: clamp(18px, 1.9vw, 36px);
+  overflow: hidden;
+  padding-top: clamp(134px, 17.5vh, 180px);
+  padding-bottom: var(--hero-pad);
+  padding-left: var(--hero-pad);
+  padding-right: var(--hero-pad);
+  display: flex;
+  flex-direction: column;
+  isolation: isolate;
+  user-select: none;
+  transition: background-color 0.5s var(--hero-ease), color 0.5s var(--hero-ease);
+}
+
+/* Theme: Dark Obsidian (Default Luxury Theme) */
+.cf-hero-card--dark {
+  --hero-bg: #0B0B0B;
+  --hero-ink: #FFFFFF;
+  --hero-accent: #FFCD00;
+  --hero-soft: rgba(255, 255, 255, 0.72);
+  --hero-pill: rgba(255, 255, 255, 0.14);
+  --hero-pill-hover: rgba(255, 255, 255, 0.24);
+  --hero-solid-bg: #FFCD00;
+  --hero-solid-ink: #0B0B0B;
+  --hero-divider: rgba(255, 255, 255, 0.22);
+  background: var(--hero-bg);
+  color: var(--hero-ink);
+}
+
+/* Theme: Brand Yellow */
+.cf-hero-card--yellow {
+  --hero-bg: #FFCD00;
+  --hero-ink: #0B0B0B;
+  --hero-accent: #0B0B0B;
+  --hero-soft: rgba(11, 11, 11, 0.76);
+  --hero-pill: rgba(11, 11, 11, 0.12);
+  --hero-pill-hover: rgba(11, 11, 11, 0.22);
+  --hero-solid-bg: #0B0B0B;
+  --hero-solid-ink: #FFCD00;
+  --hero-divider: rgba(11, 11, 11, 0.22);
+  background: var(--hero-bg);
+  color: var(--hero-ink);
+}
+
+/* ═══════════════════════════════════════════════
+   HERO HEADER
+   ═══════════════════════════════════════════════ */
+.cf-hero-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  z-index: 3;
+}
+
+/* Logo Lockup */
+.cf-hero-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: var(--hero-ink);
+  line-height: 1;
+}
+
+.cf-hero-logo-img {
+  height: clamp(24px, 2.4vw, 36px);
+  width: auto;
+  display: block;
+}
+
+.cf-hero-logo-text {
+  font-family: var(--font-body, "Plus Jakarta Sans", sans-serif);
+  font-size: clamp(20px, 2vw, 32px);
+  font-weight: 300;
+  letter-spacing: -0.03em;
+  color: var(--hero-ink);
+}
+
+.cf-hero-logo-dot {
+  color: var(--hero-accent);
+  font-weight: 700;
+}
+
+/* Header Navigation Pills */
+.cf-hero-nav {
+  display: flex;
+  align-items: center;
+  gap: clamp(6px, 0.6vw, 12px);
+}
+
+.cf-hero-btn {
+  border: 0;
+  cursor: pointer;
+  font-family: var(--font-body, "Plus Jakarta Sans", "Archivo", sans-serif);
+  font-size: clamp(12px, 0.95vw, 17px);
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+  padding: 0.68em 1.35em;
+  border-radius: 999px;
+  letter-spacing: -0.01em;
+  transition: transform 0.4s var(--hero-ease), background 0.25s ease, color 0.25s ease;
+  text-decoration: none;
+}
+
+.cf-hero-btn:hover {
+  transform: translateY(-2px) scale(1.03);
+}
+
+.cf-hero-btn--ghost {
+  background: var(--hero-pill);
+  color: var(--hero-ink);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.cf-hero-btn--ghost:hover {
+  background: var(--hero-pill-hover);
+}
+
+.cf-hero-btn--solid {
+  background: var(--hero-solid-bg);
+  color: var(--hero-solid-ink);
+  font-weight: 600;
+}
+
+.cf-hero-btn--theme {
+  padding: 0.68em 0.9em;
+  font-size: clamp(11px, 0.85vw, 15px);
+  opacity: 0.8;
+}
+
+.cf-hero-btn--theme:hover {
+  opacity: 1;
+}
+
+.cf-hero-btn svg {
+  width: 1.15em;
+  height: 1.15em;
+}
+
+/* ═══════════════════════════════════════════════
+   HERO MAIN HEADLINE GRID
+   ═══════════════════════════════════════════════ */
+.cf-hero-main {
+  flex: 1;
+  position: relative;
+  z-index: 5;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: clamp(24px, 4.5vw, 72px);
+  align-content: end; /* Shift content down to the line above Say Hello */
+  padding-bottom: clamp(6px, 1vh, 16px);
+  pointer-events: none;
+}
+
+.cf-hero-main * {
+  user-select: text;
+}
+
+.cf-hero-main a {
+  pointer-events: auto;
+}
+
+/* Two-column wrapper for exact top and bottom alignment */
+.cf-hero-col {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.cf-hero-col--left {
+  justify-content: flex-start;
+}
+
+.cf-hero-col--right {
+  justify-content: space-between;
+  align-items: flex-end;
+  text-align: right;
+}
+
+.cf-hero-h1 {
+  font-family: "Archivo", "Plus Jakarta Sans", -apple-system, sans-serif;
+  font-weight: 400;
+  font-stretch: 125%;
+  /* Monumental typography matched across both columns */
+  font-size: clamp(48px, 7.3vw, 162px);
+  line-height: 0.92;
+  letter-spacing: -0.025em;
+  text-transform: uppercase;
+  color: var(--hero-ink);
+  margin: 0;
+}
+
+.cf-hero-h1 .line {
+  display: block;
+  white-space: nowrap;
+  width: fit-content;
+}
+
+.cf-hero-h1.left {
+  text-align: left;
+}
+
+.cf-hero-h1.right {
+  text-align: right;
+}
+
+.cf-hero-h1.right .line {
+  text-align: right;
+  margin-left: auto;
+}
+
+.cf-hero-accent-text {
+  color: var(--hero-accent);
+}
+
+/* Split Character Animation */
+/* .cf-hero-chw = awake-style clipped letter slot. clip-path extends ~12%
+   beyond the box so big glyphs (W) paint fully at rest — but during the
+   ±100% slide the glyph is still cut off far before it reaches a neighbour. */
+.cf-hero-chw {
+  display: inline-block;
+  clip-path: inset(-20% -12%);
+  pointer-events: auto; /* re-enable hit-testing inside .cf-hero-main (pe:none) */
+}
+
+/* inert tween layer: carries xPercent, carries no CSS animation of its own */
+.cf-hero-swap {
+  display: inline-block;
+  will-change: transform;
+}
+
+.cf-hero-ch {
+  display: inline-block;
+  opacity: 0;  will-change: transform, opacity;
+}
+
+.cf-hero-sp {
+  display: inline-block;
+  width: 0.28em;
+}
+
+/* Lede Paragraph — 20% larger */
+.cf-hero-lede {
+  text-align: left;
+  width: min(100%, 32vw);
+  min-width: 270px;
+  max-width: 500px;
+  margin-top: clamp(14px, 2.2vh, 32px);
+  margin-bottom: 0;
+  font-family: var(--font-body, "Plus Jakarta Sans", "Inter", sans-serif);
+  font-size: clamp(13.5px, 1.15vw, 19.5px);
+  line-height: 1.48;
+  color: var(--hero-soft);
+  opacity: 0;
+  transform: translateY(14px);
+}
+
+/* ═══════════════════════════════════════════════
+   HERO FOOTER (FLOOR FOR COINS)
+   ═══════════════════════════════════════════════ */
+.cf-hero-footer {
+  position: relative;
+  z-index: 3;
+  border-top: 1px solid var(--hero-divider);
+  padding-top: clamp(12px, 1.6vw, 24px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  font-family: var(--font-body, "Plus Jakarta Sans", "Inter", sans-serif);
+  font-size: clamp(10px, 0.74vw, 14px);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--hero-soft);
+  opacity: 0;
+}
+
+.cf-hero-footer b {
+  font-weight: 600;
+  color: var(--hero-ink);
+}
+
+.cf-hero-footer a {
+  color: var(--hero-ink);
+  text-decoration: none;
+  font-weight: 500;
+  transition: opacity 0.2s ease;
+}
+
+.cf-hero-footer a:hover {
+  text-decoration: underline;
+  opacity: 0.85;
+}
+
+/* ═══════════════════════════════════════════════
+   CANVAS FOR COIN PHYSICS
+   ═══════════════════════════════════════════════ */
+#cf-coins-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 4;
+  pointer-events: none;
+}
+
+/* ═══════════════════════════════════════════════
+   ENTRANCE ANIMATION KEYFRAMES
+   ═══════════════════════════════════════════════ */
+.cf-fade {
+  opacity: 0;
+  transform: translateY(-10px);
+}
+
+.go .cf-fade {
+  animation: cfFadeIn 0.9s var(--hero-ease) forwards;
+}
+
+.go .cf-fade.d1 {
+  animation-delay: 1.4s;
+}
+
+.go .cf-fade.d2 {
+  animation-delay: 1.55s;
+}
+
+.go .cf-hero-footer {
+  animation: cfFadeUp 1s var(--hero-ease) 1.5s both;
+}
+
+.go .cf-hero-lede {
+  animation: cfFadeUp 1s var(--hero-ease) 1.4s forwards;
+}
+
+@keyframes cfFadeIn {
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes cfFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes cfCharIn {
+  0% {
+    opacity: 0;
+    transform: translateX(var(--x, 0px)) scale(0.96);
+  }
+  35% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.go .cf-hero-ch {
+  animation: cfCharIn 1.1s var(--hero-ease) var(--d, 0s) forwards;
+}
+
+/* ═══════════════════════════════════════════════
+   TABLET & MOBILE RESPONSIVE
+   ═══════════════════════════════════════════════ */
+@media (max-width: 860px) {
+  .cf-hero-frame {
+    height: auto;
+    min-height: 100vh;
+    min-height: 100dvh;
+  }
+
+  .cf-hero-card {
+    min-height: calc(100vh - 16px);
+  }
+
+  .cf-hero-main {
+    grid-template-columns: 1fr;
+    row-gap: 4vh;
+    align-content: start; /* stack tight from the top — no vertical dead zones */
+    padding: 104px 0 16px;
+  }
+
+  /* card wraps content — leftover viewport height stops pooling between lede and meta */
+  .cf-hero-card {
+    min-height: 0;
+  }
+
+  .cf-hero-col--right {
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .cf-hero-h1 {
+    font-size: clamp(40px, 12.5vw, 76px);
+  }
+
+  .cf-hero-h1.right,
+  .cf-hero-h1.right .line {
+    text-align: left;
+    margin-left: 0;
+  }
+
+  .cf-hero-lede {
+    width: 100%;
+    max-width: 100%;
+    margin-top: 14px;
+  }
+
+  .cf-hero-footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cf-hero-ch,
+  .cf-fade,
+  .cf-hero-lede,
+  .cf-hero-footer {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
