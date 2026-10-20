@@ -52,6 +52,7 @@
 
     /* Typography */
     --font-heading: 'DM Serif Display', Georgia, serif;
+    --font-heading-sans: 'DM Sans', 'Inter', sans-serif;
     --font-body: 'Libron', 'Inter', -apple-system, sans-serif;
     --font-logo: 'Bricolage Grotesque', sans-serif;
     --font-script: 'DM Serif Display', serif;

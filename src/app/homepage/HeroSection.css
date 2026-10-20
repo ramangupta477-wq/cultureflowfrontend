@@ -415,9 +415,14 @@
 
   .cf-hero-main {
     grid-template-columns: 1fr;
-    row-gap: 3.5vh;
-    align-content: center;
-    padding: 4vh 0;
+    row-gap: 4vh;
+    align-content: start; /* stack tight from the top — no vertical dead zones */
+    padding: 104px 0 16px;
+  }
+
+  /* card wraps content — leftover viewport height stops pooling between lede and meta */
+  .cf-hero-card {
+    min-height: 0;
   }
 
   .cf-hero-col--right {
@@ -426,7 +431,7 @@
   }
 
   .cf-hero-h1 {
-    font-size: clamp(32px, 8.8vw, 68px);
+    font-size: clamp(40px, 12.5vw, 76px);
   }
 
   .cf-hero-h1.right,

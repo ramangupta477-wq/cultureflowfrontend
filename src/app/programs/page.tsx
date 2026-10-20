@@ -13,9 +13,9 @@ import "./programs.css";
 gsap.registerPlugin(ScrollTrigger);
 
 const TRACKS = [
-  { num: "01", title: "Tech & Innovation", desc: "AI, deep-tech, and venture labs across Silicon Valley, Munich, and Singapore." },
-  { num: "02", title: "Sustainability", desc: "Climate policy, ESG frameworks, and green-economy research at leading European institutions." },
-  { num: "03", title: "Cultural", desc: "Heritage studies, creative industries, and cross-cultural leadership in Oxford and beyond." },
+  { num: "01", title: "Tech & Innovation", desc: "AI, robotics, and frontier technology - inside the labs, ecosystems, and institutions building what comes next. Silicon Valley. Munich. Singapore." },
+  { num: "02", title: "Sustainability & Impact", desc: "Renewable energy, climate policy, and green infrastructure - at the institutions leading the transition. Scandinavia. Northern Europe." },
+  { num: "03", title: "Heritage & Culture", desc: "Art, architecture, and living history - at the civilisations, traditions, and institutions that shaped how the world thinks. Europe. Asia. India." },
 ];
 
 export default function ProgramsPage() {
@@ -83,13 +83,15 @@ export default function ProgramsPage() {
 
           <span className="pgb-pill" data-pr>Programs</span>
           <h1 className="pgb-title" data-pr style={{ "--pr-d": "0.07s" } as React.CSSProperties}>
-            Built for people who <span className="pgb-mark">see&nbsp;further.</span>
+            Three tracks. One framework. Built for scholars who lead what comes{" "}
+            <span className="pgb-mark">next.</span>
           </h1>
 
           <div className="pgb-row" data-pr style={{ "--pr-d": "0.15s" } as React.CSSProperties}>
             <p className="pgb-sub">
-              Research, leadership, deep-tech — three tracks designed for
-              three ambitions. <strong>One platform, full circle.</strong>
+              Every programme is built on the 40/40/20 curriculum — 40% rigorous
+              academics, 40% cultural and industry immersion, 20% structured
+              reflection. <strong>One framework. Three directions.</strong>
             </p>
             <Link href="/waitlist" className="pgb-cta">
               Join the waitlist <ArrowUpRight size={15} strokeWidth={1.9} />
@@ -97,16 +99,12 @@ export default function ProgramsPage() {
           </div>
 
           <div className="pgb-grid">
-            {/* yellow tracks cell */}
+            {/* yellow framework cell */}
             <div className="pgb-cell pgb-cell--yellow" data-pr style={{ "--pr-d": "0.28s" } as React.CSSProperties}>
-              <span className="pgb-kicker">THREE TRACKS</span>
-              <div className="pgb-tags">
-                <span className="pgb-tag pgb-tag--dark">Tech &amp; Innovation</span>
-                <span className="pgb-tag">Sustainability</span>
-                <span className="pgb-tag">Cultural</span>
-              </div>
+              <span className="pgb-kicker">THE FRAMEWORK</span>
+              <div className="pgb-big pgb-big--numeric">40 / 40 / 20</div>
               <div className="pgb-cell-foot">
-                <span className="pgb-big">Any direction</span>
+                <span className="pgb-big-sub">Academics. Immersion. Reflection.</span>
                 <a href="#tracks" className="pgb-arrow" aria-label="See tracks">
                   <ArrowUpRight size={24} strokeWidth={2} />
                 </a>
@@ -121,19 +119,19 @@ export default function ProgramsPage() {
                 aria-hidden
                 className="pgb-world"
               />
-              <p className="pgb-map-cap">One semester, one platform — campuses across three continents.</p>
+              <p className="pgb-map-cap">Global partner institutions — structured immersions, not campus tours.</p>
             </div>
 
             {/* path cell */}
             <div className="pgb-cell pgb-cell--info" data-pr style={{ "--pr-d": "0.44s" } as React.CSSProperties}>
               <span className="pgb-ico" aria-hidden><RouteIco size={20} strokeWidth={1.7} /></span>
               <p className="pgb-cell-text">
-                First, we understand where you are academically and
-                professionally. <strong>Then we map the clearest path to
-                where you need to be.</strong>
+                We start with where you are academically and professionally.{" "}
+                <strong>Then we build the programme around where you need
+                to go.</strong>
               </p>
-              <a href="#tracks" className="pgb-mini-cta">
-                How the tracks work <ArrowUpRight size={14} strokeWidth={1.9} />
+              <a href="/#values" className="pgb-mini-cta">
+                How It Works <ArrowUpRight size={14} strokeWidth={1.9} />
               </a>
             </div>
           </div>
@@ -147,7 +145,8 @@ export default function ProgramsPage() {
           <RollingPolygon containerRef={tracksContainerRef} />
           <div className="tracks-header">
             <p className="tracks-tagline" data-pr>
-              The road can get <em>bumpy.</em> We keep you <em>rolling</em> regardless.
+              Each track is a <em>complete</em> academic immersion — curriculum,
+              logistics, <em>safety,</em> and <em>reflection</em> built in from day one.
             </p>
             <span className="tracks-kicker" data-pr style={{ "--pr-d": "0.1s" } as React.CSSProperties}>Our Tracks</span>
           </div>

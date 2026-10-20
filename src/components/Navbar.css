@@ -78,6 +78,7 @@
 }
 
 .cf-nav-link {
+  position: relative;
   font-family: "Archivo", "Inter", var(--font-body), sans-serif;
   font-size: 1rem;
   font-weight: 435;
@@ -94,9 +95,44 @@
   opacity: 0.72;
 }
 
-.cf-nav-link--active {
+.cf-nav-link--active,
+.cf-nav-link--onboard {
+  background: transparent;
+  border-radius: 100px;
   color: #000000;
   font-weight: 600;
+}
+
+/* gooey sliding pill — the yellow background lives HERE, morphing between links */
+.cf-nav-gooey-pill {
+  position: absolute;
+  top: 50%;
+  height: 36px;
+  transform: translateY(-50%);
+  border-radius: 100px;
+  background: var(--color-yellow, #FFCD00);
+  transition: left 0.55s cubic-bezier(0.34, 1.4, 0.64, 1), width 0.55s cubic-bezier(0.34, 1.4, 0.64, 1);
+  will-change: left, width;
+  z-index: 0;
+}
+
+@keyframes cf-pill-squash {
+  0% { transform: translateY(-50%) scale(1, 1); }
+  40% { transform: translateY(-50%) scale(1.08, 0.86); }
+  70% { transform: translateY(-50%) scale(0.96, 1.06); }
+  100% { transform: translateY(-50%) scale(1, 1); }
+}
+
+.cf-nav-gooey-pill--squash {
+  animation: cf-pill-squash 0.62s cubic-bezier(0.34, 1.4, 0.64, 1);
+}
+
+.cf-navbar-bar-inner {
+  position: relative;
+}
+
+.cf-nav-link {
+  z-index: 1;
 }
 
 /* ── CTA: full pill, radius 100px, 15px/600 ── */
@@ -294,9 +330,14 @@
 
 @media (max-width: 640px) {
   .cf-navbar {
-    top: 12px;
+    top: 20px;
     left: 12px;
     right: 12px;
+  }
+  /* phones: never hide the pill — iOS momentum + address-bar resizes fire
+     phantom scroll deltas that can strand it hidden */
+  .cf-navbar--hidden {
+    transform: none;
   }
   .cf-navbar-bar {
     border-radius: 20px;
