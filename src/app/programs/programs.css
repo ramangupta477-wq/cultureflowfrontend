@@ -1420,10 +1420,9 @@
 }
 
 .pgb-title {
-  font-family: var(--font-body, "Inter", sans-serif);
-  font-weight: 600;
-  /* sized so the unwrapped line 2 fits the container at every width */
-  font-size: clamp(2.2rem, 3.6vw, 3.9rem);
+  font-family: var(--font-heading, "DM Serif Display", Georgia, serif);
+  font-weight: 400;
+  font-size: clamp(2.4rem, 5vw, 4.4rem);
   line-height: 1.06;
   letter-spacing: -0.02em;
   color: var(--color-obraz-black, #0B0B0B);
