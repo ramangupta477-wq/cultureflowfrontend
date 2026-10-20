@@ -48,7 +48,7 @@
 }
 
 .ps-copy h2 {
-  font-family: var(--font-heading, "DM Serif Display", Georgia, serif);
+  font-family: var(--font-heading, "DM Sans", "Inter", sans-serif);
   font-weight: 400;
   font-size: clamp(24px, 1.9vw, 40px);
   letter-spacing: -0.005em;
@@ -123,4 +123,9 @@
   .ps-track {
     height: 300vh;
   }
+}
+
+/* DM Sans headings (Content Guide v2) */
+.programs-page-wrapper :is(h1, h2, h3, h4, h5, h6) {
+  font-family: var(--font-heading-sans, "DM Sans", sans-serif);
 }

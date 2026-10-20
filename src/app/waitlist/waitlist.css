@@ -447,7 +447,7 @@
 }
 
 .wl-success-heading {
-  font-family: var(--font-heading, 'DM Serif Display', Georgia, serif);
+  font-family: var(--font-heading-sans, "DM Sans", sans-serif);
   font-size: clamp(2.1rem, 4vw, 3.2rem);
   font-weight: 400;
   color: #FCFCFF;
@@ -769,4 +769,9 @@
   .wl-copy-btn-primary {
     width: 100%;
   }
+}
+
+/* DM Sans headings (Content Guide v2) */
+.wl-page :is(h1, h2, h3, h4, h5, h6) {
+  font-family: var(--font-heading-sans, "DM Sans", sans-serif);
 }

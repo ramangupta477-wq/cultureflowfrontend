@@ -1684,3 +1684,8 @@
     transition: none;
   }
 }
+
+/* DM Sans headings (Content Guide v2) */
+.programs-page-wrapper :is(h1, h2, h3, h4, h5, h6) {
+  font-family: var(--font-heading-sans, "DM Sans", sans-serif);
+}
