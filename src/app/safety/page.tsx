@@ -319,7 +319,6 @@ export default function SafetyPage() {
       {/* ═══ ACCOUNTABILITY ═══ */}
       <section className="sf-account">
         <div className="sf-account-card sf-reveal">
-          <img src="/images/about/founder_vision.jpg" alt="Culture Flow founder" className="sf-account-img" />
           <div className="sf-account-body">
             <h2 className="sf-why-title sf-account-title">Who&rsquo;s accountable.</h2>
             <p className="sf-cell-text">
