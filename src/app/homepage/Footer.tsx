@@ -90,7 +90,6 @@ export default function Footer() {
             <div className="cf-footer-address-block">
               <span className="cf-footer-label">HEAD OFFICE</span>
               <p className="cf-footer-address-text">
-                H No. B-71/B, G/F, Block-B,<br />
                 New Ashok Nagar,<br />
                 East Delhi, 110096
               </p>
@@ -205,7 +204,6 @@ export default function Footer() {
           <Link href="/about-us">ABOUT</Link>
           <Link href="/safety">SAFETY</Link>
           <Link href="/institutions">ONBOARD</Link>
-          <Link href="/waitlist">CONTACT</Link>
         </nav>
 
         <div className="cf-footer-bottom-brand">
@@ -216,7 +214,7 @@ export default function Footer() {
       {/* ═══ LEGAL BAR ═══ */}
       <div className="cf-footer-legal">
         <span className="cf-footer-legal-text">
-          Culture Flow Private Limited | CIN: U85500DL2026PTC471392 | Registered Office: H No. B-71/B, G/F, Block-B, New Ashok Nagar, East Delhi, 110096, India
+          Culture Flow Private Limited | CIN: U85500DL2026PTC471392 | Registered Office: New Ashok Nagar, East Delhi, 110096, India
         </span>
         <span className="cf-footer-copyright">
           © 2026 Culture Flow Private Limited
