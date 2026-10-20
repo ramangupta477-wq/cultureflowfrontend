@@ -108,14 +108,13 @@ export default function ProgramsShowcase() {
         </div>
 
         <div ref={copyRef} className="ps-copy">
-          <h2>Programs</h2>
+          <h2>Find your track.</h2>
           <p>
-            Three tracks across the world's leading universities — research,
-            deep-tech, and cultural leadership. We match ambition to
-            institution, handle the paperwork, and make sure you arrive ready
-            to work, not just travel.
+            Three tracks across global partner institutions — research,
+            sustainability, and cultural leadership. Every programme is
+            structured, end-to-end, and built on the 40/40/20 curriculum.
           </p>
-          <p>If our mission resonates with you, let&rsquo;s talk.</p>
+          <p>Applications for January 2027 are opening soon.</p>
           <a className="ps-cta" href="/waitlist">
             <span>Join waitlist</span>
             <i>→</i>
