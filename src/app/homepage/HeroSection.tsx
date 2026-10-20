@@ -228,7 +228,12 @@ export default function HeroSection() {
         const w = document.createElement("span");
         w.className = "cf-hero-chw";
         ch.replaceWith(w);
-        w.appendChild(ch);
+        // inner-most inert layer carries the swap transform — the char itself
+        // keeps its entrance CSS animation (forwards fill beats inline styles)
+        const sw = document.createElement("span");
+        sw.className = "cf-hero-swap";
+        w.appendChild(sw);
+        sw.appendChild(ch);
       });
     }
     const shells = Array.from(hero.querySelectorAll<HTMLElement>(".cf-hero-chw"));
@@ -252,9 +257,10 @@ export default function HeroSection() {
         return;
       }
       active = shell;
-      // awake clips each letter inside its own slot — tween the INNER char so
-      // it slides out of its clipped box and re-enters, never leaving its slot
-      const glyph = shell.querySelector<HTMLElement>(".cf-hero-ch") ?? shell;
+      // awake clips each letter inside its own slot — tween the inert swap
+      // layer (the char itself carries the entrance CSS animation, which
+      // would override inline transforms)
+      const glyph = shell.querySelector<HTMLElement>(".cf-hero-swap") ?? shell;
       gsap.killTweensOf(glyph);
       gsap
         .timeline()
@@ -272,9 +278,9 @@ export default function HeroSection() {
     return () => {
       hero.removeEventListener("pointermove", onMove);
       hero.removeEventListener("pointerleave", onLeave);
-      const glyphs = hero.querySelectorAll<HTMLElement>(".cf-hero-ch");
-      gsap.killTweensOf(glyphs);
-      gsap.set(glyphs, { xPercent: 0 });
+      const layers = hero.querySelectorAll<HTMLElement>(".cf-hero-swap");
+      gsap.killTweensOf(layers);
+      gsap.set(layers, { xPercent: 0 });
       shells.forEach((w) => delete w.dataset.swapChar);
     };
   }, []);

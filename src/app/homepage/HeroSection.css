@@ -248,10 +248,15 @@
   pointer-events: auto; /* re-enable hit-testing inside .cf-hero-main (pe:none) */
 }
 
+/* inert tween layer: carries xPercent, carries no CSS animation of its own */
+.cf-hero-swap {
+  display: inline-block;
+  will-change: transform;
+}
+
 .cf-hero-ch {
   display: inline-block;
-  opacity: 0;
-  will-change: transform, opacity;
+  opacity: 0;  will-change: transform, opacity;
 }
 
 .cf-hero-sp {
