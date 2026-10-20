@@ -107,8 +107,8 @@ export default function Footer() {
               <a href="mailto:info@cultureflow.in" className="cf-footer-contact-link">
                 info@cultureflow.in
               </a>
-              <a href="https://wa.me/917123445690" target="_blank" rel="noreferrer" className="cf-footer-contact-link">
-                +91 71234 45690
+              <a href="https://wa.me/917096271068" target="_blank" rel="noreferrer" className="cf-footer-contact-link">
+                +91 70962 71068
               </a>
               <Link href="/waitlist" className="cf-footer-arrow-link" style={{ marginTop: 12 }}>
                 Join the Waitlist
