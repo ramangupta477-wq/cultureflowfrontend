@@ -73,8 +73,6 @@ export default function Footer() {
                 <a href="#" className="cf-footer-social-link">LinkedIn</a>
                 <a href="#" className="cf-footer-social-link">Instagram</a>
                 <a href="#" className="cf-footer-social-link">Twitter</a>
-                <a href="#" className="cf-footer-social-link">YouTube</a>
-                <a href="#" className="cf-footer-social-link">Facebook</a>
               </div>
             </div>
           </div>
