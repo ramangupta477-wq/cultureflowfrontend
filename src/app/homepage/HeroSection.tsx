@@ -145,8 +145,9 @@ export default function HeroSection() {
   const footRef = useRef<HTMLElement>(null);
 
   const [delhiTime, setDelhiTime] = useState<string>("15:30");
+  const [delhiTemp, setDelhiTemp] = useState<string>("");
 
-  // ─── Real-time New Delhi IST Clock ───
+  // ─── Real-time New Delhi IST Clock + Weather ───
   useEffect(() => {
     const updateTime = () => {
       try {
@@ -163,6 +164,14 @@ export default function HeroSection() {
     };
     updateTime();
     const interval = setInterval(updateTime, 20000);
+    // New Delhi temperature — Open-Meteo, no API key
+    fetch("https://api.open-meteo.com/v1/forecast?latitude=28.6139&longitude=77.2090&current=temperature_2m&timezone=Asia%2FKolkata")
+      .then((r) => r.json())
+      .then((d) => {
+        const t = d?.current?.temperature_2m;
+        if (typeof t === "number") setDelhiTemp(`${Math.round(t)}°C`);
+      })
+      .catch(() => {});
     return () => clearInterval(interval);
   }, []);
 
@@ -820,7 +829,7 @@ export default function HeroSection() {
           <span>
             Based in:{" "}
             <b>
-              New Delhi <span id="cf-hero-clock">{delhiTime}</span> IST · Global Pathways
+              New Delhi <span id="cf-hero-clock">{delhiTime}</span> IST{delhiTemp ? ` · ${delhiTemp}` : ""}
             </b>
           </span>
           <span>
