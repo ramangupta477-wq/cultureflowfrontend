@@ -411,8 +411,9 @@
   .cf-hero-main {
     grid-template-columns: 1fr;
     row-gap: 5vh;
-    align-content: center; /* headline group + lede as one centered block — no middle void */
-    padding: 0;
+    align-content: center; /* headline group + lede as one centered block */
+    /* 104px clears the fixed pill (12 + 56 + air) — headline never slides under it */
+    padding: 104px 0 24px;
   }
 
   .cf-hero-h1 {
