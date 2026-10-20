@@ -298,6 +298,11 @@
     left: 12px;
     right: 12px;
   }
+  /* phones: never hide the pill — iOS momentum + address-bar resizes fire
+     phantom scroll deltas that can strand it hidden */
+  .cf-navbar--hidden {
+    transform: none;
+  }
   .cf-navbar-bar {
     border-radius: 20px;
   }
