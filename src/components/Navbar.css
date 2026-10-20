@@ -95,7 +95,8 @@
   opacity: 0.72;
 }
 
-.cf-nav-link--active {
+.cf-nav-link--active,
+.cf-nav-link--onboard {
   background: var(--color-yellow, #FFCD00);
   border-radius: 100px;
   color: #000000;

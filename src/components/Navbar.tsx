@@ -53,7 +53,7 @@ export default function Navbar({ pageLabel, logoTheme = "auto" }: NavbarProps) {
     { href: "/about-us", label: "About us", active: pathname.includes("about") },
     { href: "/programs", label: "Programs", active: pathname.startsWith("/programs") },
     { href: "/safety", label: "Safety & Trust", active: pathname.startsWith("/safety") },
-    { href: "/institutions", label: "Onboard with us", active: pathname.startsWith("/institutions") },
+    { href: "/institutions", label: "Onboard with us", active: pathname.startsWith("/institutions"), always: true },
   ];
 
   return (
@@ -80,7 +80,7 @@ export default function Navbar({ pageLabel, logoTheme = "auto" }: NavbarProps) {
               <Link
                 key={l.href}
                 href={l.href}
-                className={`cf-nav-link ${l.active ? "cf-nav-link--active" : ""}`}
+                className={`cf-nav-link ${l.active ? "cf-nav-link--active" : ""} ${"always" in l && l.always ? "cf-nav-link--onboard" : ""}`}
               >
                 {l.label}
               </Link>
