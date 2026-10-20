@@ -6,27 +6,42 @@ import Skiper49 from "@/components/ui/skiper49";
 import BlurText from "@/components/ui/BlurText";
 import "./ProgramScope.css";
 
+const TRACK_IMAGES = [
+  {
+    src: "https://res.cloudinary.com/pxd8he17/image/upload/v1792488717/1.png",
+    alt: "Tech & Innovation — Frontier AI and robotics ecosystems",
+  },
+  {
+    src: "https://res.cloudinary.com/pxd8he17/image/upload/v1792488786/2.png",
+    alt: "Sustainability & Impact — Systems shaping the next era of sustainability",
+  },
+  {
+    src: "https://res.cloudinary.com/pxd8he17/image/upload/v1792488784/3.png",
+    alt: "Heritage & Culture — Civilisations, traditions, and institutional heritage",
+  },
+];
+
 const SCOPE_STEPS = [
   {
     stepNumber: "01",
-    tag: "02 — PROGRAMME SCOPE",
-    heading: "Academic pathways designed for global impact.",
+    tag: "OUR TRACKS",
+    heading: "Tech & Innovation.",
     description:
-      "From high-table collegiate tutorials to frontier artificial intelligence laboratories, each pathway unites institutional prestige with comprehensive relocation care—giving ambitious scholars the clarity and infrastructure to excel worldwide.",
+      "The next wave of global technology is being built inside frontier AI labs and advanced robotics ecosystems. This track puts scholars there — not as observers, but as participants — forging the technical depth, industry fluency, and intellectual edge to lead what comes next.",
   },
   {
     stepNumber: "02",
-    tag: "02 — PROGRAMME SCOPE",
-    heading: "Frontier research mapped to individual ambitions.",
+    tag: "OUR TRACKS",
+    heading: "Sustainability & Impact.",
     description:
-      "We architect bespoke transitions into the world's most distinguished faculties. Scholars gain direct access to proprietary research labs, faculty mentorship, and international academic credit frameworks.",
+      "Renewable energy. Climate policy. Green infrastructure. At our partner institutions, scholars study the systems shaping the next era of global sustainability — forging the expertise, perspective, and conviction to lead the century's defining challenge firsthand.",
   },
   {
     stepNumber: "03",
-    tag: "02 — PROGRAMME SCOPE",
-    heading: "Seamless mobility from application to arrival.",
+    tag: "OUR TRACKS",
+    heading: "Heritage & Culture.",
     description:
-      "Relocation without friction. From expedited visa processing and guaranteed collegiate housing to 24/7 on-ground concierge support, scholars focus purely on their intellectual frontiers.",
+      "Art. Architecture. Living history. At our partner institutions, scholars engage with the civilisations, traditions, and institutional heritage that define how the world thinks — returning with the cultural depth, global fluency, and intellectual confidence to lead across borders, not just across industries.",
   },
 ];
 
@@ -113,6 +128,7 @@ export default function ProgramScope() {
             <Skiper49
               activeStep={currentStep}
               onStepChange={handleStepSelect}
+              images={TRACK_IMAGES}
             />
           </div>
 
