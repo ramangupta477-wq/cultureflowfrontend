@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Link from "next/link";
 import "./Footer.css";
 
 /* ─── Reusable Arrow Circle ─── */
@@ -143,7 +144,7 @@ export default function Footer() {
       {/* ═══ BOTTOM BAR ═══ */}
       <div className="cf-footer-bottom">
         <div className="cf-footer-bottom-left">
-          <a href="#">PRIVACY</a> / <a href="#">COOKIES POLICY</a>
+          <Link href="/privacy-policy">PRIVACY</Link> / <a href="#">COOKIES POLICY</a>
         </div>
 
         <nav className="cf-footer-bottom-nav">
