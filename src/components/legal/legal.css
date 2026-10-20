@@ -12,7 +12,7 @@
 }
 
 .ld-title {
-  font-family: var(--font-body, "Inter", "Archivo", sans-serif);
+  font-family: var(--font-heading-sans, "DM Sans", sans-serif);
   font-size: clamp(3.4rem, 10vw, 8.2rem);
   font-weight: 700;
   line-height: 0.96;
@@ -54,7 +54,7 @@
 }
 
 .ld-h {
-  font-family: var(--font-body, "Inter", sans-serif);
+  font-family: var(--font-heading-sans, "DM Sans", sans-serif);
   font-size: clamp(1.35rem, 2.2vw, 1.7rem);
   font-weight: 700;
   letter-spacing: -0.02em;

@@ -935,3 +935,8 @@
 .safety-page :is(h1, h2, h3, h4, h5, h6) {
   font-family: var(--font-heading-sans, "DM Sans", sans-serif);
 }
+
+/* div-based display text in the tile-matrix hero also reads as headings */
+.safety-page :is(.sf-hg-word, .sf-hg-stat-num, .sf-hg-count, .sf-hg-dark-label, .sf-hg-stories-label, .sf-why-title) {
+  font-family: var(--font-heading-sans, "DM Sans", sans-serif);
+}
