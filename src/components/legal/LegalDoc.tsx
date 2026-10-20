@@ -2,6 +2,7 @@ import React from "react";
 import fs from "node:fs";
 import path from "node:path";
 import Link from "next/link";
+import Footer from "../../app/homepage/Footer";
 import "./legal.css";
 
 export type LegalSlug = "privacy-policy" | "terms" | "refund-policy" | "disclaimer";
@@ -140,6 +141,7 @@ export default function LegalDoc({ slug }: { slug: LegalSlug }) {
       <div className="ld-band">
         <article className="ld-body">{rendered}</article>
       </div>
+      <Footer />
     </main>
   );
 }
