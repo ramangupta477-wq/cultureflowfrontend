@@ -18,36 +18,36 @@ const PILLARS = [
   {
     num: "01",
     title: "1:15 chaperone ratio",
-    desc: "One trained chaperone for every fifteen students — on every flight, at every site, in every residence.",
+    desc: "One trained chaperone for every fifteen scholars — on every flight, at every site, in every residence.",
   },
   {
     num: "02",
-    title: "Vetted local partners",
-    desc: "Licences checked, references taken, sites visited — and the vetting repeats before every cohort.",
+    title: "Comprehensive insurance",
+    desc: "Medical, hospitalisation, evacuation, and travel disruption coverage for the full programme duration — arranged by us.",
   },
   {
     num: "03",
-    title: "Emergency medical insurance",
-    desc: "Every participant is insured for the full duration of the program, arranged and documented by us.",
+    title: "Parent consent & indemnity",
+    desc: "A plain-language written agreement covering consent, medical disclosures, and emergency authority. Signed before departure.",
   },
   {
     num: "04",
-    title: "Parental indemnity framework",
-    desc: "A plain-language written agreement covering responsibilities, consent and emergency authority.",
+    title: "Mandatory code of conduct",
+    desc: "Behavioural expectations, safety compliance, and consequences — signed by every scholar and parent before the programme begins.",
   },
 ];
 
 const PROTOCOL = [
-  { num: "01", title: "Student → Chaperone", desc: "Instant contact through the always-on program WhatsApp group. Every chaperone carries a working phone at all times." },
-  { num: "02", title: "Chaperone → Program Lead", desc: "The chaperone informs the Program Lead within 15 minutes of any incident, however minor." },
-  { num: "03", title: "Program Lead → Parents", desc: "Parents receive a direct call — not a message — within one hour for anything health or safety related." },
-  { num: "04", title: "Escalation", desc: "Local partner and insurer hotline engaged where needed. A written incident log is shared with parents within 24 hours." },
+  { num: "01", title: "On-ground response", desc: "The on-site chaperone assesses, contains, and acts within the first 15 minutes. No incident waits for approvals." },
+  { num: "02", title: "HQ escalation", desc: "Culture Flow's operations team in New Delhi is notified in real time. A named coordinator takes ownership." },
+  { num: "03", title: "Parent communication", desc: "Parents are contacted directly — by phone, not email — with a clear situation update and next steps." },
+  { num: "04", title: "Resolution & documentation", desc: "Every incident is resolved, logged, and reviewed. Guardians receive a written summary. Protocols are updated if needed." },
 ];
 
 const DOCUMENTS = [
-  { name: "Safety Policy", note: "Full document · PDF" },
-  { name: "Sample Parent Consent Form", note: "The exact form parents sign · PDF" },
-  { name: "Insurance Summary", note: "Cover, insurer and claims process · PDF" },
+  { name: "Parent Consent & Indemnity Bond", note: "Consent, medical authority, and emergency protocols · PDF" },
+  { name: "Mandatory Code of Conduct", note: "Signed by every scholar and guardian · PDF" },
+  { name: "Programme Itinerary & Logistics", note: "Complete schedule, accommodation, transport · PDF" },
 ];
 
 function useCountUp(to: number, active: boolean, duration = 1400) {
@@ -195,11 +195,10 @@ export default function SafetyPage() {
           <span className="sf-pill sf-reveal">Why it&rsquo;s safe</span>
           <div className="sf-why-title-row">
             <h2 className="sf-why-title sf-reveal" style={{ "--sf-d": "80ms" } as React.CSSProperties}>
-              Why parents<br />choose us
+              Why us
             </h2>
             <p className="sf-why-sub sf-reveal" style={{ "--sf-d": "160ms" } as React.CSSProperties}>
-              Every departure is built on supervision you can verify and people
-              you can name.
+              Safety infrastructure that earns trust before the first departure.
             </p>
           </div>
         </div>
@@ -209,10 +208,10 @@ export default function SafetyPage() {
           <div className="sf-cell sf-cell--map sf-reveal">
             <img src="/homepage_assets/world.svg" alt="" className="sf-world" aria-hidden />
             <div>
-              <h3 className="sf-cell-title">Local expertise</h3>
+              <h3 className="sf-cell-title">Safety is a system</h3>
               <p className="sf-cell-text">
-                On-ground teams in New Delhi, London, Munich and Singapore —
-                people who know the campuses, clinics and consulates.
+                Ratios, vetting, insurance, and written protocols — engineered
+                into every programme, not added after.
               </p>
             </div>
           </div>
@@ -220,20 +219,22 @@ export default function SafetyPage() {
           {/* stacked cards */}
           <div className="sf-why-stack">
             <div className="sf-cell sf-cell--stack sf-reveal" style={{ "--sf-d": "100ms" } as React.CSSProperties}>
-              <h3 className="sf-cell-title">Vetted local partners</h3>
+              <h3 className="sf-cell-title">Every partner is vetted</h3>
               <p className="sf-cell-text">
-                Licensed, referenced and site-visited before anyone signs with us.
+                Licensed, referenced, and site-assessed before any agreement is
+                signed. Repeated before every cohort.
               </p>
             </div>
             <div className="sf-cell sf-cell--stack sf-reveal" style={{ "--sf-d": "180ms" } as React.CSSProperties}>
-              <h3 className="sf-cell-title">Named accountability</h3>
+              <h3 className="sf-cell-title">Accountability is personal</h3>
               <div className="sf-avatars" aria-hidden>
                 <span className="sf-avatar sf-avatar--1">AH</span>
                 <span className="sf-avatar sf-avatar--2">RS</span>
                 <span className="sf-avatar sf-avatar--3">MJ</span>
               </div>
               <p className="sf-cell-text">
-                A founder and program lead who answer parent calls themselves.
+                A named person who answers parent calls directly. Not a ticket.
+                Not an inbox.
               </p>
             </div>
           </div>
@@ -270,8 +271,12 @@ export default function SafetyPage() {
         <div className="sf-why-head">
           <span className="sf-pill sf-reveal">If something goes wrong</span>
           <h2 className="sf-why-title sf-reveal" style={{ "--sf-d": "80ms" } as React.CSSProperties}>
-            Here is exactly<br />what happens
+            What happens when<br />something goes wrong.
           </h2>
+          <p className="sf-why-sub sf-reveal" style={{ "--sf-d": "160ms" } as React.CSSProperties}>
+            Every programme carries a response protocol — tested, documented, and
+            shared with guardians before departure.
+          </p>
         </div>
         <div className="sf-protocol-grid">
           {PROTOCOL.map((s, i) => (
@@ -288,9 +293,12 @@ export default function SafetyPage() {
       <section className="sf-docs">
         <div className="sf-why-head">
           <span className="sf-pill sf-reveal">Documents</span>
-          <p className="sf-docs-note sf-reveal" style={{ "--sf-d": "80ms" } as React.CSSProperties}>
-            No form, no email gate — read the paperwork before we ask you to
-            sign anything.
+          <h2 className="sf-why-title sf-reveal" style={{ "--sf-d": "60ms" } as React.CSSProperties}>
+            Every document.<br />Before departure.
+          </h2>
+          <p className="sf-docs-note sf-reveal" style={{ "--sf-d": "120ms" } as React.CSSProperties}>
+            Nothing is signed without full visibility. Nothing is withheld —
+            read the paperwork before we ask you to sign anything.
           </p>
         </div>
         <div className="sf-doc-grid">
@@ -317,12 +325,13 @@ export default function SafetyPage() {
           <img src="/images/about/founder_vision.jpg" alt="Culture Flow founder" className="sf-account-img" />
           <div className="sf-account-body">
             <span className="sf-pill">Who is accountable</span>
-            <h2 className="sf-why-title sf-account-title">A named person,<br />not a support inbox.</h2>
+            <h2 className="sf-why-title sf-account-title">Who&rsquo;s<br />accountable.</h2>
             <p className="sf-cell-text">
-              Afjal Hussein — Founder &amp; Program Lead. The same person who
-              designs the pathway answers your safety questions. Program
-              operations run under Culture Flow Education Pvt. Ltd.,
-              Connaught Place, New Delhi 110001.
+              Every programme has a named person responsible — not a
+              department, not a helpdesk. Afjal Hussein — Founder &amp; Program
+              Lead — oversees every programme at the leadership level.
+              Programme operations run under Culture Flow Private Limited,
+              East Delhi, New Delhi.
             </p>
             <Link href="/about-us" className="sf-account-link">
               Meet the team <ArrowUpRight size={15} strokeWidth={1.8} />
@@ -331,19 +340,20 @@ export default function SafetyPage() {
         </div>
       </section>
 
-      {/* ═══ ASK US ANYTHING ═══ */}
+      {/* ═══ CLOSING CTA ═══ */}
       <section className="sf-ask" id="ask">
-        <h2 className="sf-why-title sf-reveal">Ask us anything.</h2>
+        <h2 className="sf-why-title sf-reveal">Built to earn trust before the first departure.</h2>
         <p className="sf-ask-sub sf-reveal" style={{ "--sf-d": "90ms" } as React.CSSProperties}>
-          Direct questions from parents get direct answers — usually within the hour.
+          Have questions about how we keep scholars safe? We&rsquo;re here to
+          answer — directly.
         </p>
         <div className="sf-ask-actions sf-reveal" style={{ "--sf-d": "180ms" } as React.CSSProperties}>
           <a href="https://wa.me/917123445690" className="sf-btn-dark sf-btn-dark--lg">
-            WhatsApp us
+            Ask a question
           </a>
-          <a href="mailto:hello@cultureflow.co.in" className="sf-ask-mail">
-            hello@cultureflow.co.in
-          </a>
+          <Link href="/waitlist" className="sf-ask-mail">
+            Join the waitlist
+          </Link>
         </div>
       </section>
 
