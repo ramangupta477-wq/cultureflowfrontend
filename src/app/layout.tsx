@@ -15,6 +15,17 @@ export const metadata: Metadata = {
   title: "Culture Flow — One Step. New Future.",
   description:
     "Transforming Indian student mobility through structured educational programs worldwide.",
+  icons: {
+    icon: [
+      { url: "/homepage_assets/favicon.svg", type: "image/svg+xml" },
+      { url: "/homepage_assets/favicon.ico", sizes: "48x48" },
+      { url: "/homepage_assets/favicon-96x96.png", sizes: "96x96", type: "image/png" },
+      { url: "/homepage_assets/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+      { url: "/homepage_assets/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+    ],
+    apple: "/homepage_assets/apple-touch-icon.png",
+  },
+  manifest: "/homepage_assets/site.webmanifest",
 };
 
 export default function RootLayout({
