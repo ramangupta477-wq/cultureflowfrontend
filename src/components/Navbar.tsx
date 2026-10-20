@@ -18,6 +18,37 @@ export default function Navbar({ pageLabel, logoTheme = "auto" }: NavbarProps) {
   const [scrolled, setScrolled] = useState(false);
   const [hidden, setHidden] = useState(false);
   const lastYRef = useRef(0);
+  const barInnerRef = useRef<HTMLDivElement>(null);
+  const [gooey, setGooey] = useState<{ left: number; width: number; ok: boolean }>({ left: 0, width: 0, ok: false });
+  const [pillSquash, setPillSquash] = useState(false);
+
+  // ── Gooey pill positioning: finds the yellow-pill link (Onboard / active page)
+  useEffect(() => {
+    const place = (animate: boolean) => {
+      const inner = barInnerRef.current;
+      if (!inner) return;
+      const target =
+        inner.querySelector<HTMLElement>(".cf-nav-link--onboard") ??
+        inner.querySelector<HTMLElement>(".cf-nav-link--active");
+      if (!target) { setGooey((g) => ({ ...g, ok: false })); return; }
+      const ir = inner.getBoundingClientRect();
+      const tr = target.getBoundingClientRect();
+      if (tr.width === 0) { setGooey((g) => ({ ...g, ok: false })); return; } // links hidden (mobile nav)
+      setGooey({ left: tr.left - ir.left, width: tr.width, ok: true });
+      // first placement snaps; subsequent ones glide with a jelly squash
+      const pill = inner.querySelector<HTMLElement>(".cf-nav-gooey-pill");
+      if (pill && animate) pill.style.transition = "left 0.55s cubic-bezier(0.34, 1.4, 0.64, 1), width 0.55s cubic-bezier(0.34, 1.4, 0.64, 1)";
+      if (animate) {
+        setPillSquash(true);
+        setTimeout(() => setPillSquash(false), 640);
+      }
+    };
+    place(false);
+    const t = setTimeout(() => place(true), 60); // re-place after fonts settle
+    window.addEventListener("resize", () => place(false));
+    if (document.fonts?.ready) document.fonts.ready.then(() => place(false));
+    return () => clearTimeout(t);
+  }, [pathname]);
 
   const getPageTitle = () => {
     if (pageLabel) return pageLabel.toUpperCase();
@@ -29,6 +60,11 @@ export default function Navbar({ pageLabel, logoTheme = "auto" }: NavbarProps) {
 
   const activeTitle = getPageTitle();
   const isYellowLogo = logoTheme === "yellow";
+  const gooeyStyle: React.CSSProperties = {
+    left: gooey.left,
+    width: gooey.width,
+    opacity: gooey.ok ? 1 : 0,
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -60,7 +96,12 @@ export default function Navbar({ pageLabel, logoTheme = "auto" }: NavbarProps) {
     <header className={`cf-navbar ${scrolled ? "cf-navbar--scrolled" : ""} ${hidden ? "cf-navbar--hidden" : ""}`}>
       {/* ── Floating white pill (media-harbour pattern) ── */}
       <div className="cf-navbar-bar">
-        <div className="cf-navbar-bar-inner">
+        <div className="cf-navbar-bar-inner" ref={barInnerRef}>
+          <span
+            className={`cf-nav-gooey-pill ${pillSquash ? "cf-nav-gooey-pill--squash" : ""}`}
+            aria-hidden
+            style={gooeyStyle}
+          />
 
           {/* LEFT: logo */}
           <Link href="/" className="cf-navbar-logo-link" aria-label="Culture Flow Home">
