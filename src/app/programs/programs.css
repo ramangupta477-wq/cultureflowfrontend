@@ -1422,19 +1422,29 @@
 .pgb-title {
   font-family: var(--font-body, "Inter", sans-serif);
   font-weight: 600;
-  font-size: clamp(2.4rem, 5vw, 4.4rem);
+  /* sized so the unwrapped line 2 fits the container at every width */
+  font-size: clamp(2.2rem, 3.6vw, 3.9rem);
   line-height: 1.06;
   letter-spacing: -0.02em;
   color: var(--color-obraz-black, #0B0B0B);
-  max-width: 15em;
   margin: clamp(18px, 3vh, 28px) 0 clamp(20px, 3vh, 32px);
 }
 
+/* line 2 — one unwrappable line (wide screens only; phones rewrap) */
+.pgb-title-l2 {
+  display: block;
+  white-space: nowrap;
+}
+
+@media (max-width: 860px) {
+  .pgb-title-l2 {
+    white-space: normal;
+  }
+}
+
 .pgb-mark {
-  display: inline-block;
-  background: var(--color-yellow, #FFCD00);
-  border-radius: 0.3em;
-  padding: 0 0.14em;
+  font-style: italic;
+  color: var(--color-yellow, #FFCD00);
 }
 
 .pgb-row {
