@@ -8,6 +8,7 @@ import RolePicker from "./RolePicker";
 import { playShutterSound } from "@/components/ui/admit-one-ticket";
 import { fieldErrors, showError, PHONE_RE } from "@/lib/formValidation";
 import { useBlurReveal } from "@/lib/reveals";
+import Footer from "../homepage/Footer";
 import {
   creditReferrer,
   joinWaitlist,
@@ -304,7 +305,8 @@ export default function WaitlistPage() {
     };
 
     return (
-      <main className="wl-page">
+      <>
+        <main className="wl-page">
         <div className="wl-success-hero">
           <span className="wl-success-kicker">APPLICATION CONFIRMED · COHORT 2026/2027</span>
           <h1 className="wl-success-heading">Priority Admission Pass</h1>
@@ -354,11 +356,14 @@ export default function WaitlistPage() {
           </div>
         </div>
       </main>
+      <Footer />
+    </>
     );
   }
 
   return (
-    <main className="wl-page">
+    <>
+      <main className="wl-page">
       {step === 0 ? (
         <RolePicker onSelect={handleRoleSelect} />
       ) : (
@@ -654,5 +659,7 @@ export default function WaitlistPage() {
         Let&apos;s talk
       </Link>
     </main>
+    <Footer />
+  </>
   );
 }

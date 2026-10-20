@@ -20,7 +20,7 @@
 /* ─── Left prompt ─── */
 .rp-prompt {
   flex: none;
-  font-family: var(--font-heading, "DM Sans", "Inter", sans-serif);
+  font-family: var(--font-heading, "DM Serif Display", Georgia, serif);
   font-size: clamp(2.4rem, 5vw, 4.2rem);
   font-weight: 400;
   line-height: 1;
@@ -173,7 +173,7 @@
 /* Institutional onboarding link */
 .rp-inst-link {
   margin-top: 6px;
-  font-family: var(--font-heading-sans, "DM Sans", sans-serif);
+  font-family: var(--font-heading, "DM Serif Display", Georgia, serif);
   font-size: 1.05rem;
   color: rgba(11, 11, 11, 0.65);
   text-decoration: none;
@@ -187,7 +187,8 @@
   border-color: var(--color-yellow, #FFCD00);
 }
 
-/* DM Sans headings (Content Guide v2) */
-.wl-page :is(h1, h2, h3, h4, h5, h6) {
-  font-family: var(--font-heading-sans, "DM Sans", sans-serif);
+
+/* Claim-style heading weight (DM Serif 400) */
+.wl-page :is(h1, h2, h3, h4, h5, h6, .pgb-title, .pgb-big, .sf-hg-word, .sf-hg-stat-num, .sf-hg-count, .ld-title, .ld-h) {
+  font-weight: 400;
 }

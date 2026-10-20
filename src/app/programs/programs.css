@@ -1422,19 +1422,29 @@
 .pgb-title {
   font-family: var(--font-body, "Inter", sans-serif);
   font-weight: 600;
-  font-size: clamp(2.4rem, 5vw, 4.4rem);
+  /* sized so the unwrapped line 2 fits the container at every width */
+  font-size: clamp(2.2rem, 3.6vw, 3.9rem);
   line-height: 1.06;
   letter-spacing: -0.02em;
   color: var(--color-obraz-black, #0B0B0B);
-  max-width: 15em;
   margin: clamp(18px, 3vh, 28px) 0 clamp(20px, 3vh, 32px);
 }
 
+/* line 2 — one unwrappable line (wide screens only; phones rewrap) */
+.pgb-title-l2 {
+  display: block;
+  white-space: nowrap;
+}
+
+@media (max-width: 860px) {
+  .pgb-title-l2 {
+    white-space: normal;
+  }
+}
+
 .pgb-mark {
-  display: inline-block;
-  background: var(--color-yellow, #FFCD00);
-  border-radius: 0.3em;
-  padding: 0 0.14em;
+  font-style: italic;
+  color: var(--color-yellow, #FFCD00);
 }
 
 .pgb-row {
@@ -1556,8 +1566,9 @@
 
 /* 40/40/20 framework numeral in the yellow hero cell */
 .pgb-big--numeric {
-  font-size: clamp(2.6rem, 4.4vw, 4rem);
+  font-size: clamp(2rem, 2.9vw, 3rem);
   letter-spacing: -0.03em;
+  white-space: nowrap;
 }
 
 .pgb-big-sub {
@@ -1566,6 +1577,7 @@
   font-size: clamp(0.98rem, 1.3vw, 1.12rem);
   line-height: 1.35;
   color: var(--color-obraz-black, #0B0B0B);
+  white-space: nowrap;
 }
 
 .pgb-arrow {
@@ -1685,7 +1697,8 @@
   }
 }
 
-/* DM Sans headings (Content Guide v2) */
-.programs-page-wrapper :is(h1, h2, h3, h4, h5, h6) {
-  font-family: var(--font-heading-sans, "DM Sans", sans-serif);
+
+/* Claim-style heading weight (DM Serif 400) */
+.programs-page-wrapper :is(h1, h2, h3, h4, h5, h6, .pgb-title, .pgb-big, .sf-hg-word, .sf-hg-stat-num, .sf-hg-count, .ld-title, .ld-h) {
+  font-weight: 400;
 }

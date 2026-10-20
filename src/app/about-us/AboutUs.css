@@ -36,22 +36,26 @@
 }
 
 .au-hero-title {
-  font-family: var(--font-body, "Inter", sans-serif);
-  font-weight: 600;
+  font-family: var(--font-heading, "DM Serif Display", Georgia, serif);
+  font-weight: 400;
   font-size: clamp(2.6rem, 5.4vw, 4.5rem);
   line-height: 1.1;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.025em;
   max-width: 16em;
   margin: 0 auto clamp(24px, 4vh, 40px);
 }
 
-/* yellow highlight word, GreenWorld-style */
+.au-hero-title em,
 .au-mark {
-  display: inline-block;
-  background: var(--color-yellow, #FFCD00);
-  border-radius: 0.32em;
-  padding: 0 0.14em;
-  margin: 0 0.04em;
+  display: inline;
+  font-style: italic;
+  font-family: inherit;
+  font-weight: 400;
+  color: var(--color-yellow, #FFCD00);
+  background: none;
+  border-radius: 0;
+  padding: 0;
+  margin: 0;
 }
 
 /* floating icon chips */
@@ -77,12 +81,26 @@
 
 .au-hero-sub {
   font-family: var(--font-body, "Inter", sans-serif);
-  font-size: clamp(0.98rem, 1.15vw, 1.12rem);
-  line-height: 1.72;
-  color: rgba(11, 11, 11, 0.68);
-  max-width: 820px;
+  font-size: clamp(1rem, 1.15vw, 1.16rem);
+  line-height: 1.74;
+  color: rgba(11, 11, 11, 0.72);
+  max-width: 1040px;
   margin: 0 auto clamp(36px, 6vh, 60px) auto;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.au-hero-sub p {
+  margin: 0;
+}
+
+.au-hero-sub-now {
+  font-weight: 700;
+  color: var(--color-obraz-black, #0B0B0B);
+  font-size: 1.08em;
+  letter-spacing: -0.01em;
 }
 
 .au-btn-pillau {
@@ -109,7 +127,7 @@
 /* hero bento row */
 .au-hero-bento {
   display: grid;
-  grid-template-columns: 1.1fr 0.75fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   gap: clamp(14px, 1.6vw, 22px);
   text-align: left;
 }
@@ -164,12 +182,33 @@
   background: linear-gradient(to top, rgba(11, 11, 11, 0.35), transparent 45%);
 }
 
+.au-hcell--building {
+  background: var(--color-warm-white, #F1F0EE);
+  padding: clamp(22px, 2.4vw, 34px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 280px;
+}
+
+.au-hcell--building p {
+  font-family: var(--font-body, "Inter", sans-serif);
+  font-size: clamp(0.9rem, 0.98vw, 1.02rem);
+  line-height: 1.62;
+  color: rgba(11, 11, 11, 0.8);
+  margin: 0;
+}
+
 .au-hcell--founded {
   position: relative;
   background: var(--color-yellow, #FFCD00);
   padding: clamp(22px, 2.4vw, 34px);
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
 }
 
 .au-fcell-kicker {
@@ -178,20 +217,28 @@
   font-weight: 700;
   letter-spacing: 0.22em;
   color: rgba(11, 11, 11, 0.6);
+  align-self: flex-start;
+  text-align: left;
 }
 
 .au-fcell-big {
-  font-family: var(--font-heading, "DM Sans", "Inter", sans-serif);
-  font-size: clamp(2.4rem, 3.6vw, 3.6rem);
-  line-height: 1.02;
-  margin: 14px 0 10px;
+  font-family: var(--font-heading, "DM Serif Display", Georgia, serif);
+  font-size: clamp(2.2rem, 3vw, 3.4rem);
+  line-height: 1.05;
+  margin: auto 0;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
 }
 
 .au-fcell-sub {
   font-family: var(--font-body, "Inter", sans-serif);
   font-size: 0.85rem;
   color: rgba(11, 11, 11, 0.65);
-  margin-top: auto;
+  align-self: flex-start;
+  text-align: left;
 }
 
 .au-fcell-ico {
@@ -206,19 +253,22 @@
   padding: clamp(22px, 2.4vw, 34px);
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 280px;
 }
 
 .au-hcell--mission p {
   font-family: var(--font-body, "Inter", sans-serif);
-  font-size: clamp(0.98rem, 1.1vw, 1.12rem);
-  line-height: 1.6;
+  font-size: clamp(0.9rem, 0.98vw, 1.02rem);
+  line-height: 1.62;
+  color: rgba(11, 11, 11, 0.8);
   margin: 0;
 }
 
 .au-hcell--mission em {
   font-style: italic;
-  font-family: var(--font-heading, "DM Sans", "Inter", sans-serif);
+  font-family: var(--font-heading, "DM Serif Display", Georgia, serif);
   font-size: 1.06em;
 }
 
@@ -283,9 +333,9 @@
 /* ═══ STORY SPLIT ═══ */
 .au-story {
   display: grid;
-  grid-template-columns: 0.8fr 1.2fr;
-  gap: clamp(40px, 6vw, 100px);
-  align-items: end;
+  grid-template-columns: 1fr 1.1fr;
+  gap: clamp(40px, 6vw, 90px);
+  align-items: center;
   max-width: 1240px;
   margin: 0 auto;
   padding: clamp(60px, 10vh, 110px) clamp(20px, 4vw, 56px);
@@ -293,26 +343,26 @@
 
 .au-story-note {
   font-family: var(--font-body, "Inter", sans-serif);
-  font-size: clamp(0.95rem, 1.05vw, 1.05rem);
-  line-height: 1.65;
-  color: rgba(11, 11, 11, 0.55);
+  font-size: clamp(0.98rem, 1.1vw, 1.12rem);
+  line-height: 1.72;
+  color: rgba(11, 11, 11, 0.72);
   margin: 0;
 }
 
 .au-story-title {
-  font-family: var(--font-body, "Inter", sans-serif);
-  font-weight: 600;
-  font-size: clamp(2.2rem, 4.2vw, 3.6rem);
+  font-family: var(--font-heading, "DM Serif Display", Georgia, serif);
+  font-weight: 400;
+  font-size: clamp(2.4rem, 4.4vw, 3.8rem);
   line-height: 1.08;
-  letter-spacing: -0.02em;
-  margin: 0 0 28px;
+  letter-spacing: -0.025em;
+  margin: 0;
 }
 
 .au-story-title em {
   font-style: italic;
-  font-family: var(--font-heading, "DM Sans", "Inter", sans-serif);
+  font-family: inherit;
   font-weight: 400;
-  color: var(--color-gold, #C89C66);
+  color: var(--color-yellow, #FFCD00);
 }
 
 .au-story-ctas {
@@ -373,19 +423,19 @@
 }
 
 .au-sect-title {
-  font-family: var(--font-body, "Inter", sans-serif);
-  font-weight: 600;
+  font-family: var(--font-heading, "DM Serif Display", Georgia, serif);
+  font-weight: 400;
   font-size: clamp(2rem, 3.6vw, 3.2rem);
   line-height: 1.1;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.025em;
   margin: 0 0 clamp(30px, 5vh, 54px);
 }
 
 .au-sect-title em {
   font-style: italic;
-  font-family: var(--font-heading, "DM Sans", "Inter", sans-serif);
+  font-family: inherit;
   font-weight: 400;
-  color: var(--color-gold, #C89C66);
+  color: var(--color-yellow, #FFCD00);
 }
 
 /* timeline */
@@ -398,9 +448,10 @@
 .au-tl-fill {
   position: absolute;
   inset: 0;
-  background: var(--color-gold, #C89C66);
+  background: var(--color-yellow, #FFCD00);
   transform-origin: left;
   transform: scaleX(0);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .au-tl-nodes {
@@ -413,7 +464,10 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 14px;
+  gap: 12px;
+  cursor: pointer;
+  user-select: none;
+  padding-bottom: 8px;
 }
 
 .au-tl-dot {
@@ -422,69 +476,106 @@
   border-radius: 50%;
   background: var(--color-bg, #FDFCF4);
   border: 2px solid rgba(11, 11, 11, 0.3);
-  transition: all 0.4s ease;
+  transition: all 0.3s cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 
-.au-tl-node--on .au-tl-dot {
+.au-tl-node--on .au-tl-dot,
+.au-tl-node:hover .au-tl-dot {
   background: var(--color-yellow, #FFCD00);
   border-color: var(--color-obraz-black, #0B0B0B);
   box-shadow: 0 0 16px rgba(255, 205, 0, 0.55);
 }
 
-.au-tl-year {
-  font-family: var(--font-body, "Inter", sans-serif);
-  font-weight: 600;
-  font-size: 0.78rem;
-  letter-spacing: 0.14em;
-  color: rgba(11, 11, 11, 0.4);
-  transition: color 0.4s ease;
+.au-tl-node--active .au-tl-dot,
+.au-tl-node:hover .au-tl-dot {
+  transform: scale(1.3);
+  box-shadow: 0 0 18px rgba(255, 205, 0, 0.7);
 }
 
-.au-tl-node--on .au-tl-year {
+.au-tl-year {
+  font-family: var(--font-body, "Inter", sans-serif);
+  font-weight: 700;
+  font-size: 0.74rem;
+  letter-spacing: 0.14em;
+  color: rgba(11, 11, 11, 0.4);
+  transition: color 0.3s ease;
+}
+
+.au-tl-node--on .au-tl-year,
+.au-tl-node:hover .au-tl-year,
+.au-tl-node--active .au-tl-year {
+  color: var(--color-obraz-black, #0B0B0B);
+}
+
+.au-tl-node-title {
+  font-family: var(--font-heading, "DM Serif Display", Georgia, serif);
+  font-size: clamp(0.95rem, 1.1vw, 1.16rem);
+  line-height: 1.2;
+  color: rgba(11, 11, 11, 0.45);
+  transition: color 0.3s ease;
+}
+
+.au-tl-node--on .au-tl-node-title,
+.au-tl-node:hover .au-tl-node-title,
+.au-tl-node--active .au-tl-node-title {
   color: var(--color-obraz-black, #0B0B0B);
 }
 
 .au-tl-detail {
-  max-width: 560px;
+  max-width: 720px;
   margin-top: clamp(36px, 6vh, 60px);
-  animation: au-tl-in 0.5s cubic-bezier(0.2, 0.7, 0.2, 1);
+  opacity: 1 !important;
+  filter: none !important;
+  transform: none !important;
+}
+
+.au-tl-detail-prefix {
+  font-family: var(--font-body, "Inter", sans-serif);
+  font-weight: 700;
+  font-size: 0.65em;
+  letter-spacing: 0.14em;
+  color: rgba(11, 11, 11, 0.48);
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 6px;
 }
 
 .au-tl-detail h3 {
-  font-family: var(--font-heading, "DM Sans", "Inter", sans-serif);
+  font-family: var(--font-heading, "DM Serif Display", Georgia, serif);
   font-weight: 400;
-  font-size: clamp(1.5rem, 2.3vw, 2.1rem);
+  font-size: clamp(1.8rem, 2.5vw, 2.4rem);
+  letter-spacing: -0.02em;
+  color: var(--color-obraz-black, #0B0B0B);
   margin: 0 0 12px;
 }
 
 .au-tl-detail p {
   font-family: var(--font-body, "Inter", sans-serif);
-  font-size: clamp(0.95rem, 1.05vw, 1.05rem);
-  line-height: 1.65;
-  color: rgba(11, 11, 11, 0.6);
+  font-size: clamp(1.08rem, 1.22vw, 1.28rem);
+  line-height: 1.55;
+  color: var(--color-obraz-black, #0B0B0B);
+  font-style: italic;
+  font-weight: 500;
   margin: 0;
-}
-
-@keyframes au-tl-in {
-  from { opacity: 0; transform: translateY(14px); }
-  to { opacity: 1; transform: none; }
 }
 
 /* ═══ MOSAIC BENTO ═══ */
 .au-mosaic {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-auto-rows: minmax(180px, auto);
+  grid-template-rows: repeat(3, clamp(215px, 22vw, 240px));
   gap: clamp(14px, 1.6vw, 22px);
+  align-items: stretch;
 }
 
 .au-mcell {
-  border-radius: clamp(14px, 1.6vw, 22px);
-  padding: clamp(22px, 2.4vw, 34px);
+  border-radius: clamp(16px, 1.8vw, 22px);
+  padding: clamp(22px, 2.4vw, 32px);
   overflow: hidden;
   display: flex;
   flex-direction: column;
   transition: transform 0.35s cubic-bezier(0.2, 0.7, 0.2, 1), box-shadow 0.35s ease;
+  box-sizing: border-box;
 }
 
 .au-mcell:hover {
@@ -492,9 +583,12 @@
   box-shadow: 0 20px 44px rgba(11, 11, 11, 0.1);
 }
 
+/* Col 1, Rows 1-2: Top-Left (Yellow) */
 .au-mcell--yellow {
   background: var(--color-yellow, #FFCD00);
-  grid-row: span 2;
+  grid-column: 1;
+  grid-row: 1 / span 2;
+  justify-content: space-between;
 }
 
 .au-tags {
@@ -514,6 +608,7 @@
   font-family: var(--font-body, "Inter", sans-serif);
   font-weight: 600;
   font-size: 0.78rem;
+  letter-spacing: -0.01em;
 }
 
 .au-tag--dark {
@@ -528,49 +623,184 @@
   align-items: flex-end;
   justify-content: space-between;
   gap: 16px;
+  text-decoration: none;
+  color: var(--color-obraz-black, #0B0B0B);
 }
 
 .au-mbig {
   font-family: var(--font-body, "Inter", sans-serif);
-  font-weight: 600;
-  font-size: clamp(2rem, 3.4vw, 3rem);
+  font-weight: 700;
+  font-size: clamp(1.4rem, 1.8vw, 1.9rem);
   letter-spacing: -0.02em;
-  line-height: 1;
+  line-height: 1.15;
 }
 
 .au-arrow-sq {
   display: inline-grid;
   place-items: center;
-  width: 54px;
-  height: 54px;
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
   background: var(--color-obraz-black, #0B0B0B);
   color: var(--color-yellow, #FFCD00);
+  flex: none;
+  transition: transform 0.25s ease;
 }
 
-/* dots cell — halftone-ish pattern */
+.au-mcell--yellow:hover .au-arrow-sq {
+  transform: translate(2px, -2px);
+}
+
+/* Col 2, Row 1: Top-Center (Dotted) */
 .au-mcell--dots {
   background: var(--color-warm-white, #F1F0EE);
-  background-image: radial-gradient(rgba(11, 11, 11, 0.22) 1.1px, transparent 1.1px);
-  background-size: 13px 13px;
-  justify-content: flex-end;
+  background-image: radial-gradient(rgba(11, 11, 11, 0.2) 1.15px, transparent 1.15px);
+  background-size: 14px 14px;
+  grid-column: 2;
+  grid-row: 1;
+  justify-content: center;
+  align-items: center;
 }
 
 .au-mcell--dots p {
   margin: 0;
   background: var(--color-bg, #FDFCF4);
   border-radius: 12px;
-  padding: 14px 18px;
+  padding: 16px 20px;
   font-family: var(--font-body, "Inter", sans-serif);
   font-weight: 600;
-  font-size: 0.95rem;
-  max-width: 260px;
+  font-size: clamp(0.85rem, 0.95vw, 0.95rem);
+  line-height: 1.5;
+  color: var(--color-obraz-black, #0B0B0B);
+  max-width: 320px;
+  box-shadow: 0 4px 14px rgba(11, 11, 11, 0.05);
 }
 
-/* stat cells */
+/* Col 3, Row 1: Top-Right (Stat: 40/40/20) */
+.au-mcell--top-right {
+  grid-column: 3;
+  grid-row: 1;
+  background: var(--color-warm-white, #F1F0EE);
+  justify-content: center;
+  align-items: flex-start;
+}
+
+/* Col 2, Row 2: Mid-Center (Stat: Jan 2027) */
+.au-mcell--mid-center {
+  grid-column: 2;
+  grid-row: 2;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+/* Col 3, Rows 2-3: Mid-Right (Founder text card) */
+.au-mcell--founder {
+  background: var(--color-bg, #FDFCF4);
+  border: 1.5px solid rgba(11, 11, 11, 0.14);
+  grid-column: 3;
+  grid-row: 2 / span 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: clamp(24px, 2.6vw, 34px);
+}
+
+.au-founder-badge-wrap {
+  display: flex;
+  align-items: center;
+}
+
+.au-founder-quote {
+  font-family: var(--font-heading, "DM Serif Display", Georgia, serif);
+  font-size: clamp(1.22rem, 1.55vw, 1.55rem);
+  line-height: 1.45;
+  color: var(--color-obraz-black, #0B0B0B);
+  font-weight: 400;
+  margin: auto 0;
+}
+
+/* Col 1, Row 3: Bottom-Left (Beliefs) */
+.au-mcell--belief {
+  background: var(--color-warm-white, #F1F0EE);
+  grid-column: 1;
+  grid-row: 3;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(20px, 2.2vw, 28px);
+}
+
+.au-mcell--belief h3 {
+  font-family: var(--font-body, "Inter", sans-serif);
+  font-weight: 700;
+  font-size: 1.12rem;
+  letter-spacing: -0.01em;
+  color: var(--color-obraz-black, #0B0B0B);
+  margin: 0 0 14px;
+}
+
+.au-mcell--belief ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.au-mcell--belief li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-family: var(--font-body, "Inter", sans-serif);
+  font-size: 0.84rem;
+  line-height: 1.42;
+  color: rgba(11, 11, 11, 0.76);
+}
+
+.au-mcell--belief li .au-bicon {
+  flex: none;
+  margin-top: 2px;
+  color: var(--color-yellow, #FFCD00);
+}
+
+/* Col 2, Row 3: Bottom-Center (Wide / 24/7 Stat) */
+.au-mcell--wide {
+  grid-column: 2;
+  grid-row: 3;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+/* Mini CTA with bold yellow underline matching design */
+.au-mini-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 14px;
+  font-family: var(--font-body, "Inter", sans-serif);
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--color-obraz-black, #0B0B0B);
+  text-decoration: none;
+  border-bottom: 2.5px solid var(--color-yellow, #FFCD00);
+  padding-bottom: 2px;
+  width: fit-content;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.au-mini-cta:hover {
+  transform: translateX(3px);
+}
+
+/* Stat cells styling */
 .au-mcell--stat {
   background: var(--color-warm-white, #F1F0EE);
   justify-content: center;
+  align-items: flex-start;
 }
 
 .au-mcell--stat-b {
@@ -580,73 +810,25 @@
 
 .au-stat-num {
   font-family: var(--font-body, "Inter", sans-serif);
-  font-weight: 600;
-  font-size: clamp(2.2rem, 3.6vw, 3.4rem);
+  font-weight: 700;
+  font-size: clamp(2.3rem, 3.4vw, 3.2rem);
   line-height: 1;
   letter-spacing: -0.02em;
+  color: var(--color-obraz-black, #0B0B0B);
+  white-space: nowrap;
+}
+
+.au-stat-num--compact {
+  font-size: clamp(1.6rem, 2.1vw, 2.25rem);
+  letter-spacing: -0.03em;
+  white-space: nowrap;
 }
 
 .au-stat-cap {
   font-family: var(--font-body, "Inter", sans-serif);
   font-size: 0.85rem;
-  color: rgba(11, 11, 11, 0.55);
+  color: rgba(11, 11, 11, 0.58);
   margin-top: 10px;
-}
-
-/* photo cell */
-.au-mcell--photo {
-  position: relative;
-  padding: 0;
-  min-height: 300px;
-  grid-row: span 2;
-}
-
-.au-mcell--photo .au-hcell-label {
-  z-index: 1;
-}
-
-.au-mcell--photo::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to top, rgba(11, 11, 11, 0.4), transparent 45%);
-}
-
-/* beliefs cell */
-.au-mcell--belief {
-  background: var(--color-warm-white, #F1F0EE);
-}
-
-.au-mcell--belief h3 {
-  font-family: var(--font-body, "Inter", sans-serif);
-  font-weight: 600;
-  font-size: 1.15rem;
-  margin: 0 0 16px;
-}
-
-.au-mcell--belief ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.au-mcell--belief li {
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-  font-family: var(--font-body, "Inter", sans-serif);
-  font-size: 0.9rem;
-  line-height: 1.5;
-  color: rgba(11, 11, 11, 0.68);
-}
-
-.au-mcell--belief li svg {
-  flex: none;
-  margin-top: 2px;
-  color: var(--color-gold, #C89C66);
 }
 
 .au-mcell--cream {
@@ -654,44 +836,100 @@
   border: 1.5px solid rgba(11, 11, 11, 0.14);
 }
 
-.au-mcell--wide {
-  justify-content: center;
-}
-
-.au-mcell--wide .au-mini-cta {
-  margin-top: 18px;
-}
-
-/* ═══ OFFICES + CTA ═══ */
+/* ═══ CONTACT CARD + CTA ═══ */
 .au-offices-grid {
   display: grid;
-  grid-template-columns: 0.9fr 1.1fr;
-  gap: clamp(30px, 5vw, 80px);
-  align-items: center;
+  grid-template-columns: 1fr 1.15fr;
+  gap: clamp(28px, 4vw, 56px);
+  align-items: stretch;
 }
 
-.au-offices {
-  padding: clamp(10px, 1.6vw, 22px);
+.au-contact-card {
+  background: var(--color-bg, #FDFCF4);
+  border: 1.5px solid rgba(11, 11, 11, 0.14);
+  padding: clamp(28px, 3.2vw, 38px);
+  border-radius: clamp(16px, 1.8vw, 22px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  box-sizing: border-box;
+  min-height: 250px;
 }
 
-.au-office-row {
+.au-contact-top {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  padding: 18px 14px;
-  border-bottom: 1px solid rgba(11, 11, 11, 0.1);
+}
+
+.au-contact-details {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: auto;
+  padding-top: 24px;
+}
+
+.au-contact-email {
   font-family: var(--font-body, "Inter", sans-serif);
+  font-size: clamp(1.22rem, 1.6vw, 1.55rem);
   font-weight: 600;
-  font-size: 0.95rem;
+  color: var(--color-obraz-black, #0B0B0B);
+  text-decoration: none;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  transition: color 0.25s ease;
+  width: fit-content;
 }
 
-.au-office-row:last-child {
-  border-bottom: 0;
+.au-contact-email:hover {
+  color: var(--color-yellow, #FFCD00);
 }
 
-.au-office-row svg {
-  color: var(--color-gold, #C89C66);
+.au-contact-loc {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-body, "Inter", sans-serif);
+  font-weight: 500;
+  font-size: 0.92rem;
+  color: rgba(11, 11, 11, 0.62);
+}
+
+.au-contact-loc svg {
+  color: var(--color-yellow, #FFCD00);
+  flex: none;
+}
+
+/* Right-side copy layout */
+.au-offices-copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.au-offices-copy .au-sect-title {
+  margin: 0 0 clamp(14px, 2vh, 20px);
+  font-size: clamp(2.1rem, 3.4vw, 3.1rem);
+  line-height: 1.12;
+  letter-spacing: -0.025em;
+}
+
+.au-offices-copy .au-story-note {
+  margin: 0 0 clamp(22px, 3vh, 30px);
+  font-size: clamp(1rem, 1.12vw, 1.15rem);
+  line-height: 1.55;
+  color: rgba(11, 11, 11, 0.72);
+  max-width: 520px;
+}
+
+.au-offices-copy .au-story-ctas {
+  margin-top: auto;
+  display: flex;
+  gap: 14px;
+  align-items: center;
 }
 
 /* ─── Mobile ─── */
@@ -711,9 +949,15 @@
   }
 
   .au-mcell--yellow,
-  .au-mcell--photo {
+  .au-mcell--dots,
+  .au-mcell--top-right,
+  .au-mcell--mid-center,
+  .au-mcell--founder,
+  .au-mcell--belief,
+  .au-mcell--wide {
+    grid-column: auto;
     grid-row: auto;
-    min-height: 240px;
+    min-height: 200px;
   }
 
   .au-mosaic {
@@ -746,7 +990,8 @@
   }
 }
 
-/* DM Sans headings (Content Guide v2) */
-.au-page :is(h1, h2, h3, h4, h5, h6) {
-  font-family: var(--font-heading-sans, "DM Sans", sans-serif);
+
+/* Claim-style heading weight (DM Serif 400) */
+.au-page :is(h1, h2, h3, h4, h5, h6, .pgb-title, .pgb-big, .sf-hg-word, .sf-hg-stat-num, .sf-hg-count, .ld-title, .ld-h) {
+  font-weight: 400;
 }

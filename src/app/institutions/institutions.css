@@ -225,3 +225,8 @@
     width: 100%;
   }
 }
+
+/* Claim-style heading weight (DM Serif 400) */
+.wl-page :is(h1, h2, h3, h4, h5, h6, .pgb-title, .pgb-big, .sf-hg-word, .sf-hg-stat-num, .sf-hg-count, .ld-title, .ld-h) {
+  font-weight: 400;
+}
