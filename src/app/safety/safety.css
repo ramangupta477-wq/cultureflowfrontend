@@ -482,8 +482,12 @@
 /* ═══ DOCUMENTS — card rows ═══ */
 .sf-docs {
   max-width: 1360px;
-  margin: clamp(40px, 6vh, 72px) auto 0;
+  margin: 12px auto 0;
   padding: 0 clamp(16px, 4vw, 64px);
+}
+
+.sf-docs .sf-why-head {
+  margin-bottom: 18px;
 }
 
 .sf-docs-note {
