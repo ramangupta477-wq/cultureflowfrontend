@@ -411,12 +411,12 @@
   .cf-hero-main {
     grid-template-columns: 1fr;
     row-gap: 4vh;
-    align-content: center;
-    padding: 4vh 0;
+    align-content: space-between; /* headline up top, lede at the bottom — no dead band */
+    padding: 0;
   }
 
   .cf-hero-h1 {
-    font-size: clamp(32px, 8.8vw, 68px);
+    font-size: clamp(40px, 12.5vw, 76px);
   }
 
   .cf-hero-h1.left,
