@@ -1566,9 +1566,10 @@
 
 /* 40/40/20 framework numeral in the yellow hero cell */
 .pgb-big--numeric {
-  font-size: clamp(2rem, 2.9vw, 3rem);
+  font-size: clamp(2.6rem, 3.4vw, 3.6rem);
   letter-spacing: -0.03em;
   white-space: nowrap;
+  margin-block: auto; /* split the leftover space evenly — no dead blob */
 }
 
 .pgb-big-sub {
