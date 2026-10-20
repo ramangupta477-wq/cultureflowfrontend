@@ -1497,8 +1497,14 @@
 
 .pgb-grid {
   display: grid;
-  grid-template-columns: 1fr 1.1fr 1fr;
+  grid-template-columns: 0.72fr 1.25fr 1fr;
   gap: clamp(14px, 1.6vw, 22px);
+}
+
+/* framework card — compact */
+.pgb-cell--yellow {
+  align-self: center;
+  padding-block: clamp(16px, 1.8vw, 24px);
 }
 
 .pgb-cell {
