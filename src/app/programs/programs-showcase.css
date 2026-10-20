@@ -2,8 +2,8 @@
 
 .ps-track {
   position: relative;
-  /* no trailing dead scroll — visuals finish ~63% in */
-  height: 400vh;
+  /* short runway — photos + copy finish close to the track end */
+  height: 300vh;
 }
 
 .ps-stage {
@@ -121,7 +121,7 @@
 /* ─── Mobile ─── */
 @media (max-width: 800px) {
   .ps-track {
-    height: 300vh;
+    height: 240vh;
   }
 }
 
