@@ -294,7 +294,7 @@
 
 @media (max-width: 640px) {
   .cf-navbar {
-    top: 12px;
+    top: 20px;
     left: 12px;
     right: 12px;
   }
