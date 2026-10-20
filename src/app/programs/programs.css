@@ -1260,6 +1260,12 @@
   z-index: 3;
 }
 
+@media (max-width: 768px) {
+  .polygon-canvas {
+    display: none;
+  }
+}
+
 .tracks-header {
   position: relative;
   z-index: 2;
@@ -1387,31 +1393,31 @@
     gap: 12px;
   }
 
-  /* Keep the 3-column bar chart on mobile — stacked full-width bars exceed
-     the 100vh sticky stage, so the polygon canvas only covered bar 1 */
   .tracks-bars {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
+    grid-template-columns: 1fr;
+    gap: 8px;
   }
 
   .track-bar {
-    padding: 12px 10px;
+    padding: 14px 16px;
+    border-radius: 8px;
+  }
+
+  .track-bar-head {
+    margin-bottom: 4px;
   }
 
   .track-desc {
-    display: none;
+    font-size: 0.82rem;
+    line-height: 1.45;
   }
 
   .track-title {
-    font-size: 0.95rem;
+    font-size: 1rem;
   }
 
   .track-num {
     font-size: 0.7rem;
-  }
-
-  .track-bar {
-    border-radius: 8px;
   }
 }
 
