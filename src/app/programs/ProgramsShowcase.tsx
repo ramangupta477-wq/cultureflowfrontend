@@ -16,8 +16,8 @@ const PHOTOS = [
   { x: 0.865, y: 0.75, w: 9.2,  ar: 1.45, s: 0.36, d: 0.34 },
 ];
 
-/* Timeline phases (0–1) */
-const T = { copyIn: [0.10, 0.17], copyOut: [0.55, 0.63], joinEnd: 0.66 };
+/* Timeline phases (0–1) — copyOut sits beyond HOLD so the copy never leaves */
+const T = { copyIn: [0.10, 0.17], copyOut: [0.98, 1.10], joinEnd: 0.66 };
 
 const clamp = (v: number, a = 0, b = 1) => Math.min(b, Math.max(a, v));
 const ss = (a: number, b: number, v: number) => { const t = clamp((v - a) / (b - a)); return t * t * (3 - 2 * t); };
@@ -44,22 +44,26 @@ export default function ProgramsShowcase() {
       s.target = clamp(-r.top / max);
     }
 
-    function render(p: number) {
+    const HOLD = 0.78; // animation freezes here — end-state holds, nothing disappears
+
+    function render(pRaw: number) {
+      const p = Math.min(pRaw, HOLD);
       const jp = clamp(p / T.joinEnd);
 
-      // Photos: depth fly-through
+      // Photos: depth fly-through — each freezes at 86% of its travel, fully visible
       PHOTOS.forEach((o, i) => {
         const el = photoEls.current[i];
         if (!el) return;
         const u = clamp((jp - o.s) / o.d);
-        if (u <= 0 || u >= 1) { el.style.opacity = "0"; return; }
-        const z = Math.pow(u, 1.35);
+        if (u <= 0) { el.style.opacity = "0"; return; }
+        const uu = Math.min(u, 0.86);
+        const z = Math.pow(uu, 1.35);
         const sc = lerp(0.30, 2.35, z);
         const dx = (o.x - 0.5) * s.W * lerp(0.55, 1.55, z);
         const dy = (o.y - 0.5) * s.H * lerp(0.55, 1.35, z);
         const w = o.w * s.W / 100, h = w * o.ar;
-        const blur = lerp(0, 22, Math.pow(Math.abs(u - 0.50) * 2, 1.7));
-        const op = ss(0, 0.22, u) * (1 - ss(0.86, 1, u));
+        const blur = lerp(0, 22, Math.pow(Math.abs(uu - 0.50) * 2, 1.7));
+        const op = ss(0, 0.22, uu) * (1 - ss(0.86, 1, uu));
         el.style.width = w + "px";
         el.style.height = h + "px";
         el.style.opacity = String(op);
