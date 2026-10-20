@@ -4,13 +4,11 @@
 import React, { useRef, useEffect, useState } from "react";
 import Link from "next/link";
 import {
-  ShieldCheck,
-  GraduationCap,
-  Plane,
-  HeartHandshake,
   ArrowUpRight,
   MapPin,
   FileCheck,
+  ShieldCheck,
+  HeartHandshake,
 } from "lucide-react";
 import Footer from "../homepage/Footer";
 import "./AboutUs.css";
@@ -120,25 +118,15 @@ export default function AboutUsPage() {
 
       {/* ═══ HERO — centered highlight headline + floating chips + bento row ═══ */}
       <section className="au-hero">
-        <span className="au-chip au-chip--tl" aria-hidden><ShieldCheck size={17} strokeWidth={1.7} /></span>
-        <span className="au-chip au-chip--tr" aria-hidden><Plane size={17} strokeWidth={1.7} /></span>
-        <span className="au-chip au-chip--bl" aria-hidden><GraduationCap size={17} strokeWidth={1.7} /></span>
-        <span className="au-chip au-chip--br" aria-hidden><HeartHandshake size={17} strokeWidth={1.7} /></span>
 
         <h1 className="au-hero-title au-reveal">
-          The people behind{" "}
-          <span className="au-mark">every</span> departure
+          The Story Behind the <br />
+          <span className="au-mark">Mission</span>
         </h1>
 
-        <div className="au-hero-row">
-          <p className="au-hero-sub au-reveal">
-            A study-abroad company founded in New Delhi in October 2026 —
-            built to turn a semester away into the sharpest step of a career.
-          </p>
-          <Link href="/programs" className="au-btn-pillau au-reveal" style={{ "--au-d": "90ms" } as React.CSSProperties}>
-            Explore programs <ArrowUpRight size={15} strokeWidth={1.9} />
-          </Link>
-        </div>
+        <p className="au-hero-sub au-reveal">
+          We started with one conviction: every ambitious scholar in India deserves access to genuine international academic exposure — structured, rigorous, and within reach. Not someday. Not after years of saving. Now. That conviction became Culture Flow — a platform built from the ground up to design, deliver, and manage structured short-term academic immersions at global partner institutions. Every programme is engineered around the 40/40/20 curriculum framework, executed end-to-end, and built to transform how scholars think, lead, and see the world.
+        </p>
 
         {/* hero bento row */}
         <div className="au-hero-bento">
