@@ -40,11 +40,11 @@ export default function Footer() {
             <div className="cf-footer-address-block">
               <span className="cf-footer-label">HEAD OFFICE</span>
               <p className="cf-footer-address-text">
-                Culture Flow HQ,<br />
-                Connaught Place,<br />
-                New Delhi, 110001
+                H No. B-71/B, G/F, Block-B,<br />
+                New Ashok Nagar,<br />
+                East Delhi, 110096
               </p>
-              <a href="#" className="cf-footer-arrow-link">
+              <a href="https://www.google.com/maps/search/?api=1&query=Block-B+New+Ashok+Nagar+East+Delhi+110096" target="_blank" rel="noreferrer" className="cf-footer-arrow-link">
                 New Delhi Office
                 <ArrowIcon />
               </a>
@@ -57,7 +57,7 @@ export default function Footer() {
                 Bandra West,<br />
                 Mumbai, 400050
               </p>
-              <a href="#" className="cf-footer-arrow-link">
+              <a href="https://www.google.com/maps/search/?api=1&query=14+Linking+Road+Bandra+West+Mumbai+400050" target="_blank" rel="noreferrer" className="cf-footer-arrow-link">
                 Mumbai Office
                 <ArrowIcon />
               </a>
@@ -68,16 +68,16 @@ export default function Footer() {
           <div className="cf-footer-contact-row">
             <div className="cf-footer-contact-block">
               <span className="cf-footer-label">CONTACT</span>
-              <a href="mailto:hello@cultureflow.in" className="cf-footer-contact-link">
-                hello@cultureflow.in
+              <a href="mailto:info@cultureflow.in" className="cf-footer-contact-link">
+                info@cultureflow.in
               </a>
-              <a href="tel:+911234567890" className="cf-footer-contact-link">
-                +91 123 456 7890
+              <a href="https://wa.me/917123445690" target="_blank" rel="noreferrer" className="cf-footer-contact-link">
+                +91 71234 45690
               </a>
-              <a href="#" className="cf-footer-arrow-link" style={{ marginTop: 12 }}>
-                Start a Project
+              <Link href="/waitlist" className="cf-footer-arrow-link" style={{ marginTop: 12 }}>
+                Join the Waitlist
                 <ArrowIcon />
-              </a>
+              </Link>
             </div>
 
             <div className="cf-footer-contact-block">
@@ -148,11 +148,11 @@ export default function Footer() {
         </div>
 
         <nav className="cf-footer-bottom-nav">
-          <a href="#">PROGRAMS</a>
-          <a href="#">SERVICES</a>
-          <a href="#">ABOUT</a>
-          <a href="#">REVIEWS</a>
-          <a href="#">CONTACT</a>
+          <Link href="/programs">PROGRAMS</Link>
+          <Link href="/about-us">ABOUT</Link>
+          <Link href="/safety">SAFETY</Link>
+          <Link href="/institutions">ONBOARD</Link>
+          <Link href="/waitlist">CONTACT</Link>
         </nav>
 
         <div className="cf-footer-bottom-brand">
@@ -163,13 +163,13 @@ export default function Footer() {
       {/* ═══ LEGAL BAR ═══ */}
       <div className="cf-footer-legal">
         <span className="cf-footer-legal-text">
-          Culture Flow Education Pvt. Ltd. | CIN: U80902DL2024PTC123456 | Registered Address: Connaught Place, New Delhi, 110001, India
+          Culture Flow Private Limited | CIN: U85500DL2026PTC471392 | Registered Office: H No. B-71/B, G/F, Block-B, New Ashok Nagar, East Delhi, 110096, India
         </span>
         <span className="cf-footer-credit">
           Crafted with precision by <strong>Shrish</strong>
         </span>
         <span className="cf-footer-copyright">
-          © 2024 – 2025 Culture Flow
+          © 2026 Culture Flow Private Limited
         </span>
       </div>
     </footer>
