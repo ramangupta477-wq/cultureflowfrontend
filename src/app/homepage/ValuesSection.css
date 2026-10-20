@@ -185,16 +185,19 @@
 /* Responsive adjustments */
 @media (max-width: 900px) {
   .values-section {
-    /* tight track — stops right after the last step's copy */
-    height: 210vh;
+    height: 190vh;
+    min-height: 0;
   }
 
   .values-sticky {
-    padding: 0 20px;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    padding: 92px 20px 28px;
   }
 
   .values-header {
-    margin-bottom: 24px;
+    margin-bottom: 16px;
   }
 
   .values-heading {
@@ -203,11 +206,14 @@
 
   .values-stage {
     grid-template-columns: 1fr;
-    gap: 28px;
-    min-height: 360px;
+    grid-template-rows: auto 1fr auto; /* title / list / copy — fills the pin, no void */
+    height: 100%;
+    min-height: 0;
+    gap: 24px;
   }
 
   .values-list {
+    align-self: center;
     flex-direction: column;
     gap: 18px;
   }
