@@ -237,17 +237,6 @@ export default function SafetyPage() {
               </p>
             </div>
           </div>
-
-          {/* tall photo card */}
-          <div className="sf-cell sf-cell--tall sf-reveal" style={{ "--sf-d": "260ms" } as React.CSSProperties}>
-            <img src="/images/about/campus.jpg" alt="Students on campus" className="sf-cell-img" />
-            <div className="sf-tall-overlay">
-              <p>See how a program day is supervised — from pickup to lights-out.</p>
-              <span className="sf-btn-round sf-btn-round--light" aria-hidden>
-                <ArrowUpRight size={16} strokeWidth={1.8} />
-              </span>
-            </div>
-          </div>
         </div>
 
         {/* Four pillars — 2×2 mini bento */}
