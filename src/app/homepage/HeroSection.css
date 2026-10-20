@@ -410,8 +410,8 @@
 
   .cf-hero-main {
     grid-template-columns: 1fr;
-    row-gap: 4vh;
-    align-content: space-between; /* headline up top, lede at the bottom — no dead band */
+    row-gap: 5vh;
+    align-content: center; /* headline group + lede as one centered block — no middle void */
     padding: 0;
   }
 
