@@ -446,3 +446,32 @@
     justify-content: center;
   }
 }
+
+/* GET IN TOUCH — validation + status */
+.cf-footer-input--invalid {
+  border-bottom-color: #c33;
+}
+
+.cf-footer-err {
+  display: block;
+  margin: 2px 0 6px;
+  font-size: 0.8rem;
+  color: #ffb3ab;
+}
+
+.cf-footer-form-bottom {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.cf-footer-send-btn:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+.cf-footer-ok {
+  font-size: 0.85rem;
+  color: var(--color-yellow, #FFCD00);
+}

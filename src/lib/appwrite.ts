@@ -10,6 +10,31 @@ const databases = new Databases(client);
 export const WAITLIST_DB_ID = "cultureflow";
 export const WAITLIST_COLLECTION_ID = "waitlist";
 export const INSTITUTION_COLLECTION_ID = "institution_inquiries";
+export const FOOTER_CONTACT_COLLECTION_ID = "footer_contact";
+
+export interface FooterContact {
+  name: string;
+  email: string;
+  phone?: string;
+  institution?: string;
+  message: string;
+}
+
+/** Anonymous create for the footer GET IN TOUCH form — collection has create("any"). */
+export function saveFooterContact(data: FooterContact) {
+  return databases.createDocument(
+    WAITLIST_DB_ID,
+    FOOTER_CONTACT_COLLECTION_ID,
+    ID.unique(),
+    {
+      name: data.name,
+      email: data.email.toLowerCase(),
+      ...(data.phone ? { phone: data.phone } : {}),
+      ...(data.institution ? { institution: data.institution } : {}),
+      message: data.message,
+    }
+  );
+}
 
 export type WaitlistRole = "student" | "parent" | "corporate";
 export type TrackId = "tech" | "sustainability" | "cultural";

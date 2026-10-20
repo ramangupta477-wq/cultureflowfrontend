@@ -1,8 +1,22 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
+import { z } from "zod/v4";
+import { saveFooterContact } from "@/lib/appwrite";
+import { fieldErrors } from "@/lib/formValidation";
 import "./Footer.css";
+
+const footerSchema = z.object({
+  name: z.string().trim().min(1, "Please tell us your name."),
+  email: z.email("That email doesn't look right."),
+  phone: z
+    .string()
+    .trim()
+    .refine((v) => v === "" || /^\+?\d[\d\s()-]{5,18}$/.test(v), "Digits, spaces and + only — 6 to 19 chars."),
+  institution: z.string().trim().max(256),
+  message: z.string().trim().min(1, "A short message helps us reply faster."),
+});
 
 /* ─── Reusable Arrow Circle ─── */
 function ArrowIcon() {
@@ -17,6 +31,42 @@ function ArrowIcon() {
 }
 
 export default function Footer() {
+  const [form, setForm] = useState({ name: "", email: "", phone: "", institution: "", message: "" });
+  const [attempted, setAttempted] = useState(false);
+  const [touched, setTouched] = useState<Record<string, boolean>>({});
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
+  const [serverError, setServerError] = useState("");
+
+  const errors = fieldErrors(footerSchema, form);
+  const err = (key: string) =>
+    (touched[key] || attempted) && errors[key] ? (
+      <em className="cf-footer-err">{errors[key]}</em>
+    ) : null;
+  const set = (key: string, v: string) => setForm((f) => ({ ...f, [key]: v }));
+  const blur = (key: string) => setTouched((t) => ({ ...t, [key]: true }));
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    if (Object.keys(errors).length > 0 || status === "sending") {
+      setAttempted(true);
+      return;
+    }
+    setStatus("sending");
+    try {
+      await saveFooterContact({
+        name: form.name.trim(),
+        email: form.email.trim(),
+        phone: form.phone.trim() || undefined,
+        institution: form.institution.trim() || undefined,
+        message: form.message.trim(),
+      });
+      setStatus("sent");
+    } catch {
+      setServerError("Could not send right now — try again or email info@cultureflow.in.");
+      setStatus("error");
+    }
+  }
+
   return (
     <footer id="waitlist" className="cf-footer">
       <div id="contact" style={{ position: "absolute", top: "-80px" }} />
@@ -82,45 +132,63 @@ export default function Footer() {
         <div className="cf-footer-right">
           <span className="cf-footer-form-label">GET IN TOUCH</span>
 
-          <form className="cf-footer-form" onSubmit={(e) => e.preventDefault()}>
+          <form className="cf-footer-form" onSubmit={handleSubmit} noValidate>
             <div className="cf-footer-form-row">
               <input
                 type="text"
-                className="cf-footer-input"
+                className={`cf-footer-input ${err("name") ? "cf-footer-input--invalid" : ""}`}
                 placeholder="Your Name*"
-                required
+                value={form.name}
+                onChange={(e) => set("name", e.target.value)}
+                onBlur={() => blur("name")}
               />
               <input
                 type="email"
-                className="cf-footer-input"
+                className={`cf-footer-input ${err("email") ? "cf-footer-input--invalid" : ""}`}
                 placeholder="Your Email*"
-                required
+                value={form.email}
+                onChange={(e) => set("email", e.target.value)}
+                onBlur={() => blur("email")}
               />
             </div>
+            {err("name")}
+            {err("email")}
             <div className="cf-footer-form-row">
               <input
                 type="tel"
-                className="cf-footer-input"
+                className={`cf-footer-input ${err("phone") ? "cf-footer-input--invalid" : ""}`}
                 placeholder="Phone Number"
+                value={form.phone}
+                onChange={(e) => set("phone", e.target.value)}
+                onBlur={() => blur("phone")}
               />
               <input
                 type="text"
-                className="cf-footer-input"
+                className={`cf-footer-input ${err("institution") ? "cf-footer-input--invalid" : ""}`}
                 placeholder="Institution / School"
+                value={form.institution}
+                onChange={(e) => set("institution", e.target.value)}
+                onBlur={() => blur("institution")}
               />
             </div>
+            {err("phone")}
             <textarea
-              className="cf-footer-textarea"
+              className={`cf-footer-textarea ${err("message") ? "cf-footer-input--invalid" : ""}`}
               placeholder="Message*"
               rows={2}
-              required
+              value={form.message}
+              onChange={(e) => set("message", e.target.value)}
+              onBlur={() => blur("message")}
             />
+            {err("message")}
 
             <div className="cf-footer-form-bottom">
-              <button type="submit" className="cf-footer-send-btn">
-                Send Message
+              <button type="submit" className="cf-footer-send-btn" disabled={status === "sending"}>
+                {status === "sending" ? "Sending…" : status === "sent" ? "Message sent ✓" : "Send Message"}
                 <ArrowIcon />
               </button>
+              {status === "error" && <span className="cf-footer-err">{serverError}</span>}
+              {status === "sent" && <span className="cf-footer-ok">Thanks — we&rsquo;ll reply at {form.email}.</span>}
             </div>
           </form>
         </div>
