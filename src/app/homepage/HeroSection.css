@@ -410,10 +410,14 @@
 
   .cf-hero-main {
     grid-template-columns: 1fr;
-    row-gap: 5vh;
-    align-content: center; /* headline group + lede as one centered block */
-    /* 104px clears the fixed pill (12 + 56 + air) — headline never slides under it */
-    padding: 104px 0 24px;
+    row-gap: 4vh;
+    align-content: start; /* stack tight from the top — no vertical dead zones */
+    padding: 104px 0 16px;
+  }
+
+  /* card wraps content — leftover viewport height stops pooling between lede and meta */
+  .cf-hero-card {
+    min-height: 0;
   }
 
   .cf-hero-h1 {
