@@ -805,7 +805,7 @@ export default function HeroSection() {
             <h1 className="cf-hero-h1 left" data-split>
               <span className="line">We</span>
               <span className="line">Forge</span>
-              <span className="line">Leaders.</span>
+              <span className="line">Leaders</span>
             </h1>
           </div>
 
@@ -814,7 +814,7 @@ export default function HeroSection() {
             <h1 className="cf-hero-h1 right" data-split>
               <span className="line">Go</span>
               <span className="line">
-                <span className="cf-hero-accent-text">Global.</span>
+                <span className="cf-hero-accent-text">Global</span>
               </span>
             </h1>
 

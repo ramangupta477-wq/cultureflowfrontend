@@ -5,6 +5,7 @@ import { z } from "zod/v4";
 import { saveInstitutionInquiry, type InstitutionInquiry } from "@/lib/appwrite";
 import { fieldErrors, showError, PHONE_RE } from "@/lib/formValidation";
 import { useBlurReveal } from "@/lib/reveals";
+import Footer from "../homepage/Footer";
 import "../waitlist/waitlist.css";
 import "./institutions.css";
 
@@ -82,26 +83,30 @@ export default function InstitutionsPage() {
 
   if (done) {
     return (
-      <main className="wl-page">
-        <div className="inst-card">
-          <h1 className="inst-title">
-            Request received. <em>Our team will reach out.</em>
-          </h1>
-          <p className="inst-sub">
-            Thank you — we&rsquo;ve logged {form.institutionName}&rsquo;s
-            onboarding request. Someone from Culture Flow will contact you
-            within two working days.
-          </p>
-          <a className="wl-btn wl-btn--next inst-submit" href="/">
-            Back to Home
-          </a>
-        </div>
-      </main>
+      <>
+        <main className="wl-page">
+          <div className="inst-card">
+            <h1 className="inst-title">
+              Request received. <em>Our team will reach out.</em>
+            </h1>
+            <p className="inst-sub">
+              Thank you — we&rsquo;ve logged {form.institutionName}&rsquo;s
+              onboarding request. Someone from Culture Flow will contact you
+              within two working days.
+            </p>
+            <a className="wl-btn wl-btn--next inst-submit" href="/">
+              Back to Home
+            </a>
+          </div>
+        </main>
+        <Footer />
+      </>
     );
   }
 
   return (
-    <main className="wl-page">
+    <>
+      <main className="wl-page">
       <div className="wl-container inst-container">
         <header className="inst-head">
           <p className="inst-kicker" data-pr>INSTITUTION ONBOARDING</p>
@@ -317,5 +322,7 @@ export default function InstitutionsPage() {
         </form>
       </div>
     </main>
+    <Footer />
+  </>
   );
 }
