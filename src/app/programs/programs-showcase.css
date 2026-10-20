@@ -84,19 +84,19 @@
   letter-spacing: 0.04em;
   text-transform: uppercase;
   color: var(--color-obraz-black, #0B0B0B);
-  background: var(--color-warm-white, #F1F0EE);
+  background: var(--color-yellow, #FFCD00);
   height: 40px;
   display: inline-flex;
   align-items: center;
   padding: 0 28px;
   border-radius: 20px 0 0 20px;
-  transition: background 0.3s;
+  transition: background 0.3s, filter 0.3s;
 }
 
 .ps-cta i {
   font-style: normal;
   font-family: var(--font-body, "Inter", sans-serif);
-  background: var(--color-warm-white, #F1F0EE);
+  background: var(--color-yellow, #FFCD00);
   width: 42px;
   height: 40px;
   display: inline-flex;
@@ -104,15 +104,16 @@
   justify-content: center;
   color: var(--color-obraz-dark, #1B1B1B);
   border-radius: 0 20px 20px 0;
-  transition: transform 0.35s cubic-bezier(0.2, 0.7, 0.2, 1);
+  transition: transform 0.35s cubic-bezier(0.2, 0.7, 0.2, 1), background 0.3s, filter 0.3s;
 }
 
 .ps-cta:hover i {
   transform: translateX(3px);
+  filter: brightness(0.94);
 }
 
 .ps-cta:hover span {
-  background: #e5ddd0;
+  filter: brightness(0.94);
 }
 
 /* ─── Key locations heading ─── removed */
