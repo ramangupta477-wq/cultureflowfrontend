@@ -185,7 +185,8 @@
 /* Responsive adjustments */
 @media (max-width: 900px) {
   .values-section {
-    height: 320vh;
+    /* tight track — stops right after the last step's copy */
+    height: 210vh;
   }
 
   .values-sticky {
