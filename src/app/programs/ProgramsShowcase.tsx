@@ -44,26 +44,25 @@ export default function ProgramsShowcase() {
       s.target = clamp(-r.top / max);
     }
 
-    const HOLD = 0.78; // animation freezes here — end-state holds, nothing disappears
+    const HOLD = 0.78; // copy freezes here — photos have already flown past
 
     function render(pRaw: number) {
       const p = Math.min(pRaw, HOLD);
       const jp = clamp(p / T.joinEnd);
 
-      // Photos: depth fly-through — each freezes at 86% of its travel, fully visible
+      // Photos: depth fly-through — they complete their exit and vanish
       PHOTOS.forEach((o, i) => {
         const el = photoEls.current[i];
         if (!el) return;
         const u = clamp((jp - o.s) / o.d);
-        if (u <= 0) { el.style.opacity = "0"; return; }
-        const uu = Math.min(u, 0.86);
-        const z = Math.pow(uu, 1.35);
+        if (u <= 0 || u >= 1) { el.style.opacity = "0"; return; }
+        const z = Math.pow(u, 1.35);
         const sc = lerp(0.30, 2.35, z);
         const dx = (o.x - 0.5) * s.W * lerp(0.55, 1.55, z);
         const dy = (o.y - 0.5) * s.H * lerp(0.55, 1.35, z);
         const w = o.w * s.W / 100, h = w * o.ar;
-        const blur = lerp(0, 22, Math.pow(Math.abs(uu - 0.50) * 2, 1.7));
-        const op = ss(0, 0.22, uu) * (1 - ss(0.86, 1, uu));
+        const blur = lerp(0, 22, Math.pow(Math.abs(u - 0.50) * 2, 1.7));
+        const op = ss(0, 0.22, u) * (1 - ss(0.86, 1, u));
         el.style.width = w + "px";
         el.style.height = h + "px";
         el.style.opacity = String(op);
