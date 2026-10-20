@@ -6,33 +6,33 @@ import "./ValuesSection.css";
 
 const STEPS = [
   {
-    title: "Discovery",
-    copy: "It starts with a conversation. Tell us about your goals, interests, and ambitions — we listen closely to understand who you are and where you want to go.",
+    title: "Inquiry",
+    copy: "It starts with a conversation. Your goals, your interests, your ambitions — we listen.",
     mark: "M 15 148 C 110 24 310 0 474 82 S 690 183 884 40",
   },
   {
-    title: "Matching",
-    copy: "We research and shortlist the universities, courses, and destinations that align perfectly with your profile, budget, and long-term aspirations.",
+    title: "Guidance",
+    copy: "We understand where you want to go and recommend the right track and programme to get you there.",
     mark: "M 20 104 C 190 0 520 0 768 72 C 900 112 720 170 330 148 C -40 127 -28 64 164 25",
   },
   {
-    title: "Application",
-    copy: "From personal statements to submission deadlines, our team guides you through every step of the application with clarity and precision.",
+    title: "Onboarding",
+    copy: "Application, acceptance, documentation — we walk you through every step with clarity.",
     mark: "M 18 104 C 220 190 195 0 360 54 C 500 128 490 218 645 93 S 812 22 884 75",
   },
   {
-    title: "Preparation",
-    copy: "Visa support, accommodation, finances, and pre-departure briefings — we handle the details so you can focus on what matters most.",
+    title: "Pre-Departure",
+    copy: "Visas, flights, insurance, accommodation, orientation. We handle the complexity. You focus on the journey ahead.",
     mark: "M 6 145 C 225 177 490 24 355 48 C 152 84 370 186 522 127 S 740 4 884 23",
   },
   {
-    title: "Arrival",
-    copy: "Landing in a new country is a big moment. We stay connected to make sure you settle in smoothly and feel at home from day one.",
+    title: "Immersion",
+    copy: "The programme begins. Partner institutions, the 40/40/20 curriculum, and 24/7 on-ground support — every day is intentional.",
     mark: "M 5 172 L 890 5",
   },
   {
-    title: "Growth",
-    copy: "Your journey doesn't end at enrollment. We're here as you build confidence, lasting friendships, and a wider view of your future.",
+    title: "Homecoming",
+    copy: "Scholars return with more than memories — structured reflection, certification, and the clarity to lead what comes next.",
     mark: "M 84 104 L 184 161 C 278 82 406 17 528 0",
   },
 ];
@@ -195,11 +195,6 @@ export default function ValuesSection() {
         
         {/* Editorial Header */}
         <div className="values-header">
-          <div className={`values-kicker ${inView ? "" : "is-hidden"}`}>
-            <span className="values-kicker-dot" aria-hidden="true" />
-            <span>04 — HOW IT WORKS</span>
-            <span className="values-kicker-count">[06 STEPS]</span>
-          </div>
           <BlurText
             as="h2"
             text="How it works"

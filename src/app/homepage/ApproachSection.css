@@ -63,7 +63,7 @@
 /* Description */
 .approach-description {
   font-family: var(--font-body, -apple-system, sans-serif);
-  font-size: clamp(1.1rem, 1.45vw, 1.35rem);
+  font-size: clamp(0.95rem, 1.2vw, 1.15rem);
   font-weight: 400;
   line-height: 1.76;
   color: var(--color-obraz-dark, #1B1B1B);
@@ -137,7 +137,7 @@
   }
 
   .approach-description {
-    font-size: 1.05rem;
+    font-size: 0.92rem;
     line-height: 1.65;
     margin-bottom: 36px;
   }
