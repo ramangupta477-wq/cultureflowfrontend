@@ -157,7 +157,7 @@ export default function SafetyPage() {
               <span className="sf-avatar sf-avatar--2">RS</span>
               <span className="sf-avatar sf-avatar--3">MJ</span>
             </div>
-            <span className="sf-hg-count">1,400+</span>
+            <span className="sf-hg-count">Founder-led team</span>
           </div>
 
           <div className="sf-hg sf-hg-circ sf-reveal" style={{ "--sf-d": "420ms" } as React.CSSProperties} aria-hidden>
@@ -166,8 +166,8 @@ export default function SafetyPage() {
                 <path id="sf-circ-path" d="M 50,50 m -36,0 a 36,36 0 1,1 72,0 a 36,36 0 1,1 -72,0" />
               </defs>
               <text className="sf-hg-circ-text">
-                <textPath href="#sf-circ-path">
-                  SAFETY IS A SYSTEM · NOT A PROMISE ·
+                <textPath xlinkHref="#sf-circ-path" href="#sf-circ-path">
+                  SAFETY IS A SYSTEM ·
                 </textPath>
               </text>
               <circle cx="50" cy="50" r="3.5" fill="#0B0B0B" />
