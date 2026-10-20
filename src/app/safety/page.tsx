@@ -321,18 +321,28 @@ export default function SafetyPage() {
         <div className="sf-account-card sf-reveal">
           <img src="/images/about/founder_vision.jpg" alt="Culture Flow founder" className="sf-account-img" />
           <div className="sf-account-body">
-            <span className="sf-pill">Who is accountable</span>
             <h2 className="sf-why-title sf-account-title">Who&rsquo;s<br />accountable.</h2>
             <p className="sf-cell-text">
               Every programme has a named person responsible — not a
-              department, not a helpdesk. Afjal Hussein — Founder &amp; Program
-              Lead — oversees every programme at the leadership level.
-              Programme operations run under Culture Flow Private Limited,
-              East Delhi, New Delhi.
+              department, not a helpdesk.
             </p>
-            <Link href="/about-us" className="sf-account-link">
-              Meet the team <ArrowUpRight size={15} strokeWidth={1.8} />
-            </Link>
+            <div className="sf-account-list">
+              <div className="sf-account-item">
+                <span className="sf-account-num">01</span>
+                <p><strong>On-Ground Chaperone.</strong> First responder. Present at every stage of the programme.</p>
+              </div>
+              <div className="sf-account-item">
+                <span className="sf-account-num">02</span>
+                <p><strong>Programme Coordinator.</strong> Named HQ contact. Reachable by guardians throughout.</p>
+              </div>
+              <div className="sf-account-item">
+                <span className="sf-account-num">03</span>
+                <p><strong>Founder-Led Oversight.</strong> Every programme is overseen at the leadership level.</p>
+              </div>
+            </div>
+            <a href="https://wa.me/917123445690" className="sf-account-link">
+              Ask a question <ArrowUpRight size={15} strokeWidth={1.8} />
+            </a>
           </div>
         </div>
       </section>

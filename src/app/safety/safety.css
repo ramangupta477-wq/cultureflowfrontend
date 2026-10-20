@@ -941,3 +941,37 @@
 .safety-page :is(h1, h2, h3, h4, h5, h6, .pgb-title, .pgb-big, .sf-hg-word, .sf-hg-stat-num, .sf-hg-count, .ld-title, .ld-h) {
   font-weight: 400;
 }
+
+/* Accountability — numbered chain (Content Guide v2 section 5) */
+.sf-account-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin: 18px 0 22px;
+}
+
+.sf-account-item {
+  display: flex;
+  gap: 12px;
+  align-items: baseline;
+}
+
+.sf-account-num {
+  font-family: var(--font-body, "Inter", sans-serif);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--color-yellow, #FFCD00);
+}
+
+.sf-account-item p {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: var(--color-obraz-dark, #1B1B1B);
+}
+
+.sf-account-item strong {
+  font-weight: 700;
+  color: var(--color-obraz-black, #0B0B0B);
+}
