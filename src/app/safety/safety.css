@@ -931,12 +931,13 @@
   .sf-hg-dark { grid-column: 1; grid-row: 6; }
 }
 
-/* DM Sans headings (Content Guide v2) */
-.safety-page :is(h1, h2, h3, h4, h5, h6) {
-  font-family: var(--font-heading-sans, "DM Sans", sans-serif);
-}
 
 /* div-based display text in the tile-matrix hero also reads as headings */
 .safety-page :is(.sf-hg-word, .sf-hg-stat-num, .sf-hg-count, .sf-hg-dark-label, .sf-hg-stories-label, .sf-why-title) {
-  font-family: var(--font-heading-sans, "DM Sans", sans-serif);
+  font-family: var(--font-heading, "DM Serif Display", Georgia, serif);
+}
+
+/* Claim-style heading weight (DM Serif 400) */
+.safety-page :is(h1, h2, h3, h4, h5, h6, .pgb-title, .pgb-big, .sf-hg-word, .sf-hg-stat-num, .sf-hg-count, .ld-title, .ld-h) {
+  font-weight: 400;
 }

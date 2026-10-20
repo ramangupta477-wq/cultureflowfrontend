@@ -190,7 +190,7 @@
 }
 
 .au-fcell-big {
-  font-family: var(--font-heading, "DM Sans", "Inter", sans-serif);
+  font-family: var(--font-heading, "DM Serif Display", Georgia, serif);
   font-size: clamp(2.4rem, 3.6vw, 3.6rem);
   line-height: 1.02;
   margin: 14px 0 10px;
@@ -227,7 +227,7 @@
 
 .au-hcell--mission em {
   font-style: italic;
-  font-family: var(--font-heading, "DM Sans", "Inter", sans-serif);
+  font-family: var(--font-heading, "DM Serif Display", Georgia, serif);
   font-size: 1.06em;
 }
 
@@ -319,7 +319,7 @@
 
 .au-story-title em {
   font-style: italic;
-  font-family: var(--font-heading, "DM Sans", "Inter", sans-serif);
+  font-family: var(--font-heading, "DM Serif Display", Georgia, serif);
   font-weight: 400;
   color: var(--color-gold, #C89C66);
 }
@@ -392,7 +392,7 @@
 
 .au-sect-title em {
   font-style: italic;
-  font-family: var(--font-heading, "DM Sans", "Inter", sans-serif);
+  font-family: var(--font-heading, "DM Serif Display", Georgia, serif);
   font-weight: 400;
   color: var(--color-gold, #C89C66);
 }
@@ -460,7 +460,7 @@
 }
 
 .au-tl-detail h3 {
-  font-family: var(--font-heading, "DM Sans", "Inter", sans-serif);
+  font-family: var(--font-heading, "DM Serif Display", Georgia, serif);
   font-weight: 400;
   font-size: clamp(1.5rem, 2.3vw, 2.1rem);
   margin: 0 0 12px;
@@ -755,7 +755,8 @@
   }
 }
 
-/* DM Sans headings (Content Guide v2) */
-.au-page :is(h1, h2, h3, h4, h5, h6) {
-  font-family: var(--font-heading-sans, "DM Sans", sans-serif);
+
+/* Claim-style heading weight (DM Serif 400) */
+.au-page :is(h1, h2, h3, h4, h5, h6, .pgb-title, .pgb-big, .sf-hg-word, .sf-hg-stat-num, .sf-hg-count, .ld-title, .ld-h) {
+  font-weight: 400;
 }

@@ -12,7 +12,7 @@
 }
 
 .ld-title {
-  font-family: var(--font-heading-sans, "DM Sans", sans-serif);
+  font-family: var(--font-heading, "DM Serif Display", Georgia, serif);
   font-size: clamp(3.4rem, 10vw, 8.2rem);
   font-weight: 700;
   line-height: 0.96;
@@ -54,7 +54,7 @@
 }
 
 .ld-h {
-  font-family: var(--font-heading-sans, "DM Sans", sans-serif);
+  font-family: var(--font-heading, "DM Serif Display", Georgia, serif);
   font-size: clamp(1.35rem, 2.2vw, 1.7rem);
   font-weight: 700;
   letter-spacing: -0.02em;
@@ -116,4 +116,9 @@
   .ld-head { padding-top: 120px; }
   .ld-table { display: block; overflow-x: auto; white-space: nowrap; }
   .ld-table td:first-child { white-space: normal; }
+}
+
+/* Claim-style heading weight (DM Serif 400) */
+.ld-page :is(h1, h2, h3, h4, h5, h6, .pgb-title, .pgb-big, .sf-hg-word, .sf-hg-stat-num, .sf-hg-count, .ld-title, .ld-h) {
+  font-weight: 400;
 }
