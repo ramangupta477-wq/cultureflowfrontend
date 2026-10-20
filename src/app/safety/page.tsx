@@ -321,7 +321,7 @@ export default function SafetyPage() {
         <div className="sf-account-card sf-reveal">
           <img src="/images/about/founder_vision.jpg" alt="Culture Flow founder" className="sf-account-img" />
           <div className="sf-account-body">
-            <h2 className="sf-why-title sf-account-title">Who&rsquo;s<br />accountable.</h2>
+            <h2 className="sf-why-title sf-account-title">Who&rsquo;s accountable.</h2>
             <p className="sf-cell-text">
               Every programme has a named person responsible — not a
               department, not a helpdesk.
