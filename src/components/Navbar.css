@@ -78,6 +78,7 @@
 }
 
 .cf-nav-link {
+  position: relative;
   font-family: "Archivo", "Inter", var(--font-body), sans-serif;
   font-size: 1rem;
   font-weight: 435;
@@ -97,6 +98,18 @@
 .cf-nav-link--active {
   color: #000000;
   font-weight: 600;
+}
+
+/* visible active marker — yellow bar under the current page's link */
+.cf-nav-link--active::after {
+  content: "";
+  position: absolute;
+  left: 16px;
+  right: 16px;
+  bottom: 1px;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--color-yellow, #FFCD00);
 }
 
 /* ── CTA: full pill, radius 100px, 15px/600 ── */
