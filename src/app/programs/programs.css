@@ -1566,8 +1566,9 @@
 
 /* 40/40/20 framework numeral in the yellow hero cell */
 .pgb-big--numeric {
-  font-size: clamp(2.6rem, 4.4vw, 4rem);
+  font-size: clamp(2rem, 2.9vw, 3rem);
   letter-spacing: -0.03em;
+  white-space: nowrap;
 }
 
 .pgb-big-sub {
@@ -1576,6 +1577,7 @@
   font-size: clamp(0.98rem, 1.3vw, 1.12rem);
   line-height: 1.35;
   color: var(--color-obraz-black, #0B0B0B);
+  white-space: nowrap;
 }
 
 .pgb-arrow {
