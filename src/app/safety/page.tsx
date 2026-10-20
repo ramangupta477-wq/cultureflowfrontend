@@ -192,7 +192,6 @@ export default function SafetyPage() {
       {/* ═══ WHY PARENTS CHOOSE US — bento with map, stacked cards, tall photo ═══ */}
       <section className="sf-why" id="pillars">
         <div className="sf-why-head">
-          <span className="sf-pill sf-reveal">Why it&rsquo;s safe</span>
           <div className="sf-why-title-row">
             <h2 className="sf-why-title sf-reveal" style={{ "--sf-d": "80ms" } as React.CSSProperties}>
               Why us
@@ -269,7 +268,6 @@ export default function SafetyPage() {
       {/* ═══ PROTOCOL — numbered cards ═══ */}
       <section className="sf-protocol" id="protocol">
         <div className="sf-why-head">
-          <span className="sf-pill sf-reveal">If something goes wrong</span>
           <h2 className="sf-why-title sf-reveal" style={{ "--sf-d": "80ms" } as React.CSSProperties}>
             What happens when<br />something goes wrong.
           </h2>
@@ -292,7 +290,6 @@ export default function SafetyPage() {
       {/* ═══ DOCUMENTS ═══ */}
       <section className="sf-docs">
         <div className="sf-why-head">
-          <span className="sf-pill sf-reveal">Documents</span>
           <h2 className="sf-why-title sf-reveal" style={{ "--sf-d": "60ms" } as React.CSSProperties}>
             Every document.<br />Before departure.
           </h2>
