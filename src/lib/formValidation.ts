@@ -5,6 +5,12 @@ import { z } from "zod/v4";
 /** Optional phone: digits/spaces/()- with optional leading +, no letters */
 export const PHONE_RE = /^\+?\d[\d\s()-]{5,18}$/;
 
+/** Last 10 digits of an Indian mobile number, or "" if it isn't one. */
+export function tenDigitPhone(value: string): string {
+  const digits = value.replace(/\D/g, "").replace(/^91(?=\d{10}$)/, "");
+  return /^\d{10}$/.test(digits) ? digits : "";
+}
+
 /** Run a schema, flatten issues into { field: firstMessage } */
 export function fieldErrors(
   schema: z.ZodType,

@@ -5,7 +5,7 @@ import Link from "next/link";
 import dynamic from "next/dynamic";
 import { z } from "zod/v4";
 import { playShutterSound } from "@/components/ui/admit-one-ticket";
-import { fieldErrors, showError, PHONE_RE } from "@/lib/formValidation";
+import { fieldErrors, showError, tenDigitPhone } from "@/lib/formValidation";
 import { useBlurReveal } from "@/lib/reveals";
 import Footer from "../homepage/Footer";
 import {
@@ -89,8 +89,7 @@ const step1Schema = z.object({
   phone: z
     .string()
     .trim()
-    .optional()
-    .refine((v) => !v || PHONE_RE.test(v), "Enter a valid mobile number (digits, optional +)"),
+    .refine((v) => !!tenDigitPhone(v), "Enter a 10-digit mobile number after +91"),
 });
 
 const step2Schema = z.object({
@@ -130,7 +129,7 @@ export default function WaitlistPage() {
   const [form, setForm] = useState({
     fullName: "",
     email: "",
-    phone: "",
+    phone: "+91 ",
     role: "student" as WaitlistRole,
     city: "",
     college: "",
@@ -489,15 +488,16 @@ export default function WaitlistPage() {
                 <label
                   className={`wl-field${showError(step1Errors, "phone", touched1, attempted1) ? " wl-field--invalid" : ""}`}
                 >
-                  <span>Mobile / WhatsApp</span>
+                  <span>Mobile / WhatsApp *</span>
                   <input
                     type="tel"
+                    required
                     value={form.phone}
                     onChange={(e) => set("phone", e.target.value)}
                     onBlur={mark1("phone")}
                     aria-invalid={!!showError(step1Errors, "phone", touched1, attempted1)}
                     autoComplete="tel"
-                    placeholder="+91 98765 43210"
+                    placeholder="98765 43210"
                   />
                   {showError(step1Errors, "phone", touched1, attempted1) && (
                     <em className="wl-err">{step1Errors.phone}</em>
@@ -639,9 +639,9 @@ export default function WaitlistPage() {
 
       {/* Floating CTA */}
       <Link
-        href="/programs#contact-advising"
+        href="mailto:info@cultureflow.in"
         className="wl-float-cta"
-        aria-label="Let's talk — contact advising"
+        aria-label="Let's talk — email us"
       >
         Let&apos;s talk
       </Link>
