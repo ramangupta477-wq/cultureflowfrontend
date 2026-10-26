@@ -1,16 +1,16 @@
 "use client";
 
-import React, { useState, useEffect, useMemo, useCallback } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import Link from "next/link";
 import dynamic from "next/dynamic";
 import { z } from "zod/v4";
-import RolePicker from "./RolePicker";
 import { playShutterSound } from "@/components/ui/admit-one-ticket";
 import { fieldErrors, showError, PHONE_RE } from "@/lib/formValidation";
 import { useBlurReveal } from "@/lib/reveals";
 import Footer from "../homepage/Footer";
 import {
   creditReferrer,
+  findWaitlistEntry,
   joinWaitlist,
   type TrackId,
   type WaitlistEntry,
@@ -95,7 +95,7 @@ const step1Schema = z.object({
 
 const step2Schema = z.object({
   consent: z.literal(true, {
-    message: "Please accept the Privacy Policy to continue",
+    message: "Please accept the Terms and Conditions to continue",
   }),
 });
 
@@ -122,7 +122,7 @@ const SOURCE_OPTIONS = [
 
 export default function WaitlistPage() {
   // Step 1 fields (identity + role), step 2 fields (context + consent)
-  const [step, setStep] = useState<0 | 1 | 2>(0);
+  const [step, setStep] = useState<0 | 1 | 2>(1);
   const [submitting, setSubmitting] = useState(false);
   const [done, setDone] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -141,6 +141,7 @@ export default function WaitlistPage() {
   });
   const [copied, setCopied] = useState(false);
   const [createdCode, setCreatedCode] = useState("");
+  const [alreadyEnrolled, setAlreadyEnrolled] = useState(false);
   const [ticketWidth, setTicketWidth] = useState(540);
 
   // Re-scan blur-up targets whenever the step swaps the DOM (picker → 1 → 2)
@@ -233,14 +234,37 @@ export default function WaitlistPage() {
     if (!step1Valid || !step2Valid || submitting) return;
     setSubmitting(true);
     setError(null);
+    const email = form.email.trim().toLowerCase();
+    const phone = form.phone.trim() || undefined;
+
+    // Already on the list? Show their existing pass instead of a duplicate row.
+    const existing = await findWaitlistEntry(email, phone);
+    if (existing) {
+      setForm((f) => ({
+        ...f,
+        fullName: existing.fullName || f.fullName,
+        email: existing.email || f.email,
+        role: existing.role || f.role,
+        city: existing.city || f.city,
+        college: existing.college || f.college,
+        yearOfStudy: existing.yearOfStudy || f.yearOfStudy,
+        tracks: (existing.tracks as TrackId[]) ?? f.tracks,
+      }));
+      setCreatedCode(existing.referralCode);
+      setAlreadyEnrolled(true);
+      setDone(true);
+      setSubmitting(false);
+      return;
+    }
+
     try {
       const res = await joinWaitlist({
         fullName: form.fullName.trim(),
-        email: form.email.trim().toLowerCase(),
+        email,
         role: form.role,
         city: form.city.trim(),
         consent: true,
-        phone: form.phone.trim() || undefined,
+        phone,
         college: form.college.trim() || undefined,
         yearOfStudy:
           form.role === "student" && form.yearOfStudy
@@ -259,8 +283,15 @@ export default function WaitlistPage() {
       }
     } catch (err: unknown) {
       const msg = err instanceof Error ? err.message : String(err);
-      // Unique index on email — duplicate signup gets a friendly message
+      // Unique index on email/phone — race with another submit. Show their pass.
       if (msg.includes("unique attribute constraint")) {
+        const raced = await findWaitlistEntry(email, phone);
+        if (raced) {
+          setCreatedCode(raced.referralCode);
+          setAlreadyEnrolled(true);
+          setDone(true);
+          return;
+        }
         setError("You're already on the list! We'll be in touch soon.");
       } else {
         setError("Something went wrong. Please try again in a moment.");
@@ -269,16 +300,6 @@ export default function WaitlistPage() {
       setSubmitting(false);
     }
   }
-
-  const handleRoleSelect = useCallback((role: string) => {
-    const roleMap: Record<string, WaitlistRole> = {
-      Student: "student",
-      Parent: "parent",
-      "Corporate Employee": "corporate",
-    };
-    set("role", roleMap[role] ?? "student");
-    setStep(1);
-  }, []);
 
   if (done) {
     const trackLabel = form.tracks.length > 0
@@ -308,11 +329,16 @@ export default function WaitlistPage() {
       <>
         <main className="wl-page">
         <div className="wl-success-hero">
-          <span className="wl-success-kicker">APPLICATION CONFIRMED · COHORT 2026/2027</span>
-          <h1 className="wl-success-heading">Priority Admission Pass</h1>
+          <span className="wl-success-kicker">
+            {alreadyEnrolled ? "ALREADY ENROLLED · COHORT 2026/2027" : "APPLICATION CONFIRMED · COHORT 2026/2027"}
+          </span>
+          <h1 className="wl-success-heading">
+            {alreadyEnrolled ? "You are already enrolled" : "Priority Admission Pass"}
+          </h1>
           <p className="wl-success-subtext">
-            Welcome, {form.fullName.split(" ")[0]}. Your priority pass has been reserved.
-            Share your referral link with peers to advance your admission review.
+            {alreadyEnrolled
+              ? `Welcome back, ${form.fullName.split(" ")[0]}. You're already on the list — here is your existing referral link.`
+              : `Welcome, ${form.fullName.split(" ")[0]}. Your priority pass has been reserved. Share your referral link with peers to advance your admission review.`}
           </p>
 
           {/* Centered 3D Ticket */}
@@ -364,48 +390,10 @@ export default function WaitlistPage() {
   return (
     <>
       <main className="wl-page">
-      {step === 0 ? (
-        <RolePicker onSelect={handleRoleSelect} />
-      ) : (
       <div className="wl-container">
-        {/* Left column — pitch, styled like the quiz panel */}
-        <aside className="wl-quiz">
-          <h2 className="wl-quiz-question" data-pr>
-            Ready to spend two weeks abroad learning, not touring?
-          </h2>
-          <div className="wl-blob-list">
-            <div className="wl-blob wl-blob--1" data-pr style={{ "--pr-d": "0.1s" } as React.CSSProperties}>
-              <span className="wl-blob-check" aria-hidden>
-                40
-              </span>
-              <p>
-                % academic rigor and hands-on workshops — a syllabus, not an
-                itinerary.
-              </p>
-            </div>
-            <div className="wl-blob wl-blob--2" data-pr style={{ "--pr-d": "0.18s" } as React.CSSProperties}>
-              <span className="wl-blob-check" aria-hidden>
-                40
-              </span>
-              <p>% industry and cultural immersion with vetted local partners.</p>
-            </div>
-            <div className="wl-blob wl-blob--3" data-pr style={{ "--pr-d": "0.26s" } as React.CSSProperties}>
-              <span className="wl-blob-check" aria-hidden>
-                20
-              </span>
-              <p>% guided synthesis and reflection that turns it into outcomes.</p>
-            </div>
-          </div>
-          <p className="wl-quiz-note" data-pr style={{ "--pr-d": "0.34s" } as React.CSSProperties}>
-            7 to 21 day micro-immersions for university students.
-            <br />
-            Joining costs nothing — it carries no obligation to enrol.
-          </p>
-        </aside>
-
-        {/* Right column — the form panel */}
+        {/* Form panel */}
         <section className="wl-form-panel">
-          <h1 className="wl-form-heading" data-pr>Join the waitlist</h1>
+          <h1 className="wl-form-heading">Join the waitlist</h1>
 
           {step === 1 ? (
             <form
@@ -417,7 +405,7 @@ export default function WaitlistPage() {
               }}
             >
               {/* Role segmented control, like the Liebe/Lieber/Hallo radios */}
-              <fieldset className="wl-role" data-pr style={{ "--pr-d": "0.2s" } as React.CSSProperties}>
+              <fieldset className="wl-role">
                 <legend>I am a…</legend>
                 <div className="wl-role-options">
                   {(
@@ -615,7 +603,7 @@ export default function WaitlistPage() {
                 />
                 <span>
                   I accept the{" "}
-                  <Link href="/legal/privacy">Privacy Policy</Link> *{" "}
+                  <Link href="/terms">Terms and Conditions</Link> *{" "}
                   <em>(required)</em>
                 </span>
                 {showError(step2Errors, "consent", touched2, attempted2) && (
@@ -648,7 +636,6 @@ export default function WaitlistPage() {
           <p className="wl-required-note">* required fields</p>
         </section>
       </div>
-      )}
 
       {/* Floating CTA */}
       <Link

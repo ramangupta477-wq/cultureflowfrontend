@@ -95,6 +95,7 @@ export async function joinWaitlist(entry: WaitlistEntry, attempt = 0): Promise<R
   return databases
     .createDocument(WAITLIST_DB_ID, WAITLIST_COLLECTION_ID, ID.unique(), {
       ...entry,
+      ...(entry.phone ? { phone: normalizePhone(entry.phone) } : {}),
       referralCode: generateReferralCode(),
     })
     .catch((err: unknown) => {
@@ -108,8 +109,40 @@ export async function joinWaitlist(entry: WaitlistEntry, attempt = 0): Promise<R
     });
 }
 
-/** Credit a referrer: bump referralCount by 1 via secure server route. */
-export async function creditReferrer(code: string): Promise<boolean> {
+export interface ExistingWaitlistEntry {
+  fullName: string;
+  email: string;
+  role: WaitlistRole;
+  city: string;
+  college: string;
+  yearOfStudy: string;
+  tracks: string[];
+  referralCode: string;
+}
+
+/** Phone in one comparable form — "+91 98765 43210" and "+919876543210" must match. */
+export const normalizePhone = (phone: string) => phone.replace(/[^\d+]/g, "");
+
+/** Looks a signup up by email or phone via the server route. */
+export async function findWaitlistEntry(
+  email: string,
+  phone?: string
+): Promise<ExistingWaitlistEntry | null> {
+  try {
+    const res = await fetch("/api/waitlist/lookup", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, phone: phone ? normalizePhone(phone) : undefined }),
+    });
+    if (!res.ok) return null;
+    const data = await res.json();
+    return data?.found ? (data.entry as ExistingWaitlistEntry) : null;
+  } catch {
+    return null;
+  }
+}
+
+/** Credit a referrer: bump referralCount by 1 via secure server route. */export async function creditReferrer(code: string): Promise<boolean> {
   const cleanCode = (code || "").trim().toUpperCase().slice(0, 16);
   if (!cleanCode) return false;
   try {

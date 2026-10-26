@@ -180,6 +180,15 @@
   margin: 0;
   padding: 12px 26px;
   font-size: 0.95rem;
+  color: var(--color-obraz-black, #0B0B0B);
+  background: var(--color-yellow, #FFCD00);
+  border-color: var(--color-yellow, #FFCD00);
+}
+
+.inst-submit:hover:not(:disabled) {
+  color: var(--color-obraz-black, #0B0B0B);
+  background: #FFD84D;
+  border-color: #FFD84D;
 }
 
 /* success card (unchanged usage) */
