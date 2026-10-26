@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
+import { usePathname } from "next/navigation";
 import { ReactLenis, useLenis } from "lenis/react";
 import "lenis/dist/lenis.css";
 
@@ -50,6 +51,29 @@ function LenisAnchorHandler() {
   return null;
 }
 
+/**
+ * Lenis owns the scroll position, so App Router navigations otherwise land
+ * on the new page at the previous page's offset. Reset to the top instead.
+ */
+function LenisScrollReset() {
+  const lenis = useLenis();
+  const pathname = usePathname();
+  const firstRender = useRef(true);
+
+  useEffect(() => {
+    if (firstRender.current) {
+      firstRender.current = false;
+      return;
+    }
+    // A cross-page hash link should still land on its target.
+    if (window.location.hash) return;
+    lenis?.scrollTo(0, { immediate: true });
+    window.scrollTo(0, 0);
+  }, [pathname, lenis]);
+
+  return null;
+}
+
 export default function LenisProvider({ children }: { children: React.ReactNode }) {
   return (
     <ReactLenis
@@ -64,6 +88,7 @@ export default function LenisProvider({ children }: { children: React.ReactNode 
       }}
     >
       <LenisAnchorHandler />
+      <LenisScrollReset />
       {children}
     </ReactLenis>
   );
