@@ -1,14 +1,15 @@
 /* Waitlist page — organic blob styling from the Fairtrade reference,
-   rebuilt in Culture Flow palette:
-   Deep Navy #0B0B0B · Midnight #1B1B1B · Sand/Gold #C89C66 · Crisp White #FCFCFF */
+   aligned to the Culture Flow landing palette:
+   Obraz Black #0B0B0B · Obraz Dark #1B1B1B · Brand Yellow #FFCD00 ·
+   Sand #C89C66 (hairlines/tints) · Moverunion White #FDFCF4 */
 
 .wl-page {
-  --color-navy: #1A1714;
-  --color-midnight: #242018;
-  --color-gold: #C89C66;
+  --color-navy: #0B0B0B;
+  --color-midnight: #1B1B1B;
+  --color-gold: #FFCD00;
   --color-cream: #FDFCF4;
   min-height: 100vh;
-  background: var(--color-cream, #FCFCFF);
+  background: var(--color-cream, #FDFCF4);
   /* 128 clears the fixed navbar pill (bottom ≈ 97px) with comfortable air */
   padding: 128px 24px 64px;
   display: flex;
@@ -18,9 +19,9 @@
 
 .wl-container {
   display: grid;
-  grid-template-columns: 1fr 1.1fr;
+  grid-template-columns: 1fr;
   gap: 48px;
-  max-width: 1120px;
+  max-width: 580px;
   width: 100%;
   align-self: flex-start;
   align-items: flex-start;
@@ -33,7 +34,7 @@
   font-size: clamp(1.6rem, 3vw, 2.2rem);
   font-weight: 800;
   line-height: 1.25;
-  color: var(--color-navy, #1A1714);
+  color: var(--color-navy, #0B0B0B);
   margin: 0 0 36px;
   max-width: 20ch;
 }
@@ -44,7 +45,7 @@
   width: 56px;
   height: 4px;
   border-radius: 2px;
-  background: var(--color-gold, #C89C66);
+  background: var(--color-gold, #FFCD00);
   margin-top: 18px;
 }
 
@@ -59,7 +60,7 @@
   align-items: center;
   gap: 18px;
   padding: 20px 26px;
-  color: var(--color-navy, #1A1714);
+  color: var(--color-navy, #0B0B0B);
   background: rgba(200, 156, 102, 0.08);
   border: 2px solid rgba(200, 156, 102, 0.3);
 }
@@ -94,7 +95,7 @@
   font-size: 1.15rem;
   font-weight: 800;
   color: var(--color-midnight, #1B1B1B);
-  background: var(--color-gold, #C89C66);
+  background: var(--color-gold, #FFCD00);
   border-radius: 50%;
 }
 
@@ -102,26 +103,26 @@
   margin-top: 32px;
   font-size: 0.9rem;
   line-height: 1.6;
-  color: rgba(26, 23, 20, 0.6);
+  color: rgba(11, 11, 11, 0.6);
 }
 
 /* ─── Right column: white form panel ─── */
 
 .wl-form-panel {
-  background: var(--color-cream, #FCFCFF);
-  border-radius: 28px 40px 30px 44px;
+  background: var(--color-yellow, #FFCD00);
+  border-radius: 24px;
   padding: 36px 34px 28px;
-  box-shadow: 0 18px 60px rgba(11, 11, 11, 0.45);
+  box-shadow: none;
 }
 
 .wl-form-heading {
-  font-family: var(--font-body), sans-serif;
-  font-size: 1.35rem;
-  font-weight: 800;
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
-  color: var(--color-navy, #0B0B0B);
-  margin: 0 0 22px;
+  font-family: var(--font-heading, "DM Serif Display", Georgia, serif);
+  font-size: clamp(2rem, 3.4vw, 2.7rem);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  text-align: center;
+  color: var(--color-obraz-black, #0B0B0B);
+  margin: 0 0 26px;
 }
 
 .wl-form {
@@ -150,6 +151,19 @@
   color: var(--color-navy, #0B0B0B);
 }
 
+.wl-form-panel .wl-field input,
+.wl-form-panel .wl-field select {
+  background: var(--color-cream, #FDFCF4);
+  border: 1.5px solid rgba(11, 11, 11, 0.85);
+  border-radius: 999px;
+}
+
+.wl-form-panel .wl-field input:focus,
+.wl-form-panel .wl-field select:focus {
+  border-color: var(--color-obraz-black, #0B0B0B);
+  background: #FFFFFF;
+}
+
 .wl-field input,
 .wl-field select {
   width: 100%;
@@ -166,7 +180,7 @@
 
 .wl-field input:focus,
 .wl-field select:focus {
-  border-color: var(--color-gold, #C89C66);
+  border-color: var(--color-gold, #FFCD00);
   background: rgba(200, 156, 102, 0.18);
 }
 
@@ -236,7 +250,7 @@
   width: 9px;
   height: 9px;
   border-radius: 50%;
-  background: var(--color-gold, #C89C66);
+  background: var(--color-obraz-black, #0B0B0B);
   transform: scale(0);
   transition: transform 0.15s ease;
 }
@@ -246,7 +260,7 @@
 }
 
 .wl-radio input:focus-visible + .wl-radio-dot {
-  outline: 2px solid var(--color-gold, #C89C66);
+  outline: 2px solid var(--color-obraz-black, #0B0B0B);
   outline-offset: 2px;
 }
 
@@ -265,8 +279,8 @@
   font-size: 0.92rem;
   font-weight: 600;
   color: var(--color-navy, #0B0B0B);
-  background: rgba(200, 156, 102, 0.12);
-  border: 1px solid rgba(0, 34, 68, 0.14);
+  background: var(--color-cream, #FDFCF4);
+  border: 1.5px solid rgba(11, 11, 11, 0.85);
   border-radius: 20px 22px 18px 24px;
   cursor: pointer;
   transition: background-color 0.2s ease, border-color 0.2s ease;
@@ -275,11 +289,18 @@
 .wl-track-chip:has(input:checked) {
   background: var(--color-navy, #0B0B0B);
   border-color: var(--color-navy, #0B0B0B);
-  color: var(--color-cream, #FCFCFF);
+  color: var(--color-cream, #FDFCF4);
 }
 
 .wl-track-chip input {
-  accent-color: var(--color-gold, #C89C66);
+  flex: none;
+  width: 18px;
+  height: 18px;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  accent-color: var(--color-obraz-black, #0B0B0B);
 }
 
 /* Consent + buttons */
@@ -305,7 +326,7 @@
 
 .wl-consent em {
   font-style: normal;
-  color: var(--color-gold, #C89C66);
+  color: rgba(11, 11, 11, 0.6);
   font-size: 0.75rem;
 }
 
@@ -316,19 +337,22 @@
   padding: 14px 34px;
   font-family: var(--font-body), sans-serif;
   font-size: 1rem;
-  font-weight: 800;
+  font-weight: 700;
   color: var(--color-navy, #0B0B0B);
-  background: var(--color-gold, #C89C66);
-  border: 2px solid var(--color-gold, #C89C66);
+  background: transparent;
+  border: 2.5px solid var(--color-obraz-black, #0B0B0B);
   border-radius: 999px;
   cursor: pointer;
   text-decoration: none;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease,
+    color 0.2s ease;
 }
 
 .wl-btn:hover:not(:disabled) {
+  background: var(--color-obraz-black, #0B0B0B);
+  color: var(--color-yellow, #FFCD00);
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(200, 156, 102, 0.4);
+  box-shadow: 0 8px 24px rgba(11, 11, 11, 0.18);
 }
 
 .wl-btn:disabled {
@@ -432,7 +456,7 @@
   margin: 0 auto;
   text-align: center;
   padding: 40px 24px;
-  background: var(--color-navy, #1A1714);
+  background: var(--color-navy, #0B0B0B);
   border-radius: 28px;
 }
 
@@ -442,7 +466,7 @@
   font-weight: 700;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: var(--color-gold, #C89C66);
+  color: var(--color-gold, #FFCD00);
   margin-bottom: 12px;
 }
 
@@ -450,7 +474,7 @@
   font-family: var(--font-heading, "DM Serif Display", Georgia, serif);
   font-size: clamp(2.1rem, 4vw, 3.2rem);
   font-weight: 400;
-  color: #FCFCFF;
+  color: #FDFCF4;
   margin: 0 0 10px;
   letter-spacing: -0.01em;
 }
@@ -458,7 +482,7 @@
 .wl-success-subtext {
   font-family: var(--font-body);
   font-size: 0.98rem;
-  color: rgba(252, 252, 255, 0.75);
+  color: rgba(253, 252, 244, 0.75);
   margin: 0 0 32px;
   max-width: 560px;
   line-height: 1.55;
@@ -499,7 +523,7 @@
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--color-gold, #C89C66);
+  color: var(--color-gold, #FFCD00);
   white-space: nowrap;
 }
 
@@ -507,7 +531,7 @@
   font-family: monospace;
   font-size: 0.95rem;
   font-weight: 700;
-  color: #FCFCFF;
+  color: #FDFCF4;
   letter-spacing: 0.08em;
   flex: 1;
   text-align: left;
@@ -518,7 +542,7 @@
 
 .wl-copy-btn-primary {
   padding: 10px 24px;
-  background: var(--color-gold, #C89C66);
+  background: var(--color-gold, #FFCD00);
   color: #1B1B1B;
   font-family: var(--font-body);
   font-size: 0.82rem;
@@ -533,7 +557,7 @@
 }
 
 .wl-copy-btn-primary:hover {
-  background: #E0B580;
+  background: #FFD84D;
   transform: translateY(-1px);
 }
 
@@ -548,21 +572,21 @@
   display: inline-flex;
   align-items: center;
   padding: 12px 30px;
-  border: 1px solid rgba(252, 252, 255, 0.28);
+  border: 1px solid rgba(253, 252, 244, 0.28);
   border-radius: 999px;
   font-family: var(--font-body);
   font-size: 0.85rem;
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: #FCFCFF;
+  color: #FDFCF4;
   text-decoration: none;
   transition: all 0.25s ease;
 }
 
 .wl-back-home-btn:hover {
-  border-color: var(--color-gold, #C89C66);
-  color: var(--color-gold, #C89C66);
+  border-color: var(--color-gold, #FFCD00);
+  color: var(--color-gold, #FFCD00);
   background: rgba(200, 156, 102, 0.1);
 }
 
@@ -571,7 +595,7 @@
   top: -18px;
   right: 34px;
   font-size: 1.6rem;
-  color: var(--color-gold, #C89C66);
+  color: var(--color-gold, #FFCD00);
 }
 
 .wl-title {
@@ -610,16 +634,16 @@
   font-size: 0.9rem;
   font-weight: 800;
   color: var(--color-navy, #0B0B0B);
-  background: var(--color-gold, #C89C66);
+  background: var(--color-gold, #FFCD00);
   border-radius: 999px;
   text-decoration: none;
-  box-shadow: 0 10px 30px rgba(26, 23, 20, 0.2);
+  box-shadow: 0 10px 30px rgba(11, 11, 11, 0.2);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .wl-float-cta:hover {
   transform: translateY(-3px);
-  box-shadow: 0 14px 36px rgba(200, 156, 102, 0.45);
+  box-shadow: 0 14px 36px rgba(255, 205, 0, 0.45);
 }
 
 /* ─── Referral share box (success screen) ─── */
@@ -637,13 +661,13 @@
 .wl-referral-head {
   font-family: var(--font-display), serif;
   font-size: 1.25rem;
-  color: var(--color-gold, #C89C66);
+  color: var(--color-gold, #FFCD00);
   margin-bottom: 6px;
 }
 
 .wl-referral-copy {
   font-size: 0.92rem;
-  color: rgba(238, 240, 250, 0.8);
+  color: rgba(241, 240, 238, 0.8);
   line-height: 1.5;
   margin-bottom: 14px;
 }
@@ -659,7 +683,7 @@
   padding: 12px 14px;
   font-size: 0.88rem;
   font-family: var(--font-body), sans-serif;
-  color: var(--color-offwhite, #EEF0FA);
+  color: var(--color-offwhite, #F1F0EE);
   background: rgba(27, 27, 27, 0.65);
   border: 1px solid rgba(200, 156, 102, 0.4);
   border-radius: 10px;
@@ -671,7 +695,7 @@
   font-weight: 700;
   font-family: var(--font-body), sans-serif;
   color: var(--color-navy, #0B0B0B);
-  background: var(--color-gold, #C89C66);
+  background: var(--color-gold, #FFCD00);
   border: none;
   border-radius: 10px;
   cursor: pointer;
@@ -679,7 +703,7 @@
 }
 
 .wl-referral-copy-btn:hover {
-  background: var(--color-offwhite, #EEF0FA);
+  background: var(--color-offwhite, #F1F0EE);
 }
 
 @media (max-width: 640px) {
@@ -698,6 +722,14 @@
   .wl-container {
     grid-template-columns: 1fr;
     gap: 28px;
+    max-width: 560px;
+    width: 100%;
+    margin-inline: auto;
+    justify-items: center;
+  }
+
+  .wl-form-panel {
+    width: 100%;
   }
 
   .wl-quiz-question {

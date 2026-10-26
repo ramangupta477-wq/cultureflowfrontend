@@ -93,10 +93,10 @@ export default function Footer() {
                 New Ashok Nagar,<br />
                 East Delhi, 110096
               </p>
-              <a href="https://www.google.com/maps/search/?api=1&query=Block-B+New+Ashok+Nagar+East+Delhi+110096" target="_blank" rel="noreferrer" className="cf-footer-arrow-link">
+              <span className="cf-footer-arrow-link">
                 New Delhi Office
                 <ArrowIcon />
-              </a>
+              </span>
             </div>
           </div>
 

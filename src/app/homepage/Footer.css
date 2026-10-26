@@ -96,6 +96,13 @@
   color: #C89C66;
 }
 
+/* Address line is not a link — no pointer, no hover cue */
+span.cf-footer-arrow-link,
+span.cf-footer-arrow-link:hover {
+  cursor: default;
+  color: rgba(255, 255, 255, 0.7);
+}
+
 .cf-footer-arrow-circle {
   width: 32px;
   height: 32px;
