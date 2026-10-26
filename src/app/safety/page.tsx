@@ -328,7 +328,7 @@ export default function SafetyPage() {
                 <p><strong>Founder-Led Oversight.</strong> Every programme is overseen at the leadership level.</p>
               </div>
             </div>
-            <a href="https://wa.me/917123445690" className="sf-account-link">
+            <a href="https://wa.me/917096271068" className="sf-account-link">
               Ask a question <ArrowUpRight size={15} strokeWidth={1.8} />
             </a>
           </div>
@@ -343,7 +343,7 @@ export default function SafetyPage() {
           answer — directly.
         </p>
         <div className="sf-ask-actions sf-reveal" style={{ "--sf-d": "180ms" } as React.CSSProperties}>
-          <a href="https://wa.me/917123445690" className="sf-btn-dark sf-btn-dark--lg">
+          <a href="https://wa.me/917096271068" className="sf-btn-dark sf-btn-dark--lg">
             Ask a question
           </a>
           <Link href="/waitlist" className="sf-ask-mail">
